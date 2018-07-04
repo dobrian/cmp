@@ -1,0 +1,2 @@
+# cmp
+Computer Music Programming
