@@ -1,0 +1,22 @@
+necessary background
+
+c-like programming, basic acoustic terms and math, sampling, trig
+
+oscillators
+
+        • general concept of oscillator, circle, phase, wheel
+        • phasor
+        • simple wave shaping with algebra and logic operators (ramp, square, tri) (adv taylor series)
+        • table lookup (sine), by phase truncation
+        • aliasing with this method
+        • interpolation linear and hermite (adv: article on interpolation methods)
+        • other methods - complex sine
+        • additive methods for table generation
+        • sine wave additive
+        • adv - BLEP BLIT
+
+amplitude/envelopes/lines/units/applications/vibrato/tremolo/compressor/ADSR
+
+filters
+
+delay
