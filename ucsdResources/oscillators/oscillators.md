@@ -7,7 +7,7 @@ The most basic sound-generating process in digital sound is the oscillator which
 ### Unit Circle
 A helpful analogy of the oscillator is that of the wheel and spoke.
 
-![Unit Circle](images/circlePhase.gif)
+![Unit Circle](images/Unfasor.gif)
 
 The angle of the "spoke" is the phase at a given moment in time while the frequency is the change in phase per unit of time. The length (magnitude) of the spoke is the amplitude at any given point.
 
