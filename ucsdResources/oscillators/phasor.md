@@ -31,9 +31,12 @@ void Osc::Phasor(float *frequency, float *output, long samplesPerBlock)
 ```
 Important here is the relationship between `phasePerSample` and `freq`: they are, in fact, representations of the same thing. With frequency, we give the total number of rotations (oscillations) in a second while phase per sample is the rate of change at the sampling period. If we want to give an oscillator a frequency, we will need to calculate the change in phase per sample; i.e. `phasePerSample`.
 
-
 Using a samplerate of 128Hz, the first 512 samples of a 1Hz phasor are plotted below:
 
 ![Phasor](images/phasor.svg)
 
-Notice how the waveform ascends from 0 to 1 as noted above. This makes it extraordinarily useful in waveshaping, indexing into tables, etc.
+Notice how the waveform ascends from 0 to 1 as noted above. This makes it extraordinarily useful in waveshaping, indexing into tables, etc. As a simplified block diagram, the phasor looks like this:
+
+![Phasor Block Diagram](images/process.svg)
+
+`phaseInc(1)` is the phase increment for a 1Hz signal at a 128Hz samplerate. 1/128 = 0.0078125.
