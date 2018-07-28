@@ -15,7 +15,13 @@ One method of this is to create a ramp or sawtooth, multiply it by some very hig
 ```
 // make a clip function
 float clip(float n, float lower, float upper) {
-  return std::max(lower, std::min(n, upper));
+  if(n<lower) {
+    return lower;
+  } else if (n>upper) {
+    return upper;
+  } else {
+    return n;
+  }
 }
 
 void Osc::Square(float *frequency, float *output, long samplesPerBlock)
@@ -44,26 +50,7 @@ __NOTE: This is related to BLIP and BLEP__
 
 ### Using logic
 
-Perhaps a bit cleaner is to use logical operations on a ramp: `square = sign(ramp);`
-
-```
-void Osc::Square(float *frequency, float *output, long samplesPerBlock)
-{
-  long sample;
-  float rampPhase;
-
-  // calculate for each sample in a block
-  for(sample = 0; sample<samplesPerBlock; sample++)
-  {
-    phaseIncrement = *(frequency + sample)/sampleRate; // get the phase increment for this sample
-    rampPhase = (phase*2)-1; // make a ramp (-1 to +1)
-    *(output+sample) = copysign(1, rampPhase); // get the output fot this sample
-    phase = phase + phaseIncrement; // increment the phase
-  }
-}
-```
-
-Or on a phasor:
+Perhaps a bit cleaner is to use logical operations on a phasor:
 
 ```
 void Osc::Square(float *frequency, float *output, long samplesPerBlock)
