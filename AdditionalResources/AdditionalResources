@@ -2,18 +2,33 @@
 
 ## DSP Programming Concepts
 
-EarLevel Engineering, Nigel Redmon \&lt;[http://www.earlevel.com/](http://www.earlevel.com/)\&gt;
+&quot;Digital Audio&quot;, Christopher Dobrian
+[http://music.arts.uci.edu/dobrian/digitalaudio.htm](http://music.arts.uci.edu/dobrian/digitalaudio.htm)
+<br>&nbsp; Article on how digital audio works, the basics of audio sampling theory
 
-HackAudio, Eric Tarr \&lt;http://www.hackaudio.com/\&gt;
+EarLevel Engineering, Nigel Redmon [http://www.earlevel.com/](http://www.earlevel.com/) <br>&nbsp; Website/blog discussing various topics relevant to digital audio and DSP
+
+HackAudio, Eric Tarr
+http://www.hackaudio.com/
 
 ## How-To Tutorials
 
-Delicious Max Tutorials, Sam Tarkajian \&lt;[https://www.youtube.com/playlist?list=PLD45EDA6F67827497](https://www.youtube.com/playlist?list=PLD45EDA6F67827497)\&gt;
+Delicious Max Tutorials, Sam Tarkajian [https://www.youtube.com/playlist?list=PLD45EDA6F67827497](https://www.youtube.com/playlist?list=PLD45EDA6F67827497)
+<br>&nbsp; Tutorial videos building a variety of offbeat programs in Max
 
-Znibble~, \&lt;[https://www.znibbl.es/](https://www.znibbl.es/)\&gt;
+Znibble~, Julian Rubish and Patrik Lechner
+[https://www.znibbl.es/](https://www.znibbl.es/)
 
 ## PDF Documents
 
-MIDI 1.0 Specification \&lt;\&gt;
+MIDI 1.0 Specification
+[https://www.midi.org/specifications-old/item/the-midi-1-0-specification](https://www.midi.org/specifications-old/item/the-midi-1-0-specification)
+<br>&nbsp; Official document describing the MIDI protocol
 
-&quot;What is MIDI?&quot;, Paul D. Lehrman \&lt;\&gt;
+Standard MIDI File (SMF) specification
+[https://www.midi.org/specifications-old/item/standard-midi-files-smf](https://www.midi.org/specifications-old/item/standard-midi-files-smf)
+<br>&nbsp; Official document describing the format of standard MIDI files
+
+&quot;What is MIDI?&quot;, Paul D. Lehrman
+[http://emerald.tufts.edu/programs/mma/emid/WhatIsMIDI2017.pdf](http://emerald.tufts.edu/programs/mma/emid/WhatIsMIDI2017.pdf)
+<br>&nbsp; Article explaining the history and usage of the MIDI protocol
