@@ -34,7 +34,7 @@ Software project design
 
 ## Week 1
 
-### Physics of sound
+### Physics of sound |Alex|
 
 •  Harmonic series
 
@@ -74,31 +74,31 @@ Software project design
 
 ### Intro to JavaScript in HTML 5
 
-### Linear mapping and linear interpolation
+### Linear mapping and linear interpolation |Alex|
 
-### Basics of UI design for music
+### Basics of UI design for music |Alex|
 
 ## Week 3
 
 ### RAM-based sample playback in Max
 
-•  **buffer~** access and usage
+•  **buffer~** access and usage |Alex|
 
 ### Control signals
 
-•  Classic waveforms as LFOs
+•  Classic waveforms as LFOs |Alex|
 
 •  Vibrato and tremolo (of a synthesized tone)
 
-•  Windows and envelopes (of a synthesized tone)
+•  Windows and envelopes (of a synthesized tone) |Alex|
 
 ### Sample processing in Max
 
-•  Applying control signals to sample playback
+•  Applying control signals to sample playback |Alex|
 
 •  Windowing and granulation
 
-•  UI considerations for controlling processing
+•  UI considerations for controlling processing |Alex|
 
 ### Sample playback and processing in the audio context of the Web Audio API
 
