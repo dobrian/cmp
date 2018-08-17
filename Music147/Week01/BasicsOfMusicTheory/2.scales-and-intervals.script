@@ -1,0 +1,102 @@
+<h2>Intervals and Scales</h2>
+
+<h3>Intervals</h3>
+
+<p>This is a subsection of a keyboard, featuring notes spanning one octave.  If
+you count them, you'll find there are thirteen notes total, but since C is
+counted twice—at the very beginning and the very end—there are actually only
+twelve distinct notes.  These twelve notes compose what is called the
+"chromatic scale".</p>
+
+<p>Musicians use the term "interval" to refer to the distance between two notes.
+The smallest interval is a "half step", which means the two notes are directly
+adjacent to one another.  The next-smallest interval is a "whole step", which
+means the two notes are separated by exactly one other note.  Two half steps
+equals one whole step.</p>
+
+<p>Since there are twelve notes in the chromatic scale, there are therefore twelve
+intervals.  Next after the whole step is the "minor third", which contains
+three half steps.  After that is the "major third", which contains four half
+steps.  On the page below this video, you will see a table showing all twelve
+intervals, their alternative names, and the number of half steps for each.
+Although this is a lot of vocabulary, it is important that you learn at least
+the most common name for each interval, as well as the corresponding number of
+half steps.</p>
+
+<h3>Major and Minor Scales</h3>
+
+<p>We've already touched on the chromatic scale, which features all twelve notes
+in the octave.  More common than the chromatic scale is the major scale.  The
+major scale features a repeating pattern of whole steps and half steps:
+W-W-H-W-W-W-H.  The starting note of the major scale is called the "tonic".
+With C as our tonic, we have a C major scale, with Db as our tonic, we have a
+Db major scale, and so on.</p>
+
+<p>Let's try and figure out the notes of the C major scale.  Again, the pattern of
+the major scale is W-W-H-W-W-W-H.  As you can see, the C major scale features
+only white keys, which makes it unique among the major scales.  Now let's try
+and figure out the Bb major scale.  W-W-H-W-W-W-H.  You should practice finding
+the notes of the major scale, starting on all twelve possible tonics.</p>
+
+<p>Another useful scale is the minor scale.  The minor scale features a different
+pattern of intervals than the major scale: W-H-W-W-H-W-W.  While the major
+scale and minor scale are the most common, there are countless other different
+scales you may encounter.  A summary of the most common ones is included on the
+page below this video.</p>
+
+<h2>Tables</h2>
+
+<ul>
+<li>intervals</li>
+<li>common scales (maj, min, harm min, mel min)</li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li>chromatic scale</li>
+<li>half step</li>
+<li>interval</li>
+<li>major scale</li>
+<li>minor scale</li>
+<li>tonic</li>
+<li>whole step</li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ul>
+<li>If you have access to a keyboard or a piano at home, practice the major and
+minor scales in all twelve keys.  Proper fingerings (i.e. what fingers should
+be used on what keys) can be found
+<a href="https://www.pianoscales.org/major.html">here</a> and
+<a href="https://www.pianoscales.org/minor.html">here</a>.  Another classic resource is
+the
+<a href="https://www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446">Hanon</a>
+book of exercises.</li>
+<li>Make two sets of flashcards: one with all twelve intervals, one with all
+twelve note names (the "tonics").  Shuffle each set separately, then draw one
+card from each set.  Try to name the notes that are the given interval above
+and below the given tonic.</li>
+</ul>
+
+<h2>Self-Quiz</h2>
+
+<ol>
+<li>What is a minor third above Bb?</li>
+<li>What is a perfect fifth below B?</li>
+<li>What is a tritone above F#?</li>
+<li>What is a tritone below F#?</li>
+<li>Name the notes in an Ab major scale.</li>
+<li>Name the notes in an F# minor scale.</li>
+</ol>
+
+<h2>Additional Resources</h2>
+
+<ul>
+<li><a href="https://www.musictheory.net/exercises/keyboard-interval">www.musictheory.net/exercises/keyboard-interval</a></li>
+<li><a href="https://www.musictheory.net/exercises/keyboard-scale">www.musictheory.net/exercises/keyboard-scale</a></li>
+<li><a href="https://www.pianoscales.org/major.html">www.pianoscales.org/major.html</a></li>
+<li><a href="https://www.pianoscales.org/minor.html">www.pianoscales.org/minor.html</a></li>
+<li><a href="https://www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446">www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446</a></li>
+</ul>
