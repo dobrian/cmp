@@ -1,0 +1,44 @@
+<h1>Time Signatures and Tempo</h1>
+
+<h3>Time Signatures</h3>
+
+<p>So far, we have only looked at measures in 4/4, meaning each measure has four
+quarter notes.  We can also have measures in 3/4, meaning each measure has
+three quarter notes.  Each of these ratios is known as a "time signature", or
+"meter".  It is possible to have any positive integer in the numerator of a
+time signature: so 1/4, 2/4, 3/4, 4/4, 5/4, and so on, are all valid time
+signatures.  However, in the denominator of a time signature, you may have only
+a power of two: so 2/2, 5/8, and 17/16 are valid time signatures, but 4/3, 2/7,
+and 8/5 are not.</p>
+
+<h3>Tempo</h3>
+
+<p>One remaining aspect of rhythm is speed.  Sometimes your beat is fast; other
+times it's slow.  The speed of the beat is known as "tempo".  Most musicians
+are used to representing tempo as beats per minute, or BPM.  This means that if
+your beat is a quarter note—as in 4/4 or 3/4—a tempo of 60 BPM means there are
+60 quarter notes per minute, or one quarter note every second.  If your beat is
+an eighth note, as in 6/8 or 12/8, a tempo of 60 BPM means there are 60
+<em>eighth</em> notes per minute, which means there are 30 quarter notes per minute,
+or one quarter note every two seconds.  Musicians often omit the letters "BPM"
+when discussing tempo, instead saying things like "quarter note equals 90" or
+"eighth note equals one-hundred thirty-two".</p>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li>beats per minute (BPM)</li>
+<li>tempo</li>
+<li>time signature (aka meter)</li>
+</ul>
+
+<h2>Self-Quiz</h2>
+
+<ul>
+<li>How many quarter notes are in one measure of 5/4?</li>
+<li>How many eighth notes are in one measure of 3/4?</li>
+<li>How many quarter note triplets are in one measure of 4/2?</li>
+<li>How many dotted eighth notes are in <strong>two</strong> measures of 6/8?</li>
+<li>At quarter = 120, how many sixteenth notes are there per second?</li>
+<li>At half = 45, how many quarter notes are there per minute?</li>
+</ul>
