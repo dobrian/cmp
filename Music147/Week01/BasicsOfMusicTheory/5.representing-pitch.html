@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Representing Pitch in the Computer</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Representing Pitch in the Computer</h1>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="5.representing-pitch.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Script</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+            <h3>Representing Pitch in the Computer</h3>
+
+            <p>Usually, we refer each note on the keyboard with a letter-number pair, for
+            example, C4 or Eb3.  However, when coding, referring to each note in this way
+            can be cumbersome.  Instead, computer musicians tend to refer to each note with
+            a specific integer, using a standard known as "MIDI numbers".  According to
+            MIDI, middle C—also known as C4—is represented as the integer 60.  Then, C#4 is
+            61, D4 is 62, and so on.  Counting down, B3 is 59, Bb3 is 58, and so on.  It
+            turns out that MIDI number 0 is actually C-1, not C0 as you might expect.</p>
+
+            <h3>Converting from MIDI Number to Note Name</h3>
+
+            <p>Let's say you're given a random MIDI number—say 42—and you want to figure out
+            what note it is.  To do so, you should take that number modulo 12.  (If you're
+            not aware, the modulo operator—usually shown as a percent sign—provides the
+            remainder when the first number is divided by the second.) In this case, 42
+            modulo 12 is 6.  This number represents the number of half steps above C.  In
+            the case of 6, this is a tritone, meaning our note name is F#.</p>
+
+            <p>This mapping—from the integer 6 to the note name F#—is an example of what music
+            theorists refer to as "pitch class".  Pitch class is simply a one-to-one
+            mapping between an integer and a note name.  By convention, 0 is C.  Therefore,
+            1 is C#, 2 is D, and so on up to 11 as B.</p>
+
+            <h3>Converting from Note Name to MIDI Number</h3>
+
+            <p>Let's try the other way around: going from a note name to a MIDI number.  Let's
+            try to find the MIDI number for the note Eb3.  Do to this, we need to count the
+            number of half steps from C-1 (which, remember, is MIDI number 0) up to Eb3.
+            While we can always do this manually, let's try and be more clever about it.
+            Since there are twelve notes in an octave, and four octaves between C-1 and C3,
+            we can find the MIDI number of C3 by multiplying 12 by 4: so 48.  Then, to find
+            the Eb above C3, we add the pitch class of Eb to our MIDI number for C3: in
+            this case, 3 + 48, or 51.</p>
+
+            <p>While it is important to understand how to translate between note names and
+            MIDI numbers, in practice you may end up relying on online tables and
+            calculators to perform this conversion; some additional resources are given on
+            the page below this video.</p>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="tables">
+        <h2>Tables</h2>
+        <table class="table">
+          <thead>
+            <tr><th>Note Name</th><th>Pitch Class</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>C</td><td>0</td><td>-</td></tr>
+            <tr><td>C#/Db</td><td>1</td><td>-</td></tr>
+            <tr><td>D</td><td>2</td><td>-</td></tr>
+            <tr><td>D#/Eb</td><td>3</td><td>-</td></tr>
+            <tr><td>E</td><td>4</td><td>-</td></tr>
+            <tr><td>F</td><td>5</td><td>-</td></tr>
+            <tr><td>F#/Gb</td><td>6</td><td>-</td></tr>
+            <tr><td>G</td><td>7</td><td>-</td></tr>
+            <tr><td>G#/Ab</td><td>8</td><td>-</td></tr>
+            <tr><td>A</td><td>9</td><td>-</td></tr>
+            <tr><td>A#/Bb</td><td>10</td><td>Sometimes you'll see this written as "t"</td></tr>
+            <tr><td>B</td><td>11</td><td>Sometimes you'll see this written as "e"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="vocabulary">
+        <h2>Vocabulary</h2>
+        <ul>
+        <li>MIDI number</li>
+        <li>pitch class</li>
+        </ul>
+
+      </div>
+
+      <div id="self-study">
+        <h2>Self-Study</h2>
+        <ul>
+        <li>In your favorite programming language, write a function that takes in a MIDI
+        number (e.g. 60) as the input, and spits out a note name (e.g. C) as the
+        output.</li>
+        <li>In your favorite programming language, write a function that takes in a
+        letter-number pair as input (e.g. C4) and spits out a MIDI number as output
+        (e.g. 60).  This problem is trickier than the previous one, because now you
+        have to take the proper octave into account.</li>
+        </ul>
+
+      </div>
+
+      <div id="self-quiz">
+        <h2>Self-Quiz</h2>
+        <ol>
+          <li>What is the MIDI number of the lowest note on the piano? The highest note?</li>
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">The lowest note is 21.  The highest note is 108.</p>
+
+          <li>Write the C major scale in pitch classes, rather than in pitches.</li>
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-2" class="answer" style="display: none">0, 2, 4, 5, 7, 9, 11, (0).</p>
+
+          <li>Write the F# minor scale in pitch classes, rather than in pitches.</li>
+          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-3" class="answer" style="display: none">6, 8, 9, 11, 0, 2, 4, (6).</p>
+
+          <li>Write a G major scale in MIDI numbers, starting on G3.</li>
+          <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-4" class="answer" style="display: none">55, 57, 59, 60, 62, 64, 66, 67.</p>
+
+          <li>Write an Ab minor scale in MIDI numbers, starting on Ab5.</li>
+          <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-5" class="answer" style="display: none">80, 82, 83, 85, 87, 88, 90, 92.</p>
+
+        </ol>
+      </div>
+
+      <div>
+        <h2>Additional Resources</h2>
+        <li><a href="https://newt.phys.unsw.edu.au/jw/notes.html">newt.phys.unsw.edu.au/jw/notes.html</a></li>
+        <li><a href="http://www.sengpielaudio.com/calculator-notenames.htm">www.sengpielaudio.com/calculator-notenames.htm</a></li>
+        <li><a href="http://openmusictheory.com/pitch(Class).html">openmusictheory.com/pitch(Class)</a></li>
+      </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>
