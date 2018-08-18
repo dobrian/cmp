@@ -56,7 +56,7 @@ Software project design
 
 •  Sound file formats
 
-### Basics of music theory
+### Basics of music theory |Mark|
 
 •  Note names
 
@@ -72,7 +72,7 @@ Software project design
 
 ### Intro to Max and MSP
 
-### Intro to JavaScript in HTML 5
+### Intro to JavaScript in HTML 5 |Mark|
 
 ### Linear mapping and linear interpolation |Alex|
 
@@ -100,7 +100,7 @@ Software project design
 
 •  UI considerations for controlling processing |Alex|
 
-### Sample playback and processing in the audio context of the Web Audio API
+### Sample playback and processing in the audio context of the Web Audio API |Mark|
 
 •  Audio API context terminology and modules
 
@@ -126,7 +126,7 @@ Software project design
 
 •  Overview of other types of synthesis
 
-### Building a synthesizer in Web Audio API
+### Building a synthesizer in Web Audio API |Mark|
 
 •  Relating API implementations to Max implementations
 
@@ -200,7 +200,7 @@ Software project design
 
 ## Week 7
 
-### Project design and planning: the software design process
+### Project design and planning: the software design process |Mark|
 
 •  Standalone project in Max
 
