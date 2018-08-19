@@ -44,7 +44,7 @@ Software project design
 
 •  Noise
 
-### Sampling theory
+### Sampling theory |Chris|
 
 •  Schematic description of ADC-DAC
 
@@ -96,7 +96,7 @@ Software project design
 
 •  Applying control signals to sample playback |Alex|
 
-•  Windowing and granulation
+•  Windowing and granulation |Chris|
 
 •  UI considerations for controlling processing |Alex|
 
@@ -134,7 +134,7 @@ Software project design
 
 ## Week 5
 
-### Digital filters in theory and practice
+### Digital filters in theory and practice |Chris|
 
 •  Viewing sound in the spectral domain
 
@@ -188,7 +188,7 @@ Software project design
 
 ### Dynamics processing
 
-•  Amplitude-based event detection
+•  Amplitude-based event detection |Chris|
 
 •  Thresholds and gating
 
@@ -266,7 +266,7 @@ Software project design
 
 ## Week 9
 
-### Applications of the Fourier Transform
+### Applications of the Fourier Transform |Chris|
 
 Principles and terminology
 
