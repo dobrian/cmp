@@ -1,6 +1,4 @@
 Items:
-Schematic description of ADC-DAC
-PCM, sampling rate
-Nyquist theorem, Nyquist frequency, aliasing
-Bit precision, SQNR
-Sound file formats
+Discrete Samples of a Continuous Signal
+Digital Audio
+Sound File Formats
