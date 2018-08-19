@@ -18,7 +18,7 @@ one I use is in this folder.  Open up terminal, and run the following command
     $ ./Markdown.pl my-file.md > my-file.html
 
 
-## About the "music147.js" and "music147.css"
+# About "music147.js" and "music147.css"
 
 For now, don't worry about it.  In order for the "Hide/Show" buttons to work,
 you'll need to include the "music147.js" file in the *same directory* as the
