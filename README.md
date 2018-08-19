@@ -1,2 +1,2 @@
-# [Computer Music Programming](http://dobrian.github.io/cmp/docs/)
+**[Computer Music Programming]**(http://dobrian.github.io/cmp/docs/)
 
