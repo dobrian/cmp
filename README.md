@@ -1,2 +1,2 @@
-# cmp
-Computer Music Programming
+# [Computer Music Programming](http://github.com/dobrian/cmp/docs/)
+
