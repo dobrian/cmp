@@ -42,6 +42,12 @@ void Osc::Square(float *frequency, float *output, long samplesPerBlock)
 
 ![Square from clipping](images/squareClip_blockDiagram.svg)
 
+This method is very closely related to the sign method of creating the square wave in which the sign of a sinusoid is used to get either -1 or +1:
+
+$$
+  x(t) = sgn(sin fT)
+$$
+
 #### Counting samples
 
 One can also count the number of samples in a period. That is, if we know our sample rate is 1000Hz and we want a square wave at a frequency of 50Hz, we know that a complete period of the square wave will be 1000/50 or `samplerate/frequency`. This means that a 50Hz square wave (or any waveform, for that matter) at a 1000Hz sample rate is going to have a period of 20 samples. Since we know that a square wave's duty cycle is 50%, we know that the wave will be +1 for 10 samples, then -1 for 10 samples.
@@ -99,9 +105,9 @@ The triangle wave is another of the basic waveforms. It forms a triangle, center
 
 If the input is a phasor, we can create a triangle wave using absolute value and some multiplication:
 
-EQUATION HERE USING LATEX
 
 `triangle = (abs(phasor-0.5)*4)-1;`
+
 ![Block Diagram](images/triangle1_blockDiagram.svg)
 
 This method creates a triangle wave that begins it's cycle at the crest of the waveform. Here are the first 512 samples of a 100Hz triangle wave sampled at 8kHz.
@@ -110,9 +116,14 @@ This method creates a triangle wave that begins it's cycle at the crest of the w
 
 We can also use a slightly different method but using the floor function, or truncation, in addition to absolute value, where truncation removes the decimal portion of a floating point value (essentially rounding _down_ to the nearest integer).
 
-EQUATION HERE
+$$
+x_{triangle}(t) = 2 \bigg| 2 \bigg(\frac{t}{p} - \bigg\lfloor \frac{t}{p} + \frac{1}{2} \bigg\rfloor \bigg) -1 \bigg| - 1
+$$
 
-`triangle(f) = (4 * abs(phasor - trunc(phasor + 0.5))) - 1`
+where _p_ is the period and _t_ is time in seconds.
+
+`triangle(f) = (4 * abs(phasor(f) - trunc(phasor(f) + 0.5))) - 1`
+
 ![Block Diagram](images/triangle2_blockDiagram.svg)
 
 This method, as opposed to the one above, creates a triangle wave that begins its cycle at the trough:
