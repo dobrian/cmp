@@ -1,8 +1,8 @@
-Sampling Theory
-===
+# Sampling Theory
 
-Discrete Samples of a Continuous Signal
 ---
+
+## Discrete Samples of a Continuous Signal
 
 You're probably aware that when you're watching a movie you're actually watching a series of still photographs. Conventionally, 24 snapshots&mdash;also known as frames&mdash;are captured per second, and those are later played back (displayed one after the other) at a constant rate of 24 frames per second, the same rate at which the snapshots were taken. That means that the photos are shot at a rate of one every 1/24 of a second&mdash;which is to say every 0.041667 seconds, or every 41.667 milliseconds.
 
