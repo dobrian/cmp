@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>Sound File Formats</title>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="soundfileformats">Sound File Formats</h1>
+
+<hr />
+
+<div id="text">
+
+<p>Sound data is stored in a variety of file formats. Some file formats store the sound in a very straightforward way, simply as a list of sample values, without any elaborate data compression encoding. Other file formats store the data in an encoded form that yields a smaller file size. The encoded formats are quite varied in terms of their data compression methods. We'll mention a few of them here, but in general we won't engage in detailed discussion of them. For the purposes of this lesson, we'll focus on uncompressed sound files.</p>
+
+<p>Some programming environments, such as the <a href="WebAudio API">Web Audio API</a> and <a href="[https://cycling74.com/products/max]">Max</a>, already provide ways to open sound files and use the sound data, and they also provide ways to write some of these standard file formats. So, you might never need to write a program from scratch to manage every low-level aspect of opening and managing and writing sound files. On the other hand, some day you might. And in any case, it's probably good to have some idea of what's going on under the hood.</p>
+
+<p>The two most common uncompressed file formats are Audio Interchange File Format, a.k.a. AIFF (.aif), and Waveform Audio File Format, a.k.a. WAVE (.wav). AIFF was invented by Apple, and WAVE was invented by Microsoft and IBM. So, conventionally AIFF is used in Mac OS, and WAVE is used in Windows. But really, almost all applications in both operating systems can read and save either of those two file formats with no problems. And the two formats are really not very different from each other.</p>
+
+<hr />
+
+<h2 id="aiff">AIFF</h2>
+
+<p>Two excellent resources for learning the structure of an AIFF file are:</p>
+
+<ul>
+<li><a href="[http://paulbourke.net/dataformats/audio/]">Audio File Formats</a>, by Paul Bourke</li>
+
+<li><a href="[http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/AIFF/AIFF.html]">AIFF/AIFC Sound File Specifications</a>, by Peter Kabal</li>
+</ul>
+
+<p>The first of those two documents explains the file format and gives examples of how you might handle file headers and "chunks" using data structures in your program. It also contains example C code showing how you might write an AIFF file to disk. Even if you're not fluent in the C language, by reading the chunk descriptions you can get an idea of how different parts of an AIFF file are organized. At the bottom of the document, the author describes the  ways in which a WAVE file differs from an AIFF file, and provides example C code for writing a WAVE file.</p>
+
+<p>The second website amplifies that document in an important way. A couple years after the publication of the AIFF standard, the standard was modified to include the capability to contain various compressed data formats in addition to the uncompressed PCM-sampled data format of the original AIFF standard. Thus, a file type of AIFC was established to extend the AIFF specification. This document shows what changes that entailed, and provides links to all the most important official documentation of those standards.</p>
+
+<p>The very first thing you encounter in an AIFF file is a header consisting of four characters (four bytes) 'FORM', followed by an unsigned long integer telling the total size in bytes of the rest of the file (after the size info), followed by four more characters 'AIFF' (or 'AIFC'). In a WAVE file, the four characters 'FORM' are replaced by 'RIFF', and the four characters 'AIFF' (or 'AIFC') are replaced by 'WAVE'. Your program can open the file and "sniff" those first twelve bytes of the header to see what kind of file it is and how big it is.</p>
+
+<p>After that, there is usually a chunk with the ID 'COMM' (for "common") in AIFF/AIFC or ID 'fmt ' (for "format") in WAVE, containing vital information about the sound data, such as its format, its sampling rate, the number of channels, and the number of sample frames. Then there will be a 'SSND' chunk that contains the actual sample data. There are several other possible chunk types, but those three we've mentioned&mdash;header (container), common, and data&mdash;are the required ones.</p>
+
+<h2 id="mp3">MP3</h2>
+
+<p>MP3 (.mp3) has been the most ubiquitous file format for compressed audio interchange on the Web. It uses knowledge about psychoacoustics to determine what aspects of a sound might be dispensable because we don't generally notice them, throws some of that "redundant" information away, and uses data compression techniques to further reduce the sound of the file. Because some information is lost in this compression process, it is known as "lossy" compression, which implies a degradation of quality compared with uncompressed PCM-sampled data. The question of how objectionable this degradation is is subjective and context-dependent; it involves a trade-off between file size (and thus speed of transmission and copying) and quality of information. Within the MP3 specification, there are different levels of quality available, depending on the amount of compression desired.</p>
+
+<p>Here is a tutorial on the basic principles of MP3 encoding/decoding.</p>
+
+<ul>
+<li><a href="[http://music.arts.uci.edu/dobrian/MP3Tutorial/]">MP3 Learning Object</a>, by Nathaniel Tull Phillips</li>
+</ul>
+
+<p>The technology to enact MP3 encoding and decoding is patent-free. The Web Audio API and Max both have this decoding capability built in, thus they provide ways to open and decompress MP3 files, as do most end-user commercial audio applications, including open-source applications such as <a href="[https://www.audacityteam.org/]">Audacity</a>, which uses the open-source <a href="[http://lame.sourceforge.net/index.php]">LAME</a> encoding engine.</p>
+
+<h2 id="other">Other</h2>
+
+<p>There are many other compression methods, too numerous to try to list entirely. At the time of this writing, one of the most noteworthy methods is Advanced Audio Coding (AAC), which is very similar to MP3 but is thought to be more efficient and of better sound quality. That form of compression is usually contained in a .m4a file type.</p>
+
+<p>There are some lossless compression methods that provide some space savings, but are generally less commonly used than the uncompressed lossless AIFF and WAVE formats or the lossy compressed formats MP3 and AAC. The most common of those are the Free Lossless Audio Codec (FLAC), and an Apple-supported counterpart, Apple Lossless Audio Compression (ALAC).</p>
+
+</div>
+
+<hr />
+
+<div id="vocabulary">
+
+<h2 id="vocabulary">Vocabulary</h2>
+
+<ul>
+<li>AIFF</li>
+
+<li>WAVE</li>
+
+<li>MP3</li>
+
+<li>AAC</li>
+
+<li>compression</li>
+
+<li>uncompressed</li>
+
+<li>header</li>
+
+<li>chunk</li>
+
+<li>sample frame</li>
+
+<li>ckID</li>
+</ul>
+
+</div>
+
+<hr />
+
+<div id="self-study">
+
+<h2 id="selfstudy">Self-Study</h2>
+
+<p>To ensure you really understand the AIFF (or WAVE) file structure, if you feel confident in your ability to program in a language such as C, Java, or Python, you could try implementing a simple sound file reading and writing program. The official AIFF specification document contains a chart showing an example file structure, and the Bourke article provides a file-writing code example in C.</p>
+
+<p>For example, you could write a program that simply sniffs the beginning of a file and reports whether it's a sound file, and if so, what file format it is, and some details about its audio contents, such as its sampling rate, number of channels, data format, duration (in seconds and in sample frames), and file size.</p>
+
+</div>
+
+<hr />
+
+<div id="self-quiz">
+
+<h2 id="selfquiz">Self-Quiz</h2>
+
+<ol>
+<li>What are the two most common file formats for uncompressed audio?</li>
+<button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-1" class="answer" style="display: none">AIFF (.aif) and WAVE (.wav)</p>
+
+<li>What are the two most common file formats for compressed audio?</li>
+<button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-2" class="answer" style="display: none">MP3 (.mp3) and AAC (.m4a)</p>
+
+<li>In an (unncompressed) audio file, where is the sample rate stored?</li>
+<button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-3" class="answer" style="display: none">In the common chunk ('COMM' in AIFF) or format chunk ('fmt ' in WAVE)</p>
+
+<li>What bytes are not included in the file's internal size report?</li>
+<button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-4" class="answer" style="display: none">The four bytes of the file ckID ('FORM' or 'RIFF'), and the four bytes of the size report itself</p>
+
+<li>How would you determine the duration of a sound in an AIFF or WAVE file?</li>
+<button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-5" class="answer" style="display: none">Use the report of the number of sample frames in the data chunk, and divide that by the sample rate reported in the common (or format) chunk.</p>
+</ol>
+
+</div>
+
+<hr />
+
+<div>
+
+<h2 id="additionalresources">Additional Resources</h2>
+
+<p><a href="audio file formats">Audio File Formats</a>, Paul Bourke</p>
+
+<p><a href="aiff-aifc spec">AIFF/AIFC Sound File Specifications</a>, Peter Kabal</p>
+
+<p><a href="[http://music.arts.uci.edu/dobrian/MP3Tutorial/]">MP3 Learning Object</a>, Nathaniel Tull Phillips</p>
+
+</div>
+
+<hr />
+
+<p>This page was last modified August 22, 2018 by Christopher Dobrian, <em><a href="mailto:dobrian@uci.edu">dobrian@uci.edu</a></em>.
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="music147.js"></script>
+</body>
+
+</html>
