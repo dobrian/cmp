@@ -1,0 +1,35 @@
+# Possible Topics
+
+- History of JS / Why JS?
+  - Brenden Eich, 10 days -- design flaws
+  - designed for the web, interacting with the DOM
+	- mention jQuery?
+  - was client-side, now server-side w/ node.js
+  - other languages existed to transpile (CoffeeScript; TypeScript; ES6)
+  - we're using vanilla JS
+- How is JS similar
+  - C-like language, w/ curly braces and semicolons (make side not about auto-semicolon insertion)
+  - data types: number, boolean, string (single or double quote), null/undefined/NaN, array, object
+  - if/then/else, for loops, foreach, while loops, do while
+  - exceptions
+- How is JS different?
+  - scoping (careful with var/no var) - mention JS lint
+  - typing (dynamic, weak, duck) [quote wat]
+  - truthy/falsey values
+  - numbers (no float/int)
+  - prototype inheritance
+  - anonymous functions; functions as arguments to other functions (callbacks)
+  - map and filter
+- Web Audio API / tone.js?!
+
+
+# Resources
+
+- Crockford
+- jslint / node stuff
+- wat
+- Codecademy
+- Mozilla DN
+- NPM
+- Style guide / why ES6 over ES5
+- maybe make a special point, *not* w3schools?
