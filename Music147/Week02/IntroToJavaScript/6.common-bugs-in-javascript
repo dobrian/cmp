@@ -1,0 +1,67 @@
+### Global Variables
+
+JavaScript's greatest design flaw is that if you forget to say "let" or "var"
+before a variable, it is global by default.
+
+    let a = 1; // local
+	b = 2;     // global
+
+Global, by the way, does not just mean global in your one script.  Global means
+global for *every script on the webpage*.  In other words, if you do something
+silly like this:
+
+   for (i = 0; i < 10; i += 1) {
+     // do something
+   }
+
+You have just made `i` a global variable for *every one of your scripts*.
+Needless to say, this can lead to insanely hard-to-spot errors and bugs.
+
+In order to mitigate this, you should get in the habit of putting using the
+"use strict" directive.  Just put the string "use strict" at the top of each of
+your scripts, and your browser will yell at you if it thinks you've misplaced a
+global variable.
+
+    "use strict" // line 1
+
+	// put rest of code here
+
+
+### Numbers in JavaScript
+
+JavaScript makes no distinction between integers and floating point numbers.
+That means, 7 divided by 2 is actually 3.5, not 3 like it would be in many
+other languages.  This is a side effect of using the IEEE 754 number standard.
+Here is another side effect of the IEEE 754 standard:
+
+    0.1 + 0.2; // result is 0.30000000000000004
+
+As always, try to do all your arithmatic with integers until you absolutely
+have to switch to floats.
+
+
+### Automatic Semicolon Insertion
+
+JavaScript actually doesn't require you to write semicolons to terminate statements.
+It actually does a pretty good job guessing where your statements end, except in a
+case like this:
+
+   function makeNote(midiNumber, duration)
+   {
+     return
+	 {
+	   "midiNumber": midiNumber,
+	   "duration": duration
+	 }
+   }
+
+When you call `makeNote()`, you will get `undefined`, because JavaScript secretly put a semicolon
+*after the `return`*.  This means that you should always use [K&R-style
+braces](https://en.wikipedia.org/wiki/Indentation_style#K&R):
+
+  function makeNote(midiNumber, duration) {
+    return {
+	  "midiNumber": midiNumber,
+	  "duration": duration
+	}
+  }
