@@ -16,7 +16,7 @@ let playRandomGrain = (startTime, grainDuration) => {
 
   // Create a node to control the buffer's gain.
   let grainGain = audioCtx.createGain()
-  grainGain.connect(audioCtx.destination);
+  grainGain.connect(dac);
 
   // Create a window.
   grainGain.gain.setValueAtTime(0, startTime);
