@@ -333,7 +333,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 105.0, 210.0, 630.0, 29.0 ],
 					"style" : "",
-					"text" : "note name: C-1",
 					"textjustification" : 1
 				}
 
@@ -425,7 +424,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 165.0, 165.0, 51.0, 22.0 ],
 					"style" : "",
-					"text" : "60 39 0"
+					"text" : "60 51 0"
 				}
 
 			}
@@ -506,7 +505,6 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 105.0, 240.0, 630.0, 29.0 ],
 					"style" : "",
-					"text" : "MIDI number: 0",
 					"textjustification" : 1
 				}
 
