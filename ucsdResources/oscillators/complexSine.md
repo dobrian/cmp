@@ -35,7 +35,11 @@ In other words, a complex sinusoid has a constant complex magnitude (_A_). Since
 
 ![Phasor GIF](images/Unfasor.gif)
 
-This animation shows the counter-clockwise motion of the real (cosine) component of the complex sinusoid projected onto the complex plane. We can rewrite the trigonometric form of the equation into polar form:
+This animation shows the counter-clockwise motion of the real (cosine) component of the complex sinusoid projected onto the complex plane. We can also project the complex phasor onto orthogonal axes:
+
+![Orthogonal Waves](images/complexSine/circle_cos_sin.gif)
+
+The green circle in the bottom right corner is the [unit circle](https://en.wikipedia.org/wiki/Unit_circle) in the complex plane. We can rewrite the trigonometric form of the equation into polar form:
 
 $$
   cos\theta + jsin\theta = re^{j\theta}
@@ -47,8 +51,22 @@ Relabeling a sine wave:
 
 ![Sine with Radian Labels](images/complexSine/sine_radians.svg)
 
+## Advantages
+
 Instantaneous Frequency:
 
 $$
   f = \omega + \frac{d}{dt}\phi(t)
+$$
+
+Instantaneous Phase:
+
+$$
+  \angle x(t) = \omega t + \phi
+$$
+
+Instantaneous Magnitude (Amplitude):
+
+$$
+  A = \sqrt{re^2\{x(t)\} + im\{x(t)\}}
 $$
