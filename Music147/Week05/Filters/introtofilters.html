@@ -38,33 +38,40 @@
 
       <p>The most common way to visualize sound is as a graph of amplitude over time. Since the horizontal x axis of a graph is known as the <em>domain</em>, this is called a <em>time-domain</em> view of the sound. Normally the time-domain view doesn't give us a whole lot of specific information about the frequency content of the sound, but there are a few exceptions. For example, if the sound is smooth and sinusoidal and repeats with a regular periodicity, we can know that the sound has energy at that frequency of repetition.</p>
 
-      <p><img src="./400HzTone.png" alt="400 Hz tone" border=0><br>
+      <p><audio src="./400HzTone.mp3" controls style="width:480px;"></audio><br>
+      <img src="./400HzTone.png" alt="400 Hz tone" border=0><br>
       <em>This sinusoidal shape repeats four times in 1/100 sec., so it has energy at 400 Hz.</em></p>
 
       <p>Even if the sound is not so smooth, but still essentially repeats, we can figure out its fundamental frequency and can surmise that it also has energy at whole-number multiples of that frequency.</p>
 
-      <p><img src="./400HzTone8Partials.png" alt="400 Hz tone with 8 partials" border=0><br>
+      <p><audio src="./400HzTone8Partials.mp3" controls style="width:480px;"></audio><br>
+      <img src="./400HzTone8Partials.png" alt="400 Hz tone with 8 partials" border=0><br>
       <em>This shape repeats four times in 1/100 sec., so we can surmise that it has energy at whole-number multiples of 400 Hz.</em></p>
 
       <p>As a rule, the smoother a time-domain signal, the less high-frequency energy it contains. Conversely, sharper angles in a time-domain graph indicate more high-frequency energy in the signal.</p>
 
-      <p><img src="./400Hztone.png" alt="400 Hz tone" border=0>&nbsp;&nbsp;<img src="./400HzTonePartials78910.png" alt="tone with high-frequency energy" border=0><br>
+      <p><audio src="./400HzTone.mp3" controls style="width:480px;">&nbsp;&nbsp;<audio src="./400HzTonePartials78910.mp3" controls style="width:480px;"><br>
+      <img src="./400Hztone.png" alt="400 Hz tone" border=0>&nbsp;&nbsp;<img src="./400HzTonePartials78910.png" alt="tone with high-frequency energy" border=0><br>
       <em>A pure tone, and a tone with high-frequency energy</em></p>
 
       <p>For more specific information about the frequency content of a signal, it's useful to view a short segment of that signal in the <em>frequency domain</em>, as a graph of amplitude over frequency. In that case, we're treating that short amount of time as if it were a single instant, and examining the relative amplitudes of each frequency at that moment. Because this gives us a view of the sound's spectrum of frequencies, the frequency domain is sometimes also referred to as the <em>spectral domain</em>.</p>
 
       <p>A sine tone has energy at only one frequency, while a more complex periodic tone has energy at frequencies that are whole-number multiples of a common fundamental frequency. A momentary impulse (a single click) produces equal energy at all frequencies. White noise (random samples with no correlation) similarly has equal average energy in all frequency regions.</p>
 
-      <p><img src="./400HzTone.png" alt="400 Hz tone" border=0>&nbsp;&nbsp;<img src="./400HzToneSpectrum.png" alt="400 Hz spectrum" border=0><br>
+      <p><audio src="./400HzTone.mp3" controls style="width:480px;"><br>
+      <img src="./400HzTone.png" alt="400 Hz tone" border=0>&nbsp;&nbsp;<img src="./400HzToneSpectrum.png" alt="400 Hz spectrum" border=0><br>
       <em>Cosine wave, energy at one frequency</em></p>
 
-      <p><img src="./400HzTone8Partials.png" alt="400 Hz tone with 8 partials" border=0>&nbsp;&nbsp;<img src="./400HzTone8PartialsSpectrum.png" alt="400 Hz 8 partials spectrum" border=0><br>
+      <p><audio src="./400HzTone8Partials.mp3" controls style="width:480px;"><br>
+      <img src="./400HzTone8Partials.png" alt="400 Hz tone with 8 partials" border=0>&nbsp;&nbsp;<img src="./400HzTone8PartialsSpectrum.png" alt="400 Hz 8 partials spectrum" border=0><br>
       <em>Periodic complex tone, energy at whole-number multiples of a fundamental frequency</em></p>
 
-      <p><img src="./Impulse.png" alt="impulse" border=0>&nbsp;&nbsp;<img src="./ImpulseSpectrum.png" alt="impulse spectrum" border=0><br>
+      <p><audio src="./Impulse.mp3" controls style="width:480px;"><br>
+      <img src="./Impulse.png" alt="impulse" border=0>&nbsp;&nbsp;<img src="./ImpulseSpectrum.png" alt="impulse spectrum" border=0><br>
       <em>Momentary impulse, energy at all frequencies.</em></p>
 
-      <p><img src="./WhiteNoise.png" alt="white noise" border=0>&nbsp;&nbsp;<img src="./WhiteNoiseSpectrum.png" alt="white noise spectrum" border=0><br>
+      <p><audio src="./WhiteNoise.mp3" controls style="width:480px;"><br>
+      <img src="./WhiteNoise.png" alt="white noise" border=0>&nbsp;&nbsp;<img src="./WhiteNoiseSpectrum.png" alt="white noise spectrum" border=0><br>
       <em>White noise, energy at all frequencies.</em></p>
 
       <p>It's worth noting that those 2D graphs of a sound's spectrum do not have an axis showing time. We're using a short segment of time and treating it as a single moment in time. It is possible, however, to show how a sound's spectrum changes over time, using a 3D graph to include time as one axis, or by using color to show intensity.</p>
@@ -79,9 +86,8 @@
 
       <p>A graph of that same sound, showing amplitude over time, gives us similar information about the sound's change in amplitude over time, but omits any information about the frequency content of the sound (which, in musical terms, might be considered this sound's most important aspect).</p>
 
-      <audio src="./cello4.mp3" controls style="width:480px;"></audio>
-
-      <p><img src="./Cello4Seconds.png" alt="cello excerpt" border=0><br>
+      <p><audio src="./cello4.mp3" controls style="width:480px;"></audio><br>
+      <img src="./Cello4Seconds.png" alt="cello excerpt" border=0><br>
       <em>Time-domain view, amplitude over time</em></p>
 
     </div>
