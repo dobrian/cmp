@@ -1,19 +1,10 @@
+// Adapted from "https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
+
+// Create the audio context and an analyser node.
 var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 var analyser = audioCtx.createAnalyser();
 
-if (navigator.mediaDevices) {
-  navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
-    const microphone = audioCtx.createMediaStreamSource(stream);
-    microphone.connect(analyser);
-  }).catch((err) => {
-    // browser unable to access microphone
-    // (check to see if microphone is attached)
-  });
-} else {
-  // browser unable to access media devices
-  // (update your browser)
-}
-
+// Set FFT parameters
 analyser.fftSize = 2048;
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
@@ -23,8 +14,7 @@ analyser.getByteTimeDomainData(dataArray);
 var canvas = document.getElementById("oscilloscope");
 var canvasCtx = canvas.getContext("2d");
 
-// draw an oscilloscope of the current audio source
-
+// Draw an oscilloscope of the current audio source
 function draw() {
 
   requestAnimationFrame(draw);
@@ -61,3 +51,15 @@ function draw() {
 }
 
 draw();
+
+// Access the microphone, and connect it to the analyser
+if (navigator.mediaDevices) {
+  navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
+    const microphone = audioCtx.createMediaStreamSource(stream);
+    microphone.connect(analyser);
+  }).catch((err) => {
+    alert("browser unable to access microphone!");
+  });
+} else {
+  alert("browser unable to access media devices!");
+}
