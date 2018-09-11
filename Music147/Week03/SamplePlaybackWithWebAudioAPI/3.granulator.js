@@ -1,29 +1,29 @@
 // Set up the AudioContext and the dac.
-let audioCtx = new AudioContext();
-let dac = audioCtx.destination;
+const audioCtx = new AudioContext();
+const dac = audioCtx.destination;
 
 // Save a space for the audio data.
 let buffer = null;
 
 // The window shape to be used by `.setValueCurveAtTime()`.
-let curve = new Float32Array([0, 0.3, 1, 0.3, 0]);
+const curve = new Float32Array([0, 0.3, 1, 0.3, 0]);
 
 // Load the sound file, and store the data to our `buffer` variable.
-let request = new XMLHttpRequest();
+const request = new XMLHttpRequest();
 request.open("GET", "freejazz.wav", true);
 request.responseType = "arraybuffer";
 request.onload = () => audioCtx.decodeAudioData(request.response, (data) => buffer = data);
 request.send();
 
 // Play a random grain.
-let playGrain = (startTime, grainDuration) => {
+const playGrain = (startTime, grainDuration) => {
 
   // Create a node to play from a buffer.
-  let grain = audioCtx.createBufferSource();
+  const grain = audioCtx.createBufferSource();
   grain.buffer = buffer;
 
   // Create a node to control the buffer's gain.
-  let grainGain = audioCtx.createGain()
+  const grainGain = audioCtx.createGain()
   grainGain.connect(dac);
 
   // Create a window.
@@ -32,7 +32,7 @@ let playGrain = (startTime, grainDuration) => {
   grain.connect(grainGain);
 
   // Choose a random place to start.
-  let offset = Math.random() * (buffer.duration - grainDuration)
+  const offset = Math.random() * (buffer.duration - grainDuration)
 
   // Play the grain.
   grain.start(startTime, offset, grainDuration);
@@ -41,10 +41,10 @@ let playGrain = (startTime, grainDuration) => {
 // Run the granulation when you click the play button.
 $("#play").on("click", () => {
   // Get overlap time, grain duration, and total time from input sliders
-  let overlapTime = Number($("#overlap-time").val() / 1000);
-  let grainDuration = Number($("#grain-duration").val() / 1000);
-  let totalTime = Number($("#total-time").val());
-  let numberOfGrains = (totalTime - grainDuration) / overlapTime;
+  const overlapTime = Number($("#overlap-time").val() / 1000);
+  const grainDuration = Number($("#grain-duration").val() / 1000);
+  const totalTime = Number($("#total-time").val());
+  const numberOfGrains = (totalTime - grainDuration) / overlapTime;
 
   // Perform the granulation
   for (let i = 0; i < numberOfGrains; i += 1) {
