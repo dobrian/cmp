@@ -22,7 +22,7 @@ where _x<sub>n</sub>_ is the value of the current input sample, _x<sub>n-1</sub>
 
 This kind of averaging won't alter the input signal much at all if the signal is changing very gradually from one sample to the next, but it will smooth the signal considerably if the input changes drastically from sample to sample. Thus, high frequencies, which cause more rapid and radical change in the signal, get smoothed out a little, reducing the high-frequency energy.
 
-In case that's not intuitively obvious to you, let's look at a couple of examples. If an input stream of numbers is 0. 0.1 0.2 0.4 0.5 0.3 0.1 0.&mdash;and we assume an initial _x(n-1)_ with a value of 0.&mdash;the output would be 0. 0.05 0.15 0.3 0.45 0.4 0.2 0.05, which has a progression and shape very similar to the input.
+In case that's not intuitively obvious to you, let's look at a couple of examples. If an input stream of numbers is 0. 0.1 0.2 0.4 0.5 0.3 0.1 0.&mdash;and we assume an initial _x<sub>n-1</sub>_ with a value of 0.&mdash;the output would be 0. 0.05 0.15 0.3 0.45 0.4 0.2 0.05, which has a progression and shape very similar to the input.
 
 <img src="./smoothcurve.png"><br>
 _A smooth input is only slightly smoothed by the lowpass filter_
