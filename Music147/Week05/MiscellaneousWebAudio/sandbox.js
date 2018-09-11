@@ -1,6 +1,6 @@
 const audioCtx = new AudioContext();
 if (navigator.mediaDevices) {
-  navigator.getUserMedia({"audio": true}).then((stream) => {
+  navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
     const microphone = audioCtx.createMediaStreamSource(stream);
     // microphone can now act like any other AudioNode
   }).catch((err) => {
