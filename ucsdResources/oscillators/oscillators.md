@@ -13,3 +13,7 @@ The angle of the "spoke" is the phase at a given moment in time while the freque
 
 ### Phase
 The phase of a waveform, often denoted with the Greek letter phi (Φ), is a means to define a specifc point on a waveform. In the analogy above, the unit circle contains 2pi radians around the circumference and thus, one rotation contains 2pi radians of phase.
+
+### Sampled Signals
+
+In our case, we will be working primarily with discrete time; i.e. samples.
