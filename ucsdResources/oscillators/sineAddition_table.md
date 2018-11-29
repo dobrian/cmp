@@ -41,8 +41,11 @@ for(i=0; i < tableSize; i++) {
 
 ```
 
-PUT AN ANIMATION HERE??? OR AT LEAST A PLOT OF THE APPOXIMATION
+The following is an animation of the process. _N_ is the number of harmonics used to construct the wave. Notice that as _N_ increases, the result is increasingly sharp and similar to an algebraically constructed sawtooth.
 
+![Sawtooth Animation](/ucsdResources/oscillators/images/sineAdditive/Synthesis_sawtooth.gif)
+
+#### Ramp
 The ramp is created by simply inverting the phase of the sine wave used in the sawtooth:
 
 $$
@@ -88,9 +91,13 @@ for(i=0; i < tableSize; i++) {
 
 ```
 
+Notice that in the same way as the sawtooth, when we increase the number of harmonics of the square wave we more closely resemble an algebraically constructed one.
+
+![Square Wave](/ucsdResources/oscillators/images/sineAdditive/Fourier_series_for_square_wave.gif)
+
 ## Triangle
 
-The triangle wave, like the square wave, uses only odd harmonics but every other odd harmonics phase is inverted (multiplied by -1 or phase change by PI). The amplitude of the harmonics, however, is the reciprocal of the square of their mode number. This means that the first harmonic is multiplied by 1/1<sup>2</sup>, the third harmonic is multiplied by 1/3<sup>2</sup>, the fifth by 1/5<sup>2</sup>, etc.
+The triangle wave, like the square wave, uses only odd harmonics but the phase of every other harmonic is inverted (multiplied by -1 or phase change by π). The amplitude of the harmonics, however, is the reciprocal of the square of their mode number. This means that the first harmonic is multiplied by 1/1<sup>2</sup>, the third harmonic is multiplied by 1/3<sup>2</sup>, the fifth by 1/5<sup>2</sup>, etc.
 
 $$
   x_{triangle}(t) = \sum_{i=1}^{k} (-1)^{i} n^{-2} (\text{sin}[nt])
@@ -101,6 +108,7 @@ float table[1024];
 int harmonics = 10; // 10 harmonics
 float amp = 1.0; // amplitude
 float max = 0; // for normalization
+boolean invertPhase = false; // boolean to invert the phase
 
 // FILL THE TABLE WITH ZEROS?? OR START WITH FILLING IT WITH THE FIRST HARMONIC??
 
@@ -111,14 +119,18 @@ for(k=1; k <= harmonics; k++) {
     for(i=0; i < tableSize; i++) {
       float samp;
       samp = (i*k)/tableSize; // get the increment
-
-      // invert the phase here!
       samp = samp * 2PI; // scale the frequency
-
-
       table[i] = table[i] + (sin(samp) * 1/(harmonic**2)); // add it
+
+      if (invertPhase) {
+        table[i] = -1 * table[i]; // invert the phase
+        invertPhase = false; // don't invert next time
+      } else {
+        invertPhase = true; // invert the next time
+      };
+
       if (table[i] > max) {
-        max = table[i]; // remember it if it's the largest value we've encountered
+        max = table[i]; // remember it if it's the largest value we've encountered for normalization
       };
     };
   };
@@ -130,3 +142,7 @@ for(i=0; i < tableSize; i++) {
 };
 
 ```
+
+Notice that in the same way as the sawtooth, when we increase the number of harmonics of the triangle wave we more closely resemble an algebraically constructed one.
+
+![Square Wave](/ucsdResources/oscillators/images/sineAdditive/Synthesis_triangle.gif)

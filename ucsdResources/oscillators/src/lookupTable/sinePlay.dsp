@@ -1,4 +1,4 @@
-declare name "Non-bandlimted Triangle";
+declare name "Sinewave Lookup - Linear Interpolation";
 declare copyright "(c) Jacob Sundstrom";
 
 import("stdfaust.lib");

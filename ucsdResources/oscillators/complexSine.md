@@ -52,6 +52,7 @@ Relabeling a sine wave:
 ![Sine with Radian Labels](images/complexSine/sine_radians.svg)
 
 ## Advantages
+Represeting a sinewave in complex form has several distinct advantages:
 
 Instantaneous Frequency:
 

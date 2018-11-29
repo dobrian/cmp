@@ -4219,7 +4219,7 @@ _f4u$t.json_to_ui = function(json, hash) {
  
 /*
  * look for the phrase
- * UI2sineTruncPlay to see where the UI sends messages to sineTruncPlay
+ * UI2sineAdd to see where the UI sends messages to sineAdd
  * obviously, the goal is to separate the two as much as possible
  */
 
@@ -4621,7 +4621,7 @@ _f4u$t.internal_move_active_object = function(e, identifier) {
    now =  fn(e, identifier);
   }
 
-  // UI2sineTruncPlay
+  // UI2sineAdd
   if (now != null && now != _f4u$t._I[identifier]['value']) {
     var id = _f4u$t.unique(_f4u$t._I[identifier]['id']);
     _f4u$t.fausthandler(_f4u$t.IDS_TO_ATTRIBUTES[id]["address"], now);
@@ -4713,7 +4713,7 @@ _f4u$t.respondToOrientationChange = function(e) {
            _f4u$t.active_addresses.push(_f4u$t.IDS_TO_ATTRIBUTES[id]["address"]);
           now = _f4u$t.moveSliderViaAccelerometer(e, id);
         }
-        // UI2sineTruncPlay
+        // UI2sineAdd
         if (now != null && now != _f4u$t._I['orientation'+id]['value']) {
           _f4u$t.fausthandler(_f4u$t.IDS_TO_ATTRIBUTES[id]["address"], now);
           _f4u$t._I['orientation'+id]['value'] = now;
@@ -4967,7 +4967,7 @@ _f4u$t.change_checkbox = function(I, touch) {
     alert("malfunctional checkbox");
   }
   box.style.opacity = opacity;
-  // UI2sineTruncPlay
+  // UI2sineAdd
   _f4u$t.fausthandler(address, opacity);
 }
 
@@ -5033,7 +5033,7 @@ _f4u$t.actualize_buffer = function() {
   _f4u$t.change_label_text(label, id);
   _f4u$t.IDS_TO_ATTRIBUTES[id]["init"] = _f4u$t.IDS_TO_ATTRIBUTES[id]["buffer"]; // prevents bad snaps of values
 
-  // UI2sineTruncPlay
+  // UI2sineAdd
   _f4u$t.fausthandler(address, now);
 
   _f4u$t.actualize_incremental_object(id);
@@ -5847,8 +5847,8 @@ $(document).ready(function() { _f4u$t.main_loop(); });
 
 /* ------------------------------------------------------------
 copyright: "(c) Jacob Sundstrom"
-name: "Sinewave Lookup - Truncation"
-Code generated with Faust 2.12.1 (https://faust.grame.fr)
+name: "Sine-additive Waveforms"
+Code generated with Faust 2.13.8 (https://faust.grame.fr)
 Compilation options: ajs, -scal -ftz 0
 ------------------------------------------------------------ */
 /*
@@ -5874,7 +5874,7 @@ var faust = faust || {};
 
 
 
-function sineTruncPlayModule(global, foreign, buffer) {
+function sineAddModule(global, foreign, buffer) {
 	
 	'use asm';
 	
@@ -5885,6 +5885,7 @@ function sineTruncPlayModule(global, foreign, buffer) {
 	var log = foreign.log;
 	var round = foreign.round;
 	
+	var floorf = foreign.floor;
 	var max_f = foreign.max;
 	var min_f = foreign.min;
 	var min_i = foreign.min;
@@ -5894,36 +5895,36 @@ function sineTruncPlayModule(global, foreign, buffer) {
 	function log10f(a) { a = +a; return +(+log(a) / +log(10.)); }
 	function remainderf(x, y) { x = +x; y = +y; return +(x - +round(x/y) * y); }
 
-	function getNumInputssineTruncPlaySIG0(dsp) {
+	function getNumInputssineAddSIG0(dsp) {
 		dsp = dsp | 0;
 		return 0;
 	}
 	
-	function getNumOutputssineTruncPlaySIG0(dsp) {
+	function getNumOutputssineAddSIG0(dsp) {
 		dsp = dsp | 0;
 		return 1;
 	}
 	
-	function instanceInitsineTruncPlaySIG0(dsp, samplingFreq) {
+	function instanceInitsineAddSIG0(dsp, samplingFreq) {
 		dsp = dsp | 0;
 		samplingFreq = samplingFreq | 0;
 		var l0 = 0;
 		for (l0 = 0; (((l0 | 0) < 2) | 0); l0 = (((l0 | 0) + 1) | 0)) {
-			HEAP32[dsp + 4136 + ((l0 | 0) << 2) >> 2] = 0;
+			HEAP32[dsp + 4252 + ((l0 | 0) << 2) >> 2] = 0;
 			
 		}
 		
 	}
 	
-	function fillsineTruncPlaySIG0(dsp, count, output) {
+	function fillsineAddSIG0(dsp, count, output) {
 		dsp = dsp | 0;
 		count = count | 0;
 		output = output | 0;
 		var i = 0;
 		for (i = 0; (((i | 0) < (count | 0)) | 0); i = (((i | 0) + 1) | 0)) {
-			HEAP32[dsp + 4136 + (0 << 2) >> 2] = ((min_i(1024, (((HEAP32[dsp + 4136 + (1 << 2) >> 2] | 0) + 1) | 0))) | 0);
-			HEAPF[output + ((i | 0) << 2) >> 2] = +(sinf(+(0.00613592332 * +((HEAP32[dsp + 4136 + (0 << 2) >> 2] | 0)))));
-			HEAP32[dsp + 4136 + (1 << 2) >> 2] = (HEAP32[dsp + 4136 + (0 << 2) >> 2] | 0);
+			HEAP32[dsp + 4252 + (0 << 2) >> 2] = ((min_i(1024, (((HEAP32[dsp + 4252 + (1 << 2) >> 2] | 0) + 1) | 0))) | 0);
+			HEAPF[output + ((i | 0) << 2) >> 2] = +(sinf(+(0.00613592332 * +((HEAP32[dsp + 4252 + (0 << 2) >> 2] | 0)))));
+			HEAP32[dsp + 4252 + (1 << 2) >> 2] = (HEAP32[dsp + 4252 + (0 << 2) >> 2] | 0);
 			
 		}
 		
@@ -5942,23 +5943,34 @@ function sineTruncPlayModule(global, foreign, buffer) {
 	function classInit(dsp, samplingFreq) {
 		dsp = dsp | 0;
 		samplingFreq = samplingFreq | 0;
-		instanceInitsineTruncPlaySIG0(dsp, (samplingFreq | 0));
-		fillsineTruncPlaySIG0(dsp, 1024, (dsp + 0 | 0));
+		instanceInitsineAddSIG0(dsp, (samplingFreq | 0));
+		fillsineAddSIG0(dsp, 1024, (dsp + 0 | 0));
 		
 	}
 	
 	function instanceConstants(dsp, samplingFreq) {
 		dsp = dsp | 0;
 		samplingFreq = samplingFreq | 0;
-		HEAP32[dsp + 4096 >> 2] = (samplingFreq | 0);
-		HEAPF[dsp + 4100 >> 2] = +(1. / +(min_f(192000., +(max_f(1., +((HEAP32[dsp + 4096 >> 2] | 0)))))));
+		HEAP32[dsp + 4100 >> 2] = (samplingFreq | 0);
+		HEAPF[dsp + 4104 >> 2] = +(min_f(192000., +(max_f(1., +((HEAP32[dsp + 4100 >> 2] | 0))))));
+		HEAPF[dsp + 4108 >> 2] = +(10. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4132 >> 2] = +(9. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4144 >> 2] = +(8. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4156 >> 2] = +(7. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4168 >> 2] = +(6. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4180 >> 2] = +(5. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4192 >> 2] = +(4. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4204 >> 2] = +(3. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4216 >> 2] = +(1. / +(HEAPF[dsp + 4104 >> 2]));
+		HEAPF[dsp + 4228 >> 2] = +(2. / +(HEAPF[dsp + 4104 >> 2]));
 		
 	}
 	
 	function instanceResetUserInterface(dsp) {
 		dsp = dsp | 0;
-		HEAPF[dsp + 4104 >> 2] = 100.;
-		HEAPF[dsp + 4124 >> 2] = -6.;
+		HEAPF[dsp + 4096 >> 2] = 0.;
+		HEAPF[dsp + 4112 >> 2] = 100.;
+		HEAPF[dsp + 4240 >> 2] = -6.;
 		
 	}
 	
@@ -5967,16 +5979,61 @@ function sineTruncPlayModule(global, foreign, buffer) {
 		var l1 = 0;
 		var l2 = 0;
 		var l3 = 0;
+		var l4 = 0;
+		var l5 = 0;
+		var l6 = 0;
+		var l7 = 0;
+		var l8 = 0;
+		var l9 = 0;
+		var l10 = 0;
+		var l11 = 0;
+		var l12 = 0;
 		for (l1 = 0; (((l1 | 0) < 2) | 0); l1 = (((l1 | 0) + 1) | 0)) {
-			HEAPF[dsp + 4108 + ((l1 | 0) << 2) >> 2] = 0.;
+			HEAPF[dsp + 4116 + ((l1 | 0) << 2) >> 2] = 0.;
 			
 		}
 		for (l2 = 0; (((l2 | 0) < 2) | 0); l2 = (((l2 | 0) + 1) | 0)) {
-			HEAPF[dsp + 4116 + ((l2 | 0) << 2) >> 2] = 0.;
+			HEAPF[dsp + 4124 + ((l2 | 0) << 2) >> 2] = 0.;
 			
 		}
 		for (l3 = 0; (((l3 | 0) < 2) | 0); l3 = (((l3 | 0) + 1) | 0)) {
-			HEAPF[dsp + 4128 + ((l3 | 0) << 2) >> 2] = 0.;
+			HEAPF[dsp + 4136 + ((l3 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l4 = 0; (((l4 | 0) < 2) | 0); l4 = (((l4 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4148 + ((l4 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l5 = 0; (((l5 | 0) < 2) | 0); l5 = (((l5 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4160 + ((l5 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l6 = 0; (((l6 | 0) < 2) | 0); l6 = (((l6 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4172 + ((l6 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l7 = 0; (((l7 | 0) < 2) | 0); l7 = (((l7 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4184 + ((l7 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l8 = 0; (((l8 | 0) < 2) | 0); l8 = (((l8 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4196 + ((l8 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l9 = 0; (((l9 | 0) < 2) | 0); l9 = (((l9 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4208 + ((l9 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l10 = 0; (((l10 | 0) < 2) | 0); l10 = (((l10 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4220 + ((l10 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l11 = 0; (((l11 | 0) < 2) | 0); l11 = (((l11 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4232 + ((l11 | 0) << 2) >> 2] = 0.;
+			
+		}
+		for (l12 = 0; (((l12 | 0) < 2) | 0); l12 = (((l12 | 0) + 1) | 0)) {
+			HEAPF[dsp + 4244 + ((l12 | 0) << 2) >> 2] = 0.;
 			
 		}
 		
@@ -5999,7 +6056,7 @@ function sineTruncPlayModule(global, foreign, buffer) {
 	
 	function getSampleRate(dsp) {
 		dsp = dsp | 0;
-		return HEAP32[dsp + 4096 >> 2] | 0;
+		return HEAP32[dsp + 4100 >> 2] | 0;
 	}
 	
 	function setParamValue(dsp, offset, value) {
@@ -6023,18 +6080,204 @@ function sineTruncPlayModule(global, foreign, buffer) {
 		var output0 = 0;
 		var fSlow0 = 0.;
 		var fSlow1 = 0.;
+		var fSlow2 = 0.;
+		var fSlow3 = 0.;
+		var fSlow4 = 0.;
+		var fSlow5 = 0.;
 		var i = 0;
+		var fTemp0 = 0.;
+		var iTemp1 = 0;
+		var fTemp2 = 0.;
+		var fTemp3 = 0.;
+		var fTemp4 = 0.;
+		var fTemp5 = 0.;
+		var fTemp6 = 0.;
+		var fTemp7 = 0.;
+		var fTemp8 = 0.;
+		var iTemp9 = 0;
+		var fTemp10 = 0.;
+		var fTemp11 = 0.;
+		var fTemp12 = 0.;
+		var fTemp13 = 0.;
+		var fTemp14 = 0.;
+		var fTemp15 = 0.;
+		var iTemp16 = 0;
+		var fTemp17 = 0.;
+		var fTemp18 = 0.;
+		var fTemp19 = 0.;
+		var fTemp20 = 0.;
+		var fTemp21 = 0.;
+		var fTemp22 = 0.;
+		var fTemp23 = 0.;
+		var iTemp24 = 0;
+		var fTemp25 = 0.;
+		var fTemp26 = 0.;
+		var fTemp27 = 0.;
+		var fTemp28 = 0.;
+		var fTemp29 = 0.;
+		var fTemp30 = 0.;
+		var iTemp31 = 0;
+		var fTemp32 = 0.;
+		var fTemp33 = 0.;
+		var fTemp34 = 0.;
+		var fTemp35 = 0.;
+		var fTemp36 = 0.;
+		var fTemp37 = 0.;
+		var fTemp38 = 0.;
+		var iTemp39 = 0;
+		var fTemp40 = 0.;
+		var fTemp41 = 0.;
+		var fTemp42 = 0.;
+		var fTemp43 = 0.;
+		var fTemp44 = 0.;
+		var fTemp45 = 0.;
+		var iTemp46 = 0;
+		var fTemp47 = 0.;
+		var fTemp48 = 0.;
+		var fTemp49 = 0.;
+		var fTemp50 = 0.;
+		var fTemp51 = 0.;
+		var fTemp52 = 0.;
+		var fTemp53 = 0.;
+		var iTemp54 = 0;
+		var fTemp55 = 0.;
+		var fTemp56 = 0.;
+		var fTemp57 = 0.;
+		var fTemp58 = 0.;
+		var fTemp59 = 0.;
+		var fTemp60 = 0.;
+		var iTemp61 = 0;
+		var fTemp62 = 0.;
+		var fTemp63 = 0.;
+		var fTemp64 = 0.;
+		var fTemp65 = 0.;
+		var fTemp66 = 0.;
+		var fTemp67 = 0.;
+		var iTemp68 = 0;
+		var fTemp69 = 0.;
+		var fTemp70 = 0.;
+		var fTemp71 = 0.;
+		var fTemp72 = 0.;
+		var fTemp73 = 0.;
+		var fTemp74 = 0.;
+		var fTemp75 = 0.;
+		var fTemp76 = 0.;
+		var fTemp77 = 0.;
+		var fTemp78 = 0.;
+		var fTemp79 = 0.;
 		output0 = (HEAP32[outputs + (0 << 2) >> 2] | 0);
-		fSlow0 = +(0.00100000005 * +(+(HEAPF[dsp + 4104 >> 2])));
-		fSlow1 = +(0.00100000005 * +(+(HEAPF[dsp + 4124 >> 2])));
+		fSlow0 = +(+(HEAPF[dsp + 4096 >> 2]));
+		fSlow1 = +(((((+(fSlow0) == 0.) | 0)?1:0) | 0));
+		fSlow2 = +(0.00100000005 * +(+(HEAPF[dsp + 4112 >> 2])));
+		fSlow3 = +(((((+(fSlow0) == 1.) | 0)?1:0) | 0));
+		fSlow4 = +(((((+(fSlow0) == 2.) | 0)?1:0) | 0));
+		fSlow5 = +(0.00100000005 * +(+(HEAPF[dsp + 4240 >> 2])));
 		for (i = 0; (((i | 0) < (count | 0)) | 0); i = (((i | 0) + 1) | 0)) {
-			HEAPF[dsp + 4108 + (0 << 2) >> 2] = +(+(fSlow0) + +(0.999000013 * +(HEAPF[dsp + 4108 + (1 << 2) >> 2])));
-			HEAPF[dsp + 4116 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4116 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4100 >> 2]) * +(HEAPF[dsp + 4108 + (0 << 2) >> 2]))), 1.));
-			HEAPF[dsp + 4128 + (0 << 2) >> 2] = +(+(fSlow1) + +(0.999000013 * +(HEAPF[dsp + 4128 + (1 << 2) >> 2])));
-			HEAPF[output0 + ((i | 0) << 2) >> 2] = +(+(+(HEAPF[dsp + 0 + (~~(+(1023. * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))) << 2) >> 2]) * +(powf(10., +(0.0500000007 * +(HEAPF[dsp + 4128 + (0 << 2) >> 2]))))));
-			HEAPF[dsp + 4108 + (1 << 2) >> 2] = +(HEAPF[dsp + 4108 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4116 + (0 << 2) >> 2] = +(+(fSlow2) + +(0.999000013 * +(HEAPF[dsp + 4116 + (1 << 2) >> 2])));
+			HEAPF[dsp + 4124 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4124 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4108 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp0 = +(1023. * +(HEAPF[dsp + 4124 + (0 << 2) >> 2]));
+			iTemp1 = ~~(+(fTemp0));
+			fTemp2 = +(HEAPF[dsp + 0 + ((iTemp1 | 0) << 2) >> 2]);
+			fTemp3 = +(+(fTemp0) - +(floorf(+(fTemp0))));
+			fTemp4 = +(HEAPF[dsp + 0 + ((((((iTemp1 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp5 = +(HEAPF[dsp + 0 + ((((((iTemp1 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp6 = +(HEAPF[dsp + 0 + ((((((iTemp1 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp7 = +(+(fTemp2) + +(+(fTemp3) * +(+(0. - +(0.5 * +(+(fTemp4) - +(fTemp5)))) + +(+(fTemp3) * +(+(+(+(fTemp4) + +(2. * +(fTemp5))) - +(+(0.5 * +(fTemp6)) + +(2.5 * +(fTemp2)))) + +(+(+(1.5 * +(+(fTemp2) - +(fTemp5))) - +(0.5 * +(+(fTemp4) - +(fTemp6)))) * +(fTemp3)))))));
+			HEAPF[dsp + 4136 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4136 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4132 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp8 = +(1023. * +(HEAPF[dsp + 4136 + (0 << 2) >> 2]));
+			iTemp9 = ~~(+(fTemp8));
+			fTemp10 = +(HEAPF[dsp + 0 + ((iTemp9 | 0) << 2) >> 2]);
+			fTemp11 = +(+(fTemp8) - +(floorf(+(fTemp8))));
+			fTemp12 = +(HEAPF[dsp + 0 + ((((((iTemp9 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp13 = +(HEAPF[dsp + 0 + ((((((iTemp9 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp14 = +(HEAPF[dsp + 0 + ((((((iTemp9 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			HEAPF[dsp + 4148 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4148 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4144 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp15 = +(1023. * +(HEAPF[dsp + 4148 + (0 << 2) >> 2]));
+			iTemp16 = ~~(+(fTemp15));
+			fTemp17 = +(HEAPF[dsp + 0 + ((iTemp16 | 0) << 2) >> 2]);
+			fTemp18 = +(+(fTemp15) - +(floorf(+(fTemp15))));
+			fTemp19 = +(HEAPF[dsp + 0 + ((((((iTemp16 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp20 = +(HEAPF[dsp + 0 + ((((((iTemp16 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp21 = +(HEAPF[dsp + 0 + ((((((iTemp16 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp22 = +(+(fTemp17) + +(+(fTemp18) * +(+(0. - +(0.5 * +(+(fTemp19) - +(fTemp20)))) + +(+(fTemp18) * +(+(+(+(fTemp19) + +(2. * +(fTemp20))) - +(+(0.5 * +(fTemp21)) + +(2.5 * +(fTemp17)))) + +(+(+(1.5 * +(+(fTemp17) - +(fTemp20))) - +(0.5 * +(+(fTemp19) - +(fTemp21)))) * +(fTemp18)))))));
+			HEAPF[dsp + 4160 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4160 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4156 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp23 = +(1023. * +(HEAPF[dsp + 4160 + (0 << 2) >> 2]));
+			iTemp24 = ~~(+(fTemp23));
+			fTemp25 = +(HEAPF[dsp + 0 + ((iTemp24 | 0) << 2) >> 2]);
+			fTemp26 = +(+(fTemp23) - +(floorf(+(fTemp23))));
+			fTemp27 = +(HEAPF[dsp + 0 + ((((((iTemp24 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp28 = +(HEAPF[dsp + 0 + ((((((iTemp24 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp29 = +(HEAPF[dsp + 0 + ((((((iTemp24 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			HEAPF[dsp + 4172 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4172 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4168 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp30 = +(1023. * +(HEAPF[dsp + 4172 + (0 << 2) >> 2]));
+			iTemp31 = ~~(+(fTemp30));
+			fTemp32 = +(HEAPF[dsp + 0 + ((iTemp31 | 0) << 2) >> 2]);
+			fTemp33 = +(+(fTemp30) - +(floorf(+(fTemp30))));
+			fTemp34 = +(HEAPF[dsp + 0 + ((((((iTemp31 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp35 = +(HEAPF[dsp + 0 + ((((((iTemp31 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp36 = +(HEAPF[dsp + 0 + ((((((iTemp31 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp37 = +(+(fTemp32) + +(+(fTemp33) * +(+(0. - +(0.5 * +(+(fTemp34) - +(fTemp35)))) + +(+(fTemp33) * +(+(+(+(fTemp34) + +(2. * +(fTemp35))) - +(+(0.5 * +(fTemp36)) + +(2.5 * +(fTemp32)))) + +(+(+(1.5 * +(+(fTemp32) - +(fTemp35))) - +(0.5 * +(+(fTemp34) - +(fTemp36)))) * +(fTemp33)))))));
+			HEAPF[dsp + 4184 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4184 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4180 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp38 = +(1023. * +(HEAPF[dsp + 4184 + (0 << 2) >> 2]));
+			iTemp39 = ~~(+(fTemp38));
+			fTemp40 = +(HEAPF[dsp + 0 + ((iTemp39 | 0) << 2) >> 2]);
+			fTemp41 = +(+(fTemp38) - +(floorf(+(fTemp38))));
+			fTemp42 = +(HEAPF[dsp + 0 + ((((((iTemp39 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp43 = +(HEAPF[dsp + 0 + ((((((iTemp39 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp44 = +(HEAPF[dsp + 0 + ((((((iTemp39 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			HEAPF[dsp + 4196 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4196 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4192 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp45 = +(1023. * +(HEAPF[dsp + 4196 + (0 << 2) >> 2]));
+			iTemp46 = ~~(+(fTemp45));
+			fTemp47 = +(HEAPF[dsp + 0 + ((iTemp46 | 0) << 2) >> 2]);
+			fTemp48 = +(+(fTemp45) - +(floorf(+(fTemp45))));
+			fTemp49 = +(HEAPF[dsp + 0 + ((((((iTemp46 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp50 = +(HEAPF[dsp + 0 + ((((((iTemp46 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp51 = +(HEAPF[dsp + 0 + ((((((iTemp46 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp52 = +(+(fTemp47) + +(+(fTemp48) * +(+(0. - +(0.5 * +(+(fTemp49) - +(fTemp50)))) + +(+(fTemp48) * +(+(+(+(fTemp49) + +(2. * +(fTemp50))) - +(+(0.5 * +(fTemp51)) + +(2.5 * +(fTemp47)))) + +(+(+(1.5 * +(+(fTemp47) - +(fTemp50))) - +(0.5 * +(+(fTemp49) - +(fTemp51)))) * +(fTemp48)))))));
+			HEAPF[dsp + 4208 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4208 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4204 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp53 = +(1023. * +(HEAPF[dsp + 4208 + (0 << 2) >> 2]));
+			iTemp54 = ~~(+(fTemp53));
+			fTemp55 = +(HEAPF[dsp + 0 + ((iTemp54 | 0) << 2) >> 2]);
+			fTemp56 = +(+(fTemp53) - +(floorf(+(fTemp53))));
+			fTemp57 = +(HEAPF[dsp + 0 + ((((((iTemp54 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp58 = +(HEAPF[dsp + 0 + ((((((iTemp54 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp59 = +(HEAPF[dsp + 0 + ((((((iTemp54 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			HEAPF[dsp + 4220 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4220 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4216 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp60 = +(1023. * +(HEAPF[dsp + 4220 + (0 << 2) >> 2]));
+			iTemp61 = ~~(+(fTemp60));
+			fTemp62 = +(HEAPF[dsp + 0 + ((iTemp61 | 0) << 2) >> 2]);
+			fTemp63 = +(+(fTemp60) - +(floorf(+(fTemp60))));
+			fTemp64 = +(HEAPF[dsp + 0 + ((((((iTemp61 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp65 = +(HEAPF[dsp + 0 + ((((((iTemp61 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp66 = +(HEAPF[dsp + 0 + ((((((iTemp61 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			HEAPF[dsp + 4232 + (0 << 2) >> 2] = +(fmodf(+(+(HEAPF[dsp + 4232 + (1 << 2) >> 2]) + +(+(HEAPF[dsp + 4228 >> 2]) * +(HEAPF[dsp + 4116 + (0 << 2) >> 2]))), 1.));
+			fTemp67 = +(1023. * +(HEAPF[dsp + 4232 + (0 << 2) >> 2]));
+			iTemp68 = ~~(+(fTemp67));
+			fTemp69 = +(HEAPF[dsp + 0 + ((iTemp68 | 0) << 2) >> 2]);
+			fTemp70 = +(+(fTemp67) - +(floorf(+(fTemp67))));
+			fTemp71 = +(HEAPF[dsp + 0 + ((((((iTemp68 | 0) + -1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp72 = +(HEAPF[dsp + 0 + ((((((iTemp68 | 0) + 1) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp73 = +(HEAPF[dsp + 0 + ((((((iTemp68 | 0) + 2) | 0) % 1024) | 0) << 2) >> 2]);
+			fTemp74 = +(+(fTemp69) + +(+(fTemp70) * +(+(0. - +(0.5 * +(+(fTemp71) - +(fTemp72)))) + +(+(fTemp70) * +(+(+(+(fTemp71) + +(2. * +(fTemp72))) - +(+(0.5 * +(fTemp73)) + +(2.5 * +(fTemp69)))) + +(+(+(1.5 * +(+(fTemp69) - +(fTemp72))) - +(0.5 * +(+(fTemp71) - +(fTemp73)))) * +(fTemp70)))))));
+			fTemp75 = +(0.25 * +(fTemp74));
+			fTemp76 = +(0.0625 * +(fTemp52));
+			fTemp77 = +(0.027777778 * +(fTemp37));
+			fTemp78 = +(0.015625 * +(fTemp22));
+			fTemp79 = +(0.00999999978 * +(fTemp7));
+			HEAPF[dsp + 4244 + (0 << 2) >> 2] = +(+(fSlow5) + +(0.999000013 * +(HEAPF[dsp + 4244 + (1 << 2) >> 2])));
+			HEAPF[output0 + ((i | 0) << 2) >> 2] = +(+(+(+(0.100000001 * +(+(fSlow1) * +(+(0.100000001 * +(fTemp7)) + +(+(0.111111112 * +(+(fTemp10) + +(+(fTemp11) * +(+(0. - +(0.5 * +(+(fTemp12) - +(fTemp13)))) + +(+(fTemp11) * +(+(+(+(fTemp12) + +(2. * +(fTemp13))) - +(+(0.5 * +(fTemp14)) + +(2.5 * +(fTemp10)))) + +(+(+(1.5 * +(+(fTemp10) - +(fTemp13))) - +(0.5 * +(+(fTemp12) - +(fTemp14)))) * +(fTemp11)))))))) + +(+(0.125 * +(fTemp22)) + +(+(0.142857149 * +(+(fTemp25) + +(+(fTemp26) * +(+(0. - +(0.5 * +(+(fTemp27) - +(fTemp28)))) + +(+(fTemp26) * +(+(+(+(fTemp27) + +(2. * +(fTemp28))) - +(+(0.5 * +(fTemp29)) + +(2.5 * +(fTemp25)))) + +(+(+(1.5 * +(+(fTemp25) - +(fTemp28))) - +(0.5 * +(+(fTemp27) - +(fTemp29)))) * +(fTemp26)))))))) + +(+(0.166666672 * +(fTemp37)) + +(+(0.200000003 * +(+(fTemp40) + +(+(fTemp41) * +(+(0. - +(0.5 * +(+(fTemp42) - +(fTemp43)))) + +(+(fTemp41) * +(+(+(+(fTemp42) + +(2. * +(fTemp43))) - +(+(0.5 * +(fTemp44)) + +(2.5 * +(fTemp40)))) + +(+(+(1.5 * +(+(fTemp40) - +(fTemp43))) - +(0.5 * +(+(fTemp42) - +(fTemp44)))) * +(fTemp41)))))))) + +(+(0.25 * +(fTemp52)) + +(+(0.333333343 * +(+(fTemp55) + +(+(fTemp56) * +(+(0. - +(0.5 * +(+(fTemp57) - +(fTemp58)))) + +(+(fTemp56) * +(+(+(+(fTemp57) + +(2. * +(fTemp58))) - +(+(0.5 * +(fTemp59)) + +(2.5 * +(fTemp55)))) + +(+(+(1.5 * +(+(fTemp55) - +(fTemp58))) - +(0.5 * +(+(fTemp57) - +(fTemp59)))) * +(fTemp56)))))))) + +(+(+(fTemp62) + +(+(fTemp63) * +(+(0. - +(0.5 * +(+(fTemp64) - +(fTemp65)))) + +(+(fTemp63) * +(+(+(+(fTemp64) + +(2. * +(fTemp65))) - +(+(0.5 * +(fTemp66)) + +(2.5 * +(fTemp62)))) + +(+(+(1.5 * +(+(fTemp62) - +(fTemp65))) - +(0.5 * +(+(fTemp64) - +(fTemp66)))) * +(fTemp63))))))) + +(0.5 * +(fTemp74))))))))))))) + +(0.200000003 * +(+(+(fSlow3) * +(+(+(+(+(fTemp75) + +(fTemp76)) + +(fTemp77)) + +(fTemp78)) + +(fTemp79))) + +(+(fSlow4) * +(+(+(fTemp76) + +(fTemp78)) - +(+(fTemp79) + +(+(fTemp75) + +(fTemp77)))))))) * +(powf(10., +(0.0500000007 * +(HEAPF[dsp + 4244 + (0 << 2) >> 2]))))));
 			HEAPF[dsp + 4116 + (1 << 2) >> 2] = +(HEAPF[dsp + 4116 + (0 << 2) >> 2]);
-			HEAPF[dsp + 4128 + (1 << 2) >> 2] = +(HEAPF[dsp + 4128 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4124 + (1 << 2) >> 2] = +(HEAPF[dsp + 4124 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4136 + (1 << 2) >> 2] = +(HEAPF[dsp + 4136 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4148 + (1 << 2) >> 2] = +(HEAPF[dsp + 4148 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4160 + (1 << 2) >> 2] = +(HEAPF[dsp + 4160 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4172 + (1 << 2) >> 2] = +(HEAPF[dsp + 4172 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4184 + (1 << 2) >> 2] = +(HEAPF[dsp + 4184 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4196 + (1 << 2) >> 2] = +(HEAPF[dsp + 4196 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4208 + (1 << 2) >> 2] = +(HEAPF[dsp + 4208 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4220 + (1 << 2) >> 2] = +(HEAPF[dsp + 4220 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4232 + (1 << 2) >> 2] = +(HEAPF[dsp + 4232 + (0 << 2) >> 2]);
+			HEAPF[dsp + 4244 + (1 << 2) >> 2] = +(HEAPF[dsp + 4244 + (0 << 2) >> 2]);
 			
 		}
 		
@@ -6043,40 +6286,41 @@ function sineTruncPlayModule(global, foreign, buffer) {
 	return { getNumInputs : getNumInputs, getNumOutputs : getNumOutputs, classInit : classInit, instanceInit : instanceInit, instanceConstants : instanceConstants, instanceResetUserInterface : instanceResetUserInterface, instanceClear : instanceClear, init : init, getSampleRate : getSampleRate, setParamValue : setParamValue, getParamValue : getParamValue, compute : compute };
 }
 
-function getSizesineTruncPlay() {
-	return 4144;
+function getSizesineAdd() {
+	return 4260;
 }
 
-function getPathTablesineTruncPlay() {
+function getPathTablesineAdd() {
 	var pathTable = [];
-	pathTable["/Sinewave_Lookup_-_Truncation/freq"] = 4104;
-	pathTable["/Sinewave_Lookup_-_Truncation/gain"] = 4124;
+	pathTable["/Sine-additive_Waveforms/Waveform"] = 4096;
+	pathTable["/Sine-additive_Waveforms/freq"] = 4112;
+	pathTable["/Sine-additive_Waveforms/gain"] = 4240;
 	return pathTable;
 }
 
-function getJSONsineTruncPlay() {
-	return "{\"name\":\"Sinewave Lookup - Truncation\",\"filename\":\"sineTruncPlay\",\"inputs\":\"0\",\"outputs\":\"1\",\"meta\":[{\"basics.lib/name\":\"Faust Basic Element Library\"},{\"basics.lib/version\":\"0.0\"},{\"copyright\":\"(c) Jacob Sundstrom\"},{\"filename\":\"sineTruncPlay\"},{\"maths.lib/author\":\"GRAME\"},{\"maths.lib/copyright\":\"GRAME\"},{\"maths.lib/license\":\"LGPL with exception\"},{\"maths.lib/name\":\"Faust Math Library\"},{\"maths.lib/version\":\"2.1\"},{\"name\":\"Sinewave Lookup - Truncation\"},{\"signals.lib/name\":\"Faust Signal Routing Library\"},{\"signals.lib/version\":\"0.0\"}],\"ui\":[{\"type\":\"vgroup\",\"label\":\"Sinewave Lookup - Truncation\",\"items\":[{\"type\":\"hslider\",\"label\":\"freq\",\"address\":\"/Sinewave_Lookup_-_Truncation/freq\",\"meta\":[{\"scale\":\"exp\"},{\"unit\":\"Hz\"}],\"init\":\"100\",\"min\":\"10\",\"max\":\"10000\",\"step\":\"10\"},{\"type\":\"hslider\",\"label\":\"gain\",\"address\":\"/Sinewave_Lookup_-_Truncation/gain\",\"meta\":[{\"style\":\"dB\"}],\"init\":\"-6\",\"min\":\"-90\",\"max\":\"0\",\"step\":\"1\"}]}]}";
+function getJSONsineAdd() {
+	return "{\"name\":\"Sine-additive Waveforms\",\"filename\":\"sineAdd\",\"inputs\":\"0\",\"outputs\":\"1\",\"meta\":[{\"basics.lib/name\":\"Faust Basic Element Library\"},{\"basics.lib/version\":\"0.0\"},{\"copyright\":\"(c) Jacob Sundstrom\"},{\"filename\":\"sineAdd\"},{\"maths.lib/author\":\"GRAME\"},{\"maths.lib/copyright\":\"GRAME\"},{\"maths.lib/license\":\"LGPL with exception\"},{\"maths.lib/name\":\"Faust Math Library\"},{\"maths.lib/version\":\"2.1\"},{\"name\":\"Sine-additive Waveforms\"},{\"signals.lib/name\":\"Faust Signal Routing Library\"},{\"signals.lib/version\":\"0.0\"}],\"ui\":[{\"type\":\"vgroup\",\"label\":\"Sine-additive Waveforms\",\"items\":[{\"type\":\"hslider\",\"label\":\"Waveform\",\"address\":\"/Sine-additive_Waveforms/Waveform\",\"meta\":[{\"style\":\"menu{'Saw':0;'Square':1;'Triangle':2}\"}],\"init\":\"0\",\"min\":\"0\",\"max\":\"2\",\"step\":\"1\"},{\"type\":\"hslider\",\"label\":\"freq\",\"address\":\"/Sine-additive_Waveforms/freq\",\"meta\":[{\"scale\":\"lin\"},{\"unit\":\"Hz\"}],\"init\":\"100\",\"min\":\"10\",\"max\":\"10000\",\"step\":\"10\"},{\"type\":\"hslider\",\"label\":\"gain\",\"address\":\"/Sine-additive_Waveforms/gain\",\"meta\":[{\"style\":\"dB\"}],\"init\":\"-6\",\"min\":\"-90\",\"max\":\"0\",\"step\":\"1\"}]}]}";
 }
 
-function metadatasineTruncPlay(m) {
+function metadatasineAdd(m) {
 	m.declare("basics.lib/name", "Faust Basic Element Library");
 	m.declare("basics.lib/version", "0.0");
 	m.declare("copyright", "(c) Jacob Sundstrom");
-	m.declare("filename", "sineTruncPlay");
+	m.declare("filename", "sineAdd");
 	m.declare("maths.lib/author", "GRAME");
 	m.declare("maths.lib/copyright", "GRAME");
 	m.declare("maths.lib/license", "LGPL with exception");
 	m.declare("maths.lib/name", "Faust Math Library");
 	m.declare("maths.lib/version", "2.1");
-	m.declare("name", "Sinewave Lookup - Truncation");
+	m.declare("name", "Sine-additive Waveforms");
 	m.declare("signals.lib/name", "Faust Signal Routing Library");
 	m.declare("signals.lib/version", "0.0");
 }
 
 
-// Standard Faust sineTruncPlay
+// Standard Faust sineAdd
 
-faust.sineTruncPlay = function (context, buffer_size) {
+faust.sineAdd = function (context, buffer_size) {
 
     var handler = null;
     var ins, outs;
@@ -6086,7 +6330,7 @@ faust.sineTruncPlay = function (context, buffer_size) {
     var dspOutChannnels = [];
    
     // Keep JSON parsed object
-    var json_object = JSON.parse(getJSONsineTruncPlay());
+    var json_object = JSON.parse(getJSONsineAdd());
     
     function getNumInputsAux () 
     {
@@ -6112,7 +6356,7 @@ faust.sineTruncPlay = function (context, buffer_size) {
         return n;
     }
      
-    var memory_size = pow2limit(getSizesineTruncPlay() + (numIn + numOut) * (ptr_size + (buffer_size * sample_size)));
+    var memory_size = pow2limit(getSizesineAdd() + (numIn + numOut) * (ptr_size + (buffer_size * sample_size)));
    
     var HEAP = new ArrayBuffer(memory_size);
     var HEAP32 = new Int32Array(HEAP);
@@ -6140,17 +6384,17 @@ faust.sineTruncPlay = function (context, buffer_size) {
     var audio_heap_inputs = audio_heap_ptr_outputs + (numOut * ptr_size);
     var audio_heap_outputs = audio_heap_inputs + (numIn * buffer_size * sample_size);
     
-    // Setup sineTruncPlay offset
+    // Setup sineAdd offset
     var dsp_start = audio_heap_outputs + (numOut * buffer_size * sample_size);
      
-    // Start of sineTruncPlay memory
+    // Start of sineAdd memory
     var dsp = dsp_start;
  
     // ASM module
-    var factory = sineTruncPlayModule(window, window.Math, HEAP);
+    var factory = sineAddModule(window, window.Math, HEAP);
     console.log(factory);
  
-    var pathTable = getPathTablesineTruncPlay();
+    var pathTable = getPathTablesineAdd();
     
     // Allocate table for 'setParamValue'
     var value_table = [];
@@ -6283,7 +6527,7 @@ faust.sineTruncPlay = function (context, buffer_size) {
         // bargraph
         parse_ui(json_object.ui);
         
-        // Init sineTruncPlay
+        // Init sineAdd
         factory.init(dsp, context.sampleRate);
         
         // Init 'value' table
@@ -6397,7 +6641,7 @@ faust.sineTruncPlay = function (context, buffer_size) {
         
         json : function ()
         {
-            return getJSONsineTruncPlay();
+            return getJSONsineAdd();
         },
         
         getProcessor : function ()
@@ -6420,7 +6664,7 @@ faust.sineTruncPlay = function (context, buffer_size) {
 var isWebKitAudio = (typeof (webkitAudioContext) !== "undefined");
 var audio_context = (isWebKitAudio) ? new webkitAudioContext() : new AudioContext();
 var audio_input = null;
-var sineTruncPlay = null;
+var sineAdd = null;
 var faustsvg = null;
 var dsp_code = null;
 
@@ -6428,7 +6672,7 @@ function changeBufferSize(buffer_size)
 {
     var new_buffer_size = buffer_size.options[buffer_size.selectedIndex].value;
     console.log(new_buffer_size);
-    startNewsineTruncPlay(new_buffer_size);
+    startNewsineAdd(new_buffer_size);
 }
  
 // Audio input handling
@@ -6456,45 +6700,45 @@ function getDevice(device)
     audio_input = audio_context.createMediaStreamSource(device);
     
     // Connect it to the destination.
-    audio_input.connect(sineTruncPlay.getProcessor());
+    audio_input.connect(sineAdd.getProcessor());
 }
 
-function startsineTruncPlayAux(buffer_size) 
+function startsineAddAux(buffer_size) 
 {
-    console.log("startsineTruncPlay %d", buffer_size);
-    if (sineTruncPlay) {
+    console.log("startsineAdd %d", buffer_size);
+    if (sineAdd) {
         if (audio_input) {
-            audio_input.disconnect(sineTruncPlay.getProcessor());
+            audio_input.disconnect(sineAdd.getProcessor());
         }
         _f4u$t.hard_delete(faustsvg);
-        sineTruncPlay.stop();
-        sineTruncPlay.destroy();
+        sineAdd.stop();
+        sineAdd.destroy();
     }
-    sineTruncPlay = faust.sineTruncPlay(audio_context, buffer_size);
-    if (sineTruncPlay.getNumInputs() > 0) {
+    sineAdd = faust.sineAdd(audio_context, buffer_size);
+    if (sineAdd.getNumInputs() > 0) {
         activateAudioInput();
     }
-    sineTruncPlay.start();
-    console.log(sineTruncPlay.json());
-    console.log(sineTruncPlay.controls());
+    sineAdd.start();
+    console.log(sineAdd.json());
+    console.log(sineAdd.controls());
     
     // kludge...ideally, this needs to not be part of the imported JS
     _f4u$t.main_loop = function() {}
     
     faustsvg = $('<div />');
     $('body').append(faustsvg);
-    var handler = _f4u$t.main(sineTruncPlay.json(), faustsvg, sineTruncPlay.setParamValue);
-    sineTruncPlay.setHandler(handler);
+    var handler = _f4u$t.main(sineAdd.json(), faustsvg, sineAdd.setParamValue);
+    sineAdd.setHandler(handler);
 }
 
-function startsineTruncPlay() 
+function startsineAdd() 
 {
-    startsineTruncPlayAux(1024);
+    startsineAddAux(1024);
 }
 
-function startNewsineTruncPlay(buffer_size) 
+function startNewsineAdd(buffer_size) 
 {
-    startsineTruncPlayAux(buffer_size);
+    startsineAddAux(buffer_size);
 }
 
 // To activate audio on iOS
@@ -6515,7 +6759,7 @@ window.addEventListener('touchstart', function() {
 
 // General
 
-$(startsineTruncPlay);
+$(startsineAdd);
 
 </script>
 

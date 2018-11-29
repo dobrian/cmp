@@ -1,4 +1,4 @@
-declare name "Sinewave Lookup - Cubic Interpolation";
+declare name "Sine-additive Waveforms";
 declare copyright "(c) Jacob Sundstrom";
 
 import("stdfaust.lib");
@@ -29,23 +29,41 @@ b(index) = p0(index) - (2.5*p1(index)) + (2*p2(index)) - (0.5*p3(index));
 c(index) = (-0.5*p0(index)) + (0.5*p2(index));
 d(index) = p1(index);
 
-term1(index) = a(int(index)) * (ma.frac(index)^3);
-term2(index) = b(int(index)) * (ma.frac(index)^2);
+term1(index) = a(int(index)) * (ma.frac(index)*ma.frac(index)*ma.frac(index));
+term2(index) = b(int(index)) * (ma.frac(index)*ma.frac(index));
 term3(index) = c(int(index)) * ma.frac(index);
 term4(index) = d(int(index));
 
-// cubicInterp(index) = (a(int(index))*((ma.frac(index)**3))) + (b(int(index))*(ma.frac(index)**2)) + (c(int(index))*ma.frac(index)) + d(int(index)); // return
 cubicInterp(index) = term1(index) + term2(index) + term3(index) + term4(index);
-
-
 sinwaveform = float(counter)*(2.0*ma.PI)/float(tablesize) : sin; // function to fill the table
 
-freq = hslider("freq[unit: Hz][scale: exp]", 100, 10, 10000, 10) : si.smoo;
+// gui
+freq = hslider("freq[unit: Hz][scale: lin]", 100, 10, 10000, 10) : si.smoo;
 gain = hslider("gain[style:dB]", -6, -90, 0, 1) : si.smoo : ba.db2linear;
 index = phasor(freq) * (tablesize-1); // make the index
 
+numHarms = 10; // number of harmonics
+
+// radio selector for the different waves
+selector = hslider("Waveform[style:menu{'Saw':0;'Square':1;'Triangle':2}]", 0, 0, 2, 1);
+
+// saw wave
+saw(freq) = (sum(i, numHarms, cubicInterp(phasor(freq*(i+1)) * (tablesize-1)) * 1/(i+1)) / numHarms) * ba.if(selector==0, 1, 0);
+
+// square
+squareEq(i) = cubicInterp(phasor(freq*(i+1)) * (tablesize-1)) * 1/(i+1);
+squareSelectOdd(harm) = 0, squareEq(harm) : select2(harm : %(2) == 1);
+square(freq) = (sum(i, numHarms, squareSelectOdd(i) * 1/(i+1)) / (numHarms*0.5)) * ba.if(selector==1, 1, 0);
+
+// triangle
+triangleEq(i) = cubicInterp(phasor(freq*(i+1)) * (tablesize-1)) * (ba.if((i%4)==3, 1/((i+1)^2), -1/((i+1)^2))); // <------ not ready
+triangleSelectOdd(harm) = 0, triangleEq(harm) : select2(harm : %(2) == 1);
+triangle(freq) = (sum(i, numHarms, triangleSelectOdd(i)) / (numHarms*0.5)) * ba.if(selector==2, 1, 0);
 
 // process = table(int(index)); // phase truncation
 // process = linearInterp(index); // linear interpolation
-process = cubicInterp(index) * gain; // linear interpolation
+// process = saw(freq) * gain; // linear interpolation
+process = square(freq), saw(freq), triangle(freq):> _ * gain; // linear interpolation
+
+
 // process = int(index); // linear interpolation

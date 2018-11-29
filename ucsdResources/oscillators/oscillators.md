@@ -1,11 +1,11 @@
 # Oscillators
 
-The most basic sound-generating process in digital sound is the oscillator which is defined as BLAH BLAH.
+The most basic sound-generating process in digital sound is the oscillator. An oscillator creates a periodic waveform of some shape (sine, square, saw, triangle, etc) and repeats it in time. The number of times it repeats per second (Hz) is its fundamental frequency.
 
 ## As a concept
 
 ### Unit Circle
-A helpful analogy of the oscillator is that of the wheel and spoke.
+A helpful analogy of the (sine) oscillator is that of the wheel and spoke.
 
 ![Unit Circle](images/Unfasor.gif)
 

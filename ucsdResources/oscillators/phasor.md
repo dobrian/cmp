@@ -1,6 +1,6 @@
 # The Phasor
 
-The phasor is perhaps the most simple and fundamental of oscillators. It takes the shape of a sawtooth wave but has two important differences:
+The phasor is perhaps the most simple and fundamental of oscillators. It takes the shape of a [sawtooth wave](link/to/sawtooth) but has two important differences:
 
   1. It ascends from 0 to 1, as opposed from -1 to +1.
   2. It is _not_ bandlimited (in discrete time this matters).

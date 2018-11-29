@@ -5847,7 +5847,7 @@ $(document).ready(function() { _f4u$t.main_loop(); });
 
 /* ------------------------------------------------------------
 copyright: "(c) Jacob Sundstrom"
-name: "Non-bandlimted Triangle"
+name: "Sinewave Lookup - Linear Interpolation"
 Code generated with Faust 2.12.1 (https://faust.grame.fr)
 Compilation options: ajs, -scal -ftz 0
 ------------------------------------------------------------ */
@@ -6054,13 +6054,13 @@ function getSizesinePlay() {
 
 function getPathTablesinePlay() {
 	var pathTable = [];
-	pathTable["/Non-bandlimted_Triangle/freq"] = 4104;
-	pathTable["/Non-bandlimted_Triangle/gain"] = 4124;
+	pathTable["/Sinewave_Lookup_-_Linear_Interpolation/freq"] = 4104;
+	pathTable["/Sinewave_Lookup_-_Linear_Interpolation/gain"] = 4124;
 	return pathTable;
 }
 
 function getJSONsinePlay() {
-	return "{\"name\":\"Non-bandlimted Triangle\",\"filename\":\"sinePlay\",\"inputs\":\"0\",\"outputs\":\"1\",\"meta\":[{\"basics.lib/name\":\"Faust Basic Element Library\"},{\"basics.lib/version\":\"0.0\"},{\"copyright\":\"(c) Jacob Sundstrom\"},{\"filename\":\"sinePlay\"},{\"maths.lib/author\":\"GRAME\"},{\"maths.lib/copyright\":\"GRAME\"},{\"maths.lib/license\":\"LGPL with exception\"},{\"maths.lib/name\":\"Faust Math Library\"},{\"maths.lib/version\":\"2.1\"},{\"name\":\"Non-bandlimted Triangle\"},{\"signals.lib/name\":\"Faust Signal Routing Library\"},{\"signals.lib/version\":\"0.0\"}],\"ui\":[{\"type\":\"vgroup\",\"label\":\"Non-bandlimted Triangle\",\"items\":[{\"type\":\"hslider\",\"label\":\"freq\",\"address\":\"/Non-bandlimted_Triangle/freq\",\"meta\":[{\"scale\":\"exp\"},{\"unit\":\"Hz\"}],\"init\":\"100\",\"min\":\"10\",\"max\":\"10000\",\"step\":\"10\"},{\"type\":\"hslider\",\"label\":\"gain\",\"address\":\"/Non-bandlimted_Triangle/gain\",\"meta\":[{\"style\":\"dB\"}],\"init\":\"-6\",\"min\":\"-90\",\"max\":\"0\",\"step\":\"1\"}]}]}";
+	return "{\"name\":\"Sinewave Lookup - Linear Interpolation\",\"filename\":\"sinePlay\",\"inputs\":\"0\",\"outputs\":\"1\",\"meta\":[{\"basics.lib/name\":\"Faust Basic Element Library\"},{\"basics.lib/version\":\"0.0\"},{\"copyright\":\"(c) Jacob Sundstrom\"},{\"filename\":\"sinePlay\"},{\"maths.lib/author\":\"GRAME\"},{\"maths.lib/copyright\":\"GRAME\"},{\"maths.lib/license\":\"LGPL with exception\"},{\"maths.lib/name\":\"Faust Math Library\"},{\"maths.lib/version\":\"2.1\"},{\"name\":\"Sinewave Lookup - Linear Interpolation\"},{\"signals.lib/name\":\"Faust Signal Routing Library\"},{\"signals.lib/version\":\"0.0\"}],\"ui\":[{\"type\":\"vgroup\",\"label\":\"Sinewave Lookup - Linear Interpolation\",\"items\":[{\"type\":\"hslider\",\"label\":\"freq\",\"address\":\"/Sinewave_Lookup_-_Linear_Interpolation/freq\",\"meta\":[{\"scale\":\"exp\"},{\"unit\":\"Hz\"}],\"init\":\"100\",\"min\":\"10\",\"max\":\"10000\",\"step\":\"10\"},{\"type\":\"hslider\",\"label\":\"gain\",\"address\":\"/Sinewave_Lookup_-_Linear_Interpolation/gain\",\"meta\":[{\"style\":\"dB\"}],\"init\":\"-6\",\"min\":\"-90\",\"max\":\"0\",\"step\":\"1\"}]}]}";
 }
 
 function metadatasinePlay(m) {
@@ -6073,7 +6073,7 @@ function metadatasinePlay(m) {
 	m.declare("maths.lib/license", "LGPL with exception");
 	m.declare("maths.lib/name", "Faust Math Library");
 	m.declare("maths.lib/version", "2.1");
-	m.declare("name", "Non-bandlimted Triangle");
+	m.declare("name", "Sinewave Lookup - Linear Interpolation");
 	m.declare("signals.lib/name", "Faust Signal Routing Library");
 	m.declare("signals.lib/version", "0.0");
 }

@@ -1,4 +1,4 @@
-declare name "Truncated Table Lookup";
+declare name "Sinewave Lookup - Truncation";
 declare copyright "(c) Jacob Sundstrom";
 
 import("stdfaust.lib");
