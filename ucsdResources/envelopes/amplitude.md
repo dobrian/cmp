@@ -3,13 +3,21 @@
 In digital sound, amplitude is a measurement of the strength of a signal, usually between 0 and 1 (linearly) or between -infinity and 0 in decibels (dB). Colloquially, amplitude can be thought of as the volume of a sound (_not_ loudness), also called sound pressure level (SPL). Changing the amplitude of a sound is akin to turning a volume knob up or down on a car stereo.
 
 ### The decibel (dB)
-Since our ear responds logarithmically to the amplitude of sound, amplitude (SPL) is most typically measured in decibels. A decibel is a unit of measurement that expresses the ratio of one quantity to another; that is, in order to express something in decibels, we need a reference value. Note the ratio in the logarithm of the equation for calculating the SPL of sound:
-
+Since our ear responds logarithmically to the amplitude of sound, amplitude (SPL) is most typically measured in decibels. A decibel is a unit of measurement that expresses the ratio of one quantity to another; that is, in order to express something in decibels, we need a reference value. In the case of sound, our reference is ______ Note the ratio in the logarithm of the equation for calculating the SPL of sound:
 
 $$
   L_{p} = 20 \log_{10} \bigg(\frac{p_{rms}}{p_{ref}}\bigg) \text{ dB}
 $$
 
+In audio, we most often speak of decibels as if it is a fixed quantity and for these purposes, it suffices.
+
+| dB | linear amplitude |
+| ------------ | ---------------- |
+| 0 | 1 |
+| -3 | 0.707945 |
+| -6 | 0.501187 |
+| -9 | 0.354813 |
+| -12 | 0.251188 |
 
 ### Peak v. RMS
 When measuring the ammplitude of a signal, either the peak or root mean square (RMS) amplitude can be used. (Notice in the equation above that the numerator of the fraction is _p<sub>rms<sub/>_ which is the sound pressure level in root mean square (RMS) amplitude.)
