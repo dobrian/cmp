@@ -24,8 +24,7 @@ if (navigator.mediaDevices) {
       $("#sound-clip").append(audio);
       $("#sound-clip").append("<br />");
 
-      // Combine the audio chunks into a blob, then point the empty
-      // audio clip to that blob
+      // Combine the audio chunks into a blob, then point the empty audio clip to that blob.
       const blob = new Blob(chunks, {"type": "audio/ogg; codecs=opus"});
       audio.src = window.URL.createObjectURL(blob);
 
@@ -47,10 +46,10 @@ if (navigator.mediaDevices) {
     });
 
   }).catch((err) => {
-    // browser unable to access microphone
+    // Throw alert when the browser is unable to access the microphone.
     alert("Oh no! Your browser cannot access your computer's microphone.");
   });
 } else {
-  // browser unable to access media devices
+  // Throw alert when the browser cannot access any media devices.
   alert("Oh no! Your browser cannot access your computer's microphone. Please update your browser.");
 }
