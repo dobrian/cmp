@@ -30,28 +30,32 @@ float EF::GetMean(float sample)
 
 ## RMS
 
+One can also calculate the RMS amplitude and use the result as an envelope follower. Similar to using the mean, the RMS method also uses a buffer, the size of which determines the smoothness and responsiveness of the envelope follower.
+
 ```
 float EF::GetRMS(float sample)
 {
-    long meansquare;
-    float square;
-    if(envelopePosition >= compRMSArraySize)
-            envelopePosition = 0;
+  long meansquare;
+  float square;
+  if(envelopePosition >= compRMSArraySize)
+    envelopePosition = 0;
 
-    // FIRST: square the new sample
-    // square range 0.0 to 1.0
-    square = sample * sample;
+  // FIRST: square the new sample
+  // square range 0.0 to 1.0
+  square = sample * sample;
 
-    // SECOND: add to array to calculate mean
-    envelopeArrayTotal = envelopeArrayTotal - envelopeArray[envelopePosition] + square;
-    envelopeArray[envelopePosition] = square;
-    envelopePosition++;
+  // SECOND: add to array to calculate mean
+  envelopeArrayTotal = envelopeArrayTotal - envelopeArray[envelopePosition] + square;
+  envelopeArray[envelopePosition] = square;
+  envelopePosition++;
 
+  // get the mean
 	meansquare = envelopeArrayTotal/compRMSArraySize;
-    // THIRD: meansquare needs to be scaled up to 65535 for root table lookup
-//    meansquare = (long)(envelopeArrayTotal * 65536.0);
-//	if(meansquare > 65535)
-//		meansquare = 65535;
+
+  // THIRD: meansquare needs to be scaled up to 65535 for root table lookup
+  meansquare = (long)(envelopeArrayTotal * 65536.0);
+	if(meansquare > 65535)
+		meansquare = 65535;
     // FOURTH: return the root of the mean of squares
     return(sqrt(meansquare));
 }
@@ -59,12 +63,14 @@ float EF::GetRMS(float sample)
 
 ## Attack-Release
 
+The attack-release method does not use a buffer but instead takes a moving weighted average of the peak amplitude and the sample. Here, though, one must pass the samplerate which, in part, governs the responsiveness of the follower.
+
 ```
 float EF::GetPeakAttackRelase(float attack, float release, float sample)
 {
 	float attackMultiplier;
 	float releaseMultiplier;
-	
+
 	if(sample < 0.0)
 		sample = -sample;
 
@@ -83,4 +89,4 @@ float EF::GetPeakAttackRelase(float attack, float release, float sample)
 
 ![Envelope Followers Compared](/ucsdResources/envelopes/images/envFollowersCompared.svg)
 
-Note how the envelope followers with a larger buffer are smoother but delayed in time. Link to a larger version of the image is [here](/images/envFollowersCompared_large.svg)
+Note how the envelope followers with a larger buffer are smoother but the peaks and troughs are delayed in time. Link to a larger version of the image is [here](/images/envFollowersCompared_large.svg)

@@ -15,13 +15,24 @@ a = a.normalize;
 
 a.plot;
 );
-~newSignal = (~signal.normalize*1.9999);
-~newSignal = ~newSignal - (~newSignal.sum/~newSignal.size);
-~newSignal.plot
+a = Buffer.readChannel(s, "/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/78888__oasyntax__170-funky-drummer.wav", channels: [0])
+a = a.normalize
+a.loadToFloatArray(action: {|array| ~newSignal = array});
 
-f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/signal.dat", "w");
+
+~newSignal = 16384.collect{|i| rand2(1.0)*b.next}; // noise
+~newSignal.plot
+~newSignal = ~newSignal.collect{|val|
+	val*b.next;
+};
+~newSignal = ~newSignal.normalize
+
+f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer.dat", "w");
 ~newSignal.do{|x| f.write(x.asString ++ "\n");};
 f.close;
+
+
+~newSignal = File.readAllString("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/signal.dat").split(Char.nl).collect{|str| str.asFloat};
 
 // use the mean
 (
@@ -42,7 +53,7 @@ m = {|x|
 c = ~newSignal.collect{|i|
 	m.(i);
 };
-f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/mean_128.dat", "w");
+f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/mean_128.dat", "w");
 c.do{|x| f.write(x.asString ++ "\n")};
 f.close;
 [~newSignal,c].plot;
@@ -50,33 +61,38 @@ f.close;
 
 // rms
 (
-a = Array.fill(1024, {0.0});
-r = {|x|
-	var avg;
-	// square it
-	x = x*x;
+for(4, 8, {|i|
+	i = 2.pow(i).asInteger;
+	a = Array.fill(i, {0.0});
+	r = {|x|
+		var avg;
+		// square it
+		x = x*x;
 
-	// add it to an array and get the mean
-	a = a.shift(1, x);
-	avg = a.sum/a.size;
+		// add it to an array and get the mean
+		a = a.shift(1, x);
+		avg = a.sum/a.size;
 
-	// get the square root
-	sqrt(avg);
-};
-c = ~newSignal.collect{|x| r.(x)};
-f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/rms_1024.dat", "w");
-c.do{|x| f.write(x.asString ++ "\n")};
-f.close;
-[~newSignal,c].plot;
+		// get the square root
+		sqrt(avg);
+	};
+	c = ~newSignal.collect{|x| r.(x)};
+	f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/rms_%.dat".format(i), "w");
+	c.do{|x| f.write(x.asString ++ "\n")};
+	f.close;
+	// [~newSignal,c].plot;
+});
 
 )
+
+4 5 6 7 8
 
 // attack and release
 (
 z = 0; // peak
 r = {|x, attack = 1, release = 1|
 	var attackMultiplier, releaseMultiplier, sr;
-	sr = 22050; // samplerate
+	sr = 8096; // samplerate
 
 	x = x.abs;
 
@@ -84,13 +100,49 @@ r = {|x, attack = 1, release = 1|
 	releaseMultiplier = 0.01**(1/(release*sr));
 
 	if(x>z) {
-		z = (attackMultiplier * (z*x)) + x;
+		z = (attackMultiplier * (z-x)) + x;
 	} {
-		z = (releaseMultiplier * (z*x)) + x;
+		z = (releaseMultiplier * (z-x)) + x;
 	};
 	z; // return
 };
 c = ~newSignal.collect{|x| r.(x, 0.1, 0.1)};
+// f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/attackRelease_16384.dat", "w");
+// c.do{|x| f.write(x.asString ++ "\n")};
+// f.close;
+[~newSignal,c].plot;
+)
+
+// other one Tom sent
+(
+var att, dec;
+z = 0; // peak
+r = {|x, attackF = 100, releaseF = 100|
+	var attackMultiplier, releaseMultiplier, sr;
+	sr = 8192; // samplerate
+
+	// rectify
+	if(x<0) {x = -1*x};
+
+	attackMultiplier = exp((-6.283185307179586 * attackF)/sr);
+	releaseMultiplier = exp((-6.283185307179586 * releaseF)/sr);
+
+	if(x>z) {
+		z = (attackMultiplier * (z-x)) + x;
+	} {
+		z = (releaseMultiplier * (z-x)) + x;
+	};
+	z; // return
+};
+
+att = 100;
+dec = 20;
+c = ~newSignal.collect{|x| r.(x, att, dec)};
+
+
+f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/attackRelease_%-%.dat".format(att, dec), "w");
+c.do{|x| f.write(x.asString ++ "\n")};
+f.close;
 [~newSignal,c].plot;
 )
 
@@ -100,5 +152,6 @@ b = 100.collect{a*p.next}.flat;
 b.plot
 b = b.normalize
 
+exp(1)
 
 [b,c].plot

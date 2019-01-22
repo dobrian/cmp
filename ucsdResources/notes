@@ -15,7 +15,11 @@ oscillators
         • sine wave additive
         • adv - BLEP BLIT
 
-amplitude/envelopes/lines/units/applications/vibrato/tremolo/compressor/ADSR
+amplitude/envelopes/lines/units/applications/tremolo/compressor/ADSR
+  - kick drum gating sine wave
+  - auto gain control (always loud)
+  - compressor: peak (attack/release), rms, mean
+  - applications in general
 
 filters
 

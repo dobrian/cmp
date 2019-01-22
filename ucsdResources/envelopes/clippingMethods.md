@@ -22,7 +22,7 @@ HardClip(float *block, float *output, long samplesPerBlock, float limit) {
     } else {
       *(output+sample) = block[sample];
     };
-
+mark
     // check if it's less
     if(block[sample] < (-1*limit)) {
       *(output+sample) = limit;
