@@ -15,7 +15,7 @@ a = a.normalize;
 
 a.plot;
 );
-a = Buffer.readChannel(s, "/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/78888__oasyntax__170-funky-drummer.wav", channels: [0])
+a = Buffer.readChannel(s, "/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/78888__oasyntax__170-funky-drummer.wav", channels: [0])
 a = a.normalize
 a.loadToFloatArray(action: {|array| ~newSignal = array});
 
@@ -36,7 +36,8 @@ f.close;
 
 // use the mean
 (
-a = Array.fill(128, {0.0});
+var size = 16;
+a = Array.fill(size, {0.0});
 z = 0; // position in the array
 m = {|x|
 	// rectify
@@ -53,15 +54,15 @@ m = {|x|
 c = ~newSignal.collect{|i|
 	m.(i);
 };
-f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/mean_128.dat", "w");
+f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/mean_%.dat".format(size), "w");
 c.do{|x| f.write(x.asString ++ "\n")};
 f.close;
-[~newSignal,c].plot;
+// [~newSignal,c].plot;
 )
 
 // rms
 (
-for(4, 8, {|i|
+for(1, 8, {|i|
 	i = 2.pow(i).asInteger;
 	a = Array.fill(i, {0.0});
 	r = {|x|
@@ -135,8 +136,8 @@ r = {|x, attackF = 100, releaseF = 100|
 	z; // return
 };
 
-att = 100;
-dec = 20;
+att = 1000;
+dec = 5;
 c = ~newSignal.collect{|x| r.(x, att, dec)};
 
 
@@ -145,6 +146,17 @@ c.do{|x| f.write(x.asString ++ "\n")};
 f.close;
 [~newSignal,c].plot;
 )
+a = c.collect{|amp| amp*rrand(-1.0, 1.0)}
+Buffer.loadCollec
+z = a.as(Signal)
+z.play
+
+d = SoundFile.openWrite("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/attackRelease_1000-5.wav", sampleRate: 44100);
+d.writeData(z)
+d.close
+
+y = ~newSignal.as(Signal)
+y.play
 
 a = Signal.sineFill(256, [1], [0])
 p = Pbrown(0.0, 1.0, 0.1, inf).asStream;
