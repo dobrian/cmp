@@ -1,2 +1,5 @@
 # don't save the stuff Tom gave me
 /ucsdResources/resources
+
+# ignore WAV files
+*.wav
