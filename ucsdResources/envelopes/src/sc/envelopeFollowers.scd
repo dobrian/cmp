@@ -140,7 +140,7 @@ att = 1000;
 dec = 5;
 c = ~newSignal.collect{|x| r.(x, att, dec)};
 
-
+Quarks.gui
 f = File.open("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/envFollowers/funkyDrummer/attackRelease_%-%.dat".format(att, dec), "w");
 c.do{|x| f.write(x.asString ++ "\n")};
 f.close;
