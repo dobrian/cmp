@@ -21,6 +21,6 @@ amplitude/envelopes/lines/units/applications/tremolo/compressor/ADSR
   - compressor: peak (attack/release), rms, mean
   - applications in general
 
-filters
+filters (allpass [first and second order], FIR, touch on biquad)
 
 delay
