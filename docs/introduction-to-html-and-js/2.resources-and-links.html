@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>PUT TITLE HERE</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Resources and Links</h1>
+
+<p>Since JavaScript is one of the <a href="https://insights.stackoverflow.com/survey/2018#technology-programming-languages">most popular languages in the
+world</a>,
+we are not going to provide our own intro-to-JavaScript tutorial, as to avoid
+<a href="https://en.wikipedia.org/wiki/Not_invented_here#In_computing">NIH syndrome</a>.
+Instead, we expect you to learn the language on your own, from various
+tutorials and/or books linked here.  While this may seem like a tall order,
+you'll find that learning your second programming language will be much easier
+than learning your first, not to mention that the ability to quickly learn and
+translate between languages will be essential when working in the real world!</p>
+
+<p>This module contains a <a href="4.javascript-primer.html">short primer</a> describing
+JavaScript syntax, as well as a number of videos summarizing the differences
+between JavaScript and other languages you may know.
+(<a href="5.typing-in-javascript.html">Here</a>, <a href="6.functions-in-javascript.html">here</a>,
+and <a href="7.common-bugs-in-javascript.html">here</a>.) You may want to start with the
+primer and these videos, and if they seem too confusing or over-your-head, then
+you should spend some time with a few of the resources and links provided
+below.</p>
+
+<p>Finally, we have created a big <a href="8.self-test.html">self-test</a> at the end of this module: if
+you feel comfortable answering each of those questions, you are ready to move
+on to the more advanced parts of this course.</p>
+
+<h3>What We Expect You to Know</h3>
+
+<ul>
+<li>setting up a basic website (see <a href="3.development-environment.html">Setting Up a Development
+Environment</a> and <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/Dealing_with_files">this
+tutorial</a>)</li>
+<li>basic HTML tags and attributes (see <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started">this tutorial</a>)
+<ul>
+<li><code>&lt;!doctype&gt;</code>, <code>&lt;html&gt;&lt;/html&gt;</code>, <code>&lt;head&gt;&lt;/head&gt;</code>, and <code>&lt;body&gt;&lt;/body&gt;</code></li>
+<li><code>&lt;title&gt;&lt;/title&gt;</code></li>
+<li><code>&lt;strong&gt;&lt;/strong&gt;</code> and <code>&lt;em&gt;&lt;/em&gt;</code></li>
+<li><code>&lt;h1&gt;&lt;/h1&gt;</code> through <code>&lt;h6&gt;&lt;/h6&gt;</code></li>
+<li><code>&lt;p&gt;&lt;/p&gt;</code></li>
+<li><code>&lt;a&gt;&lt;/a&gt;</code>, plus <code>href</code> and <code>target</code> attributes</li>
+</ul></li>
+<li>JavaScript concepts and syntax (see <a href="4.javascript-primer.html">JavaScript as a Second Language: A
+Primer</a> and/or <a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics">this tutorial</a>)
+<ul>
+<li>declaring variables with <code>var</code> or <code>let</code></li>
+<li>declaring functions with <code>function</code> or <code>=&gt;</code></li>
+<li>data types (numbers, strings, booleans, <code>null</code> and <code>undefined</code>, arrays, and objects)</li>
+<li>control flow statements (conditionals, loops, and exception handling)</li>
+<li>accessing JavaScript in HTML with the <code>&lt;script&gt;&lt;/script&gt;</code> tag</li>
+</ul></li>
+<li>peculiar JavaScript concepts
+<ul>
+<li>typing in JavaScript (see <a href="5.typing-in-javascript.html">Typing in JavaScript</a>)</li>
+<li>anonymous functions and callback functions (see <a href="6.functions-in-javascript.html">Functions in JavaScript</a>)</li>
+<li>weird JavaScript idiosyncrasies (see <a href="7.common-bugs-in-javascript.html">Common Bugs in JavaScript</a>)</li>
+</ul></li>
+<li>using JavaScript to access the DOM
+<ul>
+<li>learning <a href="https://jquery.com/">jQuery</a> for this purpose is optional, but
+encouraged</li>
+<li>with jQuery</li>
+<li><code>$("#id")</code> and <code>$(".class")</code> selectors</li>
+<li><code>$(/*selector*/).on()</code> with different event types</li>
+<li>without jQuery</li>
+<li><code>document.getElementById("id")</code> and
+<code>document.getElementsByClassName("class")</code></li>
+<li><code>.onclick()</code> and other event types</li>
+</ul></li>
+</ul>
+
+<h3>What We <em>Don't</em> Expect You to Know</h3>
+
+<ul>
+<li>anything related to CSS
+<ul>
+<li>this includes the HTML <code>&lt;style&gt;&lt;/style&gt;</code> tag</li>
+</ul></li>
+<li>other HTML tags
+<ul>
+<li><code>&lt;div&gt;&lt;/div&gt;</code> and <code>&lt;span&gt;&lt;/span&gt;</code></li>
+<li><code>&lt;ol&gt;&lt;/ol&gt;</code>, <code>&lt;ul&gt;&lt;/ul&gt;</code>, and <code>&lt;li&gt;&lt;/li&gt;</code></li>
+<li><code>&lt;dl&gt;&lt;/dl&gt;</code>, <code>&lt;dt&gt;&lt;/dt&gt;</code>, and <code>&lt;dd&gt;&lt;/dd&gt;</code></li>
+<li><code>&lt;table&gt;&lt;/table&gt;</code>, <code>&lt;thead&gt;&lt;/thead&gt;</code>, <code>&lt;tbody&gt;&lt;/tbody&gt;</code>, <code>&lt;tr&gt;&lt;/tr&gt;</code>,
+<code>&lt;th&gt;&lt;/th&gt;</code>, and <code>&lt;td&gt;&lt;/td&gt;</code></li>
+<li><code>&lt;iframe&gt;&lt;/iframe&gt;</code>, <code>&lt;embed&gt;&lt;/embed&gt;</code>, etc.</li>
+</ul></li>
+<li>advanced JavaScript concepts
+<ul>
+<li>regular expressions</li>
+<li>prototypal inheritance</li>
+<li>promises</li>
+<li>advanced functional programming (e.g. closures and currying)</li>
+<li>metaprogramming (e.g. <code>eval</code>)</li>
+</ul></li>
+<li>node.js</li>
+<li>JavaScript web frameworks (e.g. Angular, React, Backbone, etc.)</li>
+</ul>
+
+<h3>Other Resources to Learn HTML</h3>
+
+<ul>
+<li>The Mozilla Developer Network
+<ul>
+<li>Tutorials are <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML">here</a>.</li>
+<li>Full reference is <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">here</a>.</li>
+</ul></li>
+<li><a href="https://www.w3schools.com/html/">w3schools</a>
+<ul>
+<li>Once reviled to the point of <a href="http://www.w3fools.com/">active protest</a>,
+these tutorials have gotten better and more up-to-date; I still wouldn't
+use w3schools to learn JavaScript, but for something simple like HTML it
+should be mostly harmless.</li>
+</ul></li>
+</ul>
+
+<h3>Other Resources to Learn JavaScript</h3>
+
+<ul>
+<li><a href="https://www.codecademy.com/">Codecademy</a>
+<ul>
+<li>Codecademy has some free resources, some paid; the interactive element is
+what sets it apart from other tutorials.</li>
+</ul></li>
+<li><a href="https://www.coursera.org/courses?languages=en&amp;query=javascript">Coursera</a></li>
+<li>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">Mozilla Developer Network</a>
+tutorials
+<ul>
+<li>The MDN documentation should be your go-to when trying to answer
+JavaScript syntax and library questions, and their tutorials are clear
+and comprehensive.</li>
+</ul></li>
+<li><a href="http://shop.oreilly.com/product/9780596517748.do">JavaScript: The Good Parts</a>
+by Douglas Crockford
+<ul>
+<li>An oldie-but-goodie, the Crockford summarizes some of the growing pains
+JavaScript has undergone the past several years, while also containing
+some good philosophy when it comes to good programming vs. bad
+programming.</li>
+</ul></li>
+<li><a href="https://medium.com/javascript-scene/12-books-every-javascript-developer-should-read-9da76157fb3">Best-Of Book List</a></li>
+<li><a href="https://hackr.io/tutorials/learn-javascript">Best-Of Online Tutorial List</a></li>
+<li><a href="https://stackoverflow.com">Stack Overflow</a>
+<ul>
+<li>Absolutely the best programming Q&amp;A site.</li>
+</ul></li>
+<li><a href="https://google.github.io/styleguide/jsguide.html">Google's JavaScript Style Guide</a>
+or <a href="https://github.com/airbnb/javascript">AirBnB's JavaScript Style Guide</a>
+<ul>
+<li>Two of many style guides: it's less important which style guide you follow,
+and more important that you pick one and stick with it.</li>
+</ul></li>
+</ul>
+
+<h3>Above and Beyond</h3>
+
+<p>The following subjects are not strictly-speaking relevant for this course, but
+if you can surmount the additional learning curves, you'll find that your
+web-based projects will be easier to code and far more elegant.</p>
+
+<ul>
+<li>Learning CSS is vital if you want to make your web applications actually
+<em>look</em> good.  There exist CSS frameworks like
+<a href="https://getbootstrap.com/">Bootstrap</a> and
+<a href="https://foundation.zurb.com/">Foundation</a>, as well as more low-level
+extensions of CSS like <a href="https://sass-lang.com/">Sass</a> and
+<a href="http://lesscss.org/">Less</a>.  Usually, CSS is taught along with JavaScript
+and HTML as a sort of HTML/CSS/JavaScript-hybrid, but since there is so much
+else to learn in this course, we are making the CSS portion optional.</li>
+<li>Learning <a href="https://jquery.com/">jQuery</a> will make communication between
+JavaScript and HTML significantly easier.  There are jQuery tutorials on
+Codecademy and on the jQuery site.</li>
+<li>If you are building a large web application, chances are at some point you'll
+be exposed to one of many JavaScript frameworks.  Among the most popular are
+<a href="https://angularjs.org/">Angular</a>, <a href="https://reactjs.org/">React</a>,
+<a href="https://www.emberjs.com/">Ember</a>, and <a href="http://backbonejs.org/">Backbone</a>;
+each of those sites have their own tutorials.</li>
+</ul>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>

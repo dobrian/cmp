@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Functions in JavaScript</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Functions in JavaScript</h1>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="6.functions-in-javascript.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+<h3>First-Class Functions</h3>
+
+<p>JavaScript has what are called "first-class functions", meaning that a function
+can be <em>itself</em> an argument or return value in a different function.  This
+allows you to utilize a programming style known as "functional programming".</p>
+
+<p>Here is an example.  Let's say we have an array of note names, and we want to
+convert that to an array of MIDI numbers.  Assuming we have a
+<code>noteNameToMIDINumber()</code> function, we can do something like this:</p>
+
+<pre><code>let noteNames = ["C4", "C#4", "D4", "G3"];
+let midiNumbers = noteNames.map(noteNameToMIDINumber); // [60, 61, 62, 55]
+</code></pre>
+
+<p>The
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map</code></a>
+method takes in a <em>function</em> as an argument, without the open-and-close parens
+you usually place after functions.  This means the function has not yet been
+called.  Instead, <code>map</code> calls the function—in this case
+<code>noteNameToMIDINumber</code>—once for each element in <code>noteNames</code>, building a new
+array with the result.</p>
+
+<p>You can think of the above code as equivalent to the following:</p>
+
+<pre><code>let noteNames = ["C4", "C#4", "D4", "G3"];
+let midiNumbers = [];
+for (let i = 0; i &lt; noteNames.length; i += 1) {
+  let midiNumber = noteNameToMIDINumber(noteNames[i]);
+  midiNumbers.push(midiNumber);
+}
+</code></pre>
+
+<p>You can see how <code>map</code> greatly simplifies the logic and control flow.  You
+should also look up other functional array methods, such as
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>filter</code></a>
+and
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><code>reduce</code></a>.</p>
+
+<h3>Asynchronous Callback Functions</h3>
+
+<p>Whenever we use a function as an argument, we can say that function is a
+"callback function".  Callback functions may be either "synchronous" or
+"asynchronous".  The example with <code>.map()</code> above is an example of a synchronous
+callback, because it runs the moment you call <code>.map()</code>.  Contrariwise,
+asynchronous functions will <em>wait</em> for a certain event to occur before
+executing.  This functionality is incredibly useful in musical applications,
+since we frequently find ourselves waiting for a cue before beginning an
+action.</p>
+
+<pre><code>$("#my-button").on("click", () =&gt; {
+  // do something here
+});
+</code></pre>
+
+<p>Here is an example of an asynchronous callback function using
+<a href="https://jquery.com/">jQuery</a>.  Here, we are waiting for the user to click on
+an HTML element with the ID "my-button" before launching our code.  Also note
+that the function in this example <em>does not have a name</em>.  This is an example
+of an "anonymous function", or what some languages call a "lambda".  I know
+this may seem like a lot of vocabulary—asynchronous callbacks with anonymous
+functions—but this programming paradigm is actually quite common in JavaScript,
+and you should get comfortable with the concepts and the terminology.</p>
+
+
+          </div>
+        </div>
+      </div>
+
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li>anonymous function</li>
+<li>callback function</li>
+<li>first-class function</li>
+<li>functional programming</li>
+<li><code>map</code>, <code>filter</code>, and <code>reduce</code></li>
+<li>synchronous vs. asynchronous functions</li>
+</ul>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

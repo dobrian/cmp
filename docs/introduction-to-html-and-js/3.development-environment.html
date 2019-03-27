@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Components of a Web Application</title>
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Setting Up a Development Environment</h1>
+
+<h3>Components of a Web Application</h3>
+
+<p>Throughout this course, you will be making "web applications".  Web
+applications consist of three parts:</p>
+
+<ol>
+<li>HTML, which creates the elements of a webpage,</li>
+<li>CSS, which describes how the elements <strong>look</strong>, and</li>
+<li>JavaScript, which describes how the elements <strong>move</strong></li>
+</ol>
+
+<p>For the sake of simplicity, we will be using exclusively HTML and JavaScript in
+this course, although we encourage you to prettify your assignments and
+projects with CSS if you'd like.</p>
+
+<h3>Setting Up a Development Environment</h3>
+
+<p>There are <a href="https://en.wikipedia.org/wiki/Comparison_of_integrated_development_environments#JavaScript">countless
+IDEs</a>
+one can use to write JavaScript.  However, in this course, we encourage you to
+use a text editor instead.  Text editors will give you a rawer, more hands-on
+understanding of how different elements of a web application interact.  If
+you're brand-new to text editors, you might find it easiest to start with
+either <a href="https://atom.io/">Atom</a> or <a href="https://www.sublimetext.com/">Sublime</a>,
+although if you're looking to establish some more serious hacker cred, try
+looking at <a href="https://www.gnu.org/software/emacs/">emacs</a> or
+<a href="https://www.vim.org/">vim</a>.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/Dealing_with_files">This
+article</a>
+provides a good and thorough introduction to how you should organize the files
+of your web application on your computer.  To get started right away, save the
+following text into a file called "myapp.html":</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello JavaScript!&lt;/h1&gt;
+    &lt;!-- put more HTML tags here! --&gt;
+    &lt;script src="myapp.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>To see this file in action, open up "myapp.html" with your web browser of choice.</p>
+
+<p>Now, create a new file called "myapp.js" in the same folder as "myapp.html".
+This file can start with the following:</p>
+
+<pre><code>let message = "Hello JavaScript!"
+console.log(message);
+</code></pre>
+
+<p>The <code>console.log()</code> function is the JavaScript equivalent of a <code>print</code>
+statement.  In order to actually <em>see</em> the output, though, you need to open the
+web console in your browser.  The way to do this differs from browser to
+browser:</p>
+
+<ul>
+<li>Chrome: Tools -> View -> Developer -> JavaScript Console (alt-cmd-J)</li>
+<li>Firefox: Tools -> Web Developer -> Web Console (alt-cmd-K)</li>
+<li>Edge: TODO</li>
+</ul>
+
+<p>If you want to change either "myapp.html" or "myapp.js", you will need to save
+the file, and then refresh the web page on your browser.</p>
+
+<p>Play around by changing the message in "myapp.js", or by adding new tags to
+"myapp.html"!</p>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>
