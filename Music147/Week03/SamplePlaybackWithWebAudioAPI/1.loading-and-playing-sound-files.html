@@ -1,3 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Loading and Playing Sound Files</title>
+  </head>
+  <body>
+    <div class="container">
 <h1>Loading and Playing Sound Files</h1>
 
 <h3>Method 1: Raw HTML</h3>
@@ -11,13 +24,8 @@ site</a>.)
 The <code>&lt;audio&gt;&lt;/audio&gt;</code> tag contains a number of other useful attributes, like
 <code>controls</code>, <code>autoplay</code>, and <code>loop</code>.</p>
 
-<pre><code>&lt;audio src="freejazz.wav controls autoplay loop&gt;&lt;/audio&gt;
+<pre class="html"><code>&lt;audio src="freejazz.wav controls autoplay loop"&gt;&lt;/audio&gt;
 </code></pre>
-
-<ul>
-<li>Right-click and "Save Link As" to download <a href="method1.html">method1.html</a> and
-<a href="freejazz.wav">freejazz.wav</a></li>
-</ul>
 
 <h3>Method 2: JavaScript</h3>
 
@@ -28,7 +36,7 @@ The <code>&lt;audio&gt;&lt;/audio&gt;</code> tag contains a number of other usef
 
 <p>You may then play back the sound with the <code>.play()</code> method.</p>
 
-<pre><code>audio.play();
+<pre class="javascript"><code>audio.play();
 </code></pre>
 
 <p>You may change the rate at which the sound file plays back with the
@@ -44,11 +52,6 @@ audio.play();
 <pre><code>audio.loop = true;
 audio.play();
 </code></pre>
-
-<ul>
-<li>Right-click and "Save Link As" to download <a href="method2.html">method2.html</a>,
-<a href="method2.js">method2.js</a> and <a href="freejazz.wav">freejazz.wav</a></li>
-</ul>
 
 <h3>Method 3: Web Audio API (synchronous)</h3>
 
@@ -68,18 +71,13 @@ source.connect(audioCtx.destination);
 
 <p>Finally, play the sound.</p>
 
-<pre><code>audio.play();
+<pre class="javascript"><code>audio.play();
 </code></pre>
 
 <p>While in this example we're directly connecting the <code>MediaElementSourceNode</code> to
 the dac, the advantage of this method is that we can place intermediate
 <code>AudioNodes</code> in the middle of the signal chain.  This can allow us to control
 volume, panning, reverb, delay, and so on.</p>
-
-<ul>
-<li>Right-click and "Save Link As" to download <a href="method3.html">method3.html</a>,
-<a href="method3.js">method3.js</a> and <a href="freejazz.wav">freejazz.wav</a></li>
-</ul>
 
 <h3>Method 4: Web Audio API (asynchronous)</h3>
 
@@ -130,9 +128,20 @@ buffer to it, connecting it to the dac, and playing it.</p>
 };
 </code></pre>
 
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
 <ul>
-<li>Right-click and "Save Link As" to download <a href="method4.html">method4.html</a>,
-<a href="method4.js">method4.js</a> and <a href="freejazz.wav">freejazz.wav</a></li>
+<li><a href="freejazz.wav">freejazz.wav</a></li>
+<li><a href="method1.html">method1.html</a></li>
+<li><a href="method2.html">method2.html</a></li>
+<li><a href="method2.js">method2.js</a></li>
+<li><a href="method3.html">method3.html</a></li>
+<li><a href="method3.js">method3.js</a></li>
+<li><a href="method4.html">method4.html</a></li>
+<li><a href="method4.js">method4.js</a></li>
 </ul>
 
 <h2>Vocabulary</h2>
@@ -153,3 +162,18 @@ your HTML?</li>
 <li>Change the "Method 4" code so that it has three pairs of buttons to load and
 play three different sound files.</li>
 </ol>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>
