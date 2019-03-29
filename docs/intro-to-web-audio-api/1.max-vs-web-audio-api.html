@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Max vs. Web Audio API</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Max vs. Web Audio API</h1>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="1.max-vs-web-audio-api.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+
+<p>JavaScript's Web Audio API shares a number of characteristics with Max.  In
+Max, we create and alter sounds using objects with tildes; in Web Audio API, we
+create and alter sounds using
+"<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode"><code>AudioNode</code></a>s".
+In Max, we connect objects together using patch cords; with Web Audio API, we
+connect <code>AudioNode</code>s together using the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode/connect"><code>.connect()</code></a>
+method.  Finally, whereas in Max, all objects live in a "patch", with Web Audio
+API, all <code>AudioNode</code>s exist inside of an
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext"><code>AudioContext</code></a>.</p>
+
+<p>This is the Max equivalent of a "hello world": playing a sine tone through a
+<strong>dac~</strong>.  Here, the sine tone is 300 Hz, and it's being fed through a <strong>*~</strong>
+at half gain.  How would we build the equivalent program with Web Audio API?</p>
+
+<p>The first thing we do is create an <code>AudioContext</code>, which is the equivalent of
+starting a new patch.  Then we create our three <code>AudioNode</code>s: an oscillator, a
+gain, and the dac.  Note that <code>AudioContext</code> has a built-in dac, which we can
+access with <code>audioCtx.destination</code>.</p>
+
+<pre><code>const audioCtx = new AudioContext();
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+const dac = audioCtx.destination;
+</code></pre>
+
+<p>Now, we can customize our <code>AudioNode</code>s.  To set an oscillator's frequency, we
+set the <code>osc.frequency.value</code> property.  To set a gain's gain, we set the
+<code>gain.gain.value</code> property.  Technically, <code>osc.frequency</code> and <code>gain.gain</code> are
+implementations of the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam"><code>AudioParam</code></a>
+interface.  This interface contains useful methods like
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/linearRampToValueAtTime"><code>.linearRampToValueAtTime()</code></a>
+and
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/setValueCurveAtTime"><code>.setValueCurveAtTime()</code></a>
+that allow you to smoothly interpolate between a parameter's values.</p>
+
+<pre><code>osc.frequency.value = 300;
+gain.gain.value = 0.5
+</code></pre>
+
+<p>Finally, we connect the <code>AudioNode</code>s together, just like we would connect
+objects with patch cords.  The last line of code tells the oscillator to start
+producing sound.</p>
+
+<pre><code>osc.connect(gain);
+gain.connect(dac);
+osc.start();
+</code></pre>
+
+<p>One significant difference between Max and Web Audio API is that in Max, an
+object is not at risk of deletion once it stops producing sound.  In Web Audio
+API, on the other hand, once an <code>AudioNode</code> stops producing sound, it goes away
+forever.  As a result, to create multiple simultaneous or successive sounds,
+you may have to instantiate an <code>AudioNode</code> for each one.  Don't feel weird if
+you're writing a program that creates hundreds or even thousands of
+<code>AudioNode</code>s: as long as you remember to stop each one (which triggers the
+garbage collector), your program will run just fine.</p>
+
+
+          </div>
+        </div>
+      </div>
+
+
+<h2>Tables</h2>
+
+        <h3>Max vs. Web Audio API</h3>
+        <table class="table">
+          <thead>
+            <tr><th>Max</th><th>Web Audio API</th></tr>
+          </thead>
+          <tbody>
+             <tr><td>objects with "~"</td><td><code>AudioNode</code></td>
+             <tr><td>patch</td><td><code>AudioContext</code></td>
+             <tr><td>striped patch cord</td><td><code>node.connect()</code></td>
+             <tr><td><strong>cycle~</strong>/<strong>tri~</strong>/<strong>saw~</strong>/<strong>rect~</strong></td><td><code>audioCtx.createOscillator()</code></td>
+             <tr><td><strong>gain~</strong>/<strong>*~</strong></td><td><code>audioCtx.createGain()</code></td>
+             <tr><td><strong>dac~</strong>/<strong>ezdac~</strong></td><td><code>audioCtx.destination</code></td>
+             <tr><td><strong>line</strong>/<strong>line~</strong></td><td><code>node.param.linearRampToValueAtTime()</code></td>
+          </tbody>
+        </table>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext"><code>AudioContext</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioNode"><code>AudioNode</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam"><code>AudioParam</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode"><code>GainNode</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode"><code>OscillatorNode</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/destination"><code>audioCtx.destination</code></a></li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Play an F major chord using the Web Audio API.  Hint: use either a note
+frequency table, or the note-name-to-MIDI-number code from the <a href="../basics-of-music-theory/0.basics-of-music-theory.html">Basics of
+Music Theory</a> module.</li>
+<li>The <code>osc.start()</code> method takes in an argument: a start time in seconds.
+Rather than using just a number, it is good practice to specify a time via
+<code>audioCtx.currentTime + second</code>.  Using Web Audio API, play a C major scale,
+starting on middle C, one note per second.</li>
+</ol>
+
+<h2>Self-Quiz</h2>
+
+<ol>
+<li><p>Why is there no sound playing?</p>
+
+<pre><code>const audioCtx = new AudioContext();
+const osc = audioCtx.createOscillator();
+osc.start();</pre></code></li>
+</ol>
+
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">The oscillator is not connected to the dac!  Add the line
+<code>osc.connect(audioCtx.destination);</code>.</p>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

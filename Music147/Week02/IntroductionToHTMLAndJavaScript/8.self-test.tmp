@@ -1,0 +1,180 @@
+<h1>Self-Test</h1>
+
+<ol>
+<li>Create a fully-specified HTML page (including <code>!doctype</code> and outer-level
+<code>html</code> tags) with title and main text "Hello world!"  Then, link to a
+JavaScript file called "hello.js" that also prints out "Hello world!" to the
+browser console.</li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>&lt;!-- contents of "hello.html" --&gt;
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello world!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello world!&lt;/h1&gt;
+  &lt;/body&gt;
+  &lt;script src="hello.js"&gt;&lt;/script&gt;
+&lt;/html&gt;
+
+// contents of "hello.js"
+console.log("Hello world!");
+</code></pre>
+
+<ol>
+<li>Write a function in JavaScript that takes in a number, and returns a boolean
+corresponding to whether that number is prime.</li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>let isPrime = (n) =&gt; {
+  for (let i = 2; i &lt; n; i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+};
+</code></pre>
+
+<ol>
+<li>Let's say you have an array of integers—say <code>[0, 43, -123, 4, -60, 32]</code>—and
+you want to find the sum of <em>only</em> the odd integers in the array.  Write two
+JavaScript programs to do so: one that <em>doesn't</em> use functional programming
+constructs (i.e. <code>map</code>, <code>filter</code>, and/or <code>reduce</code>), and one that does.</li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>// Without functional programming
+let numbers = [0, 43, -123, 4, -60, 32];
+let result = 0;
+for (let i = 0; i &lt; numbers.length; i += 1) {
+  if (numbers[i] % 2 === 1) {
+    result += numbers[i];
+  }
+}
+console.log(result);
+
+// With functional programming
+let numbers = [0, 43, -123, 4, -60, 32];
+let result = numbers.filter((n) =&gt; n % 2 === 1).reduce((a, b) =&gt; a + b);
+console.log(result);
+</code></pre>
+
+<ol>
+<li><p>The following is one way to represent a note:</p>
+
+<pre><code>let myNote = {
+  "midiNumber": 60,
+  "duration": "4n",
+  "velocity": 80
+};
+</code></pre>
+
+<p>In this example, <code>"midiNumber"</code> is an integer between 21 and 108, <code>"duration"</code>
+is a duration value (to simplify: one of "1n", "2n", "4n", or "8n"), and
+"velocity" is an integer between 0 and 127.  (Computer musicians often use
+"velocity" as a synonym for "volume" or "loudness".)</p>
+
+<p>Create a function makeRandomNote() that returns a note with a random MIDI
+number, duration, and velocity within the bounds stated above.  You may find
+the following function helpful:</p>
+
+<pre><code>/*
+ * This function gets a random integer between min and max, inclusive.  I copied
+ * it from StackOverflow: https://stackoverflow.com/questions/4959975/
+ */
+let getRandomInt = (min, max) =&gt; {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+</code></pre></li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>let makeRandomNote = () =&gt; {
+  let possibleDurations = ["1n", "2n", "4n", "8n"];
+  return {
+    "midiNumber": getRandomInt(21, 108),
+    "duration": possibleDurations[getRandomInt(0, possibleDurations.length - 1)],
+    "velocity": getRandomInt(0, 127)
+  };
+};
+</code></pre>
+
+<ol>
+<li>Using your new makeRandomNote() function, make five random notes, and store
+them in an array, <em>sorted by velocity</em>.  You may find <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">this array
+method</a>
+handy.  If you can, challenge yourself to use an anonymous function when
+sorting the array.</li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>let randomNotes = [];
+for (let i = 0; i &lt; 5; i += 1) {
+  randomNotes.push(makeRandomNote());
+}
+randomNotes.sort((a, b) =&gt; {
+  if (a.velocity &gt; b.velocity) {
+    return 1;
+  } else if (a.velocity === b.velocity) {
+    return 0;
+  } else {
+    return -1;
+  }
+});
+</code></pre>
+
+<ol>
+<li>Write a function that takes in a note of the form above, and determines
+whether or not that note is in the G major scale.  (Hint: you may want to
+review the material on pitch classes and MIDI numbers.)</li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>let isInGMajorScale = (note) =&gt; {
+  let gMajorScale = [7, 9, 11, 0, 2, 4, 6];
+  let pitchClass = note.midiNumber % 12;
+  return gMajorScale.includes(pitchClass);
+};
+</code></pre>
+
+<ol>
+<li><p>Look at the following snippet from an HTML document.</p>
+
+<pre><code>&lt;button id="toggler"&gt;Show/Hide Text&lt;/button&gt;
+&lt;p id="text"&gt;I'm being toggled!&lt;/p&gt;
+</code></pre>
+
+<p>Make it so that when you click on the button, you toggle the text.  If you are
+using jQuery, look up <code>$().toggle()</code>; if you are not using jQuery, look up CSS
+"display".  (Also, if you want to cheat, look at the source code for this very
+page!)</p></li>
+</ol>
+
+<p>ANSWER:</p>
+
+<pre><code>// With jQuery
+$("#toggler").on("click", () =&gt; {
+  $("#text").toggle();
+});
+
+// Without jQuery
+document.getElementById("toggler").onclick(() =&gt; {
+  let text = document.getElementById("text");
+  if (text.style.display === "none") {
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+});
+</code></pre>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="music147.css">
+
+    <title>Representing Rhythm in the Computer</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Representing Rhythm in the Computer</h1>
+
+      <div id="text">
+        <h3>Representing Rhythm in the Computer</h3>
+
+        <p>Computers can represent rhythm in two ways: absolute time, and tempo-relative
+        time.  Tempo-relative time is what you're used to: a tempo is given in beats
+        per minute, and then the rhythm is given in a series of quarter notes, eighth
+        notes, dotted notes, triplets, and so on.  Many languages use a shorthand to
+        describe rhythmic values; this shorthand is given in the table below.</p>
+
+        <p>Another way computers represent rhythm is with absolute time.  Absolute time
+        measures the number of seconds—usually milliseconds—between note onsets.</p>
+
+        <p>Let's try to convert a rhythm from tempo-relative time to absolute time.  At
+        quarter = 60, each quarter note is exactly one second long—or 1000
+        milliseconds—because there are sixty seconds in one minute.  Therefore, each
+        eighth note is exactly half-a-second long, or 500 milliseconds, and each half
+        note is exactly two seconds long, or 2000 milliseconds.  A dotted quarter note
+        would be 1500 milliseconds, because a dotted quarter note is a quarter note
+        plus an eighth note, and a triplet quarter note would be 666.6 repeating
+        milliseconds long, because there are three triplet quarters for every two
+        regular quarters.</p>
+
+        <p>The formula from converting from tempo-relative time in BPM to absolute time in
+        milliseconds is 60,000 / BPM.  As we saw earlier, with quarter = 60, the
+        milliseconds in each quarter note is 60,000 / 60, or 1000.  If quarter = 100,
+        the milliseconds in each quarter note is 60,000 / 100, or 600 milliseconds.  If
+        eighth = 300, the milliseconds in each eighth note is 60,000 / 300, or 200
+        milliseconds.</p>
+
+        <p>To convert back from absolute time to BPM, you can use the inverse of the
+        formula: 60,000 / milliseconds.  Therefore, if a quarter note is 750
+        milliseconds long, the BPM is 60,000 / 750, or 80 beats per minute.</p>
+
+      </div>
+
+      <div id="tables">
+        <h2>Common Rhythmic Shorthand</h2>
+        <table class="table">
+          <thead>
+            <tr><th>Note Value</th><th>Abbreviation</th><th>Notation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Whole Note</td><td>1n</td><td><img src="6.1n.png" /></td></tr>
+            <tr><td>Half Note</td><td>2n</td><td><img src="6.2n.png" /></td></tr>
+            <tr><td>Quarter Note</td><td>4n</td><td><img src="6.4n.png" /></td></tr>
+            <tr><td>Eightd Note</td><td>8n</td><td><img src="6.8n.png" /></td></tr>
+            <tr><td>Sixteentd Note</td><td>16n</td><td><img src="6.16n.png" /></td></tr>
+            <tr><td>Quarter Note Triplet</td><td>4nt</td><td><img src="6.4nt.png" /></td></tr>
+            <tr><td>Dotted Quarter Note</td><td>4nd</td><td><img src="6.4nd.png" /></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="vocabulary">
+        <h2>Vocabulary</h2>
+        <ul>
+        <li>absolute time</li>
+        <li>tempo-relative time</li>
+        </ul>
+      </div>
+
+      <div id="self-study">
+        <h2>Self-Study</h2>
+        <ul>
+        <li>in your favorite programming language, write a script that takes in two
+        inputs---a bpm (e.g. 60) and a duration value (e.g. 4n)---and spits out an
+        absolute time in milliseconds (e.g. 1000).</li>
+        <li>in your favorite programming language, write a script that takes in two
+        inputs---a time in milliseconds (e.g. 500) and a duration value (e.g.
+        8n)--and spits out how many of those duration values there are per minute
+        (e.g. 120).</li>
+        </ul>
+
+      </div>
+
+      <div id="self-quiz">
+        <h2>Self-Quiz</h2>
+        <ol>
+          <li>At quarter = 160, how many milliseconds are in a quarter note?</li>
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">375.</p>
+
+          <li>At quarter = 160, how many milliseconds are in a dotted half note?</li>
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-2" class="answer" style="display: none">1125.</p>
+
+          <li>At eighth = 200, how many milliseconds are in a triplet quarter note?</li>
+          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-3" class="answer" style="display: none">400.</p>
+
+          <li>If my eighth note is 400 milliseconds, how many quarter notes are in a minute?</li>
+          <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-4" class="answer" style="display: none">75.</p>
+
+          <li>If my quarter note is 1200 milliseconds, how many triplet eighth notes are in a minute?</li>
+          <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-5" class="answer" style="display: none">150.</p>
+        </ol>
+      </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>
