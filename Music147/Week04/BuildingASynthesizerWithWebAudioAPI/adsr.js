@@ -15,12 +15,15 @@ oscillator.start();
 // Create attack and release functions.
 const attack = (attackTime, decayTime, sustainValue) => {
   oscillatorGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  oscillatorGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + attackTime);
-  oscillatorGain.gain.linearRampToValueAtTime(sustainValue, audioCtx.currentTime + attackTime + decayTime);
+  oscillatorGain.gain.linearRampToValueAtTime(1,
+                                              audioCtx.currentTime + attackTime);
+  oscillatorGain.gain.linearRampToValueAtTime(sustainValue,
+                                              audioCtx.currentTime + attackTime + decayTime);
 };
 
 const release = (releaseTime) => {
-  oscillatorGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + releaseTime);
+  oscillatorGain.gain.linearRampToValueAtTime(0,
+                                              audioCtx.currentTime + releaseTime);
 };
 
 
