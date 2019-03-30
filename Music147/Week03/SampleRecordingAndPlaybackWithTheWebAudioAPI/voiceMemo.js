@@ -1,7 +1,7 @@
 // Set up the AudioContext.
 const audioCtx = new AudioContext();
 
-// Upper-level variable keeps track of whether we are recording or not.
+// Top-level variable keeps track of whether we are recording or not.
 let recording = false;
 
 // Ask user for access to the microphone.
