@@ -11,7 +11,7 @@ oscillatorGain.connect(audioCtx.destination);
 const modulator = audioCtx.createOscillator();
 modulator.frequency.value = 1;
 const modulatorGain = audioCtx.createGain();
-modulatorGain.gain.value = 100;
+modulatorGain.gain.value = 100; // right now, the oscillator will "wobble" by 100 Hz
 modulator.connect(modulatorGain);
 modulatorGain.connect(oscillator.frequency); // try switching to oscillator.detune
 
