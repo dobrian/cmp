@@ -86,32 +86,6 @@ Software project design
 
 • Providing input to Max
 
-### Building a synthesizer in Max
-
-•  The concept (and limitations) of additive synthesis
-
-•  Theory and implementation of basic FM synthesis
-
-•  Common controls (keyboard, envelopes, modulations, pitchbend, lowpass filter, etc.)
-
-•  Overview of other types of synthesis
-
-### Building a synthesizer in Web Audio API |Mark|
-
-•  Relating API implementations to Max implementations
-
-•  Web MIDI API
-
-### MIDI
-
-•  The protocol, its pros and cons
-
-•  Channel messages for performance
-
-•  MIDI file format
-
-## Week 4
-
 ### RAM-based sample playback in Max
 
 •  **buffer~** access and usage |Alex|
@@ -139,6 +113,32 @@ Software project design
 •  Relating API implementations to Max implementations
 
 •  Applying control signals to sample playback
+
+## Week 4
+
+### Building a synthesizer in Max
+
+•  The concept (and limitations) of additive synthesis
+
+•  Theory and implementation of basic FM synthesis
+
+•  Common controls (keyboard, envelopes, modulations, pitchbend, lowpass filter, etc.)
+
+•  Overview of other types of synthesis
+
+### Building a synthesizer in Web Audio API |Mark|
+
+•  Relating API implementations to Max implementations
+
+•  Web MIDI API
+
+### MIDI
+
+•  The protocol, its pros and cons
+
+•  Channel messages for performance
+
+•  MIDI file format
 
 ## Week 5
 
