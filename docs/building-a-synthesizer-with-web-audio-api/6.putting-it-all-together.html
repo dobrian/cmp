@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Putting It All Together</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Putting It All Together</h1>
+
+<p>In the preceding lessons, you learned how to implement the basic features of a
+synthesizer using JavaScript.  Now, it's time to put it all together.</p>
+
+<p>Download the "synthesizerTODO.html" and "synthesizerTODO.js" files from the
+"Downloads" section of this page.  You'll see that each contains a number of
+comments with tasks marked "TODO".  Using code from the preceding lessons, you
+should figure out how to get the missing elements working.  </p>
+
+<p>When you are done, check your work against the "synthesizer.html" and
+"synthesizer.js" files.  These will show one possible way to implement the
+missing features.</p>
+
+<p>Finally, challenge yourself by implementing even more additional features, as
+described in the self-study section.</p>
+
+<p>Good luck!</p>
+
+<h2>Downloads</h2>
+
+<p>Download the following files by right-clicking the links, and then selecting
+"Save Link As...".  Try not to look at the working versions unless you get
+really stuck!</p>
+
+<ul>
+<li><a href="synthesizerTODO.html">synthesizerTODO.html</a></li>
+<li><a href="synthesizerTODO.js">synthesizerTODO.js</a></li>
+</ul>
+
+<button id="question-1" type="button" class="btn btn-primary question">Show/Hide Completed Synth Code</button>
+<div id="answer-1" class="answer" style="display: none">
+  <ul>
+  <li><a href="synthesizer.html">synthesizer.html</a></li>
+  <li><a href="synthesizer.js">synthesizer.js</a></li>
+  </ul>
+</div>
+
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Add octave control, as described in the Self-Study section of the
+<a href="5.controllers.html">controllers</a> lesson.</li>
+<li>Add a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio">radio
+button</a>
+that will let the user change the modulator from a vibrato to a tremolo.</li>
+<li>Incorporate the user-customizable envelope code from
+<a href="4.envelopes.html">adsr.js</a>.  Figure out a way to control separate attack
+and release actions for each note.</li>
+<li>Look at the jQuery <a href="https://api.jquery.com/mousemove/"><code>.mousemove</code></a> event.
+This will give you an additional pair of continuous values.  Map the X/Y
+coordinates of the mouse to something fun, like filter cutoff/Q or vibrato
+speed/amount.</li>
+</ol>
+
+<h2>Additional Resources</h2>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Simple_synth">https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Simple_synth</a></li>
+</ul>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

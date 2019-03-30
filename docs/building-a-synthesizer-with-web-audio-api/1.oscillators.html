@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Oscillators</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Oscillators</h1>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="1.oscillators.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+
+
+
+
+<h3>Oscillators</h3>
+
+<p>To create an oscillator, instantiate an <code>OscillatorNode</code>.  Once assigned to a
+variable, you may adjust its pitch with the <code>.frequency</code> and <code>.detune</code>
+properties: <code>.frequency</code> is a number in Hz; <code>.detune</code> is a number in cents.  In
+addition, you may change the shape of the waveform by assigning the <code>.type</code>
+property:  The default value is <code>"sine"</code>, but you may change that to
+<code>"square"</code>, <code>"sawtooth"</code>, or <code>"triangle"</code>.  Once you hook up the oscillator to
+a <code>GainNode</code> and the dac, don't forget to call its <code>.start()</code> method, which is
+what actually tells the oscillator to start producing sound.</p>
+
+<p>The <code>.start()</code> method takes one optional argument: the time (in seconds) after
+which the oscillator should begin playing.  If you omit this argument, the
+method supplies a default value of <code>audioCtx.currentTime</code>, which is the
+equivalent of saying, "start immediately".  In general, it is good practice to
+declare time offsets in relation to <code>audioCtx.currentTime</code>, so instead of
+writing <code>.start(2)</code>, you should write <code>.start(audioCtx.currentTime + 2)</code>.</p>
+
+<pre><code>// Create a sawtooth wave with a frequency of 220 (aka A3).
+const oscillator = audioCtx.createOscillator();
+oscillator.frequency.value = 220;
+oscillator.type = "sawtooth";
+const oscillatorGain = audioCtx.createGain();
+oscillatorGain.gain.value = 0.1;
+oscillator.connect(oscillatorGain);
+oscillatorGain.connect(audioCtx.destination);
+
+// Start oscillator after 2 seconds have passed
+oscillator.start(audioCtx.currentTime + 2);
+</code></pre>
+
+
+          </div>
+        </div>
+      </div>
+
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="oscillator.html">oscillator.html</a></li>
+<li><a href="oscillator.js">oscillator.js</a></li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li><code>.frequency</code> vs. <code>.detune</code></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode"><code>OscillatorNode</code></a></li>
+<li>sawtooth, sine, square, and triangle waves</li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Recall the formula for converting a MIDI number to a frequency.  Write a
+function that takes in a MIDI number and plays the corresponding frequency.</li>
+<li>Familiarize yourself with the sounds of the four basic waveforms: sawtooth,
+sine, square, and triangle.  What words would you use to describe each one?
+(Examples: "thin", "beefy", "rich", "nasally", etc.)</li>
+<li>Create an additive synthesizer.  Hint: create a bunch of simultaneous sine
+tones whose frequencies correspond to the overtone series of some
+fundamental.</li>
+</ol>
+
+<h2>Self-Quiz</h2>
+
+<ol>
+<li>I have an oscillator with frequency <code>350</code> and detune <code>1200</code>.  What is
+the oscillator's actual frequency?</li>
+  <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+  <p id="answer-1" class="answer" style="display: none">700 Hz</p>
+<li>I have an oscillator with frequency <code>500</code> and detune <code>-2400</code>.  What is
+the oscillator's actual frequency?</li>
+  <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+  <p id="answer-2" class="answer" style="display: none">125 Hz</p>
+</ol>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Filters</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Filters</h1>
+
+<h3>Filters</h3>
+
+<p>To create a filter, instantiate an instance of <code>BiquadFilterNode</code>.  In the
+signal chain, hook up an <code>OscillatorNode</code> to it's <code>GainNode</code>, it's <code>GainNode</code>
+to the filter, then the filter to the dac.  It is important you pick a
+frequency-rich waveform like <code>"sawtooth"</code> or <code>"square"</code>, because it will be
+difficult or impossible to hear the filter's effects on a frequency-poor
+waveform like <code>"triangle"</code> or <code>"sine"</code>.</p>
+
+<pre><code>const audioCtx = new AudioContext();
+
+const oscillator = audioCtx.createOscillator();
+oscillator.frequency.value = 220;
+oscillator.type = "sawtooth";
+const oscillatorGain = audioCtx.createGain();
+oscillatorGain.gain.value = 0.1;
+
+const filter = audioCtx.createBiquadFilter();
+
+oscillator.connect(oscillatorGain);
+oscillatorGain.connect(filter);
+filter.connect(audioCtx.destination);
+
+oscillator.start();
+</code></pre>
+
+<p>Filters have a number of properties you may customize.  The <code>.type</code> property
+may be set to basic filter types like <code>"lowpass"</code>, <code>"highpass"</code>, and
+<code>"bandpass"</code>, as well as more advanced types like <code>"peaking"</code> and <code>"notch"</code>.
+The <code>.frequency</code> and <code>.detune</code> properties may be used to set the cutoff
+frequency.  In conjunction with the <code>.Q</code> property, you may fine-tune your
+filter.</p>
+
+<pre><code>filter.type = "lowpass";
+filter.frequency.value = 660;
+filter.Q.value = 20;
+</code></pre>
+
+<p>You may also hook up an LFO to the filter properties.  You may change all of
+the properties that are <code>AudioParam</code>s: <code>.frequency</code>, <code>.detune</code>, and <code>.Q</code>.</p>
+
+<pre><code>const modulator = audioCtx.createOscillator();
+const modulatorGain = audioCtx.createGain();
+// set modulator parameters
+modulator.connect(modulatorGain);
+modulatorGain.connect(filter.frequency);
+modulator.start();
+</code></pre>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="filter.html">filter.html</a></li>
+<li><a href="filter.js">filter.js</a></li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode"><code>BiquadFilterNode</code></a></li>
+<li>cutoff frequency</li>
+<li>lowpass vs. highpass vs. bandpass filters</li>
+<li>Q</li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li><p>In this item, you only applied a filter to a basic waveform.  Try applying
+different filters to:</p>
+
+<ol>
+<li>a sound created with FM synthesis (see the discussion of vibrato in <a href="2.lfos.html">LFOs</a>)</li>
+<li>a prerecorded soundfile (see <a href="../sample-playback-with-web-audio-api/1.loading-and-playing-sound-files.html">Loading and Playing Sound Files</a>)</li>
+<li>live microphone input (see <a href="TODO">Microphone Input</a>)</li>
+</ol></li>
+<li><p>Create a button that performs a "filter sweep", i.e. a steady decrease of
+the filter cutoff frequency over time.  (This will sound great over a sound
+file of a drum break!)  You may have to look ahead to the next lesson on
+<a href="4.envelopes.html">envelopes</a>.</p></li>
+</ol>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

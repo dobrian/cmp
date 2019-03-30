@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <body>
+    <center>
+      <h1>Envelope Control</h1>
+      <label for="attack">Attack</label>
+      <input id="attack" name="attack" type="range" min="0" max="5" value="1" step="0.5" />
+      <p id="attack-indicator"></p>
+
+      <label for="decay">Decay</label>
+      <input id="decay" name="decay" type="range" min="0" max="5" value="1" step="0.5" />
+      <p id="decay-indicator"></p>
+
+      <label for="sustain">Sustain</label>
+      <input id="sustain" name="sustain" type="range" min="0" max="1" value="0.5" step="0.1" />
+      <p id="sustain-indicator"></p>
+
+      <label for="release">Release</label>
+      <input id="release" name="release" type="range" min="0" max="5" value="1" step="0.5" />
+      <p id="release-indicator"></p>
+
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+    </center>
+
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="adsr.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <body>
+    <fieldset>
+      <legend>Synth properties</legend>
+
+      <label for="wave-type">Wave type</label>
+      <select id="wave-type" name="wave-type">
+        <option value="sawtooth">Sawtooth</option>
+        <option value="sine">Sine</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+      </select>
+
+      <br />
+
+      <label for="vibrato-speed">Vibrato speed (in Hz)</label>
+      <input id="vibrato-speed" type="number" min="0" value="6" />
+
+      <br />
+
+      <label for="vibrato-amount">Vibrato amount (in cents)</label>
+      <input id="vibrato-amount" type="number" min="0" value="50" />
+
+      <br />
+
+      <label for="filter-type">Filter type</label>
+      <select id="filter-type" name="filter-type">
+        <option value="lowpass">Low-pass</option>
+        <option value="highpass">High-pass</option>
+        <option value="bandpass">Band-pass</option>
+      </select>
+
+      <br />
+
+      <label for="filter-cutoff">Filter cutoff (in Hz)</label>
+      <input id="filter-cutoff" type="number" min="0" value="500" />
+    </fieldset>
+
+    <p>Use the home row to play a C major scale!</p>
+
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="synthesizer.js"></script>
+  </body>
+</html>
+
+
