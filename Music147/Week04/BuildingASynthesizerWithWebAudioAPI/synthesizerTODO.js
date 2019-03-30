@@ -17,7 +17,7 @@ const ASCII_TO_HZ = {
 
 let waveType = "sawtooth";   // base waveform
 let vibratoSpeed = 6;        // vibrato speed is in Hz
-let vibratoAmount = 20;      // vibrato amount is in cents (not Hz!)
+let vibratoAmount = 50;      // vibrato amount is in cents (not Hz!)
 let filterType = "lowpass";  // one of "lowpass", "highpass", or "bandpass"
 let filterCutoff = 500;      // filter cutoff frequency in Hz
 

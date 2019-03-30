@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Controllers</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Controllers</h1>
+
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="5.controllers.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+<h3>Controllers</h3>
+
+<p>Once we've set up our oscillators, LFOs, filters, and envelopes, we'll need a
+way to control them.  In Max, you can use the <strong>ctlin</strong> or <strong>midiin</strong> objects
+to hook into an external device like a MIDI keyboard or drum pad.  There
+actually exists a way to do this in JavaScript as well, by using the Web MIDI
+API.  Unfortunately, at the time of this recording in March 2019, the Web MIDI
+API is not widely implemented among browsers, only usable in Google Chrome.</p>
+
+<p>So, instead of MIDI, let's use the computer keyboard to control notes.  You can
+use the events <a href="https://api.jquery.com/keyup/"><code>"keyup"</code></a> and
+<a href="https://api.jquery.com/keydown/"><code>"keydown"</code></a> to track the keyboard movements.
+Here's how to track these motions with jQuery.</p>
+
+<pre><code>$(document).keydown((event) =&gt; {
+  let asciiValue = event.which;
+});
+</code></pre>
+
+<p>An "ASCII value" is an integer value from 0 to 127 that is associated with a
+particular key on a computer keyboard.  For instance, the ASCII value of "c" is
+67.  Let's play middle C, aka C4, whenever the "c" key is pressed.  The
+frequency of middle C is 261.63 Hz.</p>
+
+<pre><code>const audioCtx = new AudioContext();
+
+const playMiddleC = () =&gt; {
+  const oscillator = audioCtx.createOscillator();
+  oscillator.frequency.value = 261.63;
+  const oscillatorGain = audioCtx.createGain();
+  oscillator.connect(oscillatorGain);
+  oscillatorGain.connect(audioCtx.destination);
+  oscillator.start();
+
+  oscillatorGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  oscillatorGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.1);
+  oscillatorGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+  oscillator.stop(audioCtx.currentTime + 1); // remember to stop the oscillator in order
+                         // to trigger the garbage collector 
+};
+
+$(document).keyup((event) =&gt; {
+  if (event.which === 67) {
+    playMiddleC();
+  }
+});
+</code></pre>
+
+<p>You can download this code in the page below this video.  Try expanding it such
+that you can play different notes with different strokes on your computer
+keyboard!</p>
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="controllers.html">controllers.html</a></li>
+<li><a href="controllers.js">controllers.js</a></li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li>ASCII</li>
+<li><a href="https://api.jquery.com/keydown/"><code>$(document).keydown()</code></a></li>
+<li><a href="https://api.jquery.com/keyup/"><code>$(document).keyup()</code></a></li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Change the <code>playMiddleC()</code> function to <code>playNote(hz)</code>, where <code>hz</code> is an
+argument to get assigned to <code>oscillator.frequency.value</code>.</li>
+<li>Add an object called <code>asciiToHz</code>, that maps different ASCII values to
+different frequencies of your choosing.  Then, change the <code>keydown</code> event
+handler to use that object to pass different Hz values to <code>playNote(hz)</code>.</li>
+<li>A fairly common computer-keyboard-to-note-name mapping is to have the "home
+row" of the QWERTY keyboard act as the "white keys" on the piano.  So,
+lowercase "a" is C, lowercase "s" is D, lowercase "d" is E, and so on.
+Implement this mapping in your <code>asciiToHz</code> object.</li>
+<li>Create a toplevel variable called <code>octave</code>.  Then create an object called
+<code>asciiToOctave</code> that maps the ASCII values of the number row of the computer
+keyboard to different octave designations.  Then, modify the <code>playNote(hz)</code>
+function to have those octave designations affect the octave of each
+selected note.</li>
+</ol>
+
+<h2>Additional Resources</h2>
+
+<ul>
+<li>If you'd like to learn about Web MIDI API:
+<ul>
+<li>here is a <a href="https://www.keithmcmillen.com/blog/making-music-in-the-browser-web-midi-api/">simple tutorial</a>.</li>
+<li>here is a <a href="https://www.smashingmagazine.com/2018/03/web-midi-api/">more advanced tutorial</a>.</li>
+<li>here is the <a href="https://www.w3.org/TR/webmidi/">official spec</a>.</li>
+</ul></li>
+<li>To see the relationship between keyboard characters and numbers, look up the
+<a href="http://www.asciitable.com/">ASCII table</a>.</li>
+</ul>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

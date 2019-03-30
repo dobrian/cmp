@@ -22,7 +22,7 @@ const ASCII_TO_HZ = {
 
 let waveType = "sawtooth";   // base waveform
 let vibratoSpeed = 6;        // vibrato speed is in Hz
-let vibratoAmount = 20;      // vibrato amount is in cents (not Hz!)
+let vibratoAmount = 50;      // vibrato amount is in cents (not Hz!)
 let filterType = "lowpass";  // one of "lowpass", "highpass", or "bandpass"
 let filterCutoff = 500;      // filter cutoff frequency in Hz
 
@@ -43,7 +43,7 @@ const playNote = (frequency) => {
   const modulatorGain = audioCtx.createGain();
   modulatorGain.gain.value = vibratoAmount;
   modulator.connect(modulatorGain);
-  modulatorGain.connect(oscillator.frequency);
+  modulatorGain.connect(oscillator.detune);
 
   // Create the filter
   const filter = audioCtx.createBiquadFilter();

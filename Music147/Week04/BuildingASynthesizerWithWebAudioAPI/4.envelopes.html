@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Envelopes</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Envelopes</h1>
+
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="4.envelopes.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+
+
+
+
+<h3>Envelopes</h3>
+
+<p>You can think of an envelope as a function mapping some feature of sound over
+time.  This feature can be anything the Web Audio API implements as an
+<code>AudioParam</code>: a <code>GainNode</code>'s gain, an <code>OscillatorNode</code>'s frequency, a
+<code>BiquadFilterNode</code>'s Q, etc.  To construct an envelope, you can pick and choose
+from the methods available in the <code>AudioParam</code> interface, for example,
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/linearRampToValueAtTime"><code>.linearRampToValueAtTime()</code></a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/exponentialRampToValueAtTime"><code>exponentialRampToValueAtTime()</code></a>,
+and
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/setValueCurveAtTime"><code>setValueCurveAtTime()</code></a>.</p>
+
+<p>Let's start with <code>setValueCurveAtTime()</code>.  This method takes three arguments:
+an array of floats, a start time, and a duration.  The array of floats
+represents a series of values the <code>AudioParam</code> will navigate through; the start
+time represents an offset from <code>audioCtx.currentTime</code>, and the duration is a
+time in seconds over which the method will navigate the array of floats.</p>
+
+<p>Here are some examples.  In this example, <code>setValueCurveAtTime()</code> is attached
+to a filter's cutoff frequency, causing it to decrease and then bounce back.
+The envelope would look something like this.</p>
+
+<p>In this example, <code>setValueCurveAtTime()</code> is attached to the gain of a
+<code>GainNode</code>.  This type of envelope—which starts and ends at 0—may also be
+called a "window".</p>
+
+<p>Now let's look at <code>linearRampToValueAtTime()</code>.  This method is much simpler
+than <code>setValueCurveAtTime()</code> since it only repesents one linear change in a
+parameter's value: its first argument is the value to get to, and its second
+argument is the time in seconds to take to get there.  This method is quite
+useful when trying to create a traditional ADSR envelope.  To review, "ADSR"
+stands for "attack", "decay", "sustain", and "release".  "Attack" is a time to
+get from 0 to our maximum value; "decay" is a time to get from our maximum
+value to our sustain value; "sustain" is not a time, but rather the value to
+get to in our "decay"; and "release" is a time to get from our sustain value
+back to 0.</p>
+
+<p>Let's try and construct a traditional ADSR envelope to control the volume of an
+oscillator.  For this, let's make two functions: one to represent the onset of
+the note, one to represent the release.</p>
+
+<pre><code>const audioCtx = new AudioContext();
+
+// Create an oscillator.
+const oscillator = audioCtx.createOscillator();
+oscillator.frequency.value = 220;
+oscillator.type = "sawtooth";
+oscillatorGain = audioCtx.createGain();
+oscillatorGain.gain.setValueAtTime(0, audioCtx.currentTime); // start from silence!
+oscillator.connect(oscillatorGain);
+oscillatorGain.connect(audioCtx.destination);
+
+oscillator.start();
+
+
+// Create attack and release functions.
+const attack = (attackTime, decayTime, sustainValue) =&gt; {
+  oscillatorGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  oscillatorGain.gain.linearRampToValueAtTime(1,
+                          audioCtx.currentTime + attackTime);
+  oscillatorGain.gain.linearRampToValueAtTime(sustainValue,
+                          audioCtx.currentTime + attackTime + decayTime);
+};
+
+const release = (releaseTime) =&gt; {
+  oscillatorGain.gain.linearRampToValueAtTime(0,
+                          audioCtx.currentTime + releaseTime);
+};
+</code></pre>
+
+<p>An example application that uses these functions may be found in the webpage
+below this video.</p>
+
+
+          </div>
+        </div>
+      </div>
+
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="adsr.html">adsr.html</a></li>
+<li><a href="adsr.js">adsr.js</a></li>
+<li><a href="filterEnvelope.html">filterEnvelope.html</a></li>
+<li><a href="filterEnvelope.js">filterEnvelope.js</a></li>
+<li><a href="gainEnvelope.html">gainEnvelope.html</a></li>
+<li><a href="gainEnvelope.js">gainEnvelope.js</a></li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li>ADSR</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/linearRampToValueAtTime"><code>AudioParam.linearRampToValueAtTime()</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/setValueCurveAtTime"><code>AudioParam.setValueCurveAtTime()</code></a></li>
+<li>envelope</li>
+<li>window</li>
+</ul>
+
+<h2>Self-Quiz</h2>
+
+<ol>
+<li>I have an ADSR curve with an attack value of 1, a delay value of 2, a
+sustain value of 0.5, and a release value of 0.5.  If I apply it to an
+oscillator, how long is the resulting sound?</li>
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">
+ANSWER: Trick question!  While attack, delay, and release values measure
+<em>time</em>, the sustain value in fact measures <em>gain level</em>.  After the initial
+attack and delay (which, in this case, take 3 seconds), the note will last as
+long as you want until you trigger the release (which, in this case, is 0.5
+seconds).</p>
+
+<li><p>Let's say I have the following float array:</p>
+
+<p><pre><code>const curve = new Float32Array([0, 1, 0, 0, 1, 0]);</code></pre></p>
+
+<p>If I call...</p>
+
+<pre><code>gain.gain.setValueAtTime(curve, audioCtx.currentTime, 10);
+</code></pre>
+
+<p>...how many seconds will I be hearing sound?</p></li>
+
+<button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-1" class="answer" style="display: none">ANSWER: 8 seconds</p>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    $('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>
