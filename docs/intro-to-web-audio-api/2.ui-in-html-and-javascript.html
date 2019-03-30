@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>User Input in HTML and JavaScript: A Quick Reference</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>User Input in HTML and JavaScript: A Quick Reference</h1>
+
+<h3>Buttons</h3>
+
+<p>Perhaps the most straightforward way to interact with your application is to
+create a button.  Buttons use the <code>&lt;button&gt;&lt;/button&gt;</code> HTML tag.  Make sure to
+give each button a unique ID so that you can easily reference it with jQuery.</p>
+
+<pre class="html"><code>&lt;!-- in your HTML --&gt;
+&lt;button id="my-button"&gt;Click me!&lt;/button&gt;
+</code></pre>
+
+<pre class="javascript"><code>// in your JavaScript
+$("#my-button").on("click", () =&gt; {
+  // do some stuff
+});
+</code></pre>
+
+<h3>Form Elements</h3>
+
+<p>Form elements are excellent for allowing users to supply custom settings for
+their application.  Many of these elements are variations on the <code>&lt;input /&gt;</code>
+tag.  Some examples are as follows:</p>
+
+<pre class="html"><code>&lt;!-- an ordinary text box --&gt;
+&lt;input id="my-input" type="text" /&gt;
+
+&lt;!-- a number box --&gt;
+&lt;input id="my-input" type="number" /&gt;
+
+&lt;!-- a slider --&gt;
+&lt;input id="my-input" type="range" /&gt;
+
+&lt;!-- a toggle --&gt;
+&lt;input id="my-toggle" type="checkbox" /&gt;
+
+&lt;!-- a dropdown menu --&gt;
+&lt;select id="my-input"&gt;
+  &lt;option value="option1"&gt;Option 1&lt;/option&gt;
+  &lt;option value="option2"&gt;Option 2&lt;/option&gt;
+  &lt;option value="option3"&gt;Option 3&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>Generally speaking, you can get the value of most input elements as follows:</p>
+
+<pre class="javascript"><code>$("#my-input").val();
+</code></pre>
+
+<p>However, checkboxes require a different construction:</p>
+
+<pre class="javascript"><code>$("#my-input").is(":checked");
+</code></pre>
+
+<p>For more on inputs—as well as how to set useful attributes like minimum and
+maximum values, step sizes, and default values—look at the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input">MDN page for the
+input
+element</a>.
+Also, if you'd like to make your inputs more user-friendly, you can pretty them
+up with the
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label"><code>&lt;label&gt;&lt;/label&gt;</code></a>
+and/or
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset"><code>&lt;fieldset&gt;&lt;/fieldset&gt;</code></a>
+tags.</p>
+
+<h3>Mouse and Keyboard</h3>
+
+<p>You can get the state of the mouse using jQuery, as follows:</p>
+
+<pre class="javascript"><code>$(document).on("click", () =&gt; {
+  // do something when you click the mouse
+});
+
+$(document).on("mousemove", (event) =&gt; {
+  // get x and y coordinates of the mouse
+  let xValue = event.pageX;
+  let yValue = event.pageY;
+});
+</code></pre>
+
+<p>You can also get the state of the keyboard using jQuery, as follows:</p>
+
+<pre class="javascript"><code>$(document).on("keydown", (event) =&gt; {
+  // get ASCII value of the key that's pressed
+  // (check out asciitable.com)
+  let asciiValue = event.which;
+});
+</code></pre>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li><a href="https://api.jquery.com/click/"><code>$().on("click")</code></a></li>
+<li><a href="https://api.jquery.com/keydown/"><code>$().on("keydown")</code></a></li>
+<li><a href="https://api.jquery.com/mousemove/"><code>$().on("mousemove")</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button"><code>&lt;button&gt;&lt;/button&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset"><code>&lt;fieldset&gt;&lt;/fieldset&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"><code>&lt;input /&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label"><code>&lt;label&gt;&lt;/label&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select"><code>&lt;select&gt;&lt;/select&gt;</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option"><code>&lt;option&gt;&lt;/option&gt;</code></a></li>
+</ul>
+
+<h2>Self-Quiz</h2>
+
+<ol>
+<li>Create a slider that ranges from -1 to 1, with a step size of 0.05 and a
+default value of 0.05.</li>
+
+  <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+  <div id="answer-1" class="answer" style="display: none">
+<pre class="html"><code>&lt;input type="range" min="-1" max="1" step="0.05" value="0.5" /&gt;
+</code></pre>
+  </div>
+
+<li>Write a function that displays the value of the slider in a <code>&lt;p&gt;&lt;/p&gt;</code>
+element below the slider, updating whenever the slider is moved.  Hint: look
+at the jQuery <a href="https://api.jquery.com/change/"><code>$().on("change")</code></a> event and
+<a href="https://api.jquery.com/html/"><code>$().html()</code></a> function.</li>
+
+
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <div id="answer-2" class="answer" style="display: none">
+
+<pre class="html"><code>&lt;!-- HTML --&gt;
+&lt;input id="slider" type="range" min="-1" max="1" step="0.05" value="0.5" /&gt;
+&lt;p id="slider-value"&gt;0.5&lt;/p&gt;
+</code></pre>
+<pre class="javascript"><code>// JavaScript
+$("#slider").on("change", () =&gt; {
+  $("#slider-value").html($("#slider").val());
+});
+</code></pre>
+	  </div>
+</ol>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>
