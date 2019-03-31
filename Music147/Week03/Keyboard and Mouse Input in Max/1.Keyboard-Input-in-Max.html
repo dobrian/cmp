@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <title>Keyboard Input in Max</title>
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Keyboard Input in Max</h1>
+
+<p>You may want to use your computer's typing keyboard as a built-in hardware interface to interact with your Max patch. This could allow you to easily build musical keyboards, advance automations or patch states, or start/stop various processes. Your computer already understands and encodes this kind of interaction as <a href="https://en.wikipedia.org/wiki/ASCII">ASCII data</a>.</p>
+
+<p>Open the patch "Keyboard Input".
+<img src="keyboardinput.png"></p>
+
+<p>The first part of this patch demonstrates the simplest way to get your keyboard data into Max. We simply need to use the <strong>key</strong> object to output the relevant ASCII data when a key pressed on your keyboard. The <strong>keyup</strong> object lets us know when a key is released. By using the <strong>select</strong> object (this object is commonly abbreviated as <strong>sel</strong>) we can tell Max to look for certain keys and send out a bang when those keys are pressed or released.</p>
+
+<p><img src="keyboardinput2.png"></p>
+
+<p>The second part of this patch shows one particular musical application of using your computer's keyboard as a musical keyboard. Here we use the key object to look for the home keys as white keys and the "w,e,t,y,u" keys as the black keys. We then send out bangs to MIDI messages to assign each key to a chromatic note on the keyboard.</p>
+
+<p>In this example, pressing these keys will result in sound. This could potentially be quite annoying if you are either still editing your patch or want to use your keyboard for any other reason. So, one easy way to solve this is to add in a <strong>gate</strong> object after the <strong>key</strong> object so that you can toggle your keyboard's operation.</p>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="Keyboard Input.maxpat">Keyboard Input.maxpat</a></li>
+</ul>
+
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>
