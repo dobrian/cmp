@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Microphone Input and Recording</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Microphone Input and Recording</h1>
+
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="3.microphone-input-and-recording.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+<h3>Accessing Your Microphone</h3>
+
+<p>To access your computer's microphone with your browser, you need to call the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia"><code>navigator.mediaDevices.getUserMedia()</code></a>
+function.  This takes in one argument: an object that describes what media to
+access.  This object can look something like this:</p>
+
+<pre><code>{
+  "audio": true,
+  "video": true,
+}
+</code></pre>
+
+<p>For our purposes, we want just the audio.  Our full code will be as follows:</p>
+
+<pre><code>const audioCtx = new AudioContext();
+if (navigator.mediaDevices) {
+  navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) =&gt; {
+    const microphone = audioCtx.createMediaStreamSource(stream);
+    // `microphone` can now act like any other AudioNode
+  }).catch((err) =&gt; {
+    // browser unable to access microphone
+    // (check to see if microphone is attached)
+  });
+} else {
+  // browser unable to access media devices
+  // (update your browser)
+}
+</code></pre>
+
+<p>The initial <code>if (navigator.mediaDevices)</code> checks to see whether the browser
+you're using is able to access the microphone.  If this check fails, that
+probably means you need to upgrade your browser.</p>
+
+<p>On the next line, the <code>.getUserMedia()</code> function returns a special data type
+called a "promise".  For now, all you need to know about promises is that they
+take care of asynchronous processing.  The anonymous callback function passed
+in as an argument to the <code>.then()</code> method will only run once the browser has
+safely accessed the computer's microphone.  Contrariwise, the <code>.catch()</code> method
+will only run if the browser has failed to access the microphone, which usually
+means your computer lacks an internal microphone, so you need to plug one in.</p>
+
+<p>Finally, the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamAudioSourceNode"><code>audioCtx.createMediaStreamSource()</code></a>
+method takes the
+incoming microphone data and converts it into an ordinary <code>AudioNode</code>.  You can
+think of it as the equivalent of an <em>adc~</em> object in Max.  Since our incoming
+microphone data is now an <code>AudioNode</code>, you can easily incorporate it into an
+<code>AudioNode</code> network graph, letting you do things like control gain, apply
+envelopes, add filters, and so on.</p>
+
+<p>A quick word of warning: since the internal microphone on your laptop is so
+close to the speakers on your laptop, it is very difficult to test live audio
+processing algorithms without getting horrendous feedback.  A good solution is
+to test your code while wearing headphones.  Just be careful not to hurt your
+ears!</p>
+
+<h3>Recording to a Buffer</h3>
+
+<p>Let's try making a very simple voice memo recorder.  For this, we will use the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API"><code>MediaStream</code></a>
+recording API.  Once we create a <code>stream</code> using the promise structure above, we
+can pass it into a media recorder as follows:</p>
+
+<pre><code>// Instantiate the media recorder.
+const mediaRecorder = new MediaRecorder(stream);
+
+// Create a buffer to store the incoming data.
+let chunks = [];
+mediaRecorder.ondataavailable = (event) =&gt; {
+  chunks.push(event.data);
+}
+</code></pre>
+
+<p>The
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder"><code>MediaRecorder</code></a>
+is not an <code>AudioNode</code>, nor does it save its incoming data automatically;
+rather, you need to explicitly direct it to save its data into a buffer via its
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder/ondataavailable"><code>ondataavailable</code></a>
+event handler.  Here, the buffer is an array called <code>chunks</code>, so named since
+the <code>MediaRecorder</code> is not actually receiving the data one sample at a time,
+but rather in chunks of samples.</p>
+
+<p>The <code>mediaRecorder</code> instance can be controlled with the <code>.start()</code> and
+<code>.stop()</code> methods.  In order to do something with the recorded data, you will
+need to inplement a
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder/onstop"><code>.onstop()</code></a>
+event handler method to the <code>mediaRecorder</code> instance, like so:</p>
+
+<pre><code>mediaRecorder.onstop = () =&gt; {
+  // A "blob" combines all the audio chunks into a single entity
+  const blob = new Blob(chunks, {"type": "audio/ogg; codecs=opus"});
+  chunks = []; // clear buffer
+
+  // One of many ways to use the blob
+  const audio = new Audio();
+  const audioURL = window.URL.createObjectURL(blob);
+  audio.src = audioURL;
+}
+</code></pre>
+
+<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob"><code>Blob</code></a> object
+combines all the audio chunks into a single entity; you can think of it as
+effectively flattening a nested array of raw binary data.  Then, the
+<code>window.URL.createObjectURL()</code> function lets you point to that blob with a new
+URL.  Since we already know the blob contains audio data, we can simply point a
+<code>new Audio()</code> object at it, and treat it like it was any other sound file.</p>
+
+<p>A more fully-featured version of this voice memo application can be downloaded
+on the page below this video.</p>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="voiceMemo.html">voiceMemo.html</a></li>
+<li><a href="voiceMemo.js">voiceMemo.js</a></li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob"><code>Blob</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder"><code>MediaRecorder</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamAudioSourceNode"><code>MediaStreamAudioSourceNode</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia"><code>navigator.mediaDevices.getUserMedia()</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL"><code>window.URL.createObjectURL()</code></a></li>
+</ul>
+
+<h2>Additional Resources</h2>
+
+<ul>
+<li>MDN has an excellent
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API">tutorial</a>
+and <a href="https://mdn.github.io/web-dictaphone/">demo</a> on audio recording with the
+web.</li>
+<li>For more detail about Promises, look at <a href="https://developers.google.com/web/fundamentals/primers/promises">this guide</a>.</li>
+</ul>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    $('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>

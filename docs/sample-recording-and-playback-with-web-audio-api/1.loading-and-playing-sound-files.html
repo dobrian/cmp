@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+
+    <title>Loading and Playing Sound Files</title>
+  </head>
+  <body>
+    <div class="container">
+<h1>Loading and Playing Sound Files</h1>
+
+<h3>Method 1: Raw HTML</h3>
+
+<p>The easiest way to load and play a sound file does not actually require any
+JavaScript at all.  HTML includes the <code>&lt;audio&gt;&lt;/audio&gt;</code> tag, which has a <code>src</code>
+attribute that you can set to load any sound file you'd like.  (Note that
+certain browsers can only play certain file types; you can find the
+compatibility table at the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats#Browser_compatibility">Mozilla Developer Network
+site</a>.)
+The <code>&lt;audio&gt;&lt;/audio&gt;</code> tag contains a number of other useful attributes, like
+<code>controls</code>, <code>autoplay</code>, and <code>loop</code>.</p>
+
+<pre class="html"><code>&lt;audio src="freejazz.wav controls autoplay loop"&gt;&lt;/audio&gt;
+</code></pre>
+
+<h3>Method 2: JavaScript</h3>
+
+<p>You may also load a sound file with JavaScript, with <code>new Audio()</code>.</p>
+
+<pre><code>const audio = new Audio("freejazz.wav");
+</code></pre>
+
+<p>You may then play back the sound with the <code>.play()</code> method.</p>
+
+<pre class="javascript"><code>audio.play();
+</code></pre>
+
+<p>You may change the rate at which the sound file plays back with the
+<code>.playbackRate</code> property.  A rate of <code>1</code> is normal speed; a rate of <code>2</code> is
+double speed; a rate of <code>0.5</code> is half speed, and a rate of <code>-1</code> is backwards.</p>
+
+<pre><code>audio.playbackRate = 2;
+audio.play();
+</code></pre>
+
+<p>You may also loop the audio with the <code>.loop</code> property.</p>
+
+<pre><code>audio.loop = true;
+audio.play();
+</code></pre>
+
+<h3>Method 3: Web Audio API (synchronous)</h3>
+
+<p>While playing a sound file with Web Audio API is a bit more cumbersome to set
+up, it ultimately gives you much more flexibility over the sound.  Start by
+creating a context and an audio file.</p>
+
+<pre><code>const audioCtx = new AudioContext();
+const audio = new Audio("freejazz.wav");
+</code></pre>
+
+<p>Then, attach the audio file to an <code>AudioNode</code>, and that <code>AudioNode</code> to the dac.</p>
+
+<pre><code>const source = audioCtx.createMediaElementSource(audio);
+source.connect(audioCtx.destination);
+</code></pre>
+
+<p>Finally, play the sound.</p>
+
+<pre class="javascript"><code>audio.play();
+</code></pre>
+
+<p>While in this example we're directly connecting the <code>MediaElementSourceNode</code> to
+the dac, the advantage of this method is that we can place intermediate
+<code>AudioNodes</code> in the middle of the signal chain.  This can allow us to control
+volume, panning, reverb, delay, and so on.</p>
+
+<h3>Method 4: Web Audio API (asynchronous)</h3>
+
+<p>The previous method loads your audio file at the moment you load the webpage.  While
+this method will suffice when loading a handful of audio files, it will
+significantly slow your computer if you want to load a whole bunch of audio
+files.  So rather than load all of our audio files at once, we can instead load
+each audio file <em>asynchronously</em>, meaning that we will only grab it from the server
+when we explicitly ask for it.</p>
+
+<p>In JavaScript, you can make asynchronous requests to the server with
+<code>XMLHttpRequest</code>.  Often you'll hear this functionality described as AJAX,
+which is an abbreviation for "asynchronous JavaScript and XML".  We want to
+construct a <code>"GET"</code> request, which simply copies data from the server.</p>
+
+<p>Let's start by setting up our <code>AudioContext</code>, as well as a top-level variable
+to hold the data in the audio file.</p>
+
+<pre><code>const audioCtx = new AudioContext();
+let buffer = null;
+</code></pre>
+
+<p>Now, let's make the <code>"GET"</code> request.  The <code>responseType</code> tells the program that
+we're loading a sound file.  The <code>onload</code> function is a callback function that
+runs once the file has been grabbed from the server.  Here, we are simply
+taking the raw audio file, and storing it in our <code>AudioNode</code>.</p>
+
+<pre><code>const load = () =&gt; {
+  const request = new XMLHttpRequest();
+  request.open("GET", "freejazz.wav");
+  request.responseType = "arraybuffer";
+  request.onload = function() {
+    let undecodedAudio = request.response;
+    audioCtx.decodeAudioData(undecodedAudio, (data) =&gt; buffer = data);
+  };
+  request.send();
+}
+</code></pre>
+
+<p>Now, we can play the sound file by creating an <code>AudioNode</code>, attaching our
+buffer to it, connecting it to the dac, and playing it.</p>
+
+<pre><code>const play = () =&gt; {
+  const source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  source.connect(audioCtx.destination);
+  source.start();
+};
+</code></pre>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="freejazz.wav">freejazz.wav</a></li>
+<li><a href="method1.html">method1.html</a></li>
+<li><a href="method2.html">method2.html</a></li>
+<li><a href="method2.js">method2.js</a></li>
+<li><a href="method3.html">method3.html</a></li>
+<li><a href="method3.js">method3.js</a></li>
+<li><a href="method4.html">method4.html</a></li>
+<li><a href="method4.js">method4.js</a></li>
+</ul>
+
+<h2>Vocabulary</h2>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio"><code>&lt;audio&gt;&lt;/audio&gt;</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode"><code>AudioBufferSourceNode</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaElementAudioSourceNode"><code>MediaElementAudioSourceNode</code></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a></li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Choose a method above, and load and play a sound file of your choice.  How
+is your code different when the sound file is <em>not</em> in the same folder as
+your HTML?</li>
+<li>Change the "Method 4" code so that it has three pairs of buttons to load and
+play three different sound files.</li>
+</ol>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="music147.js"></script>
+  </body>
+</html>
