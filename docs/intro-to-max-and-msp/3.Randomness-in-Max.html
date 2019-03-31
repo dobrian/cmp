@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <title>Randomness in Max</title>
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Randomness in Max</h1>
+
+<p>One thing computers do much better than humans is generate "random" patterns. Though technically these aren't "random" in the <a href="https://en.wikipedia.org/wiki/Random_number_generation#%22True%22_vs._pseudo-random_numbers">"truest" sense of the word</a>, they are sufficiently random patterns for human perception.</p>
+
+<p>Especially in the context of music, humans will always subconsciously rely on patterns and our past knowledge to create. Computer programs can be used to assist in the creative process and generate new ideas and have been used quite extensively since the 1950s in the field of <a href="https://en.wikipedia.org/wiki/Computer_music#History">computer music</a> and <a href="https://en.wikipedia.org/wiki/Algorithmic_composition">algorithmic composition</a>.</p>
+
+<p>Open the patch "Types of Random".</p>
+
+<p>Max has several objects that are especially useful tools for generating different types of randomness: <strong>decide</strong>, <strong>random</strong>, <strong>urn</strong>, and <strong>drunk</strong>.</p>
+
+<p><img src="decide.png"></p>
+
+<p>The object <strong>decide</strong> outputs random 0s or 1s when it receives a <em>bang</em>. This is like flipping a coin, you have a 50% chance of getting either a 1 or 0 each time a <em>bang</em> is sent.</p>
+
+<p><img src="random1.png"></p>
+
+<p>The object <strong>random</strong> will output random numbers within a range. The range is from 0 to 1 less than the maximum argument specified. In other words, a range of 10 will output 10 numbers from 0 to 9 equally weighted. This object is like having a bag of differently colored marbles and after each time you reach in and take a new marble, you put that marble back into the bag (i.e. randomness with repetition).</p>
+
+<p><img src="urn1.png"></p>
+
+<p>You can generate randomness without repetition by using <strong>urn</strong>. This object will generate random numbers within a range (just like random) but will keep track of the output and prevent repetitions from occurring. When all available numbers within the range have been generated it will output a <em>bang</em> indicating there are no more different numbers to generate. This is like having a bag of marbles but each time you take one out, you leave it out and continue to draw from the smaller set of marbles left in the bag until there are no more marbles. The <strong>urn</strong> object also requires that you send it a <em>clear</em> message to reset (or "refill") your range once it is empty.</p>
+
+<p><img src="drunk1.png"></p>
+
+<p>Last, <strong>drunk</strong> provides a kind of predictably random number generation by outputting a range of numbers with a step size. That means that it will generate a random number within a range, keep track of that number, and then output a new random number that is both within the range and the maximum step size of the last number generated. It's kind of like imagining a drunk walk back home from the bar: you know you need to get from A to B but the exact path along the way is a little random and wanders a bit.</p>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="Types of Random.maxpat">Types of Random.maxpat</a></li>
+</ul>
+
+<h1>Assignment</h1>
+
+<ul>
+<li><p>Familiarize yourself with these objects and then open the examples subpatcher that contains musical applications of the different kinds of randomness.</p></li>
+<li><p>Combine all four types of randomness so they work together in a single patch. Consider that you can use them to decide how often notes are triggered, which notes are triggered (i.e. pitches), how long they last, how loud they are etc. You can also have nested randomness: experiment with having the ranges or step sizes randomly change.</p></li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <title>Introduction to Max and MSP</title>
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Introduction to Max and MSP</h1>
+
+<p><a href="https://en.wikipedia.org/wiki/Max_(software">Max</a> (previously referred to as Max/MSP/Jitter) is a visual programming language developed by <a href="https://cycling74.com/">Cycling '74</a>. It has become one of the most prominent coding environments for experimental musicians, composers, and visual artists over the last 20 years. Unlike traditional text-based languages, Max relies on graphically manipulating a modular system of objects connected by patch cords in a virtual blank canvas called a patcher (i.e. a "Max patch"). Objects are like pre-built self-contained programs and are used like dynamically linked libraries. Objects have inlets and outlets for input and output of data.</p>
+
+<p>The program Max is actually a couple of programs under the hood. The "Max" part of Max (named after <a href="https://en.wikipedia.org/wiki/Max_Mathews">Max Matthews</a>, a pioneer of early computer music) deals with event scheduling and uses the data types <em>int</em>, <em>float</em>, <em>list</em>, <em>symbol</em>, and <em>bang</em>. "MSP" (short for Max Signal Processing and a tip of the hat to <a href="https://en.wikipedia.org/wiki/Miller_Puckette">Miller S. Puckette</a>) deals with digital signal processing (DSP) and audio rate signals. "Jitter" deals with more complex matrix data structures and is used for experimental video processing (and other creative implementations). This course will predominantly focus on using Max and MSP.</p>
+
+<p>Max comes with a number of well-documented and thorough tutorials to help familiarize yourself with the language and some of the quirks of the environment. You can access the Documentation page by clicking Help --> Reference in the top toolbar. Click on the Max tutorials sections and complete the first 7 tutorials (from "Hello" to "Simple Math in Max").</p>
+
+<p>To test your ability and ensure that you've mastered the basic concepts from those tutorials, be sure you are able to answer all the questions in the self-quiz section below.</p>
+
+<h1>Self-Quiz</h1>
+
+<ul>
+<li>In what order will the messages 'a', 'b','c', and 'd' print in the Max Console when the button is pressed? Why?</li>
+</ul>
+
+<p><img src="messageorder.png"></p>
+
+<ul>
+<li>In what order will the messages '1','2', and '3' print in the Max Console when the button is pressed? Why?</li>
+</ul>
+
+<p><img src="messageorder2.png"></p>
+
+<ul>
+<li>Why does the following mathematical operation output an incorrect answer?</li>
+</ul>
+
+<p><img src="mathop1.png"></p>
+
+<ul>
+<li>Why is this a bad idea?</li>
+</ul>
+
+<p><img src="stackoverflow.png"></p>
+
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>
