@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <title>Linear Mapping Equation</title>
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Linear Mapping Equation</h1>
+
+<p>Open the patch "lmap"
+<img src="lmap.png"></p>
+
+<p>The term "mapping" refers to making a map of correspondences between a "source" domain and some other "target" range. The simplest kind of numerical mapping is called "linear mapping". That's when a one-to-one correspondence is drawn from every value in a source range X to a value that holds an exactly comparable position in a target range Y. For example, in the target range 0 to 100, the value 20 holds exactly the same position as the value 2 does in the source range 0 to 10. In both cases, the value is 20% of the distance from the minimum to the maximum.</p>
+
+<p>To convert one range into another linearly, there are really just two simple operations required: scaling (multiplication, to resize the range) and offsetting (addition, to push the range up or down). If you know the extent of two ranges X and Y, and a source value x, you can find the linearly corresponding target y value with this algebraic equation: </p>
+
+<p><strong>y = (((x-xmin)*(ymax-ymin))/(xmax-xmin))+ymin</strong></p>
+
+<p>This patch uses the <strong>expr</strong> object to implement that equation. In <strong>expr</strong>, the items such as <strong><em>$f1</em></strong> and <strong><em>$f2</em></strong> mean "the (floating point) number that has come in the first inlet", "the (floating point) number that has come in the second inlet", and so on. (Geeky technical note: We don't need to use quite as many parentheses in the <strong>expr</strong> object as we did in the equation above, because the ordering of mathematical operations is implicit, due to the <a href="https://en.wikipedia.org/wiki/Order_of_operations">operator precedence</a> that is standard in almost all programming languages.)</p>
+
+<p>This patch has <strong>inlet</strong> objects and an <strong>outlet</strong> object so that it can be used as an object in another patch. You just save this patch with the name "lmap" somewhere in Max's file search path, and you can then use it as a <strong>lmap</strong> object in any other patch. You establish the X and Y ranges by specifying their minimum and maximum (xmin, xmax, ymin, and ymax), then you send an x value in the left inlet to get the corresponding y value out the outlet. The <strong>patcherargs</strong> object supplies default initial values for xmin, xmax, ymin, and ymax in case no arguments are typed into the object when it's created in the parent patch; however, if values are typed in for xmin, xmax, ymin, and ymax (as in <strong>lmap 0. 1. -2. 2.</strong>), the <strong>patcherargs</strong> object inside <strong>lmap</strong> will send those values out instead of its default values.</p>
+
+<p>Go ahead and download that patch and save it with the name "lmap", as it will be used in other examples. In Max, patches that are saved with a one-word filename and used as objects in another patch are called "abstractions". This <strong>lmap</strong> abstraction functions very much like the <strong>zmap</strong> object and <strong>scale</strong> object that already exist in Max, but we've provided <strong>lmap</strong> here so that you can see how one might implement the basic linear mapping function (in any language).</p>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="lmap.maxpat">lmap.maxpat</a></li>
+</ul>
+
+<h1>Vocabulary</h1>
+
+<ul>
+<li>mapping</li>
+<li>linear mapping</li>
+<li>source domain</li>
+<li>target domain</li>
+<li>scaling</li>
+<li>offsetting</li>
+<li>linear mapping equation</li>
+</ul>
+
+<h1>Max Objects</h1>
+
+<ul>
+<li><strong>expr</strong></li>
+<li><strong>lmap</strong> (an abstraction not native to Max)</li>
+<li><strong>inlet</strong></li>
+<li><strong>outlet</strong></li>
+<li><strong>patcherargs</strong></li>
+</ul>
+
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>
