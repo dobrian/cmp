@@ -13,12 +13,12 @@ if (navigator.mediaDevices) {
 
     // Create a buffer to store the incoming data.
     let chunks = [];
-    mediaRecorder.ondataavailable = (eve) => {
-      chunks.push(eve.data);
+    mediaRecorder.ondataavailable = (event) => {
+      chunks.push(event.data);
     }
 
     // When you stop the recorder, create a empty audio clip.
-    mediaRecorder.onstop = (eve) => {
+    mediaRecorder.onstop = (event) => {
       const audio = new Audio();
       audio.setAttribute("controls", "");
       $("#sound-clip").append(audio);
