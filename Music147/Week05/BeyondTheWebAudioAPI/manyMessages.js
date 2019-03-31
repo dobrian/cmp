@@ -2,26 +2,26 @@ outlets = 3;
 
 function oddEven() {
   for (var i = 0; i < arguments.length; i++) {
-	var value = Math.abs(arguments[i]);
-    if (value % 2 === 1) {
-	  outlet(0, value);
+	var element = Math.abs(arguments[i]);
+    if (element % 2 === 1) {
+	  outlet(0, element);
     } else {
-      outlet(1, value);
+      outlet(1, element);
 	}
   }
 }
 
 function isPrime() {
   for (var i = 0; i < arguments.length; i++) {
-	var value = arguments[i];
+	var element = arguments[i];
 	var isPrime = true;
-	if (value <= 1) {
-	  outlet(1, value);
+	if (element <= 1) {
+	  outlet(1, element);
 	  continue;
     }
-	for (var j = 2; j < value; j++) {
-	  if (value % j === 0) {
-	    outlet(1, value);
+	for (var j = 2; j < element; j++) {
+	  if (element % j === 0) {
+	    outlet(1, element);
 	    isPrime = false;
 	    break;
       }
@@ -33,5 +33,10 @@ function isPrime() {
 }
 
 function meanMedianMode() {
-  var mean = 0;
+  var sum = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    var element = arguments[i]
+    sum += element;
+  }
+
 }
