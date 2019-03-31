@@ -82,9 +82,9 @@ Software project design
 
 ### Keyboard and mouse input
 
-• Providing input to JavaScript
+• Providing input to JavaScript |Mark|
 
-• Providing input to Max
+• Providing input to Max |Alex|
 
 ### RAM-based sample playback in Max
 
@@ -106,13 +106,15 @@ Software project design
 
 •  UI considerations for controlling processing |Alex|
 
-### Sample playback and processing in the audio context of the Web Audio API |Mark|
+### Sample recording and playback in the audio context of the Web Audio API |Mark|
 
 •  Audio API context terminology and modules
 
 •  Relating API implementations to Max implementations
 
 •  Applying control signals to sample playback
+
+•  Microphone input and recording to a buffer
 
 ## Week 4
 
@@ -246,7 +248,7 @@ Software project design
 
 ## Week 8
 
-### Algorithmic composition
+### Algorithmic composition |Mark|
 
 •  Randomness and probability
 
