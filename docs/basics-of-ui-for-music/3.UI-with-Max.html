@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <title>Examples of User Interfaces in Max</title>
+  </head>
+  <body>
+    <div class="container">
+
+<h1>Examples of User Interfaces in Max</h1>
+
+<p>Open the Max patch named "BasicUI"
+<img src="BasicUI.png"></p>
+
+<p>There are pre-made graphical user interface (GUI) objects in Max that are useful for representing and controlling different kinds of data within your patch. These objects typically represent some physical analog device such as a button, knob, slider, or keyboard (see the first tutorial in this module) and can be helpful in creating an intuitive interactive experience with your code.</p>
+
+<p>If we look at the "BasicUI" patch, we see a relatively simple and common set of GUIs used in musical applications. Where appropriate, the GUIs are accompanied by simple text to explain their function. In some cases, like with the keyboard or musical note staff, these do not need additional explanation, as they are familiar enough within a musical context for their function to be readily identifiable.</p>
+
+<p>It is easy enough to interact with this patch without any additional instruction, other than reading the basic functional descriptions of each GUI. Try interacting with the patch and see if you can give a more thorough and in-depth explanation for what each of the 7 GUI objects do within the patch.</p>
+
+<p>Note that we are viewing this patch in Presentation Mode, which will only show us certain specifically chosen aspects of the code. If we click the Patching Mode button on the bottom of your toolbar, you'll see the underlying code in its entirety. Here we can see there are a few more objects and patch cables connecting everything together. Not all of this code is useful for a "user" to see or interact with, therefore we choose certain aspects that are relevant and useful for the user's interactive experience.</p>
+
+<p>Open the Max patch named "BasicUI2"
+<img src="BasicUI2.png"></p>
+
+<p>This patch contains a few examples of useful MSP GUIs for controlling audio, specifically volume and amplitude. (Remember to turn on your DAC in the lower righthand corner to start MSP audio!) The first section of code in the top left corner shows perhaps the easiest way to control the amplitude of a sound. Clicking and dragging on the <em>float box</em> will increase and decrease the output amplitude of the <em>noise~</em> object. Remember however, we do not hear amplitude linearly, so representing how loud something is as a number such as "0.257" may not give us useful or intuitive information. Additionally, doubling a sound's amplitude will generally not make it twice as loud, so interacting with the object may be difficult in a performance context for example. The other sections of code show various GUIs that are useful in both visually representing and controlling a sound's volume in a musical or performative context. Adjust the sliders on the <em>gain~</em> and <em>live.gain~</em> objects. Notice how dB is a more intuitive representation of how loud the output is in relation to how we actually hear it. The <em>gain~</em> object is useful when interfacing with MIDI controllers, as it conveniently works with 0 (silence) to 127 (0dB) values. On the other hand, the <em>live.gain~</em> object has the slider and visual meter built-in to one. How you represent your code and decide what is useful or relevant data is ultimately up to you.</p>
+
+<h1>UI Design with Max/MSP Objects</h1>
+
+<p>When designing a user interface in a musical context it is most important to strike a balance between intuitive and easy-to-use while maintaining a high degree of control over the program. The user should see only what they need to see and be able to quickly and easily change parameters within the program. When appropriate, the program should also have some sort of visual feedback to provide the user with meaningful information.</p>
+
+<p><img src="basicUI.png"></p>
+
+<p>This basic Max patch only displays 7 objects with a few comments. There are no instructions or detailed explanations about how to use the patch, or really what it even does. Let's explore a bit and see what happens.</p>
+
+<p>Clearly, this patch generates random notes within a given range and the user has the ability to change 1) the range of the notes, 2) the overall velocity (volume) 3) the speed, and 4) the instrument. The patch also provides the user with the notes as they would appear on both a standard keyboard and grand staff.</p>
+
+<p>Let's take a look under the hood to see how this patch works. In Max, there are two basic viewing modes, patching and presentation mode. Clicking the small easel icon in the lower left-hand corner will toggle between these two views. You can think of these two different views as "editing" and "performance" modes. They don't actually change anything functionally within your patch, they simply allow you to display different objects for the user.</p>
+
+<p>In patching mode, we see there are in fact more objects at work and they are not laid out in perhaps the same intuitive fashion. If you unlock the patch you might notice that some objects have a faint red hue or outline, these objects are the ones that have been selected to display in presentation view.  You can add/remove objects or comments from the presentation view by right-clicking and selecting "Add to..." or "Remove from Presentation".</p>
+
+<p>This patch makes use of commonly used GUIs in Max including <strong>toggle</strong>, <strong>dial</strong>, <strong>slider</strong>, <strong>rslider</strong>, <strong>nslider</strong>, <strong>kslider</strong>, and <strong>radiogroup</strong>.</p>
+
+<p>In addition to the built-in Max GUI objects like <strong>slider</strong>, <strong>dial</strong>, <strong>button</strong>, etc. there are also some useful native MSP objects for creating a user interface. Perhaps the most common and most important feature nearly all audio programs have is volume control.</p>
+
+<p>Because MSP objects output their signal at full amplitude, we will need to attenuate (reduce or lower) the signal. The easiest way to do this is simply multiply the output by some number between 0 and 1.</p>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="music147.js"></script>
+  </body>
+</html>
