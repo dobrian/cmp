@@ -3,13 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
     <link rel="stylesheet" href="music147.css">
-
     <title>Scales and Intervals</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.basics-of-music-theory.html">Basics of Music Theory</a>
+        </li>
+      </ul>
+    </nav>
     <div class="container">
       <h1>Scales and Intervals</h1>
 
@@ -24,169 +33,177 @@
         <div id="script" class="col">
           <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
           <div id="script-text" style="display: none; overflow-y: scroll">
-            <h3>Intervals</h3>
 
-            <p>This is a subsection of a keyboard, featuring notes spanning one octave.  If
-            you count them, you'll find there are thirteen notes total, but since C is
-            counted twice—at the very beginning and the very end—there are actually only
-            twelve distinct notes.  These twelve notes compose what is called the
-            "chromatic scale".</p>
 
-            <p>Musicians use the term "interval" to refer to the distance between two notes.
-            The smallest interval is a "half step", which means the two notes are directly
-            adjacent to one another.  The next-smallest interval is a "whole step", which
-            means the two notes are separated by exactly one other note.  Two half steps
-            equals one whole step.</p>
+<h3>Intervals</h3>
 
-            <p>Since there are twelve notes in the chromatic scale, there are therefore twelve
-            intervals.  Next after the whole step is the "minor third", which contains
-            three half steps.  After that is the "major third", which contains four half
-            steps.  On the page below this video, you will see a table showing all twelve
-            intervals, their alternative names, and the number of half steps for each.
-            Although this is a lot of vocabulary, it is important that you learn at least
-            the most common name for each interval, as well as the corresponding number of
-            half steps.</p>
+<p>This is a subsection of a keyboard, featuring notes spanning one octave.  If
+you count them, you'll find there are thirteen notes total, but since C is
+counted twice—at the very beginning and the very end—there are actually only
+twelve distinct notes.  These twelve notes compose what is called the
+"chromatic scale".</p>
 
-            <h3>Major and Minor Scales</h3>
+<p>Musicians use the term "interval" to refer to the distance between two notes.
+The smallest interval is a "half step", which means the two notes are directly
+adjacent to one another.  The next-smallest interval is a "whole step", which
+means the two notes are separated by exactly one other note.  Two half steps
+equals one whole step.</p>
 
-            <p>We've already touched on the chromatic scale, which features all twelve notes
-            in the octave.  More common than the chromatic scale is the major scale.  The
-            major scale features a repeating pattern of whole steps and half steps:
-            W-W-H-W-W-W-H.  The starting note of the major scale is called the "tonic".
-            With C as our tonic, we have a C major scale, with Db as our tonic, we have a
-            Db major scale, and so on.</p>
+<p>Since there are twelve notes in the chromatic scale, there are therefore twelve
+intervals.  Next after the whole step is the "minor third", which contains
+three half steps.  After that is the "major third", which contains four half
+steps.  On the page below this video, you will see a table showing all twelve
+intervals, their alternative names, and the number of half steps for each.
+Although this is a lot of vocabulary, it is important that you learn at least
+the most common name for each interval, as well as the corresponding number of
+half steps.</p>
 
-            <p>Let's try and figure out the notes of the C major scale.  Again, the pattern of
-            the major scale is W-W-H-W-W-W-H.  As you can see, the C major scale features
-            only white keys, which makes it unique among the major scales.  Now let's try
-            and figure out the Bb major scale.  W-W-H-W-W-W-H.  You should practice finding
-            the notes of the major scale, starting on all twelve possible tonics.</p>
+<h3>Major and Minor Scales</h3>
 
-            <p>Another useful scale is the minor scale.  The minor scale features a different
-            pattern of intervals than the major scale: W-H-W-W-H-W-W.  While the major
-            scale and minor scale are the most common, there are countless other different
-            scales you may encounter.  A summary of the most common ones is included on the
-            page below this video.</p>
+<p>We've already touched on the chromatic scale, which features all twelve notes
+in the octave.  More common than the chromatic scale is the major scale.  The
+major scale features a repeating pattern of whole steps and half steps:
+W-W-H-W-W-W-H.  The starting note of the major scale is called the "tonic".
+With C as our tonic, we have a C major scale, with Db as our tonic, we have a
+Db major scale, and so on.</p>
+
+<p>Let's try and figure out the notes of the C major scale.  Again, the pattern of
+the major scale is W-W-H-W-W-W-H.  As you can see, the C major scale features
+only white keys, which makes it unique among the major scales.  Now let's try
+and figure out the Bb major scale.  W-W-H-W-W-W-H.  You should practice finding
+the notes of the major scale, starting on all twelve possible tonics.</p>
+
+<p>Another useful scale is the minor scale.  The minor scale features a different
+pattern of intervals than the major scale: W-H-W-W-H-W-W.  While the major
+scale and minor scale are the most common, there are countless other different
+scales you may encounter.  A summary of the most common ones is included on the
+page below this video.</p>
 
           </div>
         </div>
       </div>
 
-      <div id="tables">
-        <h2>Tables</h2>
-        <h3>Interval Names</h3>
-        <table class="table">
-          <thead>
-            <tr><th>Interval Name</th><th>Alternative Name(s)</th><th>Half Steps</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Half Step</td><td>Minor Second, Semitone</td><td>1</td></tr>
-            <tr><td>Whole Step</td><td>Major Second, Whole Tone</td><td>2</td></tr>
-            <tr><td>Minor Third</td><td>-</td><td>3</td></tr>
-            <tr><td>Major Third</td><td>-</td><td>4</td></tr>
-            <tr><td>Fourth</td><td>Perfect Fourth</td><td>5</td></tr>
-            <tr><td>Tritone</td><td>Augmented Fourth, Diminished Fifth</td><td>6</td></tr>
-            <tr><td>Fifth</td><td>Perfect Fifth</td><td>7</td></tr>
-            <tr><td>Minor Sixth</td><td>-</td><td>8</td></tr>
-            <tr><td>Major Sixth</td><td>-</td><td>9</td></tr>
-            <tr><td>Minor Seventh</td><td>-</td><td>10</td></tr>
-            <tr><td>Major Seventh</td><td>-</td><td>11</td></tr>
-            <tr><td>Octave</td><td>Perfect Octave</td><td>12</td></tr>
-          </tbody>
-        </table>
+<div id="tables">
+  <h2>Tables</h2>
+  <h3>Interval Names</h3>
+  <table class="table">
+    <thead>
+      <tr><th>Interval Name</th><th>Alternative Name(s)</th><th>Half Steps</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Half Step</td><td>Minor Second, Semitone</td><td>1</td></tr>
+      <tr><td>Whole Step</td><td>Major Second, Whole Tone</td><td>2</td></tr>
+      <tr><td>Minor Third</td><td>-</td><td>3</td></tr>
+      <tr><td>Major Third</td><td>-</td><td>4</td></tr>
+      <tr><td>Fourth</td><td>Perfect Fourth</td><td>5</td></tr>
+      <tr><td>Tritone</td><td>Augmented Fourth, Diminished Fifth</td><td>6</td></tr>
+      <tr><td>Fifth</td><td>Perfect Fifth</td><td>7</td></tr>
+      <tr><td>Minor Sixth</td><td>-</td><td>8</td></tr>
+      <tr><td>Major Sixth</td><td>-</td><td>9</td></tr>
+      <tr><td>Minor Seventh</td><td>-</td><td>10</td></tr>
+      <tr><td>Major Seventh</td><td>-</td><td>11</td></tr>
+      <tr><td>Octave</td><td>Perfect Octave</td><td>12</td></tr>
+    </tbody>
+  </table>
 
-        <h3>Common Scales</h3>
-        <table class="table">
-          <thead>
-            <tr><th>Scale Name</th><th>Whole Step/Half Step Pattern</th><th>Notes</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Major</td><td>W-W-H-W-W-W-H</td><td>-</td></tr>
-            <tr><td>Minor</td><td>W-H-W-W-H-W-W</td><td>Also known as "Natural Minor".</td></tr>
-            <tr><td>Harmonic Minor</td><td>W-H-W-W-H-A2-H</td><td>A2 is a Whole Step plus a Half Step.</td></tr>
-            <tr><td>Melodic Minor</td><td>W-H-W-W-W-W-H</td><td>The Melodic Minor uses the form of the Natural Minor when descending.</td></tr>
-            <tr><td>Chromatic</td><td>H-H-H-H-H-H-H-H-H-H-H-H</td><td>-</td></tr>
-          </tbody>
-        </table>
-      </div>
+  <h3>Common Scales</h3>
+  <table class="table">
+    <thead>
+      <tr><th>Scale Name</th><th>Whole Step/Half Step Pattern</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Major</td><td>W-W-H-W-W-W-H</td><td>-</td></tr>
+      <tr><td>Minor</td><td>W-H-W-W-H-W-W</td><td>Also known as "Natural Minor".</td></tr>
+      <tr><td>Harmonic Minor</td><td>W-H-W-W-H-A2-H</td><td>A2 is a Whole Step plus a Half Step.</td></tr>
+      <tr><td>Melodic Minor</td><td>W-H-W-W-W-W-H</td><td>The Melodic Minor uses the form of the Natural Minor when descending.</td></tr>
+      <tr><td>Chromatic</td><td>H-H-H-H-H-H-H-H-H-H-H-H</td><td>-</td></tr>
+    </tbody>
+  </table>
+</div>
 
-      <div id="vocabulary">
-        <h2>Vocabulary</h2>
-          <ul>
-          <li>chromatic scale</li>
-          <li>half step</li>
-          <li>interval</li>
-          <li>major scale</li>
-          <li>minor scale</li>
-          <li>tonic</li>
-          <li>whole step</li>
-          </ul>
-      </div>
+<div id="vocabulary">
+  <h2>Vocabulary</h2>
+    <ul>
+    <li>chromatic scale</li>
+    <li>half step</li>
+    <li>interval</li>
+    <li>major scale</li>
+    <li>minor scale</li>
+    <li>tonic</li>
+    <li>whole step</li>
+    </ul>
+</div>
 
-      <div id="self-study">
-        <h2>Self-Study</h2>
-          <ul>
-          <li>If you have access to a keyboard or a piano at home, practice the major and
-          minor scales in all twelve keys.  Proper fingerings (i.e. what fingers should
-          be used on what keys) can be found
-          <a href="https://www.pianoscales.org/major.html">here</a> and
-          <a href="https://www.pianoscales.org/minor.html">here</a>.  Another classic resource is
-          the
-          <a href="https://www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446">Hanon</a>
-          book of exercises.</li>
-          <li>Make two sets of flashcards: one with all twelve intervals, one with all
-          twelve note names (the "tonics").  Shuffle each set separately, then draw one
-          card from each set.  Try to name the notes that are the given interval above
-          and below the given tonic.</li>
-          </ul>
+<div id="self-study">
+  <h2>Self-Study</h2>
+    <ul>
+    <li>If you have access to a keyboard or a piano at home, practice the major and
+    minor scales in all twelve keys.  Proper fingerings (i.e. what fingers should
+    be used on what keys) can be found
+    <a href="https://www.pianoscales.org/major.html">here</a> and
+    <a href="https://www.pianoscales.org/minor.html">here</a>.  Another classic resource is
+    the
+    <a href="https://www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446">Hanon</a>
+    book of exercises.</li>
+    <li>Make two sets of flashcards: one with all twelve intervals, one with all
+    twelve note names (the "tonics").  Shuffle each set separately, then draw one
+    card from each set.  Try to name the notes that are the given interval above
+    and below the given tonic.</li>
+    </ul>
 
-      </div>
+</div>
 
-      <div id="self-quiz">
-        <h2>Self-Quiz</h2>
-        <ol>
-          <li>What is a minor third above Bb?</li>
-          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-1" class="answer" style="display: none">C#/Db.</p>
+<div id="self-quiz">
+  <h2>Self-Quiz</h2>
+  <ol>
+    <li>What is a minor third above Bb?</li>
+    <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-1" class="answer" style="display: none">C#/Db.</p>
 
-          <li>What is a perfect fifth below B?</li>
-          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-2" class="answer" style="display: none">E.</p>
+    <li>What is a perfect fifth below B?</li>
+    <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-2" class="answer" style="display: none">E.</p>
 
-          <li>What is a tritone above F#?</li>
-          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-3" class="answer" style="display: none">C.</p>
+    <li>What is a tritone above F#?</li>
+    <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-3" class="answer" style="display: none">C.</p>
 
-          <li>What is a tritone below F#?</li>
-          <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-4" class="answer" style="display: none">C.</p>
+    <li>What is a tritone below F#?</li>
+    <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-4" class="answer" style="display: none">C.</p>
 
-          <li>Name the notes in an Ab major scale.</li>
-          <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-5" class="answer" style="display: none">Ab, Bb, C, Db, Eb, F, G, Ab.</p>
+    <li>Name the notes in an Ab major scale.</li>
+    <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-5" class="answer" style="display: none">Ab, Bb, C, Db, Eb, F, G, Ab.</p>
 
-          <li>Name the notes in an F# minor scale.</li>
-          <button id="question-6" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-6" class="answer" style="display: none">F#, G#, A, B, C#, D, E, F#.</p>
-        </ol>
-      </div>
+    <li>Name the notes in an F# minor scale.</li>
+    <button id="question-6" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-6" class="answer" style="display: none">F#, G#, A, B, C#, D, E, F#.</p>
+  </ol>
+</div>
 
-      <div>
-        <h2>Additional Resources</h2>
-          <ul>
-          <li><a href="https://www.musictheory.net/exercises/keyboard-interval">www.musictheory.net/exercises/keyboard-interval</a></li>
-          <li><a href="https://www.musictheory.net/exercises/keyboard-scale">www.musictheory.net/exercises/keyboard-scale</a></li>
-          <li><a href="https://www.pianoscales.org/major.html">www.pianoscales.org/major.html</a></li>
-          <li><a href="https://www.pianoscales.org/minor.html">www.pianoscales.org/minor.html</a></li>
-          <li><a href="https://www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446">www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446</a></li>
-          </ul>
-      </div>
+<div>
+  <h2>Additional Resources</h2>
+    <ul>
+    <li><a href="https://www.musictheory.net/exercises/keyboard-interval">www.musictheory.net/exercises/keyboard-interval</a></li>
+    <li><a href="https://www.musictheory.net/exercises/keyboard-scale">www.musictheory.net/exercises/keyboard-scale</a></li>
+    <li><a href="https://www.pianoscales.org/major.html">www.pianoscales.org/major.html</a></li>
+    <li><a href="https://www.pianoscales.org/minor.html">www.pianoscales.org/minor.html</a></li>
+    <li><a href="https://www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446">www.amazon.com/Hanon-Virtuoso-Exercises-Complete-Schirmers/dp/0793525446</a></li>
+    </ul>
+</div>
+
+
 
     </div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
     <script src="music147.js"></script>
   </body>
 </html>

@@ -3,13 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
     <link rel="stylesheet" href="music147.css">
-
     <title>The Notes on a Keyboard</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.basics-of-music-theory.html">Basics of Music Theory</a>
+        </li>
+      </ul>
+    </nav>
     <div class="container">
       <h1>The Notes on a Keyboard</h1>
 
@@ -24,107 +33,116 @@
         <div id="script" class="col">
           <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
           <div id="script-text" style="display: none; overflow-y: scroll">
-            <h3>The Notes on a Keyboard</h3>
 
-            <p>This is a piano keyboard.  It has 88 keys, some white, some black.  The black
-            keys are clustered together in alternating groups of two and three; pianists
-            use this repeating arrangement to orient themselves as they play.  As you move
-            from left to right on the piano, the notes get higher and higher in pitch; as
-            you move from right to left, the notes get lower and lower.</p>
 
-            <p>Let's zoom in.  Musicians use letters from the alphabet in order to identify
-            notes.  The white key directly below a cluster of two black keys is the note
-            "C".  (Even though "A" is the first letter of the alphabet, musicians
-            customarily start with the note "C".)  As you move up along the white keys, you
-            continue through the alphabet: this is D, E, F, and G, then we wrap back around
-            to A and B.  As for the black keys, each black key has two different names: the
-            "sharp" name, and the "flat" name.  To find the "sharp" name, identify the
-            white key directly to the left of the black key.  Since this is a C, this is a
-            C#.  Similarly, this is a D#, then F#, G#, and A#.  To find the "flat" name,
-            identify the white key directly to the right of the black key.  Since this is a
-            D, this is Db.  Similarly this is an Eb, then Gb, Ab, and Bb.  It is important
-            that you familiarize yourself with <strong>both</strong> the sharp name and the
-            flat name for every black key.</p>
 
-            <h3>Octaves and Register</h3>
+<h3>The Notes on a Keyboard</h3>
 
-            <p>Zooming out again, we notice that there are multiples of each note on the
-            piano.  Different instances of each note are said to be in different "octaves".
-            These two Cs are one octave apart; these two Cs are two octaves apart; three
-            octaves apart, and so on.</p>
+<p>This is a piano keyboard.  It has 88 keys, some white, some black.  The black
+keys are clustered together in alternating groups of two and three; pianists
+use this repeating arrangement to orient themselves as they play.  As you move
+from left to right on the piano, the notes get higher and higher in pitch; as
+you move from right to left, the notes get lower and lower.</p>
 
-            <p>We use the term "register" to loosely describe a note's location on the piano:
-            a note may be low register, middle register, or high register.  If we want to
-            be more specific, we may use numbers to denote what octave a note is in.  On a
-            keyboard, the lowest C is known as C1, the next highest is C2, then C3 and so
-            on.  Of special note is C4, which is usually given the name "middle C", since
-            it is roughly—but not exactly—in the middle of the keyboard.  The other notes
-            also use numbers to designate their octave.  Above C4 is C#/Db4, then D4,
-            D#4/Eb4, and so on up to B4, then C5.  Since musicians customarily start
-            counting from C, the octave number gets incremented between B and C, <em>not</em>
-            between G and A as you might expect if you're thinking alphabetically.</p>
+<p>Let's zoom in.  Musicians use letters from the alphabet in order to identify
+notes.  The white key directly below a cluster of two black keys is the note
+"C".  (Even though "A" is the first letter of the alphabet, musicians
+customarily start with the note "C".)  As you move up along the white keys, you
+continue through the alphabet: this is D, E, F, and G, then we wrap back around
+to A and B.  As for the black keys, each black key has two different names: the
+"sharp" name, and the "flat" name.  To find the "sharp" name, identify the
+white key directly to the left of the black key.  Since this is a C, this is a
+C#.  Similarly, this is a D#, then F#, G#, and A#.  To find the "flat" name,
+identify the white key directly to the right of the black key.  Since this is a
+D, this is Db.  Similarly this is an Eb, then Gb, Ab, and Bb.  It is important
+that you familiarize yourself with <strong>both</strong> the sharp name and the
+flat name for every black key.</p>
 
-            <p>In order to familiarize yourself with the keyboard and the note names, you
-            should drill yourself regularly; links to online quizzes may be found in the
-            "additional resources" section on this page.</p>
+<h3>Octaves and Register</h3>
+
+<p>Zooming out again, we notice that there are multiples of each note on the
+piano.  Different instances of each note are said to be in different "octaves".
+These two Cs are one octave apart; these two Cs are two octaves apart; three
+octaves apart, and so on.</p>
+
+<p>We use the term "register" to loosely describe a note's location on the piano:
+a note may be low register, middle register, or high register.  If we want to
+be more specific, we may use numbers to denote what octave a note is in.  On a
+keyboard, the lowest C is known as C1, the next highest is C2, then C3 and so
+on.  Of special note is C4, which is usually given the name "middle C", since
+it is roughly—but not exactly—in the middle of the keyboard.  The other notes
+also use numbers to designate their octave.  Above C4 is C#/Db4, then D4,
+D#4/Eb4, and so on up to B4, then C5.  Since musicians customarily start
+counting from C, the octave number gets incremented between B and C, <em>not</em>
+between G and A as you might expect if you're thinking alphabetically.</p>
+
+<p>In order to familiarize yourself with the keyboard and the note names, you
+should drill yourself regularly; links to online quizzes may be found in the
+"additional resources" section on this page.</p>
 
           </div>
         </div>
       </div>
 
-      <div id="vocabulary">
-        <h2>Vocabulary</h2>
-        <ul>
-        <li>flat</li>
-        <li>middle C</li>
-        <li>octave</li>
-        <li>register</li>
-        <li>sharp</li>
-        </ul>
-      </div>
+<div id="vocabulary">
+  <h2>Vocabulary</h2>
+  <ul>
+  <li>flat</li>
+  <li>middle C</li>
+  <li>octave</li>
+  <li>register</li>
+  <li>sharp</li>
+  </ul>
+</div>
 
-      <div id="self-study">
-        <h2>Self-Study</h2>
-        <ul>
-        <li>If you have access to a keyboard or a piano at home, try playing all of the
-        Cs as fast as you can, starting from the lowest, then up to the highest, then
-        back down to the lowest.  Do the same for the other eleven notes.</li>
-        <li><a href="https://www.musictheory.net/exercises/keyboard">Here</a> is an online resource
-        for practicing note identification.</li>
-        </ul>
-      </div>
+<div id="self-study">
+  <h2>Self-Study</h2>
+  <ul>
+  <li>If you have access to a keyboard or a piano at home, try playing all of the
+  Cs as fast as you can, starting from the lowest, then up to the highest, then
+  back down to the lowest.  Do the same for the other eleven notes.</li>
+  <li><a href="https://www.musictheory.net/exercises/keyboard">Here</a> is an online resource
+  for practicing note identification.</li>
+  </ul>
+</div>
 
-      <div id="self-quiz">
-        <h2>Self-Quiz</h2>
-        <ol>
-          <li>What's the highest note on the piano?  What's the lowest note on the piano?</li>
-          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-1" class="answer" style="display: none">The highest note is C8.  The lowest note is A0.</p>
+<div id="self-quiz">
+  <h2>Self-Quiz</h2>
+  <ol>
+    <li>What's the highest note on the piano?  What's the lowest note on the piano?</li>
+    <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-1" class="answer" style="display: none">The highest note is C8.  The lowest note is A0.</p>
 
-          <li>Most of the notes occur 7 times on the piano, but others occur 8 times.
-Which notes occur 8 times?</li>
-          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-2" class="answer" style="display: none">A, A#/Bb, B, and C.</p>
+    <li>Most of the notes occur 7 times on the piano, but others occur 8 times.
+notes occur 8 times?</li>
+    <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-2" class="answer" style="display: none">A, A#/Bb, B, and C.</p>
 
-          <li>Sometimes, musicians will use the "sharp" and "flat" terminology to refer to
-<em>white</em> keys.  What do you think is another name for E#?  Cb?</li>
-          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-          <p id="answer-3" class="answer" style="display: none">Another name for E# is F.  Another name for Cb is B.</p>
-        </ol>
-      </div>
+    <li>Sometimes, musicians will use the "sharp" and "flat" terminology to refer to
+ite</em> keys.  What do you think is another name for E#?  Cb?</li>
+    <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+    <p id="answer-3" class="answer" style="display: none">Another name for E# is F.  Another name for Cb is B.</p>
+  </ol>
+</div>
 
-      <div>
-        <h2>Additional Resources</h2>
-        <ul>
-        <li><a href="https://www.musictheory.net/exercises/keyboard">www.musictheory.net/exercises/keyboard</a></li>
-        </ul>
-      </div>
+<div>
+  <h2>Additional Resources</h2>
+  <ul>
+  <li><a href="https://www.musictheory.net/exercises/keyboard">www.musictheory.net/exercises/keyboard</a></li>
+  </ul>
+</div>
+
+
 
     </div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
     <script src="music147.js"></script>
   </body>
 </html>
