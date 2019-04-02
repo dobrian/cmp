@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css"/>
+  <title>Sampling Theory</title>
+</head>
+
+<body>
+
+<div class="container">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Sampling Theory</a>
+        </li>
+      </ul>
+    </nav>
+
+
+<div id="text">
+
+<h1 id="sampling-theory">Sampling Theory</h1>
+
+<hr>
+
+<h2 id="discrete-samples-of-a-continuous-signal">Discrete Samples of a Continuous Signal</h2>
+
+<p>You&#39;re probably aware that when you&#39;re watching a movie you&#39;re actually watching a series of still photographs. Conventionally, 24 snapshots&mdash;also known as frames&mdash;are captured per second, and those are later played back (displayed one after the other) at a constant rate of 24 frames per second, the same rate at which the snapshots were taken. That means that the photos are shot at a rate of one every 1/24 of a second&mdash;which is to say every 0.041667 seconds, or every 41.667 milliseconds.</p>
+
+<p>We think of the real world as being continuous. We think of time as a continuous flow, within which the objects in the world move (or don&#39;t) and change (or don&#39;t). We, and the rest of the world, move constantly forward in time. We can recall the past only with our memory, or with some sort of capture-and-storage mechanism such as a camera. With a camera we can, in effect, freeze time, by capturing and storing one instant as a still image. With a movie camera, we take 24 snapshots per second, and we can then replay the past by showing those photos at the same rate. Thus, with a series of discrete images, we can simulate the continuous flow of time.</p>
+
+<p>Digital recording of sound works in much the same way, although we need to take many more than 24 snapshots of the sound per second. We use a microphone to transduce sound energy into an electrical signal. The voltage of that signal changes analogously to (proportionally to) the changing air pressure of the sound wave. At regular intervals, a computer can measure that voltage and represent it as a number, and store that number in memory. For accurate representation of sound, we need to take many thousands of measurements per second. For example, a CD recording uses a rate of 44,100 samples per second. Later we can read through those numbers at the same rate, and convert them back to voltages to drive a loudspeaker.</p>
+
+<p>For this audio capture process, a circuit called a <a href="https://en.wikipedia.org/wiki/Sample_and_hold">sample-and-hold</a> is used.</p>
+
+<p class="center"><img src="./sample-and-hold.svg" alt="Sample-and-hold Signal"><br>
+<em>The gray curve represents the continuously changing voltage of the input signal. The red indicates the discrete voltages that are sampled periodically and held constant until the next sample.</em></p>
+
+<p>The sample-and-hold circuit periodically holds its input voltage constant, giving the computer time to measure the voltage and quantize it as a numerical value.</p>
+
+<p>The result is an ordered file of numbers&mdash;in this case, 44,100 numbers per second of sound. Just as a movie shows us 24 still images per second, a digital recording reproduces 44,100 constant voltages per second. A filter circuit is used to smooth that signal, so that it effectively replicates the continuously changing voltage of the original sound signal.</p>
+
+<hr>
+
+<h2 id="digital-audio">Digital Audio</h2>
+
+<p>The article <a href="http://music.arts.uci.edu/dobrian/digitalaudio.htm">&quot;Digital Audio&quot;</a> describes the digital audio sampling process, and introduces some of its important terminology and concepts. You should try to understand the meaning of the terms listed below. If you don’t understand the explanation of those terms in the article, do some research in additional resources to try to learn more about the things you don’t understand.</p>
+
+</div>
+
+<hr>
+
+<div id="vocabulary">
+
+<h2 id="vocabulary">Vocabulary</h2>
+
+<ul>
+<li>simple harmonic motion</li>
+<li>fundamental (resonant) mode of vibration</li>
+<li>harmonics (overtones, partials)</li>
+<li>harmonic series</li>
+<li>spectrum</li>
+<li>amplitude envelope</li>
+<li>loudness, amplitude</li>
+<li>pitch</li>
+<li>frequency</li>
+<li>decibel</li>
+<li>analog-to-digital converter</li>
+<li>digital-to-analog, converter</li>
+<li>Nyquist theorem (Nyquist frequency)</li>
+<li>sampling rate</li>
+<li>aliasing/foldover</li>
+<li>quantization</li>
+<li>quantization precision</li>
+<li>signal-to-quantization noise ratio (SQNR)</li>
+<li>clipping</li>
+</ul>
+
+</div>
+
+<hr>
+
+<div id="self-quiz">
+
+<h2 id="self-quiz">Self-Quiz</h2>
+
+<ol>
+<li>What is the sampling rate of CD-quality audio?</li>
+<button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-1" class="answer" style="display: none">44,100 Hz</p>
+
+<li>If the sampling rate is 48,000 Hz, what is the Nyquist frequency?</li>
+<button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-2" class="answer" style="display: none">24,000 Hz</p>
+
+<li>What is the range of frequencies that humans can hear as a tone?</li>
+<button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-3" class="answer" style="display: none">20 Hz to 20,000 Hz</p>
+
+<li>If an amplitude of 1 is used as the 0 dB reference, what amplitude is signified by -6 dB?</li>
+<button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-4" class="answer" style="display: none">0.5</p>
+
+<li>What adjective describes a tone that consists of frequencies that are all whole number multiples of the same fundamental frequency?</li>
+<button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+<p id="answer-5" class="answer" style="display: none">Harmonic</p>
+</ol>
+
+</div>
+
+<hr>
+
+<div>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<p><a href="http://music.arts.uci.edu/dobrian/digitalaudio.htm">Digital Audio</a>, Christopher Dobrian</p>
+
+<p><a href="http://sites.music.columbia.edu/cmc/MusicAndComputers/">Computer Music: A Theoretical and Historical Approach</a>, Phil Burk et al.</p>
+
+</div>
+
+<hr />
+
+<p>This page was last modified August 22, 2018 by Christopher Dobrian, <em><a href="mailto:dobrian@uci.edu">dobrian@uci.edu</a></em>.
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://dobrian/github.io/cmp/static/js/cmp.js"></script>
+</body>
+
+</html>
