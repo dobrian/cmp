@@ -62,7 +62,8 @@ let buffer = null;
 const request = new XMLHttpRequest();
 request.open("GET", "freejazz.wav", true);
 request.responseType = "arraybuffer";
-request.onload = () =&gt; audioCtx.decodeAudioData(request.response, (data) =&gt; buffer = data);
+request.onload = () =&gt; audioCtx.decodeAudioData(request.response,
+                                                   (data) =&gt; buffer = data);
 request.send();
 </code></pre>
 

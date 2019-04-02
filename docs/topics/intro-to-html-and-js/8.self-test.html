@@ -219,6 +219,14 @@ document.getElementById("toggler").onclick(() =&gt; {
     //$('pre').addClass("javascript");
     hljs.initHighlightingOnLoad();
     </script>
-    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+    <!--<script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>-->
+    <script>
+    // This is a hint for question 7!
+    $(".question").on("click", function() {
+      var questionId = $(this).attr("id");
+      var answerID = "#answer-" + questionId.split("-")[1];
+      $(answerID).toggle();
+    });
+    </script>
   </body>
 </html>
