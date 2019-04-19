@@ -20,9 +20,40 @@
     </nav>
     <div class="container">
       <h1 id="computer-music-programming">Alphabetical List of Examples</h1>
-      <h2>Max Examples</h2>
-      <p>Stay tuned!</p>
-      <h2>JavaScript Examples</h2>
+      <hr />
+      <h2><a name="max">Max Examples</a></h2>
+      <p>
+      The largest single collection of Max examples is the <a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook</a>. You can find specific examples there by title or by keyword search.
+      </p>
+      <p><strong>[Each image below is linked to a file of JSON code containing the actual Max patch.<br />
+        Right-click on an image to download the .maxpat file directly to disk, which you can then open in Max.]</strong>
+      </p>
+      <p>
+        <a name="Ex01"><b>Example 1</b></a>: Fade-in and fade-out
+      </p>
+      <p>
+        <a href="examples/max/patches/fadeinfadeoutdemo.maxpat"><img src="examples/max/images/fadeinfadeoutdemo.png" width=467 height=484 alt="Example 1" border=0></a>
+      </p>
+      <p>
+      This shows the use of linear interpolation from one amplitude to another to create a smooth fade-in or fade-out. The <b>line~</b> object expects to receive a ramp time in milliseconds in its right inlet, and then a destination value in its left inlet. (It can also receive those two numbers as a two-item list, &lt;destination value&gt;&lt;ramp time&gt;, in its left inlet.) Its output signal will then change linearly from its current value to its new destination value in the specified amount of time. Once it arrives at the destination value, its output signal stays constant at the new value.
+      </p>
+      <p>
+      Because the fade-out takes a non-zero amount of time, it's necessary to delay stopping the sound file until the fade-out has taken place. So, whereas we can start the fade-in at the same time as we start the sound file, we need to wait for the fade-out to finish before we stop the file. So, we look for the off message (0), using a <b>select</b> object, which will send out a <i>bang</i> when it receives a match, and we then delay that bang with a <b>delay</b> object until the fade-out is done, then the <i>bang</i> triggers the message <i>0</i> to stop the <b>sfplay~</b> object.
+      </p>
+      <p>
+        <a name="Ex02"><b>Example 2</b></a>: Vibrato by means of frequency modulation
+      </p>
+      <p>
+        <a href="examples/max/patches/modulationdemo.maxpat"><img src="examples/max/images/modulationdemo.png" width=899 height=483 alt="Example 2" border=0></a>
+      </p>
+      <p>
+      The <b>cycle~</b> object is an oscillator that produces a sinusoidal tone at any specified frequency. At an audio frequency we can listen to it, and at a sub-audio frequency we can use it as a low-frequency oscillator (LFO) to modulate some parameter of a sound. This patch demonstrates frequency modulation to create a vibrato effect. Try changing the different number boxes until you have a good experience of how each parameter affects the sound, especially the rate and depth of the frequency modulation caused by the modulating oscillator. Try some extreme values to get extreme effects.
+      </p>
+      <p>
+      Because the fade-out takes a non-zero amount of time, it's necessary to delay stopping the sound file until the fade-out has taken place. So, whereas we can start the fade-in at the same time as we start the sound file, we need to wait for the fade-out to finish before we stop the file. So, we look for the off message (<i>0</i>), using a <b>select</b> object, which will send out a <i>bang</i> when it receives a match, and we then delay that bang with a <b>delay</b> object until the fade-out is done, then the <i>bang</i> triggers the message <i>0</i> to stop the <b>sfplay~</b> object.
+      </p>
+      <hr />
+      <h2><a name="webaudio">WebAudio Examples</a></h2>
       <p>Stay tuned!</p>
     </div>
   </body>
