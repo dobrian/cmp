@@ -16,6 +16,8 @@ where _c_ is the coefficent calculated from the tangent of the frequency, _tf_, 
 $$
   t = tan\bigg(\pi \frac{f_c}{sr} \bigg)
 $$
+
+and _c_ is:
 $$
   c = \frac{t-1}{t+1}
 $$

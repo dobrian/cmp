@@ -1,7 +1,7 @@
 var trem, size, sound, sr, linFreq, opY1L, cutoff, filters, writeFile;
 
 sr = 44100; // samplerate
-cutoff = 100; // cutoff in Hx
+cutoff = 22049; // cutoff in Hx
 opY1L = 0.0; // val to save
 
 filters = ();
@@ -68,27 +68,39 @@ filters.foLowPass = {|dict, sound, cutoff, sr|
 // 	out;
 // };
 
-sound.output = filters.foLowPass(sound.impulse, 100, sr); // should be phase shift of 90 degrees
+sound.output = filters.foLowPass(sound.impulse, cutoff, sr); // should be phase shift of 90 degrees
 
 f = SoundFile.openWrite("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/filters/src/foAllPass.wav", "WAV", numChannels: 1, sampleRate: 44100);
 f.writeData(sound.output.asFloatArray);
 f.close;
 
 r = {
-	var size = 4096, real, imag, cosTable, complex, plotArray;
+	var size = 4096, real, imag, cosTable, complex, freqArray, phaseArray, plotArray;
 	real = Signal.newFrom(sound.output[0..size-1]);
 	imag = Signal.newClear(size);
 	cosTable = Signal.fftCosTable(size);
 	complex = fft(real, imag, cosTable);
 	plotArray = {
 		var max, array;
-		max = complex.magnitude.maxItem;
+		max = complex.magnitude[1..2047].maxItem;
+		~complex = complex;
 		complex.magnitude[1..2047].collect{|val|
 			// 20 * log10(val/max); // get it in dB
 			val;
 		};
 	}.value;
-	plotArray.normalize(0.000001, 1).ampdb.plot;
+	// plotArray.normalize(0.000001, 1).ampdb.plot;
+	freqArray = plotArray.normalize(0.000001, 1).ampdb;
+	phaseArray = complex.phase[1..2047];
+	// plotArray.plot;
+
+
+	f = File.open("../plots/foLP_%Hz.dat".format(cutoff).resolveRelative, "w");
+	// freqArray.do{|bin, i| f.write((((i)/2048)*(sr/2)).asString ++ " " ++ bin.asString ++ "\n")};
+	plotArray.size.do{|bin, i| f.write((((i)/2048)*(sr/2)).asString ++ " " ++ freqArray[i].asString ++ " " ++ phaseArray[i] ++ " \n")};
+	// plotArray.do{|bin, i| f.write(bin.asString ++ "\n")};
+	f.close;
+
 }.value;
 
 
