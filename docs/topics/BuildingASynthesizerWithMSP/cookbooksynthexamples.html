@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>Synthesizer Examples in MSP</title>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container">
+
+    <h1>Synthesizer Examples in MSP</h1>
+
+    <hr width="50%"/>
+
+    <p>
+      To design a synthesizer, you have to think about a lot of things: what kind of sounds you want your synth to produce, what sound generation/synthesis method will be best for the sounds you want, what features it will need, what kind of interface you want to present to the user, and how the synth will respond to MIDI input.
+    </p>
+
+    <p>
+      In the <a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook</a> you can find quite a lot of examples demonstrating different aspects of building a synthesizer in MSP. They're pretty basic, and you can surely improve on them, but let's take a look at what's there.
+    </p>
+
+    <p>
+      There's an example of an "<a href="http://music.arts.uci.edu/dobrian/maxcookbook/overly-simple-midi-synth">Overly simple MIDI synth</a>", which is, as the title says, too simplified to be considered good, but it introduces some really basic ideas. It gets incoming MIDI note messages, and uses the key-number and velocity bytes to affect the pitch and loudness of the sound. The text suggests some of the ways in which this overly simple example could be improved.
+    </p>
+
+    <p>
+      You can surmise some of the ways in which that example is inadequate:
+      <ol>
+        <li>It doesn't properly account for the possibility that the user might press two MIDI keys at once (or have unintentional overlap while playing a melody, thus releasing key A after playing key B).</li>
+        <li>The sound generator&mdash;a sawtooth oscillator&mdash;is not very interesting. Many more interesting sounds are possible. At the least, this sound may need some filtering, vibrato, etc. </li>
+        <li>It turns the sound on and off instantaneously. Some sort of amplitude envelope is needed to give the sound a more interesting shape.</li>
+        <li>It doesn't implement pitchbend or modulation.</li>
+      </ol>
+    </p>
+
+    <p>
+      Here are some other examples that will put you on the path to a more effective synth:
+      <ul>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/very-simple-monophonic-midi-synthesizer">Very simple monophonic MIDI synthesizer</a><br>
+          - nearly identical to the overly simple example, but with one small improvement</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/adsr-amplitude-envelope">ADSR amplitude envelope</a><br>
+          - a classic way to make an amplitude envelope</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/how-adsr-object-works">How the adsr~ object works</a><br>
+          - a further demonstration of the <strong>adsr~</strong> object</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/envelope-function-object">Envelope with the function object</a><br>
+          - the function object generates line segment descriptions for the <strong>line~</strong> object, to design an amplitude envelope</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/using-sustain-point-function-object">Using a sustain point in a function object</a><br>
+          - use most of an amplitude envelope, but wait for the note-off to complete it (similar effect to <strong>adsr~</strong>)</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/generate-classic-waveforms">Generate classic waveforms</a><br>
+          - equivalents in Max for some basic waveforms found in most classic synthesizers</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/frequency-modulation-sinusoidal-tones">Frequency modulation of sinusoidal tones</a><br>
+          - add some pitch fluctuation to the sound (with video demo)</li>
+        <li><a href=""></a><br>
+          </li>
+      </ul>
+    <p>
+
+    <div id="vocabulary">
+      <h2>Vocabulary</h2>
+      <ul>
+        <li>ADSR envelope</li>
+        <li>amplitude envelope</li>
+        <li>monophonic</li>
+        <li>sawtooth wave</li>
+        <li>square wave</li>
+        <li>triangle wave</li>
+        <li>vibrato</li>
+      </ul>
+    </div>
+
+    <div id="self-study">
+      <h2>Self-Study</h2>
+      <ul>
+        <li>Try combining some of the things you learned in the above examples&mdash;limiting incoming MIDI note data with <strong>poly</strong> to play only a single note at a time, generate a tone with one of the oscillator objects, generate an amplitude envelope to shape the sound, and consider adding some <em>vibrato</em> to the sound with LFO frequency modulation.</li>
+        <li>How would you add MIDI pitchbend control to vary the pitch of the sound? (Hint: You might want to research in the Max Cookbook and the MSP Tutorials.)</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Additional Resources</h2>
+      <ul>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook:</a> Useful and Instructive Programming Examples, by Christopher Dobrian</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+  //$('pre').addClass("javascript");
+  hljs.initHighlightingOnLoad();
+  </script>-->
+  <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+</body>
+
+</html>
