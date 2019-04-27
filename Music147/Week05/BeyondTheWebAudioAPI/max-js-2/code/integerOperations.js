@@ -1,35 +1,47 @@
 outlets = 3;
 
 function oddEven() {
+  var odds = [];
+  var evens = [];
   for (var i = 0; i < arguments.length; i++) {
 	var element = Math.abs(arguments[i]);
     if (element % 2 === 1) {
-	  outlet(0, element);
+	  odds.push(element);
     } else {
-      outlet(1, element);
+      evens.push(element);
 	}
   }
+
+  // Ensure good Max right-to-left ordering.
+  outlet(1, evens);
+  outlet(0, odds);
 }
 
 function isPrime() {
+  var primes = [];
+  var composites = [];
   for (var i = 0; i < arguments.length; i++) {
 	var element = arguments[i];
 	var isPrime = true;
 	if (element <= 1) {
-	  outlet(1, element);
+	  composites.push(element);
 	  continue;
     }
 	for (var j = 2; j < element; j++) {
 	  if (element % j === 0) {
-	    outlet(1, element);
+	    composites.push(element);
 	    isPrime = false;
 	    break;
       }
     }
     if (isPrime) {
-	  outlet(0, element);
+	  primes.push(element);
 	}
   }
+
+  // Ensure good Max right-to-left ordering.
+  outlet(1, composites);
+  outlet(0, primes);
 }
 
 function meanMedianMode() {
@@ -77,7 +89,8 @@ function meanMedianMode() {
 	median = sorted[(sorted.length - 1) / 2];
   }
 
-  outlet(0, mean);
-  outlet(1, median);
+  // Ensure good Max right-to-left ordering.
   outlet(2, mode);
+  outlet(1, median);
+  outlet(0, mean);
 }

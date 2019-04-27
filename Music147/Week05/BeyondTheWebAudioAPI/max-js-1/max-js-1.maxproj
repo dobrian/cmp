@@ -1,5 +1,5 @@
 {
-	"name" : "max-js",
+	"name" : "max-js-1",
 	"version" : 1,
 	"creationdate" : 3637390896,
 	"modificationdate" : 3637391092,

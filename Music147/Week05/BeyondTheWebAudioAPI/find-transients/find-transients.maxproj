@@ -1,8 +1,8 @@
 {
-	"name" : "max-js-2",
+	"name" : "find-transients",
 	"version" : 1,
-	"creationdate" : 3637391451,
-	"modificationdate" : 3639221423,
+	"creationdate" : 3639223690,
+	"modificationdate" : 3639223733,
 	"viewrect" : [ 25.0, 70.0, 300.0, 500.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
@@ -19,27 +19,7 @@
 		}
 ,
 		"code" : 		{
-			"addFive.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
-			"postArguments.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
-			"integerOperations.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
-			"valueTracker.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
-,
-			"firstThreeIntegers.js" : 			{
+			"findTransients.js" : 			{
 				"kind" : "javascript",
 				"local" : 1
 			}
@@ -61,6 +41,5 @@
 	"readonly" : 0,
 	"devpathtype" : 0,
 	"devpath" : ".",
-	"sortmode" : 0,
-	"viewmode" : 0
+	"sortmode" : 0
 }

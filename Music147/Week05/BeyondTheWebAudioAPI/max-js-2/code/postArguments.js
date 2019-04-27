@@ -1,4 +1,4 @@
-function msg_int() {
+function list() {
   post(arguments); // this is totally unhelpful
   post("\n");
   var s = ""
