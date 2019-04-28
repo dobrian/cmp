@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>JavaScript and Max: An Introduction</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.beyond-the-web-audio-api.html">Beyond the Web Audio API</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>JavaScript and Max: An Introduction</h1>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="2.javascript-and-max-an-introduction.mov"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+
+
+
+<p>Max includes a built-in JavaScript interpreter, accessible by creating a <strong>js</strong>
+object.  This object should have one argument: the name of the JavaScript file
+you'd like to create.</p>
+
+<p>You'll find there are few important differences between the JavaScript you're
+used to and JavaScript as implemented in Max.  First, Max uses a pre-ES2015
+version of JavaScript, meaning that newer features like the <code>let</code> and <code>const</code>
+keywords, arrow functions, and array destructuring will be interpreted as
+syntax errors.  Another difference is that Max doesn't use the DOM API, meaning
+that global variables like <code>document</code> and <code>window</code> no longer carry any special
+meaning.  On the flip side, Max introduces its own brand-new API, loading
+special meanings onto variable names like <code>inlets</code>, <code>bang</code>, <code>post</code>, and many
+more.</p>
+
+<p>Let's build a simple JavaScript program inside Max.  First, exit edit mode, and
+then double-click on your newly-made <strong>js</strong> object to open up the code editor.
+Then, open the Max console by typing ctrl- or cmd-M.  This step is important
+because the Max console will tell you if your code has any syntax errors.</p>
+
+<p>Next, use the code editor to declare how many inlets and outlets your <strong>js</strong>
+object will have.  Do this with the global <code>inlets</code> and <code>outlets</code> variables.
+When you save your code, you'll see that the number of inlets and outlets of
+the <strong>js</strong> object will change accordingly.</p>
+
+<p>The next thing we'll do is create a function called <code>bang()</code>.  <code>bang()</code> is a
+special function that executes whenever the <strong>js</strong> object receives a bang in
+its leftmost inlet.  Let's add the code, <code>post("hello world");</code>.  As you can
+probably guess, the <code>post()</code> function is the Max equivalent of a
+<code>console.log()</code>, printing a debug message to the Max console.</p>
+
+<p>Let's test our code by creating a <strong>button</strong>, and then connecting it to our
+<strong>js</strong> object.  You'll see that the <code>"hello world"</code> keeps repeating on the same
+line; to change this behavior, we need to manually provide a <code>\n</code>.</p>
+
+<p>In our next example, let's have our <strong>js</strong> object spit out a random number when
+you send it a <em>bang</em>.  JavaScript has a built-in math library, including a
+function called <code>Math.random()</code>.  Let's assign our random number to a local
+variable called <code>random</code>.  Then, we need to send our random number to an
+outlet.  To do so, use the built-in <code>outlet</code> function.  The first argument is
+the index of the outlet to send the data to—and be careful, it starts at 0!—and
+the second argument is the data to send.  </p>
+
+<p>Before moving on, let's briefly talk about how to organize your ".js" files in
+relation to your ".maxpat" files.  The simplest method is to throw everything
+in the same folder, ".js" and ".maxpat" alike; crude as this is, it will ensure
+that Max won't run into any file path issues when trying to find your
+JavaScript code.  A fancier solution is to create something called a "Max
+project", by going to File->New Project in Max.  A Max project automatically
+organizes your Max patches in a "patches" subfolder, and your JavaScript code
+in a "code" subfolder; it will also do the same for your externals and JSON
+files.  As you begin to develop larger and larger projects, you'll probably
+find that Max projects provide a cleaner and safer way to organize your code
+than the one-folder way of doing things.</p>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="max-js-1.zip">max-js-1.zip</a></li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Code a <strong>js</strong> object such that, when it receives a <em>bang</em>, it randomly
+selects from a series of phrases to post to the console.  You may need to
+look at the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor"><code>Math.floor()</code></a>
+and/or
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil"><code>Math.ceil()</code></a>
+functions.</li>
+<li>Take one of the preceding Max assignments from this course, and encapsulate
+it in a Max project.  Note how nicely the project window keeps track of
+abstractions!</li>
+</ol>
+
+<h2>Additional Resources</h2>
+
+<ul>
+<li>The JavaScript tutorials in Max cover much of the same ground as this
+introduction.  These tutorials may be found in the built-in reference guide
+in Max, or online on the Cycling 74 site 
+<a href="https://docs.cycling74.com/max7/tutorials/javascriptchapter01">here</a>,
+<a href="https://docs.cycling74.com/max7/tutorials/javascriptchapter02">here</a>, and
+<a href="https://docs.cycling74.com/max7/tutorials/javascriptchapter02">here</a>.</li>
+<li>For more on Max projects, see the built-in reference guide in Max, or the
+online version on the Cycling 74 site
+<a href="https://docs.cycling74.com/max7/vignettes/projects_topic">here</a>.</li>
+<li>For more information about file management in Max, Prof. Dobrian has written
+a
+<a href="https://sites.uci.edu/camp2014/2014/04/09/basics-of-opening-a-file/">helpful guide</a>.</li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>

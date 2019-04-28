@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>JavaScript and Max: Functions and Arguments</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.beyond-the-web-audio-api.html">Beyond the Web Audio API</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>JavaScript and Max: Functions and Arguments</h1>
+
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="3.javascript-and-max-functions-and-arguments.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+
+<p>So far, our <strong>js</strong> object can only respond to a <em>bang</em>, since the only thing in
+our JavaScript code is a <code>bang()</code> function.  To have our <strong>js</strong> object respond
+to integers and floats, we should add <code>msg_int()</code> and <code>msg_float()</code> functions
+to our JavaScript code, respectively.  These functions take one argument, which
+will give us the value of the integer or float that was sent to the function.
+As an example, let's have our <strong>js</strong> object add 5 to whatever number—integer or
+float—comes in through its inlet.  Here's what that code would look like.</p>
+
+<pre><code>function msg_int(i) {
+  outlet(0, i + 5);
+}
+
+function msg_float(f) {
+  outlet(0, f + 5);
+}
+</code></pre>
+
+<p>If you'd like to send the <strong>js</strong> object a <em>list</em> of integers, rather than just
+one, you should use the <code>list</code> function.</p>
+
+<pre><code>outlets = 3;
+
+function list(i, j, k) {
+  // Since Max objects typically send out messages in right-to-left order,
+  // it is good practice to follow that pattern in your JS objects.
+  outlet(2, k);
+  outlet(1, j);
+  outlet(0, i);
+}
+</code></pre>
+
+<p>If you'd rather extract each element of the list one-by-one, you can get all of
+the elements in the list at once by using the built-in <code>arguments</code> variable,
+which is represented internally as an array.  Be careful though: if you try to
+print the <code>arguments</code> array as is, you'll get a very unhelpful message that
+says <code>jsobject</code> followed by some very large integer; this is because you're
+printing the <em>pointer</em> to the array, not the array itself.  To see each element
+of the array, iterate through it with a <code>for</code> loop.</p>
+
+<pre><code>function list() {
+  post(arguments); // this is totally unhelpful
+  post("\n");
+  var s = ""
+  for (var i = 0; i &lt; arguments.length; i++) {
+    s += arguments[i] + " ";
+  }
+  post(s); // this is much better
+  post("\n");
+}
+</code></pre>
+
+<p>Finally, it turns out you can send the <strong>js</strong> object <em>any</em> message, as long as
+you have a corresponding outer-level function of the same name.  You can find
+two examples in the accompanying Max patch: one that performs basic math
+operations on lists of integers, and another that stores a value and keeps
+track of math operations sent to it.</p>
+
+<p>In summary, you can begin planning out your JavaScript code by deciding what
+Max messages you want to send to the <strong>js</strong> object.  Then, write a series of
+outer-level functions in JavaScript with names that correspond to those Max
+messages: the first element of the Max message will be the function name, and
+the rest of the elements of the message will be the function arguments.</p>
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="max-js-2.zip">max-js-2.zip</a></li>
+</ul>
+
+<h2>Self-Study</h2>
+
+<ol>
+<li>Once you've downloaded max-js-2.zip, add a function <code>range()</code> to the
+integerOperations.js file that spits the lowest value out the left outlet
+and the highest value out the middle outlet.</li>
+<li>Use the <code>jsarguments</code> global variable to add an argument to
+<strong>js valueTracker.js</strong> that determines the initial value.  For instance, if
+you create a <strong>js valueTracker.js 3</strong> object, an initial <em>bang</em> should send
+out a 3, not a 0.  Look at the
+<a href="https://docs.cycling74.com/max7/maxobject/js">jsarguments</a> argument for
+more details.</li>
+</ol>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
