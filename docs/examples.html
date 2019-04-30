@@ -52,9 +52,25 @@
       <p>
       Because the fade-out takes a non-zero amount of time, it's necessary to delay stopping the sound file until the fade-out has taken place. So, whereas we can start the fade-in at the same time as we start the sound file, we need to wait for the fade-out to finish before we stop the file. So, we look for the off message (<i>0</i>), using a <b>select</b> object, which will send out a <i>bang</i> when it receives a match, and we then delay that bang with a <b>delay</b> object until the fade-out is done, then the <i>bang</i> triggers the message <i>0</i> to stop the <b>sfplay~</b> object.
       </p>
+
       <hr />
+
       <h2><a name="webaudio">WebAudio Examples</a></h2>
-      <p>Stay tuned!</p>
+
+      <p>
+        <a name="Ex01js"><b>Example 1</b></a>: Synthesizer with vibrato
+      </p>
+
+      <p>Here is a basic synthesizer in Web Audio, designed by Chris, with a sawtooth oscillator, a simple attack-release amplitude envelope, and sinusoidal vibrato by means of frequency modulation with an LFO. The notes are played by keys of the computer keyboard. MIDI velocity is simulated by setting a note-on velocity value to control the notes' peak amplitude. The rate and depth of the vibrato can also be set by the user.
+      </p>
+
+      <p>
+        <a href="examples/javascript/vibratosynth.html">Synthesizer with vibrato</a>
+      </p>
+
+      <p>
+        There are lots of explanatory comments in the <a href="examples/javascript/vibratosynth.js">vibratosynth.js</a> file.
+      </p>
     </div>
   </body>
 </html>
