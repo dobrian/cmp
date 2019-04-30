@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>Getting a Sample from RAM</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.RAM-basedSamplePlayback.html">RAM-based Sample Playback in Max</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>Getting a Sample from RAM</h1>
+
+<p>The <strong>buffer~</strong> object holds audio data in RAM as an array of 32-bit floating point numbers (floats). The fact that the sound is loaded into RAM, rather than read continuously off the hard drive as the <strong>sfplay~</strong> object does, means that it can be accessed quickly and in various ways, for diverse audio effects (including normal playback).</p>
+
+<p>The most basic way to use a buffer is simply to access each individual sample by incrementing through the array indices at the sample rate. To do that, the best objects to use are <strong>count~</strong>, which puts out a signal that increments by one for each sample, and <strong>index~</strong>, which refers to the <strong>buffer~</strong>'s contents by the sample index received from <strong>count~</strong> and sends that out its outlet. This is good for basic playback with no speed change, or for when you want to access a particular sample within the <strong>buffer~</strong>.</p>
+
+<p>When <strong>count~</strong> receives a <em>bang</em>, it begins outputting an incrementing signal, starting from 0 by default. You can cause it to start counting from some other starting sample number by sending a number in its left inlet. (You can also cause it to count in a loop by giving it both a starting and ending number. It will count from the starting number up to one less than the ending number, then will loop back to the starting number.)</p>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="getsamplefromRAM.maxpat">getsamplefromRAM.maxpat</a></li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
