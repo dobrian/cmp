@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Synthesizer with vibrato</title>
+</head>
+
+<body>
+
+    <h1>Synthesizer with vibrato</h1>
+
+    <hr />
+
+    <p>
+      To turn on the synthesizer, click here: <input id="onoff" type="button" value="Off">
+    </p>
+
+    <p>
+      To play the synthesizer, type the keys shown below on your computer keyboard.<br>
+      <img src="notekeys.png" alt="awsedftgyhujk" width="311" height="158" border="0">
+    </p>
+
+    <p>
+      To transpose down one octave, type the 'z' key. To transpose up one octave, type the 'x' key.
+    </p>
+
+    <p>
+      Because your computer keyboard is not velocity-sensitive, you must choose a simulated velocity. The current velocity setting is <input id="velocity" type="number" min="0" max="127" style="width: 3em" value="100"/>.
+    </p>
+
+    <p>Enter a number for the vibrato rate (LFO frequency).
+       <input id="vibratorate" type="number" style="width: 3em" value="6"/> Hz
+    </p>
+
+    <p>Enter a number for the vibrato depth (LFO amplitude).
+       <input id="vibratodepth" type="number" style="width: 3em" value="25"/> cents
+    </p>
+
+    <p id="info"></p> <!-- This is where we'll show information to the user. -->
+    <p id="warnings"></p> <!-- This is where we'll show warning messages to the user. -->
+    <p id="errors"></p> <!-- This is where we'll show error messages to the user. -->
+
+    <hr />
+
+    <p>
+      <img src="vibratosynthdiagram.png" width="500" height="300" border="0">
+    </p>
+
+    <hr />
+
+    <p>This example is by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>, April 30, 2019.
+
+    <!-- Link to the JavaScript, contained in a separate source file. -->
+     <script src="vibratosynth.js"></script>
+
+</body>
+
+</html>
