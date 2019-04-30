@@ -52,6 +52,25 @@
       <p>
       Because the fade-out takes a non-zero amount of time, it's necessary to delay stopping the sound file until the fade-out has taken place. So, whereas we can start the fade-in at the same time as we start the sound file, we need to wait for the fade-out to finish before we stop the file. So, we look for the off message (<i>0</i>), using a <b>select</b> object, which will send out a <i>bang</i> when it receives a match, and we then delay that bang with a <b>delay</b> object until the fade-out is done, then the <i>bang</i> triggers the message <i>0</i> to stop the <b>sfplay~</b> object.
       </p>
+      <p>
+        <a name="Ex03"><b>Example 3</b></a>: MIDI Keyboard Example
+      </p>
+      <p>
+        <a href="examples/max/patches/midikeyboard.maxpat"><img src="examples/max/images/midikeyboard.png" class="img-fluid"></a>
+      </p>
+      <p>
+        <a name="Ex04"><b>Example 4</b></a>: Mouse Theremin
+      </p>
+      <p>
+        <a href="examples/max/patches/mousetheremin.maxpat"><img src="examples/max/images/mousetheremin.png" class="img-fluid"></a>
+      </p>
+      <p>
+        <a name="Ex05"><b>Example 5</b></a>: Saw Synth Demo
+      </p>
+      <p>
+        <a href="examples/max/patches/sawsynthdemo.maxpat"><img src="examples/max/images/sawsynthdemo.png" class="img-fluid"></a>
+      </p>
+
 
       <hr />
 
