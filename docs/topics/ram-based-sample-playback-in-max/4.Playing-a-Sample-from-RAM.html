@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>Playing a Sample from RAM</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.RAM-basedSamplePlayback.html">RAM-Based Sample Playback in Max</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>Playing a Sample from RAM</h1>
+
+<p>Open the patch "playsamplefromRAM"</p>
+
+<p>You can use the <strong>play~</strong> object to play the contents of a <strong>buffer~</strong>, simply by sending it a <em>start</em> message. By default it starts from the beginning of the <strong>buffer~</strong>. You can specify a different starting time, in milliseconds, as an argument to the <em>start</em> message, or you can specify both a starting time and a stopping time (in ms) as two arguments to the <em>start</em> message. In the patch, you can see two examples of the use of ‘starttime’ and ‘stoptime’ arguments. The message start 0 420 reads from time 0 to time 420 ms, then stops. You can cause reverse playback just by specifying a stop time that's less than the start time; the message start 2000 420 starts at time 2000 ms and plays backward to time 420 ms and stops. In all of these cases––start with no arguments, start with one argument, or start with two arguments­­––play~ plays at normal speed. If you include a third argument in the start message, that's the amount of time you want play~ to take to get to its destination; in that way, you can cause play~ to play at a different rate, just by specifying an amount of time that's not the same as the absolute difference between the ‘starttime’ and ‘stoptime’ arguments. For example, the message start 1000 2000 1200 means "play from time 1000 ms to time 2000 ms in 1200 ms." Since that will cause the playback to take 6/5 as long as normal playback, the rate of playback will be 5/6 of normal, and thus will sound a minor third lower than normal. (The ratio between the 5th and 6th partials of the harmonic series is a pitch interval of a minor third.) The message start 2000 1000 4000 will read backward from 2000 ms to 1000 ms in 4000 ms, thus playing backward at 1/4 the original rate, causing extreme slowing and a pitch transposition of two octaves down.</p>
+
+<p>The <strong>info~</strong> object, when it receives a bang in its inlet, provides information about the contents of a <strong>buffer~</strong> object. Since the <strong>buffer~</strong> object sends a bang out its right outlet when it has finished a read or replace operation, we can use that bang to get information about the sound that has just been loaded in. In this example, we see the length of the buffer, in milliseconds. You can use that information in other parts of your patch.</p>
+
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="playsamplefromRAM.maxpat">playsamplefromRAM.maxpat</a></li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>

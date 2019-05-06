@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>Getting Info From a Buffer</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.RAM-basedSamplePlayback.html">RAM-Based Sample Playback in Max</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>Getting Info From a Buffer</h1>
+
+<p>Open the patch 'bufferinfo'</p>
+
+<p><img class="img-fluid" src="bufferinfo.png"></p>
+
+<p>This patch doesn't play any audio, but it does allow us to access some useful information related to the audio data stored within our <strong>buffer~</strong> object.</p>
+
+<p>First, it is important to consider the arguments related to the <strong>buffer~</strong> object. All <strong>buffer~</strong> objects <em>must</em> be named so that they can be referred to by other objects for both playback and information. In this case, the buffer is labeled 'buff1'. The next argument is the length of the buffer in milliseconds, in this case it is one second long (or 44100 samples). Additional arguments could include the number of channels––if using stereo or multichannel audio––or specifying a default file to load into the buffer.</p>
+
+<p>In the latter case, we can load a default file into the <strong>buffer~</strong> by using the <em>read</em> message followed by the specified file name (remember that you must take into account where these files are stored on your computer and project file paths).</p>
+
+<p>If arguments are absent, when you load in a sound from a file with the <em>read</em> message the <strong>buffer~</strong> will be resized to hold the entire file. The <em>replace</em> message is like <em>read</em> except that it will always resize the <strong>buffer~</strong> regardless of the arguments.</p>
+
+<p>If I click these messages, it will load those files into the buffer and we will see the related objects and information change (and you should also notice that a bang has been sent out of the <strong>buffer~</strong>'s right outlet). You can also use the <em>replace</em> message to load in any other file stored on your computer into the buffer.</p>
+
+<p>If you want to view the contents currently stored in a buffer you can either use the <em>open</em> message or double-click on the <strong>buffer~</strong> object itself. Clicking and dragging, using your mouse, will display as a position in milliseconds out the <strong>buffer~</strong>'s left inlet. This can be useful if you want to determine playback cues for example.</p>
+
+<p>Another way to visualize the contents of a <strong>buffer~</strong> object is to use the <strong>waveform~</strong> object. This object––like all objects related to <strong>buffer~</strong>––requires that you identify and label which buffer it should refer to. In this case, we use the the <em>set</em> message followed by our buffer's name, 'buff1'. Changing the buffer will automatically change the display in the <strong>waveform~</strong> object.</p>
+
+<p>There are two other messages worth noting that can alter the contents of a buffer. The <em>normalize</em> message and the <em>apply gain</em> message will change the amplitude (i.e. volume) of the sound file within a buffer. Normalizing will calculate the maximum peak amplitude of a file and adjust the entire file so that it's peak amplitude matches the argument in the <em>normalize</em> message (i.e. this will raise or lower the entire file so that the peak amplitude matches the argument of the <em>normalize</em> message). This approach is useful when you are dealing with a number of different sound files that may have varying amplitudes and you want them to each peak at the same maximum amplitude. Another useful message is <em>apply gain</em>. This message will alter the entire amplitude of the file loaded into a buffer on each successive sending of the message. So, each time I click the '<em>apply gain 0.5</em>' message it will reduce the amplitude by 50%. This operation can also be undone using the <em>normalize</em> message again.</p>
+
+<h2>Downloads</h2>
+
+<p>Download the files used in the above examples by right-clicking the links, and
+then selecting "Save Link As...".</p>
+
+<ul>
+<li><a href="bufferinfo.maxpat">bufferinfo.maxpat</a></li>
+</ul>
+
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
