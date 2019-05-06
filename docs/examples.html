@@ -52,6 +52,30 @@
       <p>
       Because the fade-out takes a non-zero amount of time, it's necessary to delay stopping the sound file until the fade-out has taken place. So, whereas we can start the fade-in at the same time as we start the sound file, we need to wait for the fade-out to finish before we stop the file. So, we look for the off message (<i>0</i>), using a <b>select</b> object, which will send out a <i>bang</i> when it receives a match, and we then delay that bang with a <b>delay</b> object until the fade-out is done, then the <i>bang</i> triggers the message <i>0</i> to stop the <b>sfplay~</b> object.
       </p>
+      <p>
+        <a name="Ex03"><b>Example 3</b></a>: Schedule a future event
+      </p>
+      <p>
+        <a href="examples/max/patches/schedulefutureevent.maxpat"><img src="examples/max/images/schedulefutureevent.png" width=544 height=306 alt="Example 3" border=0></a>
+      </p>
+      <p>
+        Timing is very important in music. The fundamental way to ensure precise timing of events is to use a scheduler. A schedule is a list of time-tagged events to be executed at specific times in the future. That schedule must be consulted constantly at regular intervals (as often as possible, e.g., every millisecond) to see if any item on the list has a time tag that is less than or equal to the current time; if so, that event should be enacted.
+      </p>
+      <p>
+        Max has a master scheduler constantly running behind the scenes, and has various objects that allow you to post events on the schedule. The simplest of all of those is the <b>delay</b> object. When <b>delay</b> receives a <i>bang</i> in its left inlet, it schedules that <i>bang</i> to be sent out its outlet after a delay of a certain number of milliseconds, which has been specified in its right inlet. (Alternatively, if <b>delay</b> receives an <i>int</i> or a <i>float</i> in its left inlet, it uses that number to set its delay time, overwriting whatever number was previously set as the delay time, and schedules a <i>bang</i> to be sent out after that number of milliseconds has elapsed.)
+      </p>
+      <p>
+        The <b>delay</b> object can schedule only one <i>bang</i> at a time. If another <i>bang</i>, <i>int</i>, or <i>float</i> is received in its left inlet before the previously-scheduled <i>bang</i> has been sent out, the previously-scheduled <i>bang</i> will be pre-empted and the new <i>bang</i> will be scheduled instead. The message <i>stop</i> in the left inlet cancels any currently-scheduled <i>bang</i>. If the delay time in the right inlet is changed while a <i>bang</i> is scheduled, that doesn't change the timing of the existing scheduled <i>bang</i>; the new delay time only affects subsequently-scheduled <i>bang</i>s.
+      </p>
+      <p>
+        In this example, we use a bass drum sound and a snare drum sound as two stand-ins for the idea of "an event", but in fact an event can be any Max message, or combination of messages, even turning on or off other entire processes. The delay time might be only a few milliseconds, to make two things happen in rapid precisely-timed succession, or it could be a much longer time (though still expressed in terms of milliseconds) such as several seconds, minutes, or even hours.
+      </p>
+      <p>
+        Although it's not demonstrated in this example, it's also possible to specify the delay time in <a href="https://docs.cycling74.com/max7/vignettes/maxtime_syntax">tempo-relative time units</a>, such as <i>4n</i> for a quarter note, based on the current tempo of the Max <a href="https://docs.cycling74.com/max7/maxobject/transport">transport</a>, but in that case <b>delay</b> will only work when the transport is on.
+      </p>
+      <p>
+        The Max <b>delay</b> object is comparable to the <code>setTimeout()</code> method in JavaScript. When using JavaScript within a Max <b>js</b> object, the <code>setTimeout()</code> method is not available; the nearest equivalent is the <code>schedule()</code> method of <a href="https://docs.cycling74.com/max7/vignettes/jstaskobject">the Task() object</a>, but that will run in a low-priority thread of Max, not in the high-priority scheduler as Max's <b>delay</b> object does.
+      </p>
 
       <hr />
 
