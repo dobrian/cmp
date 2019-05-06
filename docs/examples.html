@@ -53,10 +53,28 @@
       Because the fade-out takes a non-zero amount of time, it's necessary to delay stopping the sound file until the fade-out has taken place. So, whereas we can start the fade-in at the same time as we start the sound file, we need to wait for the fade-out to finish before we stop the file. So, we look for the off message (<i>0</i>), using a <b>select</b> object, which will send out a <i>bang</i> when it receives a match, and we then delay that bang with a <b>delay</b> object until the fade-out is done, then the <i>bang</i> triggers the message <i>0</i> to stop the <b>sfplay~</b> object.
       </p>
       <p>
-        <a name="Ex03"><b>Example 3</b></a>: Schedule a future event
+        <a name="Ex03"><b>Example 3</b></a>: MIDI Keyboard Example
       </p>
       <p>
-        <a href="examples/max/patches/schedulefutureevent.maxpat"><img src="examples/max/images/schedulefutureevent.png" width=544 height=306 alt="Example 3" border=0></a>
+        <a href="examples/max/patches/midikeyboard.maxpat"><img src="examples/max/images/midikeyboard.png" class="img-fluid"></a>
+      </p>
+      <p>
+        <a name="Ex04"><b>Example 4</b></a>: Mouse Theremin
+      </p>
+      <p>
+        <a href="examples/max/patches/mousetheremin.maxpat"><img src="examples/max/images/mousetheremin.png" class="img-fluid"></a>
+      </p>
+      <p>
+        <a name="Ex05"><b>Example 5</b></a>: Saw Synth Demo
+      </p>
+      <p>
+        <a href="examples/max/patches/sawsynthdemo.maxpat"><img src="examples/max/images/sawsynthdemo.png" class="img-fluid"></a>
+      </p>
+      <p>
+        <a name="Ex06"><b>Example 6</b></a>: Schedule a future event
+      </p>
+      <p>
+        <a href="examples/max/patches/schedulefutureevent.maxpat"><img src="examples/max/images/schedulefutureevent.png" width=544 height=306 alt="Example 6" border=0></a>
       </p>
       <p>
         Timing is very important in music. The fundamental way to ensure precise timing of events is to use a scheduler. A schedule is a list of time-tagged events to be executed at specific times in the future. That schedule must be consulted constantly at regular intervals (as often as possible, e.g., every millisecond) to see if any item on the list has a time tag that is less than or equal to the current time; if so, that event should be enacted.
@@ -75,23 +93,6 @@
       </p>
       <p>
         The Max <b>delay</b> object is comparable to the <code>setTimeout()</code> method in JavaScript. When using JavaScript within a Max <b>js</b> object, the <code>setTimeout()</code> method is not available; the nearest equivalent is the <code>schedule()</code> method of <a href="https://docs.cycling74.com/max7/vignettes/jstaskobject">the Task() object</a>, but that will run in a low-priority thread of Max, not in the high-priority scheduler as Max's <b>delay</b> object does.
-      </p>
-        <a name="Ex03"><b>Example 3</b></a>: MIDI Keyboard Example
-      </p>
-      <p>
-        <a href="examples/max/patches/midikeyboard.maxpat"><img src="examples/max/images/midikeyboard.png" class="img-fluid"></a>
-      </p>
-      <p>
-        <a name="Ex04"><b>Example 4</b></a>: Mouse Theremin
-      </p>
-      <p>
-        <a href="examples/max/patches/mousetheremin.maxpat"><img src="examples/max/images/mousetheremin.png" class="img-fluid"></a>
-      </p>
-      <p>
-        <a name="Ex05"><b>Example 5</b></a>: Saw Synth Demo
-      </p>
-      <p>
-        <a href="examples/max/patches/sawsynthdemo.maxpat"><img src="examples/max/images/sawsynthdemo.png" class="img-fluid"></a>
       </p>
 
       <hr />
