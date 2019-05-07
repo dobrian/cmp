@@ -75,3 +75,24 @@ the filter becomes a highpass filter.
 
 <img src="./simplesthighpassresponsecurve.png"><br>
 _Effect of the highpass filter y<sub>n</sub> = (x<sub>n</sub>-x<sub>n-1</sub>)/2_
+
+---
+
+## Nth-order FIR Filter
+
+In the simple lowpass filter formula shown above, the coefficient of the delayed sample is always one minus the coefficient of the current input sample. If we were to make the two coefficients independent of each other we could write a slightly more general equation,
+
+_y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub>+a<sub>1</sub>x<sub>n-1</sub>_
+
+in which _a<sub>0</sub>_ and _a<sub>1</sub>_ could be any value (usually between -1 and 1). And, in fact, you could extrapolate from that an even more general equation that would provide a weighted sum of _any_ number of immediately preceding samples,
+
+_y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub>+a<sub>1</sub>x<sub>n-1</sub>+a<sub>2</sub>x<sub>n-2</sub>+ ... a<sub>N</sub>x<sub>n-N</sub>_
+
+Another way of writing that same formula is in the form of what's called summation notation or sigma notation.
+
+<img src="./FIRsigmanotation.png" width="225" height="105" border="0"><br>
+_FIR filter equation in sigma notation_
+
+The ordered set of coefficients in this equation is called its _impulse response_. In digital audio, the term impulse is used to refer to a single sample of value 1 (surrounded by 0s before and after it). If you were to feed an audio signal consisting of a 1 followed by N 0s in to this equation (and assume that all the prior samples had been 0s, as well), the output result would be a signal equal to the impulse response, the coefficients of the equation. The equation above describes what's called a finite impulse response (FIR) filter. For any finite signal that's put into it, the resulting output will also be finite, eventually returning to 0 N samples later. A filter equation consisting of the input sample plus N previous input samples is called an Nth-order FIR filter.
+
+An FIR filter in which all the coefficients are between -1 and 1 will only result in attenuation (reduction of amplitude) of the signal at certain frequencies. It will not resonate (increase) the energy at any frequency.

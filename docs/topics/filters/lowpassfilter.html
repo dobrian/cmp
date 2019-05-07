@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>Simple Lowpass Filter</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="TOP LEVEL URL">Simple Lowpass Filter</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+
+
+
+<h1 id="simple-lowpass-filter">Simple Lowpass Filter</h1>
+<hr>
+<h2 id="introduction">Introduction</h2>
+<p>A lowpass filter reduces the high-frequency content of a signal while allowing lower frequencies to pass through.</p>
+<p>There are many reasons why one might want to attenuate or remove high frequencies. In the analog-to-digital conversion (ADC) process of digitizing an electrical signal, it&#39;s important to remove frequencies that are above the Nyquist frequency (i.e., that are above 1/2 the sampling rate) so that they wont be misrepresented in the digital signal. A lowpass filter used for that purpose is called an <em>anti-aliasing</em> filter. In a digital signal received from a sensor (e.g., a motion detector), the data might be noisy and jittery or might contain occasional spurious incorrect values. A <em>smoothing</em> lowpass filter can smooth out those inconsistencies. And in the case of an audio signal, a lowpass filter is often used to reduce high-frequency hiss in a recording, or to reduce the amplitude of upper frequencies in the sound itself, in order to change the sound&#39;s timbre.</p>
+<p>In all cases, reducing high frequency content of a signal results in a slightly smoother-looking waveform in the time domain.</p>
+<hr>
+<h2 id="the-simplest-lowpass-filter">The Simplest Lowpass Filter</h2>
+<p>Most lowpass filters smooth the input signal by taking a weighted combination of the current input sample and one or more previous samples, to calculate a weighted moving average. The simplest example of this would be a filter that outputs the average (mean) of the current input sample and the previous input sample. The difference equation for that lowpass filter would be:</p>
+<p><em>y<sub>n</sub> = (x<sub>n</sub>+x<sub>n-1</sub>)/2</em></p>
+<p>where <em>x<sub>n</sub></em> is the value of the current input sample, <em>x<sub>n-1</sub></em> is the previous input sample, and <em>y<sub>n</sub></em> is the current output sample.</p>
+<p>This kind of averaging won&#39;t alter the input signal much at all if the signal is changing very gradually from one sample to the next, but it will smooth the signal considerably if the input changes drastically from sample to sample. Thus, high frequencies, which cause more rapid and radical change in the signal, get smoothed out a little, reducing the high-frequency energy.</p>
+<p>In case that&#39;s not intuitively obvious to you, let&#39;s look at a couple of examples. If an input stream of numbers is 0. 0.1 0.2 0.4 0.5 0.3 0.1 0.&mdash;and we assume an initial <em>x<sub>n-1</sub></em> with a value of 0.&mdash;the output would be 0. 0.05 0.15 0.3 0.45 0.4 0.2 0.05, which has a progression and shape very similar to the input.</p>
+<p><img src="./smoothcurve.png"><br>
+<em>A smooth input is only slightly smoothed by the lowpass filter</em></p>
+<p>Whereas, with a jagged input stream (containing high-frequency energy), a smoothing filter will have a more remarkable effect. With an input stream such as 0.8 0.7 -0.1 0.9 -0.9 0.1 -0.4 0.4, the output would be 0.4 0.75 0.3 0.4 0. -0.4 0.15 0., which is significantly different in shape and amplitude (especially of the jagged high-frequency edges) from the input.</p>
+<p><img src="./jaggedcurve.png"><br>
+<em>A jagged input is more noticeably smoothed by the lowpass filter</em></p>
+<p>Similarly, in audio signals, a sound without much high-frequency energy, such as the 1000 Hz sine tone shown below, is not much affected by this simple lowpass filter.</p>
+<p><img src="./sinelpfiltered.png"><br>
+<em>A 1KHz sine tone almost totally unaffected by the lowpass filter</em></p>
+<p>Whereas a noise signal will show a more significant change because of the attenuation of its high frequencies.</p>
+<p><img src="./noiselpfiltered.png"><br>
+<em>A noisy input is changed more by the lowpass filter</em></p>
+<p>Below, you can see the gently sloping amplitude response of this lowpass filter shown as a graph of amplitude over frequency.</p>
+<p><img src="./simplestlowpassresponsecurve.png"><br>
+<em>Effect of the lowpass filter y<sub>n</sub> = (x<sub>n</sub>+x<sub>n-1</sub>)/2</em></p>
+<hr>
+<h2 id="adjustable-lowpass-filter">Adjustable Lowpass Filter</h2>
+<p>It&#39;s worth pointing out that the averaging filter described above is just one instance of a slightly more general filter that would allow any balance between the current input sample and the previous input sample. The averaging equation above could be restated equivalently as</p>
+<p><em>y<sub>n</sub> = 0.5x<sub>n</sub>+0.5x<sub>n-1</sub></em></p>
+<p>and that&#39;s a particular case of the equation</p>
+<p><em>y<sub>n</sub> = ax<sub>n</sub>+(1-a))x<sub>n-1</sub></em></p>
+<p>in which the current input value is multiplied by a coefficent <em>a</em> and the previous input value is multiplied by <em>(1-a)</em>. When the value of the coefficient <em>a</em> is 1, there will be no change to the input (the delayed input sample will be multiplied by 0), whereas when the value of the coefficient <em>a</em> is 0.5, <em>1-a</em> will also equal 0.5, yielding the average of the most recent two input samples. Any value of <em>a</em> between 1 and 0 will provide a different weighting between the two samples.</p>
+<p>(It&#39;s worth noting that the filter&#39;s effect becomes strongest as <em>a</em> approaches 0.5. As <em>a</em> goes below 0.5 toward 0, the filter&#39;s effect becomes weaker until, when <em>a</em> = 0, the output is the same as the input, just delayed by one sample.)</p>
+<p>Interestingly, if we change the + operator to a - operator in the above equation,</p>
+<p><em>y<sub>n</sub> = ax<sub>n</sub>-(1-a))x<sub>n-1</sub></em></p>
+<p>or</p>
+<p><em>y<sub>n</sub> = ax<sub>n</sub>+(a-1))x<sub>n-1</sub></em></p>
+<p>the filter becomes a highpass filter.</p>
+<p><img src="./simplesthighpassresponsecurve.png"><br>
+<em>Effect of the highpass filter y<sub>n</sub> = (x<sub>n</sub>-x<sub>n-1</sub>)/2</em></p>
+<hr>
+<h2 id="nth-order-fir-filter">Nth-order FIR Filter</h2>
+<p>In the simple lowpass filter formula shown above, the coefficient of the delayed sample is always one minus the coefficient of the current input sample. If we were to make the two coefficients independent of each other we could write a slightly more general equation,</p>
+<p><em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub>+a<sub>1</sub>x<sub>n-1</sub></em></p>
+<p>in which <em>a<sub>0</sub></em> and <em>a<sub>1</sub></em> could be any value (usually between -1 and 1). And, in fact, you could extrapolate from that an even more general equation that would provide a weighted sum of <em>any</em> number of immediately preceding samples,</p>
+<p><em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub>+a<sub>1</sub>x<sub>n-1</sub>+a<sub>2</sub>x<sub>n-2</sub>+ ... a<sub>N</sub>x<sub>n-N</sub></em></p>
+<p>Another way of writing that same formula is in the form of what&#39;s called summation notation or sigma notation.</p>
+<p><img src="./FIRsigmanotation.png" width="225" height="105" border="0"><br>
+<em>FIR filter equation in sigma notation</em></p>
+<p>The ordered set of coefficients in this equation is called its <em>impulse response</em>. In digital audio, the term impulse is used to refer to a single sample of value 1 (surrounded by 0s before and after it). If you were to feed an audio signal consisting of a 1 followed by N 0s in to this equation (and assume that all the prior samples had been 0s, as well), the output result would be a signal equal to the impulse response, the coefficients of the equation. The equation above describes what&#39;s called a finite impulse response (FIR) filter. For any finite signal that&#39;s put into it, the resulting output will also be finite, eventually returning to 0 N samples later. A filter equation consisting of the current input sample plus N previous input samples is called an Nth-order FIR filter.</p>
+<p>An FIR filter in which all the coefficients are between -1 and 1 will only result in attenuation (reduction of amplitude) of the signal at certain frequencies. It will not resonate (increase) the energy at any frequency.</p>
+
+      <div id="vocabulary">
+        <h2>Vocabulary</h2>
+        <ul>
+          <li>Lowpass filter</li>
+          <li>Difference equation</li>
+          <li>Filter coefficients</li>
+          <li>Impulse response</li>
+          <li>Summation notation (sigma notation)</li>
+          <li>Finite impulse response (FIR) filter</li>
+        </ul>
+      </div>
+
+      <div id="self-quiz">
+        <h2>Self-Quiz</h2>
+        <ol>
+          <li>Does a lowpass filter suppress low frequencies or high frequencies?</li>
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">A lowpass filter passes through low frequencies, and suppresses high frequencies.</p>
+
+          <li>What do sharp angles in an audio waveform indicate?</li>
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-2" class="answer" style="display: none">The presence of high-frequency energy in the signal</p>
+
+          <li>What a term for an equation that combines weighted delayed samples of a digital signal?</li>
+          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-3" class="answer" style="display: none">Difference equation</p>
+
+          <li>What's an impulse?</li>
+          <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-4" class="answer" style="display: none">A signal consisting of a single sample of value 1, surrounded by 0s before and after it</p>
+
+          <li>What do we call a filter equation consisting of the only the current input sample plus N previous input samples?</li>
+          <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-5" class="answer" style="display: none">An (Nth-order) finite impulse response (FIR) filter</p>
+
+          <li>What is impulse response of a FIR filter?</li>
+          <button id="question-6" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-6" class="answer" style="display: none">It's the output when the input is an impulse. It's the same as the ordered set of coefficients of the terms of the filter equation.</p>
+
+        </ol>
+      </div>
+
+      <div>
+        <h2>Additional Resources</h2>
+        <ul>
+          <li><a href="https://ccrma.stanford.edu/~jos/filters/"><i>Introduction to Digital Filters</a> with Audio Applications</i> by Julius O. Smith</li>
+        </ul>
+      </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
