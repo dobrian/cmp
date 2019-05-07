@@ -94,6 +94,24 @@
       <p>
         The Max <b>delay</b> object is comparable to the <code>setTimeout()</code> method in JavaScript. When using JavaScript within a Max <b>js</b> object, the <code>setTimeout()</code> method is not available; the nearest equivalent is the <code>schedule()</code> method of <a href="https://docs.cycling74.com/max7/vignettes/jstaskobject">the Task() object</a>, but that will run in a low-priority thread of Max, not in the high-priority scheduler as Max's <b>delay</b> object does.
       </p>
+      <p>
+        <a name="Ex07"><b>Example 7</b></a>: DIY ring buffer
+      </p>
+      <p>
+        <a href="examples/max/patches/ringbufferdemo.maxpat"><img src="examples/max/images/ringbufferdemo.png" width=741 height=545 alt="Example 7" border=0></a>
+      </p>
+      <p>
+        For time-delayed audio, we need to create what's called a "<a href="https://en.wikipedia.org/wiki/Circular_buffer">circular buffer</a>" or a "ring buffer", an array of samples to which we record continuously in a loop, and which we can then use always to access the most recently recorded sound from the past.
+      </p>
+      <p>
+        The MSP object <b>delay~</b> does exactly that. And another pair of objects&mdash;<b>tapin~</b> and <b>tapout~</b> does the same thing, but with a minimum delay of one signal vector so that you can even feed the delayed sound back into the delay loop. However, in this example, we build and access a ring buffer ourselves, just to demonstrate inner workings of the process in a little more detail.
+      </p>
+      <p>
+        The <b>buffer~</b> object creates an array in RAM for storing sound and accessing it in a variety of ways. Here we create a one-second buffer, and we use a sample counter (the <b>count~</b> object) to put each sample of the incoming sound (from <b>adc~</b>) into that array, using the <b>poke~</b> object to access individual sample locations in the array. At the same time, we can use that same sample counter, which is always pointing to the location of the current time in the array, to calculate the signal some amount of time (some number of samples) in the past. If the current time in samples minus the delay time in samples is less than 0, we need to wrap the calculated sample location back into the array (by adding the number of samples in the array); that's what the <b>pong~</b> object does for us.
+      </p>
+      <p>
+        You can try this out yourself, but beware of the possibility of feedback, since this patch sends the incoming sound from <b>adc~</b>, with some delay, right back out via the <b>dac~</b>.
+      </p>
 
       <hr />
 
