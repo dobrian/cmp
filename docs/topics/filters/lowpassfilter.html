@@ -73,7 +73,7 @@
 <h2 id="nth-order-fir-filter">Nth-order FIR Filter</h2>
 <p>In the simple lowpass filter formula shown above, the coefficient of the delayed sample is always one minus the coefficient of the current input sample. If we were to make the two coefficients independent of each other we could write a slightly more general equation,</p>
 <p><em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub>+a<sub>1</sub>x<sub>n-1</sub></em></p>
-<p>in which <em>a<sub>0</sub></em> and <em>a<sub>1</sub></em> could be any value (usually between -1 and 1). And, in fact, you could extrapolate from that an even more general equation that would provide a weighted sum of <em>any</em> number of immediately preceding samples,</p>
+<p>in which <em>a<sub>0</sub></em> and <em>a<sub>1</sub></em> could be any values (usually between -1 and 1). And, in fact, you could extrapolate from that an even more general equation that would provide a weighted sum of <em>any</em> number of immediately preceding samples,</p>
 <p><em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub>+a<sub>1</sub>x<sub>n-1</sub>+a<sub>2</sub>x<sub>n-2</sub>+ ... a<sub>N</sub>x<sub>n-N</sub></em></p>
 <p>Another way of writing that same formula is in the form of what&#39;s called summation notation or sigma notation.</p>
 <p><img src="./FIRsigmanotation.png" width="225" height="105" border="0"><br>
