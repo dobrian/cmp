@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>Getting to the Frequency Domain: In Practice</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.fourier-transform.html">The Fourier Transform</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>Getting to the Frequency Domain: In Practice</h1>
+
+<p>How do we get from the time domain to the frequency domain in Max?  There are
+two tutorials, <a href="https://docs.cycling74.com/max7/tutorials/14_analysischapter03">Using the
+FFT</a> and
+<a href="https://docs.cycling74.com/max7/tutorials/14_analysischapter04">Signal Processing with
+pfft~</a>, that
+describe this process in great detail.  Please read these! The first
+tutorial—Using the FFT—focuses mostly on the <strong>fft~</strong> object, which can
+actually be a bit unwieldy and hard-to-use.  Therefore, focus more on the
+second tutorial—Signal Processing with <strong>pfft~</strong>—which provides an easier way
+to navigate some of these difficult concepts.</p>
+
+<p>What follows here are some mini-tutorials, in an attempt to further simplify some of the material in the more wide-ranging tutorials linked above.</p>
+
+<h3>Mini-Tutorial 1: Visualizing the Frequency Spectrum</h3>
+
+<p>Quick vocab review: when discussing timbre, and the relative strength of the
+sine tones that compose a given pitch, we can refer to the totality of a
+sound's frequency-to-magnitude mappings as its "spectrum".  Put more simply, do
+you remember that visualization of the frequency domain, with frequency on the
+x axis and magnitude on the y axis?  That's called a "spectrum".  In Max, we
+can visualize a spectrum of a sound with the object <strong>spectroscope~</strong>.</p>
+
+<p><img src="spectrogram.png" />
+<caption>The <strong>spectroscope~</strong> object, in "spectrogram" mode.</caption></p>
+
+<p>The <strong>spectroscope~</strong> object has two modes: spectrogram and sonogram.  The
+spectrogram is what we've been discussing: a snapshot of magnitude over
+frequency.  The sonogram is actually a map of frequency over time, with high
+frequencies at the top of the y axis and low frequencies at the bottom of the y
+axis.  Dark points represent louder frequencies, while lighter points represent
+softer ones.</p>
+
+<p><img src="sonogram.png" />
+<caption>The <strong>spectroscope~</strong> object, in "sonogram" mode.</caption></p>
+
+<p>To switch between spectrogram and sonogram modes, change the "Display Mode"
+attribute in the inspector window.</p>
+
+<h3>Mini-Tutorial 2: How to Use pfft~</h3>
+
+<p>The <strong>pfft~</strong> object has a number of unusual quirks.  The first is that its
+first argument is <em>the name of a Max patch</em>.  That's right: for <strong>pfft~</strong> to
+work, you need to create completely separate, secondary Max patch that contains
+all of the frequency-domain processing you want to do.  A common convention is
+to postfix the filename of this secondary Max patch with "_pfft" so that other
+programmers understand what the patch is doing.  For example, you might have a
+patch called "spectral<em>gate.maxpat", which contains the object <strong>pfft~
+spectral</em>gate<em>pfft.maxpat</strong>.  So long as "spectral</em>gate_pfft.maxpat" is in same
+folder or elsewhere on the search path, the <strong>pfft~</strong> will function correctly.</p>
+
+<p>The second argument of <strong>pfft~</strong> is the FFT frame size.  Review the <a href="1.getting-to-the-frequency-domain-theory.html">previous
+lession</a> if you're unsure what this means.  To review, this must be a
+power of 2, and the most common values are 1024, 2048, and 4096.</p>
+
+<p>The third argument of <strong>pfft~</strong> is the <em>overlap factor</em>.  One way to counteract
+the time-resolution/frequency-resolution tradeoff described in the previous
+lession is to have FFT frames overlap with one another.  Usually this overlap
+factor is fairly small, somewhere around 4.</p>
+
+<p>That's it for <strong>pfft~</strong> arguments!  Now let's move on now to the interior Max
+patch—the one that actually does the <strong>pfft~</strong> processing.</p>
+
+<p>To change the number of inlets and outlets of <strong>pfft~</strong>, create <strong>fftin~</strong> and
+<strong>fftout~</strong> objects.  These take one required argument: the (1-indexed) order
+of inlet/outlet the object corresponds to on the outer-level.  So, if you want
+to create a <strong>pfft~</strong> with two inlets and one outlet, create the objects
+<strong>fftin~ 1</strong>, <strong>fftin~ 2</strong>, and <strong>fftout~ 1</strong>.</p>
+
+<p>If you look at the three outlets of an <strong>fftin~</strong>, you'll see the leftmost is
+labeled "Real Input", the middle is labeled "Imaginary Input", and the
+rightmost is labeled "FFT Bin Index".  For the first two—real and
+imaginary—these correspond to what are called the "cosine coefficient" and
+"sine coefficient" of each frequency bin of the FFT.  Unless you really know
+what you're doing, these coefficients will be of little use to you.  To get the
+magnitude of each frequency bin—what you're probably really looking for—you
+have to run <em>both</em> the real and imaginary inputs through a <strong>cartopol~</strong>
+object.  Then, the left outlet of <strong>cartopol~</strong> will correspond to magnitude,
+while the right outlet of <strong>cartopol~</strong> will correspond to phase.</p>
+
+<p>When done playing around with magnitude and phase values, don't forgot to
+run those values back through a <strong>poltocar~</strong> before passing them to
+<strong>fftout~</strong>!</p>
+
+<p>Finally, the "FFT Bin Index" outlet of <strong>fftin~</strong> tells you which bin the
+corresponding cosine and sine coefficients belong to.  One quirk of this is
+that this bin index only goes up to <em>half</em> the FFT size.  So, if your FFT size
+is 4096, the FFT bin index will top out at 2047.  This is because the
+frequencies from bins 2048 through 4095 will be above the Nyquist frequency,
+and so are of no use for us.  To review what the Nyquist frequency is, reread
+Prof. Dobrian's <a href="http://music.arts.uci.edu/dobrian/digitalaudio.htm">Digital
+Audio</a> article.</p>
+
+<h3>Mini-Tutorial 3: Creating a Spectral Gate</h3>
+
+<p>Let's compose a cool audio effect that's only possible by translating to and
+from the frequency domain: a "spectral gate".  Whereas a "noise gate" takes an
+input signal, and only lets amplitude values pass through that are above a
+given threshold, a spectral gate takes an input signal, and only lets
+<em>frequency bins</em> pass through whose <em>magnitudes</em> are above a given threshold.
+You can download this example below.</p>
+
+<p><img src="spectral_gate.png" />
+<caption>Outer-level spectral gate patch</caption></p>
+
+<p><img src="spectral_gate_pfft.png" />
+<caption>View of "spectral<em>gate</em>pfft"</caption></p>
+
+<h2>Downloads</h2>
+
+<ul>
+<li><a href="spectral_gate.zip">spectral_gate.zip</a></li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
