@@ -1,49 +1,49 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
-    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
-    <title>Getting to the Frequency Domain: In Theory</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="0.fourier-transform.html">The Fourier Transform</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="container">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+  <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+  <title>Getting to the Frequency Domain: In Theory</title>
+ </head>
+ <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+     <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link" href="0.fourier-transform.html">The Fourier Transform</a>
+    </li>
+   </ul>
+  </nav>
+  <div class="container">
 
 <h1>Getting to the Frequency Domain: In Theory</h1>
 
 <h3>What Is Timbre?</h3>
 
-<p>A trumpet plays middle C.  A violin plays middle C.  They are playing the same
-note, yet why do they sound different?  The answer is that these two instruments
-have different <strong>timbres</strong>.  (Prounounced "TAM-ber", not "TIM-ber" or
+<p>A trumpet plays middle C. A violin plays middle C. They are playing the same
+note, yet why do they sound different? The answer is that these two instruments
+have different <strong>timbres</strong>. (Prounounced "TAM-ber", not "TIM-ber" or
 "TIM-bruh".)</p>
 
 <p>As discussed in the <a href="https://dobrian.github.io/cmp/topics/physics-of-sound/0.index.html">Physics of
 Sound</a>
-topic, every pitch is composed of multiple sine waves.  The lowest sine wave is
+topic, every real-world pitched tone is composed of multiple sine waves. The lowest sine wave is
 called the "fundamental frequency"; for middle C, (aka C4) this is around
-261.63 Hz.  The higher sine waves are all at integer multiples of the
-fundamental frequency: the first overtone is 261.63 x 2 = 523.26 Hz (aka C5),
-the second overtone is 261.63 x 3 = 784.89 Hz (aka G5), and so on to infinity.</p>
+261.63 Hz. The higher sine waves are all at integer multiples of the
+fundamental frequency: the first overtone (the second harmonic) is 261.63 x 2 = 523.26 Hz (aka C5),
+the second overtone (the third harmonic) is 261.63 x 3 = 784.89 Hz (aka G5), and so on to infinity.</p>
 
 <p>The reason why the trumpet and the violin sound different has everything to do
-with these overtones.  <em>An pitch's timbre is entirely determined by the
-relative loudnesses (aka amplitudes) of the sine waves that compose it.</em>  So,
+with these overtones. <em>A pitch's timbre is entirely determined by the
+relative loudnesses (aka amplitudes) of the sine waves that compose it, and the way that those amplitudes vary over time.</em> So,
 one might imagine that for one instrument, the 2nd, 4th, and 7th overtones are
 particularly loud, while for another instrument, the 3rd, 4th, and 11th
 overtones are particularly loud, and so the two instruments would end up
@@ -54,96 +54,96 @@ The answer can be found by visualizing the sound in the frequency domain.</p>
 
 <h3>The Frequency Domain</h3>
 
+<p>
+The French mathematician Jean-Baptiste Joseph de Fourier&mdash;who lived in the late 18th and early 19th centuries, contemporaneously with Beethoven&mdash;demonstrated that any periodic wave can be expressed as the sum of harmonically related sinusoids, each with its own amplitude and phase. Given a digital representation of a periodic wave, one can employ a formula known as the discrete Fourier transform (DFT) to calculate the frequency, phase, and amplitude of its sinusoidal components. Essentially, the DFT transforms a time-domain representation of a sound wave into a frequency-domain spectrum. This spectrum can also be transformed back into a time-domain waveform.
+</p>
+
 <p>Normally, we look at sounds in the time domain: amplitude on the y axis, and
-time on the x axis.  We line up a bunch of samples on the x axis, graph their
+time on the x axis. We line up a bunch of samples on the x axis, graph their
 amplitudes, and the result looks something like this:</p>
 
 <p><img class="img-fluid" src="time_domain.png" /></p>
 <p><small><em>A sound represented in the time domain.</em></small></p>
 
-<p>In the frequency domain, the picture is different.  On the x axis, we have what
-are called "frequency bins".  These are evenly-spaced frequencies, with 0 Hz on
-the leftmost side of the graph, and a hair under 44100 Hz (or whatever the
-sampling rate is) on the rightmost side of the graph.  Unlike the time
-domain—in which the x axis can theoretically stretch to infinity—the frequency
-domain is bounded by 0 Hz on the left and (a bit less than) the sampling rate
-on the right.  On the y axis, we have the relative magnitude at that frequency.
+<p>In the frequency domain, the picture is different. On the x axis, we have what
+are called "frequency bins". These are evenly-spaced frequencies, with 0 Hz on
+the leftmost side of the graph, and the Nyquist frequency (one half the sampling rate) on the rightmost side of the graph. Unlike the time
+domain&mdash;in which the x axis can theoretically stretch to infinity&mdash;the frequency
+domain is bounded by 0 Hz on the left and the Nyquist frequency on the right. On the y axis, we have the relative magnitude at that frequency.
 Unlike in the time domain, where amplitudes are bounded between -1 and 1; in
 the frequency domain, magnitudes are bounded between 0 on the low end, and some
-much higher number on the high end.   The exact value of this higher bound is
-determined by the specific mechanics of the FFT; a common value is something
-like 256 (though it's <em>not always</em> a power of 2).</p>
+much higher number on the high end.  The exact value of this higher bound for the magnitudes is
+determined by the specific mechanics of the FFT.</p>
 
-<p>Here is an image of a sound in the frequency domain.  A picture like this is
+<p>Here is an image of a sound in the frequency domain, up to the Nyquist frequency. A picture like this is
 often called a "frame":</p>
 
 <p><img class="img-fluid" src="frame.png" /></p>
-<p><small><em>A "frame" of an FFT.  The y axis is magnitude; the x axis is frequency.</small></em></p>
+<p><small><em>A "frame" of an FFT. The y axis is magnitude; the x axis is frequency.</small></em></p>
 
 <p>At this point, you should be comfortable with how sound is represented in the
-time domain and the frequency domain.  But how do you translate from one to the
-other?  The answer is the Fourier Transform.</p>
+time domain and the frequency domain. But how do you translate from one to the
+other? The answer is the Fourier Transform.</p>
 
 <h3>Fourier Transform</h3>
 
-<p>The actual mechanics of the Fourier Transform are beyond the scope of this
-lesson.  (See the Additional Resources section if you're really looking to get
-into the weeds.)  However, there are a few general principles you should
+<p>The actual mathematics of the Fourier Transform are beyond the scope of this
+lesson. (See the Additional Resources section if you're really looking to get
+into the weeds.) However, there are a few general principles you should
 understand about how the Fourier Transform works.</p>
 
-<p>First, there are a number of ways to implement a Fourier Transform.  The most
+<p>First, there's a number of ways to implement a Fourier Transform. The most
 common in computer music is the "Fast Fourier Transform", usually abbreviated
-"FFT".  The FFT is a computationally optimized way of computing a Fourier
+"FFT". The FFT is a computationally optimized way of computing a Fourier
 Transform, but it also requires a few constraints on the Fourier Transform
 itself, described below.</p>
 
 <p>Before running a Fourier Transform, you need to determine the size of the FFT
-frame, which—as stated in the previous section—is the same thing as determining
-how many frequency bins you want to create.  In the FFT, your frame size must
-be a power of 2: the most common sizes are 1024, 2048, and 4096.  That means,
+frame, which&mdash;as stated in the previous section&mdash;is the same thing as determining
+how many frequency bins you want to create. In the FFT, your frame size must
+be a power of 2: the most common sizes for audio are 1024, 2048, and 4096. That means,
 your FFT frame will have 1024 bins, 2048 bins, or 4096 bins.</p>
 
-<p>Since we know that the frequency bins are evenly spaced, between 0 and (a
-little less than) the sampling rate, we can easily calculate the frequency at
+<p>Since we know that the frequency bins are evenly spaced, between 0 and the sampling rate, we can easily calculate the frequency at
 each bin using the following formulae:</p>
 
 <pre><code>bin spacing = sampling rate / FFT frame size
 bin frequency = bin index * bin spacing
 </code></pre>
 
-<p>As an example, witha sampling rate of 44100, and an FFT frame size of 2048,
-then our bin spacing will be 44100 / 2048 = 21.53 Hz.  That means our 0th bin
-has a frequency of 21.53 x 0 = 0 Hz, our 1st bin has a frequency of 21.53 x 1 =
-21.53 Hz, our 2nd bin has a frequency of 21.53 x 2 = 43.06 Hz, and so on up to
-21.52 x 2047 = 44071.91 Hz.</p>
+<p>As an example, with a sampling rate of 44100, and an FFT frame size of 2048,
+then our bin spacing will be 44100 / 2048 = 21.533 Hz. That means our 0th bin
+has a frequency of 21.533 x 0 = 0 Hz, our 1st bin has a frequency of 21.533 x 1 =
+21.533 Hz, our 2nd bin has a frequency of 21.533 x 2 = 43.07 Hz, and so on up to
+21.533 x 1023 = 22028.26 Hz. The next bin represents the magnitude of energy at the Nyquist frequency, and the subsequent bins contain the magnitude at negative frequencies from the Nyquist frequency back up to 0. Because, in an audio signal, the negative frequencies generally mirror the positive frequencies, we usually visualize only the positive frequencies up to the Nyquist frequency, as in the graphic above.</p>
 
 <h3>Time vs. Frequency Tradeoff</h3>
 
 <p>Given the equations above, you might wonder why we don't pick a super-large FFT
-size, like 4096 or even 8192 or 16384, all the time.  After all, the greater
-your FFT size, the more frequency bins—and therefore the greater "frequency
-resolution"—you will have, no?</p>
+size, like 4096 or even 8192 or 16384, all the time. After all, the greater
+your FFT size, the more frequency bins&mdash;and therefore the greater "frequency
+resolution"&mdash;you will have, no?</p>
 
 <p>The issue is that, in order to generate an FFT of a given frame size, you need
 to record and save the <strong>exact same number of samples</strong> in the time domain.
 So, if you want to create an extremely large FFT—like one with 16384 frequency
-bins—that means you need to record 16384 samples of data.  At a sampling rate
-of 44100 Hz, that's 16384 / 44100 = 0.37 seconds of music.  A lot can happen in
-0.37 seconds!  Most instruments can play at least four distinct notes in that
+bins—that means you need to record 16384 samples of data. At a sampling rate
+of 44100 Hz, that's 16384 / 44100 = 0.37 seconds of music. A lot can happen in
+0.37 seconds! Most instruments can play at least four distinct notes in that
 span, if not many more.</p>
 
 <p>So, let's say you wanted to use an FFT to do pitch detection (i.e. guessing the
-pitch an instrument is playing).  If your musician plays too quickly, you'll
+pitch an instrument is playing). If your musician plays too quickly, you'll
 actually get <strong>multiple notes</strong> inside your FFT frame, but it will look as if
-those notes were played simultaneously, even though they weren't.  Maybe that's
-an acceptible side effect, but chances are you want to have some sense of when
+those notes were played simultaneously, even though they weren't. Maybe that's
+an acceptable side effect, but chances are you want to have some sense of when
 each note was played.</p>
 
-<p>Do you see the conundrum?  In order to get more resolution in the frequency
-domain, you have to sacrifice resolution in the time domain.  But if you go the
-other way and have more FFT frames per second—i.e. more resolution in the time
-domain-you'll end up with a greater bin spacing, thus sacrificing resolution in
-the frequency domain.  This tradeoff is unavoidable.  As a consequence, you
+<p>Do you see the conundrum? In order to get more resolution in the frequency
+domain, you have to sacrifice resolution in the time domain. But if you go the
+other way and have more FFT frames per second&mdash;i.e. more resolution in the time
+domain&mdash;you'll end up with a greater bin spacing, thus sacrificing resolution in
+the frequency domain. This tradeoff is unavoidable. As a consequence, you
 should think carefully about your technical needs as well as the musical
 situation when choosing an FFT frame size.</p>
 
@@ -151,13 +151,13 @@ situation when choosing an FFT frame size.</p>
 <h2>Self-Quiz</h2>
 
 <ol>
-  <li>With a sampling rate of 48000 and an FFT frame size of 1024, what is the frequency of the 567th (0-indexed) bin?</li>
-  <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-  <p id="answer-1" class="answer" style="display: none">26578.125 Hz</p>
+ <li>With a sampling rate of 48000 and an FFT frame size of 1024, what is the frequency of the 11th (0-indexed) bin?</li>
+ <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+ <p id="answer-1" class="answer" style="display: none">468.75 Hz, calculated as 10 &middot; samplerate / framesize</p>
 
-  <li>With a sampling rate of 44100 and an FFT frame size of 4096, what is the frequency of the 3054th (1-indexed) bin?</li>
-  <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-  <p id="answer-2" class="answer" style="display: none">32870.4 Hz (if you got 32881.2 Hz, you missed the fact that this question 1-indexed the bins!) </p>
+ <li>With a sampling rate of 44100 and an FFT frame size of 4096, what is the frequency of the 2048th (1-indexed) bin?</li>
+ <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+ <p id="answer-2" class="answer" style="display: none">22039.23 Hz (if you got 22,050 Hz, you missed the fact that this question 1-indexed the bins!) </p>
 </ol>
 
 <h2>Additional Resources</h2>
@@ -170,17 +170,18 @@ that takes you through absolutely every step with only a minimum of
 mathematical jargon.</li>
 <li>For the more mathematically-inclined, there's a good <a href="https://www.youtube.com/watch?v=1JnayXHhjlg">online video series</a>
 by Brian Douglas.</li>
+<li>For a different, conceptual look at the math of the Fourier transform, you might want to take a look at <a href="https://www.youtube.com/watch?v=spUNpyF58BY">"But what is the Fourier Transform? A visual introduction."</a></li>
 </ul>
 
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-    <script>
-    //$('pre').addClass("javascript");
-    hljs.initHighlightingOnLoad();
-    </script>-->
-    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
-  </body>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+  //$('pre').addClass("javascript");
+  hljs.initHighlightingOnLoad();
+  </script>-->
+  <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+ </body>
 </html>
