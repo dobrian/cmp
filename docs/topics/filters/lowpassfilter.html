@@ -61,6 +61,9 @@
 <p>and that&#39;s a particular case of the equation</p>
 <p><em>y<sub>n</sub> = ax<sub>n</sub>+(1-a))x<sub>n-1</sub></em></p>
 <p>in which the current input value is multiplied by a coefficent <em>a</em> and the previous input value is multiplied by <em>(1-a)</em>. When the value of the coefficient <em>a</em> is 1, there will be no change to the input (the delayed input sample will be multiplied by 0), whereas when the value of the coefficient <em>a</em> is 0.5, <em>1-a</em> will also equal 0.5, yielding the average of the most recent two input samples. Any value of <em>a</em> between 1 and 0 will provide a different weighting between the two samples.</p>
+<p>In case it helps to see a graphic representation of that, here is the way that filter algorithms are often depicted diagrammatically. The symbol <i>z<sub>-1</sub></i> means delay by one sample, and the triangle icons indicate amplification (multiplication) by the indicated coefficient.</p>
+<p><img src="onezerolowpass.png" width="495" height="249" border="0"><br>
+<em>First-order FIR filter</em></p>
 <p>(It&#39;s worth noting that the filter&#39;s effect becomes strongest as <em>a</em> approaches 0.5. As <em>a</em> goes below 0.5 toward 0, the filter&#39;s effect becomes weaker until, when <em>a</em> = 0, the output is the same as the input, just delayed by one sample.)</p>
 <p>Interestingly, if we change the + operator to a - operator in the above equation,</p>
 <p><em>y<sub>n</sub> = ax<sub>n</sub>-(1-a))x<sub>n-1</sub></em></p>

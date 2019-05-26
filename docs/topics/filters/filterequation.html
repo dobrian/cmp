@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>The General Filter Equation</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="TOP LEVEL URL">The General Filter Equation</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>The general filter equation</h1>
+
+<hr />
+
+<h2>FIR and IIR filters</h2>
+
+<p>
+A finite impulse response filter (FIR) outputs a weighted combination of the current input sample and one or more past input samples.
+</p.>
+
+<p>
+The general equation for an FIR filter is:
+</p>
+
+<p>
+<em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub> + a<sub>1</sub>x<sub>n-1</sub> + a<sub>2</sub>x<sub>n-2</sub> + ... a<sub>N</sub>x<sub>n-N</sub></em>
+</p>
+
+<p>
+where each coefficient&mdash;<em>a<sub>0</sub></em>, <em>a<sub>1</sub></em>, etc. &mdash;can have any value, including 0 (usually between -1 and 1), determining the relative weighting of the delayed samples in the output.
+</p>
+
+<p>
+A filter equation also can contain past <u>output</u> samples, which would be referred to as <em>y<sub>n-1</sub></em>, <em>y<sub>n-2</sub></em>, etc. Thus, a <i>general filter equation</i>&mdash;where the output can consist of the current input sample, past input samples, and past output samples&mdash;is:
+</p>
+
+<p>
+<em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub> + a<sub>1</sub>x<sub>n-1</sub> + a<sub>2</sub>x<sub>n-2</sub> + ... a<sub>N</sub>x<sub>n-N</sub> - b<sub>1</sub>y<sub>n-1</sub> - b<sub>2</sub>y<sub>n-2</sub> - ... b<sub>N</sub>y<sub>n-N</sub></em>
+</p>
+
+<p>
+Because the equation uses past output samples, the output of the filter is effectively being fed back into its input. For this reason, a filter equation that uses past output samples is often called a feedback filter or a recursive filter. (And by contrast, an FIR filter, which uses past input samples but no past output samples, may be called a feedforward filter or a non-recursive filter.) Any filter that has nonzero coefficients for any of its past output samples is an <i>infinite impulse response (IIR)</i> filter, because theoretically its output will never totally reach 0. An IIR filter is sometimes also referred to as a resonant filter, because the feedback of past outputs tends to reinforce (resonate) particular frequencies.
+</p>
+
+<hr />
+
+<h2>Examples of IIR filters</h2>
+
+<p>
+  Let's take a look at a couple of IIR filters that are commonly used for audio applications, and that exist as MSP objects in Max. (Note: By convention in most DSP textbooks, in an IIR filter the coefficients for past inputs use the letter <i>b</i> and the coefficients for the past outputs use the letter <i>a</i>. However, just for consistency with the way the coefficients are labeled in the Max documentaton, within this page we'll continue to use <i>a</i> for the past input coefficients and <i>b</i> for the past output coefficients.)
+</p>
+
+<p><strong>Biquad Filter</strong></p>
+
+<p>
+  The <b>biquad~</b> object in Max implements a second-order recursive filter, using the two most recent past input samples and the two most recent past output samples. So its difference equation is:
+</p>
+
+<p>
+<em>y<sub>n</sub> = a<sub>0</sub>x<sub>n</sub> + a<sub>1</sub>x<sub>n-1</sub> + a<sub>2</sub>x<sub>n-2</sub> - b<sub>1</sub>y<sub>n-1</sub> - b<sub>2</sub>y<sub>n-2</sub></em>
+</p>
+
+<p>
+  Diagrammatically, it can be depicted like this:
+</p>
+
+<p><img src="biquad.png" width="428" height="228" border="0"><br>
+<em>Biquad, 2nd-order IIR filter</em></p>
+
+<p>
+  A particularly valuable feature of the biquad filter is that, depending on the coefficients, it can be made to behave like a wide variety of filter types&mdash;lowpass, highpass, bandpass, etc.&mdash; (as demonstrated in the video on <a href="./audiofiltertypes.html">Audio Filter Types</a>), and those coefficients can be provided by the helpful <b>filtergraph~</b> UI object.
+</p>
+
+<p><img src="filtergraph.png" width="515" height="399" border="0"><br>
+<em>filtergraph~ provides coefficients for biquad~ filter equation</em></p>
+
+<p><strong>Comb Filter</strong></p>
+
+<p>
+  A comb filter emphasizes or de-emphasizes a harmonically-related series of frequencies. It does this by using a past input sample and/or past output sample from a specfic moment in the past. The delay time of the past samples will determine which frequencies are enhanced by the filter and which are attenuated. For example, if the signal is delayed exactly 1 millisecond (1/1000 of a second), that means the delayed version of the signal will be exactly in phase for frequencies that are a multiple of 1000 Hz, and will be exactly a half cycle out of phase for the frequencies exactly between those, such as 500 Hz, 1500 Hz, 2500 Hz, and so on. Thus, every frequency is affected differently by the filter, and the resulting magnitude response curve looks like the teeth of a comb. The magnitude response of the comb filter looks like this (with multiples of 2&pi; representing the frequencies that are exactly in phase with the delayed signal):
+</p>
+
+<p><img src="FF_comb_filter_response.png" width="388" height="389" border="0"><br>
+<em>Feedforward comb filter effect</em></p>
+
+<p>
+  And if we use the past <u>output</u> sample, the resonating effect is even more pronounced:
+</p>
+
+<p><img src="FB_comb_filter_response.png" width="640" height="314" border="0"><br>
+<em>Feedback comb filter effect</em></p>
+
+<p>
+  We could have a filter with both a feedforward delay and a feedback delay. The difference equation for a comb filter that has both feedforward and feedback components is:
+</p>
+
+<p>
+<em>y<sub>n</sub> = a(x<sub>n</sub>) + b(x<sub>n-d</sub>) - c()y<sub>n-d</sub>)</em>
+</p>
+
+<p>
+  where <i>a</i> is the coefficient for the current input sample, <i>b</i> is the coefficient for the delayed input sample, <i>c</i> is the coefficient for the delayed output sample, and <i>d</i> is the number of samples of delay that will result in emphasizing the desired frequencies.
+</p>
+
+<p>
+  The filter diagram would look like this:
+</p>
+
+<p><img src="comb.png" width="497" height="238" border="0"><br>
+<em>Comb filter diagram</em></p>
+
+<p>
+  If, for example, we wanted to emphasize all the harmonics of low A (A2 at 110 Hz) in a sound, we would use a delay time of 1/110 second, which is 9.091 ms. At a sampling rate of 44,100, the required delay would be 400.91 samples. We could round that to 401 samples of delay, getting emphasis at harmonics of 109.975 Hz, or with a little more math we could use <a href="../linear-mapping-and-interpolation/IntroductionToLinearInterpolation&LinearMapping.html">interpolation</a> to find the value that's 0.91 of the way between 400 samples ago and 401 samples ago.
+</p>
+
+<p>
+  Because a comb filter with a fixed delay time like that will impose the same emphasis at every harmonic of its input signal, the output will have a pitched buzzy timbre, exactly as if the input had been convolved with a pulse train at the fundamental frequency. It sounds like this.
+</p>
+
+<p><audio src="./combfilteredvoice.mp3" controls style="width:480px;"></audio><br>
+<em>Voice, with comb filtering delay of 1/110 second</em></p>
+
+<p>
+  If the delay time is continually changing&mdash;modulated by an LFO, for example&mdash;the emphasized frequencies will always be changing, giving a sweeping flanging effect. It sounds like this.
+</p>
+
+<p><audio src="./sweepingcombfilter.mp3" controls style="width:480px;"></audio><br>
+<em>LFO-modulated delay of a comb filter</em></p>
+
+<p>
+  In Max, the <b>comb~</b> object implements the comb filtering equation shown above. The user specifies a buffer size (50 ms is largely sufficient) a delay time in ms, and values for the <i>a</i>, <i>b</i>, and <i>c</i> coefficients.
+</p>
+
+<p><img src="comb~example.png" width="270" height="180" border="0"><br>
+<em><b>comb~</b> object in Max</em></p>
+
+<hr />
+
+<h2>Conclusion</h2>
+
+<p>
+  As you can see, the general filter equation can result in a wide variety of different filter effects, depending on the number of feedforward and feedback delays, and the values of the coefficients. In Max, there are many available filter objects: <b>lores~</b>, <b>reson~</b>, <b>onepole~</b>, <b>cross~</b>, <b>fffb~</b>, <b>svf~</b>, <b>comb~</b>, and <b>biquad~</b>. Because of its helper object <b>filtergraph~</b>, <b>biquad~</b> is probably the most versatile and most commonly used filter in Max.
+</p>
+
+<hr />
+
+<div id="vocabulary">
+
+  <h2>Vocabulary</h2>
+
+  <ul>
+    <li>FIR</li>
+    <li>IIR</li>
+    <li>feedforward</li>
+    <li>feedback</li>
+    <li>recursive</li>
+    <li>non-recursive</li>
+    <li>biquad filter</li>
+    <li>comb filter</li>
+    <li>order</li>
+  </ul>
+
+</div>
+
+<hr />
+
+<div>
+  <h2>Additional Resources</h2>
+  <ul>
+    <li><a href="https://ccrma.stanford.edu/~jos/filters/"><i>Introduction to Digital Filters</a> with Audio Applications</i> by Julius O. Smith</li>
+  </ul>
+</div>
+
+<hr />
+
+<div>
+  <p>
+    This page is by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a>, May 25, 2019.
+  </p>
+</div>
+
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script>
+//$('pre').addClass("javascript");
+hljs.initHighlightingOnLoad();
+</script>-->
+<script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+
+</body>
+
+</html>
