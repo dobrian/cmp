@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Sound Localization</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./index.html">Sound Spatialization</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+      <h1 id="localization">Sound Localization</h1>
+
+      <div class="text">
+
+      <hr />
+
+      <h2 id="whatislocalization">Localizing a Sound Source</h2>
+
+      <p>
+        When we hear a sound, how do we know where it's coming from? How do we know whether its near to us or far from us? How do we know in which direction the sound source is? And how do we get a sense, solely from sound, of the kind of space we're in? This human process of determining (or guessing) where a sound is is called <i>localization</i>.
+      </p>
+
+      <p>
+        Even when we listen to recorded or synthesized sound, and know that the sound is coming from loudspeakers or headphones, we still can have a sense of a sound's location in the virtual (imagined) space in which the sound seems to be occurring. This, too, is a form of localization. In a concert recording or studio recording of music, or in 3D game, the sound engineer may use digital audio processing techniques to create a particular localization effect. This, too, is sometimes referred to as "localization" of the sound, but to avoid confusion, we'll use <i>localization</i> to refer only to the human listener's attempt to identify the location of the sound source (virtual or real), and we'll use the term <i>spatialization</i> to refer to the technical process of giving sound a sense of existing in a virtual space, when it is actually being produced by loudspeakers or headphones.
+      </p>
+
+      <h3 id="distance">Distance, and the Inverse Square Law</h3>
+
+      <p>
+        We gauge how far a sound source is from us mostly by how loud it is, relative to how loud we know it to be from prior experience. That is, we all have a large repertoire of sounds we have heard in different situations in our lives, and for which we have unconsciously noted the intensity relative to their distance from us. For example, we have all heard a basketball being bounced, both close-up (by ourselves) and far away (by someone else at the other end of the court). So, we can compare a current sound to our prior experiences to guess how far the sound is from us. And we can also use changes in a sound's loudness (intensity) to surmise that the sound has changed its distance from us.
+      </p>
+
+      <p>
+        A given sound has an amount of <i>power</i>, which is defined as the amount of energy transferred from the source (in all directions) per unit of time (<i>P = E/t</i>). The <i>intensity</i> of a sound is its power measured over a certain area (<i>I = P/a</i>). Our tympanic membrane (a.k.a. our eardrum) and a microphone are both devices that measure sound intensity. When a sound arrives at our eardrum or at the diaphragm of a microphone, either of which has a certain surface area, the power in that area (i.e. the intensity) is detected. However, the intensity of a sound, as measured by an eardrum or a microphone, will differ depending on the distance from the sound's source, because the sound is being emitted from the source in <u>all</u> directions. If you think of the sound energy as radiating outward from the source in a spherical pattern, and you bear in mind that the surface of a sphere is proportional to the square of its radius (the surface area of a sphere is equal to <i>4&pi;r<sup>2</sup></i>), you can understand that the intensity of a sound as measured in a given surface area is inversely proportional to the square of the distance of the point of measurement from the sound source. This principle is known as the <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/Forces/isq.html"><i>inverse square law</i></a>: intensity is inversely proportional to the square of the distance from the source (<i>I &prop; 1/d<sup>2</sup></i>).
+      </p>
+
+      <p>
+        <img src="./isq.gif" border="0" width="602" height="324"><br>
+        <i>Inverse square law</i>
+      </p>
+
+      <p>
+        <strong>Amplitude and Intensity</strong>
+      </p>
+
+      <p>
+        Our subjective sense of a sound's "loudness" is not the same as its intensity, but is generally roughly proportional to it. But what does that mean in terms of the <u>amplitude</u> factor we'll use to alter a sound's intensity in digital audio? As defined in physics, the <a href="https://www.youtube.com/watch?v=dV7WqWIMl0o">intensity of a wave is proportional to the square of its <i>amplitude</i> (<i>A<sup>2</sup> &prop; I</i>)</a>. So that means that if we want to emulate the effect of a sound being twice as far away, (1/4 the intensity), we would need to multiply the amplitude by one-half. Indeed, based on what we know about the relationship between distance and intensity (the inverse square law, <i>I &prop; 1/d<sup>2</sup></i>), we can see that the relationship between distance and amplitude is simply <i>A &prop; 1/d</i>; amplitude is inversely proportional to distance (see Max <a href="http://music.arts.uci.edu/dobrian/maxcookbook/amplitude-inversely-proportional-distance">example</a>).
+      </p>
+
+      <h3 id="beat">Reflections and Reverberation</h3>
+
+      <p>
+        The preceding discussion of the inverse square law assumes an idealized open space in which the sound is free to radiate in all directions from the source with no reflections. In reality, there is always at least the ground, and usually some walls, off of which the sound reflects, complicating the idealized spherical model somewhat. Some sound goes directly to the listener, and some strikes the floor, ceiling, and walls. When sound strikes a surface, some of its energy is absorbed by the surface (or transmitted through the surface) and some of it is reflected. The sound that's reflected (after being diminished somewhat by the absorption) may also reach the listener, as if it came from the surface itself (or a virtual source beyond the surface). So, in a room, we're actually hearing a combination of the direct sound and the (usually lesser) reflected sound.
+      </p>
+
+      </p>
+        <img src="./direct-and-reflected-sound.pbm" border="0" width="425" height="228"><br>
+        <i>Direct and reflected sound energy</i>
+      </p>
+
+      <p>
+        These reflections (and reflections of reflections) travel a longer distance than the direct sound, so they're very slightly delayed relative to the direct sound, and they are so numerous and quick that they blend together, causing a slight amplification and prolongation of the sound, known as <i>reverberation</i>. The balance between direct sound and reverberated sound is another cue that helps the listener have an idea of the proximity of the sound source. For example, when someone whispers into your ear, you hear almost exclusively direct sound, whereas when they talk to you from across the room you hear much more reflected sound in addition to the direct sound. So, in addition to intensity, the balance of direct ("dry") sound and reverberated ("wet") sound also give a sense of space. For that reason, most digital audio reverb effects have a way of controlling the mix of dry and wet versions of a source sound.
+      </p>
+
+      </p>
+        <img src="./reverbplugin.jpg" border="0" width="705" height="139"><br>
+        <i>"Dry/Wet" controls in the user interface</i>
+      </p>
+
+      <p>
+        <strong>High-Frequency Rolloff</strong>
+      </p>
+
+      <p>
+        In addition to sound absorption and reflection, another physical phenomenon that occurs when sound waves encounter a physical object is <i>diffraction</i>, which is the change of direction that occurs when sound passes through an opening or around an object. Any less-than-total barrier, be it a partial wall or any other object, leaves space for some sound to get past it, and the sound continues to radiate outward from that opening, effectively seeming to bend around the obstacle. A sound's wavelength is inversely proportional to its frequency (<i>f &prop; 1/&lambda;</i>), and for that reason, lower-frequency waves have a greater wavelength than higher-frequency waves. Thus, low frequencies tend to diffract more readily than high-frequencies, and for that reason, a sound barrier will tend to serve as a lowpass filter, muffling the sound slightly.
+      </p>
+
+      <p>
+        For many absorptive surfaces, high frequencies likewise tend to get absorbed more readily than low frequencies. So, reflective surfaces might have a lowpass filter effect, as well. And even the air itself absorbs sound a little, and tends to absorb higher frequencies more than lower ones. So, the greater the distance of a sound source from the listener, the greater the lowpass filtering effect of air absorption. All of those factors&mdash;diffraction, absorption during reflection, and air absorption&mdash;lead to a common reduction of high frequencies as sounds get farther away, so high-frequency rolloff (lowpass filtering) is also an effective method of controlling the impression of distance of a sound in a virtual space.
+      </p>
+
+      <h3 id="angle">Angle</h3>
+
+      <p>
+        Another important factor for sound localization, equally important as distance, is the angle of the sound source relative to the listener's orientation. When discussing angles in 3-dimensional space, one can refer to altitude (known as the elevation angle) and direction (known as the <i>azimuth</i> angle). We don't often hear sounds that come from radically different heights, whereas we often hear sounds coming from different directions. So, the azimuth angle is much more important to us in sound localization.
+      </p>
+
+      <p>
+        We're able to localize a sound's direction because we have two ears. If a sound is directly in front of us, it arrives at our two ears at exactly the same time and with equal intensity. However, if the sound is at all off of that central axis, it will arrive at our ears at slightly different times and with slightly different intensities. We're highly sensitive to these very subtle differences, known as the <i>interaural time difference (ITD)</i> and the <i>interaural intensity difference (IID)</i>, and we use them to determine the azimuth angle of a sound source. As depicted below, an off-axis sound takes longer to get to one ear than the other, and has to diffract around the head with a related slight loss of intensity and high-frequency content. The ITD is commonly very slight, even less than a millisecond, but is enough to give us a sense of azimuth angle. This effect is known as the <i>precedence effect</i> or the <i>Haas effect</i>. Helmut Haas demonstrated that the precedence effect (ITD) can overcome IID; we base our sense of a sound's direction on the first, direct version of a sound even if a reflected version of the sound comes from a different direction with somewhat greater amplitude than the direct sound. However, if the IID is great enough, it will be more salient than the ITD.
+      </p>
+
+      </p>
+        <img src="./ITD&IID.png" border="0" width="392" height="270"><br>
+        <i>Off-axis sound source causes ITD and IID</i>
+      </p>
+
+      <p>
+        Audio engineers will sometimes exploit the Haas effect by delaying a sound going to one of two stereo speakers, to give the sound a sense of directionality in the stereo field. Delaying the sound to one channel by several milliseconds&mdash;more than ordinary ITD but not so much as to be heard as a discrete echo&mdash;can give a sound a more "spacious" feel, perhaps because the listener becomes slightly confused about its virtual direction. An audio engineer might also create a difference in the intensity of the sound going to the two stereo channels, so as to give the listener an impression of significant IID. Either or both of those techniques is commonly used to give a sense of space in a stereo recording.
+      </p>
+
+      <h2 id="stereo">Stereo</h2>
+
+      <p>
+        Stereophonic recording and playback, the use of two separate channels of sound so that the listener's two ears receive different signals, was invented in the 1930s and has been the norm in recorded music since the 1960s. As notes above, listeners derive as sense of space from cues such as loudness, reverberation, filtering, interaural time difference and interaural intensity difference.
+      </p>
+
+      <p>
+        The perceived azimuth angle of a sound in virtual space can be influenced by the balance of intensity between the two speakers. Most audio mixers and most DAWs provide a knob or a slider for "<a href="https://en.wikipedia.org/wiki/Panning_(audio)">panning</a>" the intensity of the sound between the two channels.
+      </p>
+
+      <p>
+        The following examples from the Max Cookbook teach about techniques for intensity-based stereo panning. The most favored of those methods is constant-power panning (a.k.a. constant-intensity panning); one of the examples shows how that method can be encapsulated as a very useful <b>pan~</b> abstraction for easy and effective intensity-based panning of any sound in Max.
+      </p>
+
+      <p>
+        <ul>
+          <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/linear-amplitude-panning">Linear amplitude panning</a></li>
+          <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/constant-power-panning-using-square-root-intensity">Constant power panning using square root of intensity</a></li>
+          <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/constant-power-panning-using-table-lookup">Constant power panning using table lookup</a></li>
+          <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/constant-intensity-panning-subpatch">Constant-intensity panning subpatch</a></li>
+          <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/rhythmic-automated-panning">Rhythmic automated panning</a></li>
+          </ul>
+      </p>
+
+      <h2 id="beyondstereo">Beyond Stereo</h2>
+
+      <p>
+        Many other systems have been devised, using four, six, eight, or more speakers, to create a more realistic 2D or 3D sound spatialization that goes beyond stereo. These techniques include <a href="https://stereosociety.com/Quadraphonics/">quadraphonic</a> spatialization, <a href="https://www.dolby.com/us/en/technologies/dolby-digital.pdf">5.1</a> cinema spatialization (common in DVDs), <a href="https://www.dolby.com/us/en/guide/surround-sound-speaker-setup/7-1-setup.html">7.1</a> cinema spatialization (common in theaters and Blu-ray discs), <a href="https://www.dolby.com/us/en/technologies/cinema/dolby-atmos.html">Atmos</a> spatialization (in a mnority of theaters), <a href="https://lmkprod.com/what-is-hrtf-brief-explanation/">head-related transfer functions (HRTF)</a> for binaural headphone listening, and other advanced mathematical techniques such as <a href="">Ambisonics</a> and <a href="https://www.researchgate.net/publication/242235793_WAVE_FIELD_SYNTHESIS_FROM_RESEARCH_TO_APPLICATIONS/download">wave field synthesis (WFS)</a>.
+      </p>
+
+    </div>
+
+      <hr />
+
+      <div id="vocabulary">
+
+        <h2>Vocabulary</h2>
+
+        <ul>
+          <li>spatialization</li>
+          <li>localization</li>
+          <li>power</li>
+          <li>intensity</li>
+          <li>amplitude</li>
+          <li>inverse square law</li>
+          <li>absorption</li>
+          <li>reflection</li>
+          <li>diffraction</li>
+          <li>reverberation</li>
+          <li>azimuth angle</li>
+          <li>elevation angle</li>
+          <li>interaural time difference (ITD)</li>
+          <li>interaural intensity difference (IID)</li>
+          <li>precedence effect (Haas effect)</li>
+          <li>stereo</li>
+          <li>panning</li>
+          <li>constant-intensity panning</li>
+        </ul>
+
+      </div>
+
+      <hr />
+
+      <div id="self-quiz">
+
+      <h2>Self-Quiz</h2>
+
+      <ol>
+        <li>What's the most significant cue for a sense of the distance of a sound source?</li>
+        <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-1" class="answer" style="display: none">Loudness (Intensity)</p>
+
+        <li>What is the relationship between distance and amplitude?</li>
+        <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-2" class="answer" style="display: none"><i>A &prop; 1/d</i>Amplitude is inversely proportional to distance (<i>A &prop; 1/d</i>)</p>
+
+        <li>What are our primary indicators of a sound source's azimuth angle?</li>
+        <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-3" class="answer" style="display: none">Interaural time difference and interaural intensity difference</p>
+
+        <li>What's the name ascribed to sound localization by interaural time difference?</li>
+        <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-4" class="answer" style="display: none">The "precedence effect", a.k.a. the "Haas effect"</p>
+
+        <li>What's the name ascribed to the use of different amplitudes in stereo speakers to create a sense of a sound's azimuth angles?</li>
+        <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-5" class="answer" style="display: none">(Constant-intensity)Panning</p>
+
+        <li>What's the preferred method of constant-intensity panning?</li>
+        <button id="question-6" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-6" class="answer" style="display: none">Table lookup in a stored sinusoid</p>
+      </ol>
+
+    </div>
+
+      <hr />
+
+      <p>This page was written by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>, and was last modified June 1, 2019.</p>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>

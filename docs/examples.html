@@ -113,10 +113,27 @@
         You can try this out yourself, but beware of the possibility of feedback, since this patch sends the incoming sound from <b>adc~</b>, with some delay, right back out via the <b>dac~</b>.
       </p>
       <p>
-        <a name="Ex08"><b>Example 8</b></a>: Algorithmic Demo with Phasor
+        <a name="Ex08"><b>Example 8</b></a>: Algorithmic demo with phasor
       </p>
       <p>
-        <a href="examples/max/patches/algorithmicdemowithphasor.maxpat"><img src="examples/max/images/algorithmicdemowithphasor.png" width=544 height=306 alt="Example 6" border=0></a>
+        <a href="examples/max/patches/algorithmicdemowithphasor.maxpat"><img src="examples/max/images/algorithmicdemowithphasor.png" width=544 height=306 alt="Example 8" border=0></a>
+      </p>
+      <p>
+        <a name="Ex09"><b>Example 9</b></a>: Amplitude is inversely proportional to distance
+      </p>
+      <p>
+        <a href="examples/max/patches/distance&amplitude.maxpat"><img src="examples/max/images/distance&amplitude.png" width=412 height=346 alt="Example 9" border=0></a>
+      </p>
+      <p>
+        Our tympanic membrane (a.k.a. our eardrum) and a microphone are both devices that measure sound intensity. When a sound arrives at our eardrum or at the diaphragm of a microphone, either of which has a certain surface area, the power in that area (i.e. the intensity) is detected. However, the intensity of a sound, as measured by an eardrum or a microphone, will differ depending on the distance from the sound's source, because the sound is being emitted from the source in <u>all</u> directions. If you think of the sound energy as radiating outward from the source in a spherical pattern, and you bear in mind that the surface of a sphere is proportional to the square of its radius (the surface area of a sphere is equal to <em>4πr<sup>2</sup></em>), you can understand that the intensity of a sound as measured in a given surface area is inversely proportional to the square of the distance of the point of measurement from the sound source. This principle is known as the <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/Forces/isq.html"><em>inverse square law</em></a>: intensity is inversely proportional to the square of the distance from the source (<em>I &prop; 1/d<sup>2</sup></em>).
+      </p>
+
+      <p>
+        Our subjective sense of a sound's "loudness" is not the same as its intensity, but is generally roughly proportional to it. But what does that mean in terms of the <u>amplitude</u> factor we'll use to alter a sound's intensity in digital audio? As defined in physics, the intensity of a wave is proportional to the square of its amplitude (<em>A<sup>2</sup> &prop; I</em>). So that means that if we want to emulate the effect of a sound being twice as far away, (1/4 the intensity), we would need to multiply the amplitude by one-half. Indeed, based on what we know about the relationship between distance and intensity (the inverse square law, <em>I &prop; 1/d<sup>2</sup></em>), we can see that the relationship between distance and amplitude is simply <em>A ∝ 1/d</em>; amplitude is inversely proportional to distance.
+      </p>
+
+      <p>
+        This patch shows how you can emulate a change of distance simply by changing its relative amplitude inversely. Of course, our sense of distance is also affected by reverberation and high-frequency rolloff, but this basic relationship between distance and ampitude is useful to know for sound spatialization.
       </p>
 
       <hr />
