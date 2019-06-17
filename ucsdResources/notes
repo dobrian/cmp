@@ -19,8 +19,10 @@ amplitude/envelopes/lines/units/applications/tremolo/compressor/ADSR
   - kick drum gating sine wave
   - auto gain control (always loud)
   - compressor: peak (attack/release), rms, mean
+    - compressors with polynomial equations (draw and use a function finder)
+  - break point envelopes (time and amplitude)
   - applications in general
 
-filters (allpass [first and second order], FIR, touch on biquad)
+filters (allpass [first and second order], FIR, touch on biquad) Allpass with delay.
 
 delay

@@ -1,7 +1,7 @@
 var trem, size, sound, sr, linFreq, opY1L, cutoff, filters, writeFile;
 
 sr = 44100; // samplerate
-cutoff = 22049; // cutoff in Hx
+cutoff = 100; // cutoff in Hx
 opY1L = 0.0; // val to save
 
 filters = ();
@@ -53,9 +53,25 @@ filters.foLowPass = {|dict, sound, cutoff, sr|
 	tf = tan(pi * (cutoff/sr));
 	coeff = (tf - 1.0)/(tf + 1.0);
 	output = sound.collect{|samp, i|
-		out = (coeff * samp) + in1 - (coeff * out);
+		// out = (coeff * samp) + in1 - (coeff * out);
+		out = (coeff * (samp - in1)) + in1;
 		in1 = samp;
 		(samp + out) * 0.5; // return
+	};
+	output = output.normalize(-1.0, 1.0); // return the output
+};
+
+filters.foHiPass = {|dict, sound, cutoff, sr|
+	var output, tf, in1, coeff, out;
+	out = 0;
+	in1 = 0;
+	tf = tan(pi * (cutoff/sr));
+	coeff = (tf - 1.0)/(tf + 1.0);
+	output = sound.collect{|samp, i|
+		out = (coeff * samp) + in1 - (coeff * out);
+		// out = (coeff * (samp - in1)) + in1;
+		in1 = samp;
+		(samp - out) * 0.5; // return
 	};
 	output = output.normalize(-1.0, 1.0); // return the output
 };
@@ -68,7 +84,7 @@ filters.foLowPass = {|dict, sound, cutoff, sr|
 // 	out;
 // };
 
-sound.output = filters.foLowPass(sound.impulse, cutoff, sr); // should be phase shift of 90 degrees
+sound.output = filters.foHiPass(sound.impulse, cutoff, sr); // should be phase shift of 90 degrees
 
 f = SoundFile.openWrite("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/filters/src/foAllPass.wav", "WAV", numChannels: 1, sampleRate: 44100);
 f.writeData(sound.output.asFloatArray);
@@ -92,10 +108,10 @@ r = {
 	// plotArray.normalize(0.000001, 1).ampdb.plot;
 	freqArray = plotArray.normalize(0.000001, 1).ampdb;
 	phaseArray = complex.phase[1..2047];
-	// plotArray.plot;
+	freqArray.plot;
 
 
-	f = File.open("../plots/foLP_%Hz.dat".format(cutoff).resolveRelative, "w");
+	f = File.open("../plots/foHP_%Hz.dat".format(cutoff).resolveRelative, "w");
 	// freqArray.do{|bin, i| f.write((((i)/2048)*(sr/2)).asString ++ " " ++ bin.asString ++ "\n")};
 	plotArray.size.do{|bin, i| f.write((((i)/2048)*(sr/2)).asString ++ " " ++ freqArray[i].asString ++ " " ++ phaseArray[i] ++ " \n")};
 	// plotArray.do{|bin, i| f.write(bin.asString ++ "\n")};

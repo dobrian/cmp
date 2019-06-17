@@ -57,6 +57,10 @@ FOLowPass(float *block, float *output, long samplesInBlock, float cutoff) {
 }
 ```
 
+At a cutoff of 100Hz, the output is as such:
+
+![100Hz](images/foLP_100Hz.svg)
+
 __Highpass__
 ```
 float in1 = 0; // delayed sample
