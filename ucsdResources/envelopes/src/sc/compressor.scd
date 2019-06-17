@@ -1,14 +1,13 @@
 // compressor
-var comp = IdentityDictionary.new(know: true), sound = IdentityDictionary.new(know: true), out;
+var comp = IdentityDictionary.new(know: true), sound = IdentityDictionary.new(know: true), out, ampCorrection;
 
 // compressor
 comp.add(\rmsSize -> 64);
 comp.add(\thresh -> 0.2);
-comp.add(\att -> 0.003);
-comp.add(\rel -> 0.03);
-comp.add(\del -> 150);
+comp.add(\att -> 0.03);
+comp.add(\rel -> 0.3);
 comp.add(\gain -> 1);
-comp.add(\ratio -> 2);
+comp.add(\ratio -> 50);
 
 // sound
 sound.add(\sf -> SoundFile.openRead("/home/roger/Documents/jacob/jobs/cmp/ucsdResources/envelopes/src/amplitude/tremolo/chord.wav"));
@@ -101,12 +100,19 @@ comp.peakComp = {|comp, sound|
 	};
 };
 
-// out = comp.rmsComp(sound);
-out = comp.rmsCompTest(sound);
+out = comp.rmsComp(sound);
+ampCorrection = comp.rmsCompTest(sound);
 // out = comp.peakComp(sound);
-[out, sound.sig].plot;
+// [out, sound.sig].plot;
+~sound = sound.sig;
+
+ampCorrection.writeToFile("../compressor/amplitudeCorrection_50_slow.dat".resolveRelative);
+Array.newFrom(sound.sig).writeToFile("../compressor/original_50_slow.dat".resolveRelative);
+out.writeToFile("../compressor/compressed_50_slow.dat".resolveRelative);
 
 // exp(-1/(44100*0.03)) // coefficient in a one pole filter for a time of 0.03
 // a = SinglePoleLP.new
-a = SinglePoleLP(1 - exp(-1/(44100*0.03)), 44100);
-a.coeff
+// a = SinglePoleLP(1 - exp(-1/(44100*0.03)), 44100);
+// a.coeff
+
+// Array.fill(100, {rrand(1,10)}).writeToFile("./test.dat".resolveRelative)

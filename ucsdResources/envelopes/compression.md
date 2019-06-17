@@ -14,7 +14,7 @@ Compression is a very common and useful signal processing device. By setting an 
 
 The basic form of a compressor is an envelope follower whose output is passed to a function that checks whether or not the amplitude has exceeded the threshold and if so, by what amount. If the amplitude exceeds the threshold, an amplitude correction is multiplied to the signal using the ratio. After compression is applied, the makeup gain is applied and the signal is sent out.
 
-In the below example of an RMS compressor, the smoothing of the attack and release are accomplished with the use of a single-pole low pass filter. Without smoothing, amplitude artifacts would be introduced into the output. It is also assumed that one has an RMS function elsewhere.
+In the below example of an RMS compressor, the smoothing of the attack and release are accomplished with the use of a single-pole low pass filter. Without smoothing, amplitude artifacts would be introduced into the output. It is also assumed that one has an RMS function (`getRMS()`) elsewhere.
 
 ```
 float gain = 0; // a placeholder
@@ -25,7 +25,7 @@ RMSCompressor(float *block, float *output, long samplesInBlock, float threshold 
   double relCoeff = 1 - exp(-1/(SAMPLERATE*relTime)); // the coefficient for the release
   float ratioFac = 1 - (1/ratio); // get the ratio factor
   float rmsBuff[] = rmsSize; // a buffer for RMS calculations
-  
+
   for(sample = 0; sample < samplesPerBlock; sample++) {
     rmsAmp = getRMS(sample, rmsBuff); // get the RMS amplitude
     diff = (sample-threshold).clip(0,1); // get the difference
@@ -44,6 +44,23 @@ RMSCompressor(float *block, float *output, long samplesInBlock, float threshold 
 }
 ```
 
+When applied to a signal, the dynamic range is compressed. The image below is an overlay of an original signal (purple) and a compressed version (green) sampled at 44.1kHz. Note how the amplitude peaks on the compressed version are lower than the original. The following image shows the amplitude correction applied to the signal to create the compressed version. The compressor used was 5:1 with a threshold of 0.5, an attack time of 0.003, a release time of 0.03, and a makeup gain of 0.
+
+![Compressed](images/compressor/sigOverlay_0.5-5.svg)
+
+![Amp Correction](images/compressor/ampCorrection_0.5-5.svg)
+
+More extreme compression with the threshold set to 0.2 and the ratio as 50:1.
+
+![Compressed](images/compressor/sigOverlay_0.2-50.svg)
+
+![Amp Correction](images/compressor/ampCorrection_0.2-50.svg)
+
+And the same again but with the attack time set to 0.03 and the release time to 0.3.
+
+![Compressed](images/compressor/sigOverlay_0.2-50_slow.svg)
+
+![Amp Correction](images/compressor/ampCorrection_0.2-50_slow.svg)
 
 #### The Limiter
 A limiter is a type of compressor with certain settings such that it only makes itself known at the extreme ends of amplitude and in a very high degree. For instance, it might have a threshold of 0.9 linear amplitude and a ratio of 40.
