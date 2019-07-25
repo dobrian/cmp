@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <title>JavaScript as a Second Language: A Primer</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.introduction-to-html-and-js.html">Introduction to HTML and JavaScript</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+<h1>JavaScript as a Second Language: A Primer</h1>
+
+<h3>JavaScript Uses C-Like Syntax</h3>
+
+<p>JavaScript uses C-like syntax, making it look superficially like languages such
+as C, C++, C#, and Java.  Some qualities of C-like syntax are as follows:</p>
+
+<ol>
+<li><p>Single-line comments use <code>//</code>; multi-line comments use <code>/* */</code>.</p>
+
+<pre><code>// this is a single-line comment
+
+/*
+   this
+   is
+   a
+   multi-line
+   comment
+*/
+</code></pre></li>
+<li><p>Curly braces <code>{ }</code> denote blocks.</p>
+
+<pre><code>// The following code is identical to what you might write in Java or C.
+while (condition1) {
+  if (condition2) {
+    // do a thing
+  } else {
+    // do a different thing
+  }
+}
+</code></pre></li>
+<li><p>Statements are terminated by semicolons, and whitespace is irrelevant.</p>
+
+<pre><code>// Although this is unnecessarily difficult to read, it is technically
+// correct, working code:
+if(i&gt;1){arr.push(i);return false;}else{return true;}
+
+
+// A better, clearer way to write the same thing:
+if (i &gt; 1) {
+  arr.push(i);
+  return false;
+} else {
+  return true;
+}
+</code></pre></li>
+</ol>
+
+<h3>Declaring Functions and Variables</h3>
+
+<p>JavaScript has gone through a bit of a redesign recently, thanks to the update
+of the language known as ES2015.  ES2015 introduced new ways of declaring
+functions and variables that rectify some bizarre behavior in the original
+JavaScript specification.</p>
+
+<ol>
+<li><p>Declaring Variables</p>
+
+<pre><code>// New Way
+let myNumber = 42;        // use "let" the first time you declare a variable
+myNumber = myNumber + 1;  // same as myNumber += 1; no need to reuse "let"
+
+
+const myConstant = 74;    // use "const" whenever you know the value of the
+                          // variable is not going to change
+
+
+// Old Way
+var myNumber = 42;        /*
+                           * "var" has some bizarre edge-case scoping
+                           * rules, so if using "var", declare all your
+                           * variables at the top of each function, NOT
+                           * when the variable is first used
+                           */
+
+
+// Never-Ever Way
+myNumber = 42;            /*
+                           * Technically, this will work, but it makes
+                           * myNumber a global variable accessible by ALL
+                           * other JavaScript files in the project.  Never,
+                           * ever do this.
+                           */
+</code></pre></li>
+<li><p>Declaring Functions</p>
+
+<pre><code>// New Way - use for non-method functions
+let myFunction = (arg1, arg2) =&gt; {
+  // body of function
+  return result;
+};
+
+
+// Old Way - use for methods
+function myFunction(arg1, arg2) {
+  // body of function
+  return result;
+}
+
+
+// Another Old Way
+var myFunction = function(arg1, arg2) {
+  // body of function
+  return result;
+}
+</code></pre></li>
+</ol>
+
+<h3>Data Types</h3>
+
+<ol>
+<li><p>Numbers</p>
+
+<pre><code>let myNumber = (100 + 5 * 4) / 3 - (-2); // JavaScript uses PEMDAS, so
+                                         // this evaluates to 42.
+
+
+let impossible1 = 100 / 0;               // the special value "Infinity"
+
+
+let impossible2 = 0 / 0;                 // the special value "NaN"
+                                         // (short for "Not a Number")
+</code></pre></li>
+<li><p>Strings</p>
+
+<pre><code>// New Way
+let greeting = `Hello ${name}!`;         // ES2015 has string interpolation
+
+
+// Old Way
+let greeting = "Hello " + name + "!"     // Old JavaScript relies on + to concat
+</code></pre></li>
+<li><p>Booleans</p>
+
+<pre><code>let condition = !((true &amp;&amp; false) || (1 &lt; 0)); // Evaluates to true
+</code></pre></li>
+<li><p><code>null</code> and <code>undefined</code></p>
+
+<pre><code>// The difference between null and undefined is a bit wonky, and ultimately
+// not that consequential.  Both represent a value which is not there.
+</code></pre></li>
+<li><p>Arrays</p>
+
+<pre><code>let myArray = [42, "", false]; // arrays don't have to have the same data type
+let element = myArray[0];      // use square brackets to index; this is 42
+myArray[4] = "test";           // myArray is now [42, "", false, undefined, "test"]
+</code></pre></li>
+<li><p>Objects</p>
+
+<pre><code>/*
+ * JavaScript objects are really key/value pairs, similar to what Perl and
+ * Ruby call a "hash" or what Python calls a "dictionary".  The key must be a
+ * string; the value can be ANYTHING, even a function!
+ */
+let note = {
+  "midiNumber": 60,
+  "duration": "4n"
+};
+
+
+let midiNumber = note["midiNumber"]; // one way to access a value by key
+let duration = note.duration;        // another way to access a value by key
+
+
+/*
+ * In this example, "transpose" is a function, but it might more aptly be
+ * called a method.  If this example is starting to look like an
+ * object-oriented programming paradigm, that's because it is!
+ */
+let chord = {
+  "notes": [note1, note2, note3],
+  "transpose": function(transposeValue) {
+    for (let i = 0; i &lt; this.notes.length; i += 1) {
+      let note = this.notes[i];
+      note.midiNumber = note.midiNumber + transposeValue;
+    }
+  }
+};
+</code></pre></li>
+</ol>
+
+<h3>Control Flow</h3>
+
+<p>JavaScript supports many common control flow statements:</p>
+
+<ul>
+<li><code>if</code>/<code>else if</code>/<code>else</code></li>
+<li><code>for</code>, <code>foreach</code>, and <code>while</code>/<code>do {} while</code> (with <code>continue</code> and <code>break</code>)</li>
+<li><code>switch</code>/<code>case</code>/<code>default</code></li>
+<li><code>throw</code> and <code>try</code>/<code>catch</code>/<code>finally</code></li>
+</ul>
+
+<p>Many tasks you can do with one control flow statement (e.g. <code>foreach</code>) can also
+be accomplished with another (e.g. <code>for</code>), so don't feel pressure to memorize
+the syntax for all of this.  If you just know <code>if</code>/<code>else if</code>/<code>else</code>, <code>for</code>, and
+<code>while</code>, you should be able to get by just fine.</p>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    $('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
