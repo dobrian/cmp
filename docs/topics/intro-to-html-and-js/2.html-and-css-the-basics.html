@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <style type="text/css">
+      pre {
+        white-space: pre-wrap;       /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+    </style>
+    <title>HTML and CSS: The Basics</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.introduction-to-html-and-js.html">Introduction to HTML and JavaScript</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>HTML and CSS: The Basics</h1>
+
+<h3>On Html</h3>
+
+<p>Now that you have an overall idea of the <a href="3.development-environment.html">components of a web application</a>, and before we advance further into javascript, where we will spend considerable more time, it would be a good to take a closer look at the structure of an html page.</p>
+
+<p>Try reading the following code and understand what each <code>&lt;tag&gt;</code> is for.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+
+&lt;HTML&gt;
+
+&lt;!-- This is a comment. It won't be displayed in the document. --&gt;
+
+&lt;!-- An HTML document contains different sorts of "elements", which are indicated by HTML "tags".
+Most elements start with an opening tag, a word inside angle brackets, like this: &lt;TITLE&gt;, and end with a closing tag, which is the same as the opening tag, but with a forward slash after the first angle bracket, like this: &lt;/TITLE&gt;. Some elements have only a single tag instead of an opening and closing tag. In this document you can see examples of elements that have a single tag, such as !DOCTYPE, BR, and HR, and you can see examples of elements that have opening and closing tags, such as HTML, HEAD, TITLE, BODY, H1, H2, H3, and P. Elements with a single tag are sometimes called "empty elements" because they don't contain anything else, whereas most elements contain text between the start and end tags, and those tags indicate something about how the intervening text should be formatted or used. --&gt;
+
+&lt;HEAD&gt;
+&lt;TITLE&gt;This is the Title in the Title Bar&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+
+&lt;BODY&gt;
+
+&lt;H1&gt;This is the primary Heading text in the document itself&lt;/H1&gt;
+&lt;H2&gt;You can have a secondary-level Heading, too&lt;/H2&gt;
+&lt;H3&gt;Or even a tertiary-level Heading, and so on&lt;/H3&gt;
+
+&lt;P&gt;Each paragraph of text is usually in its own Paragraph element.&lt;/P&gt;
+&lt;P&gt;So you'll usually have severals Paragraphs. You can give individual words or phrases added &lt;EM&gt;emphasis&lt;/EM&gt;, which usually means &lt;I&gt;italicization&lt;/I&gt;, or you can make them more &lt;B&gt;bold&lt;/B&gt;.&lt;/P&gt;
+&lt;P&gt;You might want a line break within a Paragraph, without starting a whole new paragraph, like right here...&lt;BR&gt;
+and you might want a horizontal line between objects in the document, like here:&lt;/P&gt;
+
+&lt;HR&gt;
+
+&lt;H2&gt;You may use multiple instances of any particular level of Heading&lt;/H2&gt;
+&lt;P&gt;It's traditional practice to put some contact info for the author somewhere, so readers can give feedback.&lt;BR&gt;
+Here is how you might do that: Christopher Dobrian &lt;A HREF="mailto:dobrian@uci.edu"&gt;dobrian@uci.edu&lt;/A&gt;&lt;/P&gt;
+
+&lt;/BODY&gt;
+
+&lt;/HTML&gt;
+</code></pre>
+
+<p>To see this file in action, you can either open this page <a href="HTML-Lesson01.htm">here</a> or, just like before, copy this content, save it as a .html file, and open it with your web browser of choice.</p>
+
+<h3>On CSS</h3>
+
+<p>You can think of CSS as a layer of code on top of HTML. Its purpose is only to describe how the elements on a HTML page should look.</p>
+
+<p>Again, try to read through the following HTML and CSS code, and follow up with <a href="CSS-Lesson01.htm">displaying it</a> in the browser to see how it looks like.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+
+&lt;HTML&gt;
+
+&lt;HEAD&gt;
+&lt;TITLE&gt;Formatting Using CSS&lt;/TITLE&gt;
+&lt;LINK rel="stylesheet" href="CSSfile01.css"&gt;
+&lt;/HEAD&gt;
+
+&lt;!-- This shows how to link to a CSS file that defines formatting styles for the
+HTML elements that are in this document. Notice how the formatting of this document
+is very different from that of HTML-Lesson01.htm, just because of the CSS.
+All of the elements have the same generic tags, but traits of those elements are defined elsewhere. --&gt;
+
+&lt;BODY&gt;
+
+&lt;!-- In the CSS file, the background color of the document, and the default font and font color for the document, are defined for the entire document in the definition of the BODY element. --&gt;
+
+&lt;H1&gt;Formatting Using CSS&lt;/H1&gt;
+&lt;H2&gt;Lesson 1&lt;/H2&gt;
+&lt;H3&gt;The basics of getting the document to look the way you want&lt;/H3&gt;
+
+&lt;!-- Note that the Headings have a particular color, size and alignment. --&gt;
+
+&lt;P&gt;Note that the Headings have a particular color, size and alignment. The paragraph text uses the default font and color and alignment of the document, and its own particular font size, 12 pt. A paragraph can have any amount of text in it, and normally it will wrap around in the way that the browser determines, based on the window size. It's possible to specify different margins, paddings, etc., in the CSS file, but that hasn't been done in this case, so the margins and wrapping are determined by the browser.&lt;/P&gt;
+
+&lt;P class="center"&gt;In the CSS file a particular class of paragraph has also been defined that is center-aligned and uses a slightly smaller font size, like this.&lt;/P&gt;
+
+&lt;P&gt;By default Paragraphs use the style defined in the CSS: the default style traits that are defined for the whole document, plus whatever additional traits are defined for the Paragraph element. You can still give individual words &lt;I&gt;italicization&lt;/I&gt; or make them &lt;B&gt;bold&lt;/B&gt;. In this case, in the CSS file the definition of &lt;EM&gt;emphasis&lt;/EM&gt; includes both italicization and bold weighting.&lt;/P&gt;
+
+&lt;HR&gt;
+
+&lt;P class="center"&gt;Christopher Dobrian &lt;A HREF="mailto:dobrian@uci.edu"&gt;dobrian@uci.edu&lt;/A&gt;&lt;/P&gt;
+
+&lt;/BODY&gt;
+
+&lt;/HTML&gt;
+</code></pre>
+
+<p>The following is the content of the actual CSS file containing the information that will change the look of the HTML page. If trying it on your machine, make sure to copy this content to a "CSSfile01.css" file (referred to on the <code>&lt;link&gt;</code> tag) that is saved in the same folder as the .html file.</p>
+
+<pre><code>/* This is how you make a comment in a CSS document.
+Text between these symbols won't be interpreted as CSS information. */
+
+/* A CSS file can define attributes and stylistic characteristics of HTML elements.
+An HTML file can then refer to a CSS file to get stylistic details
+about how to format the text that's in the HTML file's elements. */
+
+body {
+    background-color: rgb(239, 247, 255);
+    /* A color attribute can also be described in RGB hexademical, like this: #DFFFFF. */
+    font-family: arial, helvetica, sans-serif;
+  text-align: left;
+    color: #000000;
+ 
+}
+
+h1 {
+    color: #000080;
+    text-align: center;
+  font-size: 24px;
+}
+
+h2 {
+    color: #000080;
+    text-align: center;
+    font-size: 18px;
+}
+
+h3 {
+    color: #000080;
+    text-align: center;
+    font-size: 14px;
+}
+
+p {
+    font-size: 12px;
+}
+
+p.center {
+    text-align: center;
+    font-size: 10px;
+}
+
+em {
+  font-style: italic;
+  font-weight: bold;
+} 
+</code></pre>
+
+<p>See how much different you can make the same HTML structure look like, just by adding this CSS code layer? There is much more that you can do with these tools but for now let's move on to javascript.</p>
+
+<h2>Additional Resources</h2>
+
+<ul>
+<li><a href="https://www.w3schools.com/">w3schools</a> (you might want to bookmark this page).</li>
+</ul>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>

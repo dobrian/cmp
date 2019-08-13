@@ -1,0 +1,47 @@
+/* This is how you make a comment in a CSS document.
+Text between these symbols won't be interpreted as CSS information. */
+
+/* A CSS file can define attributes and stylistic characteristics of HTML elements.
+An HTML file can then refer to a CSS file to get stylistic details
+about how to format the text that's in the HTML file's elements. */
+
+body {
+    background-color: rgb(239, 247, 255);
+    /* A color attribute can also be described in RGB hexademical, like this: #DFFFFF. */
+    font-family: arial, helvetica, sans-serif;
+	text-align: left;
+   	color: #000000;
+ 
+}
+
+h1 {
+    color: #000080;
+    text-align: center;
+	font-size: 24px;
+}
+
+h2 {
+    color: #000080;
+    text-align: center;
+    font-size: 18px;
+}
+
+h3 {
+    color: #000080;
+    text-align: center;
+    font-size: 14px;
+}
+
+p {
+    font-size: 12px;
+}
+
+p.center {
+    text-align: center;
+    font-size: 10px;
+}
+
+em {
+	font-style: italic;
+	font-weight: bold;
+}
