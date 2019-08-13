@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<HTML>
+
+<HEAD>
+<TITLE>Formatting Using CSS</TITLE>
+<LINK rel="stylesheet" href="CSSfile01.css">
+</HEAD>
+
+<!-- This shows how to link to a CSS file that defines formatting styles for the
+HTML elements that are in this document. Notice how the formatting of this document
+is very different from that of HTML-Lesson01.htm, just because of the CSS.
+All of the elements have the same generic tags, but traits of those elements are defined elsewhere. -->
+
+<BODY>
+
+<!-- In the CSS file, the background color of the document, and the default font and font color for the document, are defined for the entire document in the definition of the BODY element. -->
+
+<H1>Formatting Using CSS</H1>
+<H2>Lesson 1</H2>
+<H3>The basics of getting the document to look the way you want</H3>
+
+<!-- Note that the Headings have a particular color, size and alignment. -->
+
+<P>Note that the Headings have a particular color, size and alignment. The paragraph text uses the default font and color and alignment of the document, and its own particular font size, 12 pt. A paragraph can have any amount of text in it, and normally it will wrap around in the way that the browser determines, based on the window size. It's possible to specify different margins, paddings, etc., in the CSS file, but that hasn't been done in this case, so the margins and wrapping are determined by the browser.</P>
+
+<P class="center">In the CSS file a particular class of paragraph has also been defined that is center-aligned and uses a slightly smaller font size, like this.</P>
+
+<P>By default Paragraphs use the style defined in the CSS: the default style traits that are defined for the whole document, plus whatever additional traits are defined for the Paragraph element. You can still give individual words <I>italicization</I> or make them <B>bold</B>. In this case, in the CSS file the definition of <EM>emphasis</EM> includes both italicization and bold weighting.</P>
+
+<HR>
+
+<P class="center">Christopher Dobrian <A HREF="mailto:dobrian@uci.edu">dobrian@uci.edu</A></P>
+
+</BODY>
+
+</HTML>
