@@ -29,22 +29,9 @@
 
     <h1>Synthesizer Examples in MSP</h1>
 
-    <hr width="50%"/>
-
+    <!--<hr width="50%"/>-->
     <p>
-      To design a synthesizer, you have to think about a lot of things: what kind of sounds you want your synth to produce, what sound generation/synthesis method will be best for the sounds you want, what features it will need, what kind of interface you want to present to the user, and how the synth will respond to MIDI input.
-    </p>
-
-    <p>
-      In the <a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook</a> you can find quite a lot of examples demonstrating different aspects of building a synthesizer in MSP. They're pretty basic, and you can surely improve on them, but let's take a look at what's there.
-    </p>
-
-    <p>
-      There's an example of an "<a href="http://music.arts.uci.edu/dobrian/maxcookbook/overly-simple-midi-synth">Overly simple MIDI synth</a>", which is, as the title says, too simplified to be considered good, but it introduces some really basic ideas. It gets incoming MIDI note messages, and uses the key-number and velocity bytes to affect the pitch and loudness of the sound. The text suggests some of the ways in which this overly simple example could be improved.
-    </p>
-
-    <p>
-      You can surmise some of the ways in which that example is inadequate:
+      You can surmise some of the ways in which the example on the previous lesson is inadequate:
       <ol>
         <li>It doesn't properly account for the possibility that the user might press two MIDI keys at once (or have unintentional overlap while playing a melody, thus releasing key A after playing key B).</li>
         <li>The sound generator&mdash;a sawtooth oscillator&mdash;is not very interesting. Many more interesting sounds are possible. At the least, this sound may need some filtering, vibrato, etc. </li>
@@ -83,14 +70,6 @@
         <li>square wave</li>
         <li>triangle wave</li>
         <li>vibrato</li>
-      </ul>
-    </div>
-
-    <div id="self-study">
-      <h2>Self-Study</h2>
-      <ul>
-        <li>Try combining some of the things you learned in the above examples&mdash;limiting incoming MIDI note data with <strong>poly</strong> to play only a single note at a time, generate a tone with one of the oscillator objects, generate an amplitude envelope to shape the sound, and consider adding some <em>vibrato</em> to the sound with LFO frequency modulation.</li>
-        <li>How would you add MIDI pitchbend control to vary the pitch of the sound? (Hint: You might want to research in the <a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook</a> and the <a href="https://docs.cycling74.com/max8/tutorials/00_mspindex">MSP Tutorials</a>.)</li>
       </ul>
     </div>
 
