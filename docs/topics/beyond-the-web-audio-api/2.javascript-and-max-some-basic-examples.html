@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+    <style type="text/css">
+      pre {
+        white-space: pre-wrap;       /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      }
+    </style>
+    <title>JavaScript and Max: Some Basic Examples</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/topics.html">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.beyond-the-web-audio-api.html">Beyond the Web Audio API</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+<h1>JavaScript and Max: Some Basic Examples</h1>
+
+<h3>Getting our feet wet</h3>
+
+<p>Following on our strategy for some other topics, let's dive right into a set of three small examples
+on Javascript and Max. Each example consists of two files, a max patch file, and a javascript file.
+The interaction with these patches should feel straight forward, and peeking at the javascript files 
+will explain how it <em>really</em> works. If it looks too much, don't worry. Feel free to move on to
+lessons 3 to 5 and come back later to re-learn from these examples.</p>
+
+<h3>Bang twice</h3>
+
+<p>Start with downloading these two files by right-clicking the links, and
+then selecting "Save Link As...". Make sure to save them on the same folder.</p>
+<ul>
+<li><a href="bang2x.js">bang2x.js</a></li>
+<li><a href="bang2x.maxpat">bang2x.maxpat</a></li>
+</ul>
+
+<div align="center"><img src="bang2x.png" width="80%"></div>
+
+<p>Then open the patch file to try it out. 
+Everytime you push the button, or the message box <em>foo</em>, a <em>bang</em> should be printed to
+the max console. Do make sure you also have the console window open, so you can confirm this.
+The core element in this patch is the <strong>js</strong> object which is loading the javascript file.
+Shall you double click this object, a Max text editor window will open. You can also define this action
+to open the javascript file with your favorite text editor, such as one of the ones listed in the 
+<a href="../../resources.html#software">resources</a> page, by changing the settings under 
+<em>Preferences > All > Interface</em>. As you already know, in javascript everything after a double 
+slash, until the end of the line, will not be executed. The portion of actual executable code here is 
+very small, all the rest is documenting it. Take a look at it.</p>
+
+
+<div id="script" class="col">
+  <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Text</button>
+  <div id="answer-1" class="answer" style="display: none; overflow-y: scroll">
+    <pre><code>
+    // on any line, any text after the two slashes is just commentary and is ignored by the compiler 
+
+    // by default the js object is created with 1 inlet and 1 outlet
+    // if you want some number of inlets or outlets other than 1, you must say so
+    // to do that, you give commands to set the object's "inlets" and "outlets" properties
+    // (setting the inlets to 1 is technically unnecessary, since it's the default anyway)
+    // "=" does not mean "is equal to", it means set the thing on the left to the value on the right
+    // the semicolon signals that the command is complete
+
+    inlets = 1; // the default number of inlets and outlets is 1 anyway
+    outlets = 2; // this changes the number of outlets to 2
+
+    // the above lines are called "global" code
+    // they are run first, automatically when an instance of the  object is created
+
+    // whenever you want your object to do something in response to a message,
+    // that's called giving the object a "method" to do the task
+    // to create a method, type "function" and give the function a method name
+    // follow the method name immediately by two parentheses to show that it's the name of a function
+    // (the parentheses can contain "arguments" to the function, if they're needed)
+    // then create two curly braces to contain the things done by the function
+    // inside the curly braces you list the things you want done
+    // "bang" is a useful method name, of course, since it's a special Max message
+    // when the object receives the word "bang" it looks to see if it has a "bang" method
+    // if so, then it executes the "bang" function
+
+    function bang() { // whenever a bang is received (bang has no arguments)
+        outlet(1, "bang"); // send out the right outlet first, for good Max behavior
+        outlet(0, "bang");  // then send out the left outlet
+    }
+
+    // the "outlet" function is a method that's available in every js object
+    // it expects two arguments, separated by a comma:
+    // the first is the outlet number you're referring to, numbered left to right, starting at 0
+    // the second is the message you want to send out that outlet 
+
+    // "anything" is another special method name,
+    // that's designed for handling unpredicted messages
+    // (anything that's not explicitly specified as a method)
+
+    function anything() { // any message other than bang
+        bang(); // run the bang function anyway
+    }
+
+    // in this case we want to treat every message as if it were "bang"
+    </code></pre>
+  </div>
+</div>
+
+</br>
+
+<h3>Same number once</h3>
+
+<p>Start by downloading these two files and saving them on the same folder.</p>
+
+<ul>
+<li><a href="number1x.js">number1x.js</a></li>
+<li><a href="number1x.maxpat">number1x.maxpat</a></li>
+</ul>
+
+<div align="center"><img src="number1x.png" align="center" width="80%"></div>
+
+<p>This patch is very similar to the previous one. It receives a value, and it outputs it, though here it is
+not printing to the Max console. When you'll open the javascript code you'll notice that there is much more
+executable code. Also different here is the fact that we are now expecting to receive floats or ints and we
+took some time to do some error handling. This example introduces a practice while writing javascript code that you
+should take into consideration when you'll start writing your own code.</p>
+
+<div id="script-2" class="col">
+  <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Text</button>
+  <div id="answer-2" class="answer" style="display: none; overflow-y: scroll">
+    <pre><code>
+      // this object stores one number, either integer or float
+      // it emulates the behavior of the int and float objects in Max
+
+      inlets = 2; // this time we'll have two inlets
+      outlets = 1; // and one outlet
+
+      // this creates a global variable in this object
+      // in JavaScript, a variable can contain anything (not just numbers)
+
+      var x = 0; //  create a variable named "x" and set it to 0
+
+      // the next section is for handling any typed-in messages
+      // it uses the "if{}else{}" construct to test things
+      // and nests two other ifs within the first if
+
+      // jsarguments is a provided array containing the items typed in the object box after the "js"
+      // so jsarguments[0] is the filename, jsarguments[1] is the next thing, and so on
+      // the property jsarguments.length is the number of items in the array
+
+      if (jsarguments.length > 1) { // if there's something typed in besides just the filename
+      if ( isNaN( jsarguments[1] ) ) { // check in case the argument after the filename is not a number
+      post( "Error in js", jsarguments[0], ": argument must be a number" );
+      } // if it's not a number, print an error message in the Max window
+      else { // otherwise, 
+      x = jsarguments[1]; // put it into the variable x to set its initial value
+      } // and the next thing is just a courtesy warning to the user
+      if (jsarguments.length > 2) { // if there are unneeded extra arguments,
+      post( "Warning from js", jsarguments[0], ": there are extra arguments" );
+      }  // report that in the Max window
+      }
+
+      function bang() { // bang will trigger output of the stored number
+      if (inlet == 1) { // but if it comes in the 2nd inlet...
+      post( "Error in js", jsarguments[0], ": second inlet does not understand bang" );
+      } // do nothing except report the error
+      else { // otherwise, it must be in the 1st inlet, so...
+      outlet(0, x); // send out the stored number
+      }
+      }
+
+      // when an int comes in an inlet, it calls the "msg_int" function
+      // the argument of the msg_int function is the value of the number that came in
+
+      function msg_int( incoming ) { // we arbitrarily gave the name "incoming" to the argument
+      x = incoming; // whatever it is, put it in the variable x
+      if (inlet == 0)  { // and if it came in the left inlet.
+      outlet(0, x); // send it out
+      }
+      }
+
+      function msg_float( incoming ) { // if a float comes in
+      msg_int(incoming);  // do the same thing as for msg_int
+      }
+
+      function set( incoming ) { // another way to set the value without causing output
+      if (inlet == 1) { //  if it comes in the 2nd inlet...
+      post( "Error in js", jsarguments[0], ": second inlet does not understand set" );
+      } // do nothing except report the error
+      else { // otherwise, it must be in the 1st inlet, so...
+      if ( isNaN( incoming ) ) { // make sure its argument is not a word instead of a number
+      post( "Error in js", jsarguments[0], ": argument for the set message must be a number" );
+      }
+      else { // if it's been verified as a number, store it
+      x = incoming;
+      }
+      }
+      }
+
+      function send( receiver ) { // send the value to a named object
+      if (inlet == 1) { //  if it comes in the 2nd inlet...
+      post( "Error in js", jsarguments[0], ": second inlet does not understand send" );
+      } // do nothing except report the error
+      else { // otherwise, it must be in the 1st inlet, so...
+      messnamed( receiver, x ); // this sends the contents of x to the named receive object(s)
+      }
+      }
+    </code></pre>
+  </div>
+</div>
+
+</br>
+<h3>Number array</h3>
+
+<p>Once again, start by downloading these two files and saving them on the same folder.</p>
+
+<ul>
+<li><a href="numberarray.js">numberarray.js</a></li>
+<li><a href="numberarray.maxpat">numberarray.maxpat</a></li>
+</ul>
+
+<div align="center"><img src="numberarray.png" align="center" width="80%"></div>
+
+<p>Though it contains a patch whose interface still resembles the previous examples, this one will introduce
+the use of an array in Javascript for Max, together with some new ways to store and process data. Take a
+look at the commented javascript code.</p>
+
+<div id="script-3" class="col">
+  <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Text</button>
+  <div id="answer-3" class="answer" style="display: none; overflow-y: scroll">
+    <pre><code>
+      // this is an object that stores the most recently received values in an array
+      // and allows you to access the array in various ways
+      // technically you could store strings in an array in addition to numbers, but
+      // in this object we'll restrict the contents of the array to numbers
+
+      // the object will have just one inlet and one outlet
+
+      inlets = 1;
+      outlets = 1;
+
+      // this is a declaration of the array where we'll keep the goodies
+      // declaring an array is different from declaring a single variable
+      // the default size of thearray  will be 1, but the user can change that
+      // by typing in a size argument or by sending a size message
+
+      thearray = new Array(1);
+
+      // if there's a typed-in  argument in the object box, use that to set the size of the array
+
+      if (jsarguments.length > 1) { // if true, that means there's at least one typed-in argument
+      if ( jsarguments[1] > 0 ) { // check to see that it's a valid argument
+        thearray.length = parseInt( jsarguments[1] ); // use it to set the length of thearray
+      } // notice that we parsed it as an integer before using it to set the length of thearray
+      else { // otherwise, 
+        post( "Error in js", jsarguments[0], ": invalid argument for array size\n");
+      }
+      }
+
+      // this is a declaration of a global variable
+      // that will always point to the array index where we'll store the next received number
+
+      var i; // i is the name of the index pointer to the location of the next  received number
+
+      // use that index pointer to step through the array,
+      // and set all the values in thearray to 0 initially
+      for ( i = 0; i < thearray.length; i++ ) { // set i to 0, test i after each pass, then increment i and repeat
+        thearray[i] = 0;
+      }
+
+      i = 0; // set the index pointer to point to the beginning of the array
+      // we'll start it at the beginning of thearray,
+      // so the first number will be placed at the beginning of the array
+
+      // this gives the user a method for changing the size of thearray
+
+      function size( arraylength ) { // the provided number will be in the arraylength argument
+      if (  arraylength > 0 ) { // check to see that it's a valid argument
+        thearray.length = parseInt( arraylength ); // use it to set the length of thearray
+        i = i%thearray.length // in case the size was reduced, make sure i is within thearray.length
+      }
+      else { // otherwise, 
+        post( "Error in js", jsarguments[0], ": invalid argument for size\n" );
+      }
+      }
+
+      // make it possible also to query the object about the size of thearray
+
+      function getsize() { // the same function with the word "get" in front of it queries for info
+      outlet( 0, thearray.length ); // report the size of thearray
+      }
+
+      // when a number comes in, place the incoming number there
+      // and increment the index (modulo the array length)
+
+      function msg_float( incoming ) { // when a float is received
+      thearray[i] = incoming; // put the incoming number there in the array
+      i = (i+1)%thearray.length; // increment the index (modulo the array length)
+      }
+
+      // same thing for an integer
+
+      function msg_int( incoming ) { // when an int is received
+      thearray[i] = incoming; // put the incoming number there in the array
+      i = (i+1)%thearray.length; // increment the index (modulo the array length)
+      }
+
+      // to get a single stored value out of the array
+
+      function getvalue( theindex ) {
+      if ( (theindex >= 0) && (theindex < thearray.length) ) { // make sure it's a valid index
+        outlet( 0, thearray[theindex] ); // if so, send out the value stored there
+      }
+      else { // otherwise, post an error message
+        post( "Error in js", jsarguments[0], ": invalid argument to getvalue\n" );
+      }
+      }
+
+      // to set the value at a particular location in the array (without regard to the current index i)
+
+      function setvalue( theindex, thevalue ) { 
+      if ( (theindex >= 0) && (theindex < thearray.length) ) { // make sure it's a valid index
+        thearray[theindex] = parseFloat( thevalue ); // if so, store thevalue there (0 if it isNaN)
+      }
+      else { // otherwise, post an error message
+        post( "Error in js", jsarguments[0], ": invalid array location to setvalue\n" );
+      }
+      }
+
+      // to get the current location of the index pointer i of the array
+
+      function getindex() {
+      outlet( 0, i );
+      } 
+
+      // to set the location of the index pointer i
+
+      function setindex( theindex ) {
+      if ( (theindex >= 0) && (theindex < thearray.length) ) { // make sure it's a valid index
+        i = theindex; // if so, set i to that location
+      }
+      else { // otherwise, post an error message
+        post( "Error in js", jsarguments[0], ": invalid array location to setindex\n" );
+      }
+      }
+
+      // to set all values in the array to 0
+
+      function clear() { // step through the whole array, setting the values to 0
+      var j; // local variable for use within this function
+      for ( j = 0; j < thearray.length; j++ ) { // set it to 0, test it after each pass, then increment and repeat
+        thearray[j] = 0;
+      }
+      }
+
+      // to output all values in the array as fast as possible
+
+      function dump() { // step through the whole array, sending out the values
+      for ( j = 0; j < thearray.length; j++ ) { 
+        outlet( 0, thearray[j] );
+      }
+      }
+
+      // to output all values in the array as a list
+      // (the receiving object in Max must be able to handle the list length)
+
+      function dumplist() { // sending out all the values as a space-separated list
+      outlet( 0, thearray ); // Max JavaScript support formats the array as a list for you
+      }
+
+      // output the sum of all the elements in the array
+
+      function sum() {
+      var thesum = 0.; // local variable for use within this function
+      for ( j = 0; j < thearray.length; j++ ) { 
+        thesum = thesum + thearray[j]; // add 'em up
+      }
+      outlet( 0, thesum );
+      }
+
+      // output the mean value of all the elements in the array
+
+      function mean() {
+      var thesum = 0.; // local variable for use within this function
+      for ( j = 0; j < thearray.length; j++ ) { 
+        thesum = thesum + thearray[j]; // add 'em up
+      }
+      outlet( 0, ( thesum / thearray.length ) ); // divide thesum by the number of elements
+      }
+
+      // what else would you want to know about the array?
+      // minimum, maximum, indexOf, lastIndexOf, prev, etc.
+    </code></pre>
+  </div>
+</div>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+  </body>
+</html>
