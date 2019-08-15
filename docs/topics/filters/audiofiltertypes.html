@@ -1,23 +1,41 @@
 <!DOCTYPE html>
+
 <html lang="en">
-  <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-      <title>Audio Filter Types</title>
-  </head>
-  <body>
-    <div class="container">
-      <div id="text">
-            <h1 id="audio-filter-types">Audio Filter Types</h1>
-            <hr>
-  <div id="video-script" class="row">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+  <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+  <title>Audio Filter Types</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../topics.html">Topics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="0.index.html">Filters</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div id="text">
+      <h1 id="audio-filter-types">Audio Filter Types</h1>
+      <hr>
+
+      <div id="video-script" class="row">
         <div id="video" class="col">
           <video controls
-                 src="./AudioFilterTypes.mp4"
-                 width="100%"
-                 height="100%"
-                 >
+          src="./AudioFilterTypes.mp4"
+          width="100%"
+          height="100%"
+          >
         </div>
         <div id="video-script" class="col">
           <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
@@ -46,58 +64,62 @@
           </div>
         </div>
       </div>
-<hr>
-<p>This video presents a few of the most common types of filter used for audio timbre transformation, shows how those filter types affect a sound, and explains a few important vocabulary terms like lowpass, highpass, bandpass, cutoff frequency, center frequency, resonance, bandwidth, and Q.</p>
-</div>
-<hr>
-<div id="vocabulary">
-<h2>Vocabulary</h2>
-<ul>
-<li>lowpass filter</li>
-<li>highpass filter</li>
-<li>cutoff frequency</li>
-<li>bandpass filter</li>
-<li>center frequency</li>
-<li>passband</li>
-<li>bandwidth</li>
-<li>Q (quality factor)</li>
-<li>resonance</li>
-<li>EQ (equalization)
-</ul>
-</div>
-<hr>
-<div id="self-quiz">
-  <h2>Self-Quiz</h2>
-  <ol>
-    <li>Does a lowpass filter filter out low frequencies or high frequencies?</li>
-    <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-    <p id="answer-1" class="answer" style="display: none">Low frequencies</p>
+      <hr>
+      <p>This video presents a few of the most common types of filter used for audio timbre transformation, shows how those filter types affect a sound, and explains a few important vocabulary terms like lowpass, highpass, bandpass, cutoff frequency, center frequency, resonance, bandwidth, and Q.</p>
+    </div>
+    <hr>
+    <div id="vocabulary">
+      <h2>Vocabulary</h2>
+      <ul>
+        <li>lowpass filter</li>
+        <li>highpass filter</li>
+        <li>cutoff frequency</li>
+        <li>bandpass filter</li>
+        <li>center frequency</li>
+        <li>passband</li>
+        <li>bandwidth</li>
+        <li>Q (quality factor)</li>
+        <li>resonance</li>
+        <li>EQ (equalization)
+        </ul>
+    </div>
+    <hr>
+    <div id="self-quiz">
+      <h2>Self-Quiz</h2>
+      <ol>
+        <li>Does a lowpass filter filter out low frequencies or high frequencies?</li>
+        <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-1" class="answer" style="display: none">Low frequencies</p>
 
-    <li>What exactly is meant by the bandwidth of a bandpass filter?</li>
-    <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-    <p id="answer-2" class="answer" style="display: none">It's the range of frequencies within which the attenuation effect is no greater than 3 dB, relative to the effect at the center frequency.</p>
+        <li>What exactly is meant by the bandwidth of a bandpass filter?</li>
+        <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-2" class="answer" style="display: none">It's the range of frequencies within which the attenuation effect is no greater than 3 dB, relative to the effect at the center frequency.</p>
 
-    <li>If you know the center frequency and the bandwidth of a filter, how would you calculate its Q?</li>
-    <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-    <p id="answer-3" class="answer" style="display: none">Q = F<sub>0</sub> / BW</p>
+        <li>If you know the center frequency and the bandwidth of a filter, how would you calculate its Q?</li>
+        <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-3" class="answer" style="display: none">Q = F<sub>0</sub> / BW</p>
 
-    <li>How would you describe a lowpass filter's effect on the timbre of a sound?</li>
-    <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-    <p id="answer-4" class="answer" style="display: none">By reducing the higher frequencies, a lowpass filter often makes the sound seem darker and more muffled.</p>
+        <li>How would you describe a lowpass filter's effect on the timbre of a sound?</li>
+        <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-4" class="answer" style="display: none">By reducing the higher frequencies, a lowpass filter often makes the sound seem darker and more muffled.</p>
 
-    <li>Why might you use a highpass filter when recording violin or female voice?</li>
-    <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-    <p id="answer-5" class="answer" style="display: none">To remove low-frequency rumbles such as from a ventilation fan, etc.</p>
+        <li>Why might you use a highpass filter when recording violin or female voice?</li>
+        <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-5" class="answer" style="display: none">To remove low-frequency rumbles such as from a ventilation fan, etc.</p>
+      </ol>
+      <hr />
 
-  </ol>
-  <hr />
-
-  <p>This page was last modified September 10, 2018 by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>.</p>
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+      <p>This page was last modified September 10, 2018 by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>.</p>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+  //$('pre').addClass("javascript");
+  hljs.initHighlightingOnLoad();
+  </script>-->
+  <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
 </body>
 </html>
