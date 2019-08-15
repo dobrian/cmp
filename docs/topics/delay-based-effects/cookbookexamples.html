@@ -1,74 +1,94 @@
 <! DOCTYPE html>
 
-<html>
+<html lang="en">
 
 <head>
-<title>Delay-Based Effects</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<style>
-	.margin
-	{
-		margin-left:2.5em;
-		margin-right:2.5em;
-		margin-top:1em;
-		margin-bottom:1em;
-	}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+  <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css">
+  <title>Delay-Based Effects</title>
 </head>
 
-<body class="margin">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../topics.html">Topics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="0.index.html">Delay-Based Effects</a>
+      </li>
+    </ul>
+  </nav>
 
-<h1>
-Delay-Based Effects
-</h1>
+  <div class="container">
+    <h1>
+    Delay-Based Effects
+    </h1>
 
-<hr/>
+    <hr/>
 
-<h2>Max Cookbook Examples</h2>
+    <h3>Max Cookbook Examples</h3>
 
-<p>
-Many audio effects require use of a time-delayed copy of a sound: for creating an echo effect, for simulating room reverberation, for filtering (changing the frequency content of a sound), and for a variety of other delay-based effects such as flanging, chorusing, Doppler shift, etc. Here are some examples in the <a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook</a> that demonstrate various delay-based effects.
-</p>
+    <p>
+    Many audio effects require use of a time-delayed copy of a sound: for creating an echo effect, for simulating room reverberation, for filtering (changing the frequency content of a sound), and for a variety of other delay-based effects such as flanging, chorusing, Doppler shift, etc. Here are some examples in the <a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook</a> that demonstrate various delay-based effects.
+    </p>
 
-<h3>Basic Delay</h3>
+    <h3>Basic Delay</h3>
 
-<p>
-  <ul>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-delay-audio-signal">Simple delay of audio signal</a> - demonstrates the <b>delay~</b> object</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/diy-ring-buffer">DIY ring buffer</a> - shows how you could build your own delay in Max/MSP</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/delay-tempo-relative-timing">Delay with tempo-relative timing</a> - using the transport's time value syntax to specify delay time</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/delay-feedback">Delay with feedback</a> - how to feed the dealyed sound back into the delay loop</li>
-  </ul>
-</p>
+    <p>
+      <ul>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-delay-audio-signal">Simple delay of audio signal</a> - demonstrates the <b>delay~</b> object</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/diy-ring-buffer">DIY ring buffer</a> - shows how you could build your own delay in Max/MSP</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/delay-tempo-relative-timing">Delay with tempo-relative timing</a> - using the transport's time value syntax to specify delay time</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/delay-feedback">Delay with feedback</a> - how to feed the dealyed sound back into the delay loop</li>
+      </ul>
+    </p>
 
-<h3>Flanging</h3>
+    <h3>Flanging</h3>
 
-<p>
-  <ul>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-flanging">Simple flanging</a> - time-varying delay</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/flanging-explained">Flanging explained</a> - further explanation of the theory and technique</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/abstraction-flanging">Abstraction for flanging</a> - a reusable subpatch to achieve the flanging effect</li>
-  </ul>
-</p>
+    <p>
+      <ul>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-flanging">Simple flanging</a> - time-varying delay</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/flanging-explained">Flanging explained</a> - further explanation of the theory and technique</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/abstraction-flanging">Abstraction for flanging</a> - a reusable subpatch to achieve the flanging effect</li>
+      </ul>
+    </p>
 
-<h3>Filtering</h3>
+    <h3>Filtering</h3>
 
-<p>
-  <ul>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/resonant-lowpass-filter">Resonant lowpass filter</a> - a basic adjustable lowpass filter</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/bandpass-filter-swept-lfo">Bandpass filter swept with a LFO</a> - using an LFO control signal to change the center frequency of a filter</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/biquad-filter">Biquad filter</a> - a very versatile variable (two-pole, two-zero) filter object</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/comb-filter">Comb filter</a> - explanation/demonstration of a comb filter</li>
-    <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/adjust-pitch-comb-filter">Adjust the pitch of a comb filter</a> - imposing a pitched resonance with feedback delay</li>
-  </ul>
-</p>
+    <p>
+      <ul>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/resonant-lowpass-filter">Resonant lowpass filter</a> - a basic adjustable lowpass filter</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/bandpass-filter-swept-lfo">Bandpass filter swept with a LFO</a> - using an LFO control signal to change the center frequency of a filter</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/biquad-filter">Biquad filter</a> - a very versatile variable (two-pole, two-zero) filter object</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/comb-filter">Comb filter</a> - explanation/demonstration of a comb filter</li>
+        <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/adjust-pitch-comb-filter">Adjust the pitch of a comb filter</a> - imposing a pitched resonance with feedback delay</li>
+      </ul>
+    </p>
 
-<hr width=50%/>
+    <hr width=50%/>
 
-<p>
-This page is by <a href=http://music.arts.uci.edu/dobrian/>Christopher Dobrian</a>, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a>.<br/>
-Last modified May 7, 2019.
-</p>
+    <p>
+    This page is by <a href=http://music.arts.uci.edu/dobrian/>Christopher Dobrian</a>, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a>.<br/>
+    Last modified May 7, 2019.
+    </p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+  //$('pre').addClass("javascript");
+  hljs.initHighlightingOnLoad();
+  </script>-->
+  <script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
 
 </body>
 
