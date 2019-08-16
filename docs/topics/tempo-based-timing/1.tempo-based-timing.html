@@ -29,105 +29,107 @@
 
       <div class="text">
 
-      <hr />
+        <hr />
 
-      <h2 id="clocktimemusicaltime">Clock Time and Musical Time</h2>
+        <h2 id="clocktimemusicaltime">Clock Time and Musical Time</h2>
 
-      <p>
-        The most objective type of time measurement, the one most frequent in everyday discourse and in scientific measurement, is the use of a regular, reliable, and agreed-upon clock; we can call this <i>absolute time</i> or <i>clock time</i>. In Max, time is most commonly referred to in terms of milliseconds (ms), which is a fine enough resolution for most purposes, and we can pretty easily translate arithmetically from ms to seconds, minutes, etc. The Max scheduler allows us to post events (messages) we want to send in the future, using objects such as <b>delay</b>, <b>metro</b>, <b>pipe</b>, etc. If you're not already very familiar with the use of those objects, you might want to read the blog posts "<a href="http://algocomp.blogspot.com/2008/08/repetition-at-steady-rate_06.html">Repetition at a steady rate</a>", "<a href="http://algocomp.blogspot.com/2008/08/timed-counting.html">Timed counting</a>", and "<a href="http://algocomp.blogspot.com/2008/08/counting-through-list.html">Counting through a list</a>".
-      </p>
+        <p>
+          The most objective type of time measurement, the one most frequent in everyday discourse and in scientific measurement, is the use of a regular, reliable, and agreed-upon clock; we can call this <i>absolute time</i> or <i>clock time</i>. In Max, time is most commonly referred to in terms of milliseconds (ms), which is a fine enough resolution for most purposes, and we can pretty easily translate arithmetically from ms to seconds, minutes, etc. The Max scheduler allows us to post events (messages) we want to send in the future, using objects such as <b>delay</b>, <b>metro</b>, <b>pipe</b>, etc. If you're not already very familiar with the use of those objects, you might want to read the blog posts "<a href="http://algocomp.blogspot.com/2008/08/repetition-at-steady-rate_06.html">Repetition at a steady rate</a>", "<a href="http://algocomp.blogspot.com/2008/08/timed-counting.html">Timed counting</a>", and "<a href="http://algocomp.blogspot.com/2008/08/counting-through-list.html">Counting through a list</a>".
+        </p>
 
-      <p>
-        Music is not commonly organized by direct reference to clock time, though; instead, it uses a different type of time measurement known as <i>musical time</i>, which relies on some agreed-upon more-or-less constant unit of time known as a <i>beat</i>. In the majority of music, and certainly in almost all popular music, there's a sense of regularity, called the beat, that underlies the musical structure at a fairly steady rate. The beat rate is called the <i>tempo</i>, and is measured in beats per minute (BPM). The relationship of musical time to clock time is determined by that tempo. The <i>onset</i> time of each sonic event is the moment when it is perceived to begin, and its <i>duration</i> is how long it lasts, from its onset to its ending; either may be measured in clock time and/or musical time. (This might be a good time to distinguish between duration&mdash;how long something lasts&mdash;and <i>inter-onset interval</i>, a.k.a. <i>IOI</i>, which is a cognitive science term for the time interval between beginnings of events. Our sense of rhythm is more strongly affected by IOIs than by the actual duration of any one event.) Any instant in time can be ascribed a unique numerical value in either clock time or musical time relative to an established 0 point; such a representation of a single moment is called a <i>timepoint</i>.
-      </p>
+        <p>
+          Music is not commonly organized by direct reference to clock time, though; instead, it uses a different type of time measurement known as <i>musical time</i>, which relies on some agreed-upon more-or-less constant unit of time known as a <i>beat</i>. In the majority of music, and certainly in almost all popular music, there's a sense of regularity, called the beat, that underlies the musical structure at a fairly steady rate. The beat rate is called the <i>tempo</i>, and is measured in beats per minute (BPM). The relationship of musical time to clock time is determined by that tempo. The <i>onset</i> time of each sonic event is the moment when it is perceived to begin, and its <i>duration</i> is how long it lasts, from its onset to its ending; either may be measured in clock time and/or musical time. (This might be a good time to distinguish between duration&mdash;how long something lasts&mdash;and <i>inter-onset interval</i>, a.k.a. <i>IOI</i>, which is a cognitive science term for the time interval between beginnings of events. Our sense of rhythm is more strongly affected by IOIs than by the actual duration of any one event.) Any instant in time can be ascribed a unique numerical value in either clock time or musical time relative to an established 0 point; such a representation of a single moment is called a <i>timepoint</i>.
+        </p>
 
-      <hr />
+        <hr />
 
-      <h2 id="beat">Beat and Rhythm</h2>
+        <h2 id="beat">Beat and Rhythm</h2>
 
-      <p>
-        Musicians often discuss tempo in terms of beats per minute (BPM), and they have a pretty good intuitive sense of beat rate when they hear that number. They don't give much conscious thought specifically to what interval of time passes between beats, the IOI in clock time. In a computer program, though, it's often necessary to know the amount of time per beat. You could calculate that easily by taking the number of milliseconds per minute and dividing that by the BPM number. The result would give you milliseconds per beat. For example 60,000 milliseconds per 1 minute, divided by 120 beats per 1 minute, yields 500 milliseconds per 1 beat.<br />
-        <center><i>ms/min &divide; beats/min = ms/min &middot; min/beat = ms/beat</i></center><br />
-        You can read more about these time relationships in the blog post "<a href="http://algocomp.blogspot.com/2008/08/tempo-relative-timing.html">Tempo-relative timing</a>".
-      </p>
+        <p>
+          Musicians often discuss tempo in terms of beats per minute (BPM), and they have a pretty good intuitive sense of beat rate when they hear that number. They don't give much conscious thought specifically to what interval of time passes between beats, the IOI in clock time. In a computer program, though, it's often necessary to know the amount of time per beat. You could calculate that easily by taking the number of milliseconds per minute and dividing that by the BPM number. The result would give you milliseconds per beat. For example 60,000 milliseconds per 1 minute, divided by 120 beats per 1 minute, yields 500 milliseconds per 1 beat.<br />
 
-      <p>
-        Here's a simple demonstration of the beat, marked by repeated thumps of a kick drum. In this example,and in a lot of popular music, beats are grouped in fours. Something happens in the music to cause the listener to group the beats mentally. In this example the first beat in each group of four is played a bit louder than the others, and that's all it takes to lead us to group the beats in fours. Most commony, the beat is notated as a quarter note, and since there are four quarter notes in a group, together they take the time of one whole note. This sort of small grouping of beats is called a <i>measure</i> or a <i>bar</i>, and because there are four beats (four quarters) in a bar, we say the music is in "four-four" time (written 4/4), which is known as the <i>meter</i> of the music. At the beginning of this example, the meter is shown in the <i>meter signature</i> (a.k.a. the <i>time signature</i>), and the tempo is shown above that.<br />
-        <center><video controls src="./fouronthefloor.mp4" width="50%" height="50%"></video><br />
-        <i>4/4 meter, with an accent on the first beat of each bar</i></center>
-      </p>
+          <center><i>ms/min &divide; beats/min = ms/min &middot; min/beat = ms/beat</i></center><br />
+          
+          You can read more about these time relationships in the blog post "<a href="http://algocomp.blogspot.com/2008/08/tempo-relative-timing.html">Tempo-relative timing</a>".
+        </p>
 
-      <p>
-        That kind of drum beat is known as "four on the floor", meaning a kick drum note on every beat in 4/4 meter. More commonly, though, a drummer might play the kick drum less frequently, say, every other beat, and play the snare drum on beats 2 and 4 of the measure, as shown below. (This additional accenting of beats 2 and 4 is sometimes referred to as the "backbeat", giving the music a feel that's common in rock, jazz, and hip-hop.) There's also a crash cymbal on the first beat of bars 1 and 3, which leads the listener to group the music mentally in three ways simultaneously: into groups of two beats (kick-snare), four beats (the accented kick drum notes), and eight beats (the crash cymbal).<br />
-        <center><video controls src="./kicknsnare.mp4" width="50%" height="50%"></video><br />
-        <i>Backbeat, with snare drum on beats 2 and 4</i></center>
-      </p>
+        <p>
+          Here's a simple demonstration of the beat, marked by repeated thumps of a kick drum. In this example,and in a lot of popular music, beats are grouped in fours. Something happens in the music to cause the listener to group the beats mentally. In this example the first beat in each group of four is played a bit louder than the others, and that's all it takes to lead us to group the beats in fours. Most commony, the beat is notated as a quarter note, and since there are four quarter notes in a group, together they take the time of one whole note. This sort of small grouping of beats is called a <i>measure</i> or a <i>bar</i>, and because there are four beats (four quarters) in a bar, we say the music is in "four-four" time (written 4/4), which is known as the <i>meter</i> of the music. At the beginning of this example, the meter is shown in the <i>meter signature</i> (a.k.a. the <i>time signature</i>), and the tempo is shown above that.<br />
+          <center><video controls src="./fouronthefloor.mp4" width="50%" height="50%"></video><br />
+          <i>4/4 meter, with an accent on the first beat of each bar</i></center>
+        </p>
 
-      <p>
-        In addition to these sorts of beat groupings, rhythmic interest is added by <i>division</i> of the beat, into halves (eighth notes), fourths (sixteenth notes), and so on. In the example below, the drummer adds constant eighth notes on the closed hi-hat cymbal, and sometimes divides the kick drum into two eighth notes instead of a single quarter note. The use of eighth notes establishes an underlying <i>pulse</i> that's twice as fast as the beat, giving added energy to the music.<br />
-        <center><video controls src="./addhihat.mp4" width="50%" height="50%"></video><br />
-        <i>Eighth-note divisions</i></center>
-      </p>
+        <p>
+          That kind of drum beat is known as "four on the floor", meaning a kick drum note on every beat in 4/4 meter. More commonly, though, a drummer might play the kick drum less frequently, say, every other beat, and play the snare drum on beats 2 and 4 of the measure, as shown below. (This additional accenting of beats 2 and 4 is sometimes referred to as the "backbeat", giving the music a feel that's common in rock, jazz, and hip-hop.) There's also a crash cymbal on the first beat of bars 1 and 3, which leads the listener to group the music mentally in three ways simultaneously: into groups of two beats (kick-snare), four beats (the accented kick drum notes), and eight beats (the crash cymbal).<br />
+          <center><video controls src="./kicknsnare.mp4" width="50%" height="50%"></video><br />
+          <i>Backbeat, with snare drum on beats 2 and 4</i></center>
+        </p>
 
-      <p>
-        Even more musical interest is achieved by <i>syncopation</i>, which means displacement of a note from its normally expected rhythmic location. The example below is exactly the same as the one above, except for one thing. In the second and fourth measures, the drummer plays the kick drum note that would be expected to occur on beat 3 a half-beat early, so that it occurs on the second half of beat 2 instead (and also gives it a little added loudness to emphasize its occurrence). That syncopation is unexpected the first time we hear it, but once it's repeated we start to expect it. That one syncopation changes the feel of the music, and makes a distinctive, memorable rhythmic motif.<br />
-        <center><video controls src="./boomchickboomboomchick.mp4" width="50%" height="50%"></video><br />
-        <i>Syncopations in the kick drum</i></center>
-      </p>
+        <p>
+          In addition to these sorts of beat groupings, rhythmic interest is added by <i>division</i> of the beat, into halves (eighth notes), fourths (sixteenth notes), and so on. In the example below, the drummer adds constant eighth notes on the closed hi-hat cymbal, and sometimes divides the kick drum into two eighth notes instead of a single quarter note. The use of eighth notes establishes an underlying <i>pulse</i> that's twice as fast as the beat, giving added energy to the music.<br />
+          <center><video controls src="./addhihat.mp4" width="50%" height="50%"></video><br />
+          <i>Eighth-note divisions</i></center>
+        </p>
 
-      <p>
-        So far we have seen three ways of making the rhythm interesting: accent on certain events (a change in loudness or timbre), division of the beat (eighth notes, sixteenth notes, etc.), and syncopation (moving a note slightly off the beat, displacing it from where it would normally be expected). A couple of other techniques are ornamentation (added quick notes around a main note) and rests (omitting notes selectively to defy normal expectations). The example below shows the inclusion of those techniques. The first half of the example is the same as the previous example. The use of sixteenth notes on the last beat of the third measure introduces to the listener the notion of there being a faster underlying pulse at the sixteenth-note rate, that appears only occasionally to interject moments of added speed. In the third measure there's an ornamental sixteenth note in the kick drum just before beat 3, and a syncopation&mdash;an offset by a sixteenth note&mdash;in the snare drum just before beat 4. In the fourth measure, all the instruments stop (rest) momentarily in beat 3, creating a sudden hole in the texture that adds an element of surprise for the listener, and then the snare drum plays sixteenth-note divisions, creating renewed energy (a sort of psychological acceleration) leading into the next measure.<br />
-        <center><video controls src="./ornsyncrestfill.mp4" width="50%" height="50%"></video><br />
-        <i>Sixteenth-note pulse, ornaments, syncopations, and rests</i></center>
-      </p>
+        <p>
+          Even more musical interest is achieved by <i>syncopation</i>, which means displacement of a note from its normally expected rhythmic location. The example below is exactly the same as the one above, except for one thing. In the second and fourth measures, the drummer plays the kick drum note that would be expected to occur on beat 3 a half-beat early, so that it occurs on the second half of beat 2 instead (and also gives it a little added loudness to emphasize its occurrence). That syncopation is unexpected the first time we hear it, but once it's repeated we start to expect it. That one syncopation changes the feel of the music, and makes a distinctive, memorable rhythmic motif.<br />
+          <center><video controls src="./boomchickboomboomchick.mp4" width="50%" height="50%"></video><br />
+          <i>Syncopations in the kick drum</i></center>
+        </p>
 
-      <hr />
+        <p>
+          So far we have seen three ways of making the rhythm interesting: accent on certain events (a change in loudness or timbre), division of the beat (eighth notes, sixteenth notes, etc.), and syncopation (moving a note slightly off the beat, displacing it from where it would normally be expected). A couple of other techniques are ornamentation (added quick notes around a main note) and rests (omitting notes selectively to defy normal expectations). The example below shows the inclusion of those techniques. The first half of the example is the same as the previous example. The use of sixteenth notes on the last beat of the third measure introduces to the listener the notion of there being a faster underlying pulse at the sixteenth-note rate, that appears only occasionally to interject moments of added speed. In the third measure there's an ornamental sixteenth note in the kick drum just before beat 3, and a syncopation&mdash;an offset by a sixteenth note&mdash;in the snare drum just before beat 4. In the fourth measure, all the instruments stop (rest) momentarily in beat 3, creating a sudden hole in the texture that adds an element of surprise for the listener, and then the snare drum plays sixteenth-note divisions, creating renewed energy (a sort of psychological acceleration) leading into the next measure.<br />
+          <center><video controls src="./ornsyncrestfill.mp4" width="50%" height="50%"></video><br />
+          <i>Sixteenth-note pulse, ornaments, syncopations, and rests</i></center>
+        </p>
 
-      <h2 id="beat">The Temporal Grid</h2>
+        <hr />
 
-      <p>
-        The preceding discussion points to a way of thinking about musical timing&mdash;and <i>rhythm</i>, which we can define as the articulation of timepoints with sound&mdash;in a way that's particularly appropriate for computer music. In this model, music exists on a temporal grid, one in which sonic events reside upon, and are quantized to, conceptual time divisions that correspond to the pulse (the quickest division)&mdash;which is the sixteenth-note rate in the above example. According to this model, the grid represents musical time, and the rhythm is articulated by sounds placed on that grid. The grid, and the events on it, exist independent of clock time, but if we know the BPM tempo, we can easily translate the grid into clock time. One advantage of thinking of musical time as a temporal grid is that it's analogous to the way musicians think about notation of rhythms, as shown above. Another powerful advantage of using a musical time grid that's indpendent of clock time is that we can leave the musical structure intact, changing only the BPM tempo, and all of the clock times can then be adjusted accordingly with straightforward arithmetic.
-      </p>
+        <h2 id="beat">The Temporal Grid</h2>
 
-      <p>
-        The music in the previous example could be shown graphically on a grid like this.<br />
-        <center><img src="./rhythmgrid.png" border="0" width="823" height="76"><br />
-        <i>Drum set rhythm, displayed graphically on a temporal grid</i></center>
-      </p>
+        <p>
+          The preceding discussion points to a way of thinking about musical timing&mdash;and <i>rhythm</i>, which we can define as the articulation of timepoints with sound&mdash;in a way that's particularly appropriate for computer music. In this model, music exists on a temporal grid, one in which sonic events reside upon, and are quantized to, conceptual time divisions that correspond to the pulse (the quickest division)&mdash;which is the sixteenth-note rate in the above example. According to this model, the grid represents musical time, and the rhythm is articulated by sounds placed on that grid. The grid, and the events on it, exist independent of clock time, but if we know the BPM tempo, we can easily translate the grid into clock time. One advantage of thinking of musical time as a temporal grid is that it's analogous to the way musicians think about notation of rhythms, as shown above. Another powerful advantage of using a musical time grid that's indpendent of clock time is that we can leave the musical structure intact, changing only the BPM tempo, and all of the clock times can then be adjusted accordingly with straightforward arithmetic.
+        </p>
 
-      <p>
-        Many digital audio workstation (DAW) applications use some version of this temporal grid model to show a timeline of musical events, such as MIDI notes, allowing notes to be placed precisely in the desired rhythm by the user, and doing all the necessary calculations of clock time behind the scenes without troubling the user with having to think about them. In the <a href="https://www.propellerheads.com/en/reason">Reason</a> application, for example, the grid idea is used explicity in the ReDrum drum machine and the Matrix pattern sequencer. The user places events on the grid, and those events are translated as MIDI notes (or control values) for playing sounds at the right time. The patterns placed on the grid can then be stored as self-contained rhythmic patterns, which themselves can be arranged on the timeline for the whole musical composition.<br />
-        <center><img src="./redrum.png" border="0" width="693" height="347"><br />
-        <i>Kick drum rhythm, displayed on 16 locations in a stored pattern</i><br /><br />
-        <img src="./matrix.png" border="0" width="694" height="140"><br />
-        <i>Note pattern, displayed on 16 locations in a stored pitch/rhythm matrix</i></center>
-      </p>
+        <p>
+          The music in the previous example could be shown graphically on a grid like this.<br />
+          <center><img src="./rhythmgrid.png" border="0" width="823" height="76"><br />
+          <i>Drum set rhythm, displayed graphically on a temporal grid</i></center>
+        </p>
 
-      <hr />
+        <p>
+          Many digital audio workstation (DAW) applications use some version of this temporal grid model to show a timeline of musical events, such as MIDI notes, allowing notes to be placed precisely in the desired rhythm by the user, and doing all the necessary calculations of clock time behind the scenes without troubling the user with having to think about them. In the <a href="https://www.propellerheads.com/en/reason">Reason</a> application, for example, the grid idea is used explicity in the ReDrum drum machine and the Matrix pattern sequencer. The user places events on the grid, and those events are translated as MIDI notes (or control values) for playing sounds at the right time. The patterns placed on the grid can then be stored as self-contained rhythmic patterns, which themselves can be arranged on the timeline for the whole musical composition.<br />
+          <center><img src="./redrum.png" border="0" width="693" height="347"><br />
+          <i>Kick drum rhythm, displayed on 16 locations in a stored pattern</i><br /><br />
+          <img src="./matrix.png" border="0" width="694" height="140"><br />
+          <i>Note pattern, displayed on 16 locations in a stored pitch/rhythm matrix</i></center>
+        </p>
 
-      <h2 id="beat">Tempo-Relative Timing in Max</h2>
+        <hr />
 
-      <p>
-        In addition to Max's built-in clock-time scheduler, Max also has a feature to support tempo-relative musical-time scheduling. The musical timing feature is called the "global transport". Like the transport feature in most DAWs, Max's global transport allows one to set the tempo and the meter signature of musical time, start and stop the passage of musical time (in reference to a time 0 starting point), and refer to time in terms of bars, beats, and units. So-called "units" are fractions of a quarter note, for finer-resolution timing, also known as <i>ticks</i>, a.k.a. pulses-per-quarter (<i>ppq</i>). The number of pulses   per quarter note (ppq) used for fine-resolution musical timing is usually some number that can be divided by 2, 3, 4, and ideally 5. The ppq value in MIDI is 24 by default, whereas in DAWs it is usually 480 or 960. In Max's global transport, the number of ticks (ppq) is 480.
-      </p>
+        <h2 id="beat">Tempo-Relative Timing in Max</h2>
 
-      <p>
-        When programming in Max, you can access the global transport via the <b>transport</b> object, and some of its related objects such as <b>when</b> (to find out what the current time is in the global transport), <b>timepoint</b> (to send out a <i>bang</i> at a specific moment in musical time), and <b>translate</b> (to convert between different time formats in musical time and clock time). And, by using the global transport for musical timing, you can refer to timings and durations using Max's <a href="https://docs.cycling74.com/max7/vignettes/maxtime_syntax">time value syntax</a>. The following set of Max Cookbook examples will help you learn about the <b>transport</b> object and Max's way of handling musical timing.
-      </p>
+        <p>
+          In addition to Max's built-in clock-time scheduler, Max also has a feature to support tempo-relative musical-time scheduling. The musical timing feature is called the "global transport". Like the transport feature in most DAWs, Max's global transport allows one to set the tempo and the meter signature of musical time, start and stop the passage of musical time (in reference to a time 0 starting point), and refer to time in terms of bars, beats, and units. So-called "units" are fractions of a quarter note, for finer-resolution timing, also known as <i>ticks</i>, a.k.a. pulses-per-quarter (<i>ppq</i>). The number of pulses   per quarter note (ppq) used for fine-resolution musical timing is usually some number that can be divided by 2, 3, 4, and ideally 5. The ppq value in MIDI is 24 by default, whereas in DAWs it is usually 480 or 960. In Max's global transport, the number of ticks (ppq) is 480.
+        </p>
 
-      <p>
-        Max Cookbook examples about <b>transport</b>:<br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/tempo-relative-timing-transport-object">Tempo-relative timing with the transport object</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-demonstration-transport-object">Simple demonstration of the transport object</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/other-basic-functionality-transport-object">Other basic functionality of the transport object</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/beat-divisions-transport">Beat divisions with transport</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/translate-object-updates-its-output-when-tempo-changes">The translate object updates its output when the tempo changes</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/using-timepoints-interactive-sequencing">Using timepoints for interactive sequencing</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/event-timing-transport">Event timing with transport</a><br />
-        <a href="http://music.arts.uci.edu/dobrian/maxcookbook/tempo-relative-timing-msp-lfo-control">Tempo-relative timing for MSP LFO control</a><br />
-      </p>
+        <p>
+          When programming in Max, you can access the global transport via the <b>transport</b> object, and some of its related objects such as <b>when</b> (to find out what the current time is in the global transport), <b>timepoint</b> (to send out a <i>bang</i> at a specific moment in musical time), and <b>translate</b> (to convert between different time formats in musical time and clock time). And, by using the global transport for musical timing, you can refer to timings and durations using Max's <a href="https://docs.cycling74.com/max7/vignettes/maxtime_syntax">time value syntax</a>. The following set of Max Cookbook examples will help you learn about the <b>transport</b> object and Max's way of handling musical timing.
+        </p>
 
-    </div>
+        <p>
+          Max Cookbook examples about <b>transport</b>:<br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/tempo-relative-timing-transport-object">Tempo-relative timing with the transport object</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-demonstration-transport-object">Simple demonstration of the transport object</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/other-basic-functionality-transport-object">Other basic functionality of the transport object</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/beat-divisions-transport">Beat divisions with transport</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/translate-object-updates-its-output-when-tempo-changes">The translate object updates its output when the tempo changes</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/using-timepoints-interactive-sequencing">Using timepoints for interactive sequencing</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/event-timing-transport">Event timing with transport</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/tempo-relative-timing-msp-lfo-control">Tempo-relative timing for MSP LFO control</a><br />
+        </p>
+
+      </div>
 
       <hr />
 
@@ -163,43 +165,49 @@
 
       <div id="self-study">
 
-      <h2>Try it yourself</h2>
+        <h2>Try it yourself</h2>
 
-      <p>
-        To gain experience with this way of thinking of events in terms of the musical timing and musical rhythm, write a Max patch that uses the Max <b>transport</b> object and one or more related objects such as <b>metro</b>, <b>translate</b>, <b>timepoint</b>, and/or <b>phasor~</b>. Make something happen in a particular rhythm (play some MIDI notes, or trigger some sound files, or modulate a sound), in such a way that you can change its underlying tempo (the <i>tempo</i> attribute of the <b>transport</b> object) without changing the rhythm.
-      </p>
+        <p>
+          To gain experience with this way of thinking of events in terms of the musical timing and musical rhythm, write a Max patch that uses the Max <b>transport</b> object and one or more related objects such as <b>metro</b>, <b>translate</b>, <b>timepoint</b>, and/or <b>phasor~</b>. Make something happen in a particular rhythm (play some MIDI notes, or trigger some sound files, or modulate a sound), in such a way that you can change its underlying tempo (the <i>tempo</i> attribute of the <b>transport</b> object) without changing the rhythm.
+        </p>
 
-    </div>
+        </div>
 
-      <hr />
+        <hr />
 
       <div id="self-quiz">
 
-      <h2>Self-Quiz</h2>
+        <h2>Self-Quiz</h2>
 
-      <ol>
-        <li>What is the basic unit of time for Max's clock-time scheduler?</li>
-        <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-        <p id="answer-1" class="answer" style="display: none">Millisecond</p>
+        <ol>
+          <li>What is the basic unit of time for Max's clock-time scheduler?</li>
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">Millisecond</p>
 
-        <li>What object allows you to use musical timing in Max</li>
-        <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-        <p id="answer-2" class="answer" style="display: none">transport</p>
+          <li>What object allows you to use musical timing in Max</li>
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-2" class="answer" style="display: none">transport</p>
 
-        <li>What musical unit is most commonly used to designate a beat?</li>
-        <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-        <p id="answer-3" class="answer" style="display: none">Quarter note</p>
+          <li>What musical unit is most commonly used to designate a beat?</li>
+          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-3" class="answer" style="display: none">Quarter note</p>
 
-        <li>What is syncopation?</li>
-        <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-        <p id="answer-4" class="answer" style="display: none">Displacement of a sonic event to create an unexpected effect</p>
+          <li>What is syncopation?</li>
+          <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-4" class="answer" style="display: none">Displacement of a sonic event to create an unexpected effect</p>
 
-        <li>How many ticks are there per quarter note in Max's musical timing?</li>
-        <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-        <p id="answer-5" class="answer" style="display: none">480</p>
-      </ol>
+          <li>How many ticks are there per quarter note in Max's musical timing?</li>
+          <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-5" class="answer" style="display: none">480</p>
+        </ol>
 
-    </div>
+      </div>
+
+      <h2>Additional Resources</h2>
+
+      <ul>
+      <li><a href="http://algocomp.blogspot.com/">Algorithmic Composition</a> - A collection of essays on algorithmic composition, with sonic, musical, and visual examples in Max, by Christopher Dobrian.</li>
+      </ul>
 
       <hr />
 
