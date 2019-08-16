@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css"/>
-  <title>Sampling Theory</title>
+  <title>Discrete Samples of a Continuous Signal</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
           <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://dobrian.github.io/cmp/topics.html">Topics</a>
+          <a class="nav-link" href="../../topics.html">Topics</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="0.index.html">Sampling Theory</a>
@@ -26,16 +26,8 @@
       </ul>
     </nav>
 <div class="container">
-  
 
-
-<div id="text">
-
-<h1 id="sampling-theory">Sampling Theory</h1>
-
-<hr>
-
-<h2 id="discrete-samples-of-a-continuous-signal">Discrete Samples of a Continuous Signal</h2>
+<h1 id="discrete-samples-of-a-continuous-signal">Discrete Samples of a Continuous Signal</h1>
 
 <p>You&#39;re probably aware that when you&#39;re watching a movie you&#39;re actually watching a series of still photographs. Conventionally, 24 snapshots&mdash;also known as frames&mdash;are captured per second, and those are later played back (displayed one after the other) at a constant rate of 24 frames per second, the same rate at which the snapshots were taken. That means that the photos are shot at a rate of one every 1/24 of a second&mdash;which is to say every 0.041667 seconds, or every 41.667 milliseconds.</p>
 
@@ -51,74 +43,6 @@
 <p>The sample-and-hold circuit periodically holds its input voltage constant, giving the computer time to measure the voltage and quantize it as a numerical value.</p>
 
 <p>The result is an ordered file of numbers&mdash;in this case, 44,100 numbers per second of sound. Just as a movie shows us 24 still images per second, a digital recording reproduces 44,100 constant voltages per second. A filter circuit is used to smooth that signal, so that it effectively replicates the continuously changing voltage of the original sound signal.</p>
-
-<hr>
-
-<h2 id="digital-audio">Digital Audio</h2>
-
-<p>The article <a href="http://music.arts.uci.edu/dobrian/digitalaudio.htm">&quot;Digital Audio&quot;</a> describes the digital audio sampling process, and introduces some of its important terminology and concepts. You should try to understand the meaning of the terms listed below. If you don’t understand the explanation of those terms in the article, do some research in additional resources to try to learn more about the things you don’t understand.</p>
-
-</div>
-
-<hr>
-
-<div id="vocabulary">
-
-<h2 id="vocabulary">Vocabulary</h2>
-
-<ul>
-<li>simple harmonic motion</li>
-<li>fundamental (resonant) mode of vibration</li>
-<li>harmonics (overtones, partials)</li>
-<li>harmonic series</li>
-<li>spectrum</li>
-<li>amplitude envelope</li>
-<li>loudness, amplitude</li>
-<li>pitch</li>
-<li>frequency</li>
-<li>decibel</li>
-<li>analog-to-digital converter</li>
-<li>digital-to-analog, converter</li>
-<li>Nyquist theorem (Nyquist frequency)</li>
-<li>sampling rate</li>
-<li>aliasing/foldover</li>
-<li>quantization</li>
-<li>quantization precision</li>
-<li>signal-to-quantization noise ratio (SQNR)</li>
-<li>clipping</li>
-</ul>
-
-</div>
-
-<hr>
-
-<div id="self-quiz">
-
-<h2 id="self-quiz">Self-Quiz</h2>
-
-<ol>
-<li>What is the sampling rate of CD-quality audio?</li>
-<button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-<p id="answer-1" class="answer" style="display: none">44,100 Hz</p>
-
-<li>If the sampling rate is 48,000 Hz, what is the Nyquist frequency?</li>
-<button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-<p id="answer-2" class="answer" style="display: none">24,000 Hz</p>
-
-<li>What is the range of frequencies that humans can hear as a tone?</li>
-<button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-<p id="answer-3" class="answer" style="display: none">20 Hz to 20,000 Hz</p>
-
-<li>If an amplitude of 1 is used as the 0 dB reference, what amplitude is signified by -6 dB?</li>
-<button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-<p id="answer-4" class="answer" style="display: none">0.5</p>
-
-<li>What adjective describes a tone that consists of frequencies that are all whole number multiples of the same fundamental frequency?</li>
-<button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
-<p id="answer-5" class="answer" style="display: none">Harmonic</p>
-</ol>
-
-</div>
 
 <hr>
 
@@ -141,7 +65,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://dobrian.github.io/cmp/static/js/cmp.js"></script>
+<script src="../../static/js/cmp.js"></script>
 </body>
 
 </html>
