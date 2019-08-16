@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://dobrian.github.io/cmp/static/css/cmp.css" />
+    <script src="./static/js/cmp.js"></script>
     <title>Week-by-Week Plan</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+          <a class="nav-link" href="index.html">Computer Music Programming</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://dobrian.github.io/cmp/week-by-week.html">Week-by-Week Plan</a>
+          <a class="nav-link" href="week-by-week.html">Week-by-Week Plan</a>
         </li>
       </ul>
     </nav>
@@ -24,7 +25,7 @@
       <ul>
         <li><a href="/cmp/topics/physics-of-sound/0.index.html">Physics of Sound</a></li>
         <li><a href="/cmp/topics/basics-of-music-theory/0.basics-of-music-theory.html">Basics of Music Theory</a></li>
-        <li><a href="/cmp/topics/sampling-theory/index.html">Sampling Theory</a></li>
+        <li><a href="/cmp/topics/sampling-theory/0.index.html">Sampling Theory</a></li>
       </ul>
       <h3>Week 2</h3>
       <ul>
@@ -43,8 +44,8 @@
       <h3>Week 4</h3>
       <ul>
         <li><a href="/cmp/topics/building-a-synthesizer-with-web-audio-api/0.building-a-synthesizer.html">Building a Synthesizer with Web Audio API</a></li>
-        <li><a href="/cmp/topics/building-a-synthesizer-with-msp/cookbooksynthexamples.html">Building a Synthesizer with MSP</a></li>
-        <li><a href="/cmp/topics/midi/mididocuments.html">MIDI</a></li>
+        <li><a href="/cmp/topics/building-a-synthesizer-with-msp/0.index.html">Building a Synthesizer with MSP</a></li>
+        <li><a href="/cmp/topics/midi/0.index.html">MIDI</a></li>
       </ul>
       <h3>Week 5</h3>
       <ul>
@@ -53,17 +54,20 @@
       </ul>
       <h3>Week 6</h3>
       <ul>
-        <li><a href="/cmp/topics/delay-based-effects/index.html">Delay-Based Effects</a></li>
-        <li><a href="/cmp/topics/filters/index.html">Filters</a></li>
+        <li><a href="/cmp/topics/delay-based-effects/0.index.html">Delay-Based Effects</a></li>
+        <li><a href="/cmp/topics/filters/0.index.html">Filters</a></li>
       </ul>
       <h3>Week 8</h3>
       <ul>
-        <li><a href="/cmp/topics/tempo-based-timing/index.html">Tempo-Based Timing</a></li>
+        <li><a href="/cmp/topics/tempo-based-timing/0.index.html">Time Manipulation</a></li>
         <li><a href="/cmp/topics/fourier-transform/0.fourier-transform.html">The Fourier Transform</a></li>
       </ul><h3>Week 9</h3>
       <ul>
-        <li><a href="/cmp/topics/spatialization/index.html">Spatialization</a></li>
+        <li><a href="/cmp/topics/spatialization/0.index.html">Spatialization</a></li>
       </ul>
+      <hr/>
+      <p>This page was last modified: <a id="Last-Modified"></a>.</p> 
     </div>
+    <script>document.getElementById("Last-Modified").innerHTML = fetchHeader(location.href,'Last-Modified');</script>
   </body>
 </html>
