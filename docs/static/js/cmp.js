@@ -11,6 +11,7 @@ $(document).ready(function() {
     var answerID = "#answer-" + questionId.split("-")[1];
     $(answerID).toggle();
   });
+  document.getElementById("Last-Modified1").innerHTML = fetchHeader(location.href,'Last-Modified');
 });
 
 //to automatically write last changed date
