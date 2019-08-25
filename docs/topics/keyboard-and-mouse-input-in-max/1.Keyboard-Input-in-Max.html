@@ -28,8 +28,9 @@
 
 <p>You may want to use your computer's typing keyboard as a built-in hardware interface to interact with your Max patch. This could allow you to easily build musical keyboards, advance automations or patch states, or start/stop various processes. Your computer already understands and encodes this kind of interaction as <a href="https://en.wikipedia.org/wiki/ASCII">ASCII data</a>.</p>
 
-<p>Open the patch "Keyboard Input".
-<img src="keyboardinput.png"></p>
+<p>Open the patch "Keyboard Input".</p>
+
+<p><img src="keyboardinput.png"></p>
 
 <p>The first part of this patch demonstrates the simplest way to get your keyboard data into Max. We simply need to use the <strong>key</strong> object to output the relevant ASCII data when a key pressed on your keyboard. The <strong>keyup</strong> object lets us know when a key is released. By using the <strong>select</strong> object (this object is commonly abbreviated as <strong>sel</strong>) we can tell Max to look for certain keys and send out a bang when those keys are pressed or released.</p>
 
@@ -52,6 +53,7 @@ then selecting "Save Link As...".</p>
 
 <ul>
 <li>If you would like to know how to achieve some of what is approached here in Javascript/HTML, take a look at <a href="../intro-to-web-audio-api/2.ui-in-html-and-javascript.html">this lesson</a>.</li>
+<li><a href="../building-a-synthesizer-with-msp/2.synthesizer-examples-in-msp.html">Synthesizer Examples in MSP</a> includes another example of using the keyboard in max, to control a sawtooth.</li>
 </ul>
 <hr/>
 <p>This page was last modified: <a id="Last-Modified"></a>.</p> 
