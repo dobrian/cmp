@@ -3,7 +3,7 @@
 <sesx version="1.5">
 
   <session appBuild="11.0.0.199" appVersion="11.0" audioChannelType="stereo" bitDepth="32" duration="13665491" sampleRate="44100">
-    <name>audition session.sesx</name>
+    <name>audition session_20190825T034254.711037.sesx</name>
     <tracks>
       <audioTrack automationLaneOpenState="false" id="10001" index="1" select="false" visible="true">
         <trackParameters trackHeight="134" trackHue="-1" trackMinimized="false">
@@ -77,7 +77,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="e937bc11-8416-4a64-9d8a-562c9ecf6bd7" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="302e6839-7196-4f99-8d09-9b998099a109" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -165,7 +165,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="797b2e72-ed60-42fa-8728-e50c5006b233" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="342327f5-e98f-4070-bbb9-01a718b6aa6f" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -248,12 +248,12 @@
           </component>
         </trackAudioParameters>
         <editParameter parameterIndex="0" slotIndex="4294967280"/>
-        <audioClip clipAutoCrossfade="true" crossFadeHeadClipID="-1" crossFadeTailClipID="-1" endPoint="13343925" fileID="2" hue="-1" id="0" lockedInTime="false" looped="false" name="getting_started_wtih_midi_narration" offline="false" select="true" sourceInPoint="0" sourceOutPoint="13343925" startPoint="0" zOrder="0">
+        <audioClip clipAutoCrossfade="true" crossFadeHeadClipID="-1" crossFadeTailClipID="-1" endPoint="13343925" fileID="2" hue="-1" id="0" lockedInTime="false" looped="false" name="getting_started_wtih_midi_narration" offline="true" select="true" sourceInPoint="0" sourceOutPoint="13343925" startPoint="0" zOrder="0">
           <component componentGuid="5f045b24-58b9-4961-a167-4fee46ca81bc" componentID="Audition.Fader" id="clipGain" name="volume" powered="true">
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="adac33bd-4002-41c4-8332-b2522dc8852f" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="ddd6d6d2-e715-4d2c-ad64-9f2a2846e478" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -545,7 +545,7 @@
     </tracks>
     <sessionState ctiPosition="6225126" smpteStart="0">
       <selectionState selectionDuration="0" selectionStart="6225126"/>
-      <viewState horizontalViewDuration="0" horizontalViewStart="0" trackControlsWidth="0" verticalScrollOffset="0"/>
+      <viewState horizontalViewDuration="13343925" horizontalViewStart="0" trackControlsWidth="224" verticalScrollOffset="0"/>
       <timeFormatState beatsPerBar="4" beatsPerMinute="120" customFrameRate="12" linkToDefaultTimeSettings="true" noteLength="4" subdivisions="16" timeCodeDropFrame="false" timeCodeFrameRate="30" timeCodeNTSC="false" timeFormat="timeFormatDecimal"/>
       <mixingOptionState defaultPanModeLogarithmic="false" panPower="-3"/>
     </sessionState>
@@ -556,14 +556,15 @@
             xmlns:xmp="http://ns.adobe.com/xap/1.0/"
             xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
             xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#"
+            xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#"
             xmlns:dc="http://purl.org/dc/elements/1.1/"
             xmlns:xmpDM="http://ns.adobe.com/xmp/1.0/DynamicMedia/">
          <xmp:CreatorTool>Adobe Audition CC 2018.0 (Macintosh)</xmp:CreatorTool>
          <xmp:CreateDate>2019-08-25T02:15:03+01:00</xmp:CreateDate>
-         <xmp:MetadataDate>2019-08-25T03:44:10+01:00</xmp:MetadataDate>
-         <xmp:ModifyDate>2019-08-25T03:44:10+01:00</xmp:ModifyDate>
-         <xmpMM:InstanceID>xmp.iid:418174c8-981c-4f1a-8e27-431604076e23</xmpMM:InstanceID>
-         <xmpMM:DocumentID>xmp.did:b5db096f-510b-4be2-a56c-ea235f19f3b8</xmpMM:DocumentID>
+         <xmp:MetadataDate>2019-08-25T03:42:54+01:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2019-08-25T03:42:54+01:00</xmp:ModifyDate>
+         <xmpMM:InstanceID>xmp.iid:48420437-0d9f-4f93-8948-c93f30488820</xmpMM:InstanceID>
+         <xmpMM:DocumentID>xmp.did:48420437-0d9f-4f93-8948-c93f30488820</xmpMM:DocumentID>
          <xmpMM:OriginalDocumentID>xmp.did:b5db096f-510b-4be2-a56c-ea235f19f3b8</xmpMM:OriginalDocumentID>
          <xmpMM:History>
             <rdf:Seq>
@@ -590,20 +591,25 @@
                </rdf:li>
                <rdf:li rdf:parseType="Resource">
                   <stEvt:action>saved</stEvt:action>
-                  <stEvt:instanceID>xmp.iid:804070da-6350-4387-b191-57d48ad54055</stEvt:instanceID>
-                  <stEvt:when>2019-08-25T03:44:10+01:00</stEvt:when>
+                  <stEvt:instanceID>xmp.iid:06d167a4-e1ac-4209-81dc-453727ef04cf</stEvt:instanceID>
+                  <stEvt:when>2019-08-25T03:42:54+01:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition CC 2018.0 (Macintosh)</stEvt:softwareAgent>
                   <stEvt:changed>/metadata</stEvt:changed>
                </rdf:li>
                <rdf:li rdf:parseType="Resource">
                   <stEvt:action>saved</stEvt:action>
-                  <stEvt:instanceID>xmp.iid:418174c8-981c-4f1a-8e27-431604076e23</stEvt:instanceID>
-                  <stEvt:when>2019-08-25T03:44:10+01:00</stEvt:when>
+                  <stEvt:instanceID>xmp.iid:48420437-0d9f-4f93-8948-c93f30488820</stEvt:instanceID>
+                  <stEvt:when>2019-08-25T03:42:54+01:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition CC 2018.0 (Macintosh)</stEvt:softwareAgent>
                   <stEvt:changed>/</stEvt:changed>
                </rdf:li>
             </rdf:Seq>
          </xmpMM:History>
+         <xmpMM:DerivedFrom rdf:parseType="Resource">
+            <stRef:instanceID>xmp.iid:06d167a4-e1ac-4209-81dc-453727ef04cf</stRef:instanceID>
+            <stRef:documentID>xmp.did:b5db096f-510b-4be2-a56c-ea235f19f3b8</stRef:documentID>
+            <stRef:originalDocumentID>xmp.did:b5db096f-510b-4be2-a56c-ea235f19f3b8</stRef:originalDocumentID>
+         </xmpMM:DerivedFrom>
          <dc:format>application/xml</dc:format>
          <xmpDM:Tracks>
             <rdf:Bag>
@@ -726,9 +732,9 @@
   </session>
 
   <files>
-    <file absolutePath="/Users/omar/Documents/GitHub/cmp/docs/topics/midi/getting_started_with_midi-assets/midi_tut_take3_audio_4.wav" id="0" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:1;" mediaHandler="AmioWav" relativePath="../midi_tut_take3_audio_4.wav"/>
-    <file absolutePath="/Users/omar/Documents/GitHub/cmp/docs/topics/midi/getting_started_with_midi-assets/midi_tut_take3_audio_2.wav" id="1" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:1;" mediaHandler="AmioWav" relativePath="../midi_tut_take3_audio_2.wav"/>
-    <file absolutePath="/Users/omar/Documents/GitHub/cmp/docs/topics/midi/getting_started_with_midi-assets/getting_started_wtih_midi_narration.mp3" id="2" importerPrivateSettings="BitsPerSecond:0:320000;CompressionQuality:0:4;CompressionType:0:0;" mediaHandler="AmioMP3" relativePath="../getting_started_wtih_midi_narration.mp3"/>
+    <file absolutePath="/Users/omar/Documents/GitHub/cmp/docs/topics/midi/getting_started_with_midi-assets/midi_tut_take3_audio_4.wav" id="0" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:1;" mediaHandler="AmioWav" recoveryID="5f406470-1a35-4f7b-aa40-faacac97d63d" relativePath="../../midi_tut_take3_audio_4.wav"/>
+    <file absolutePath="/Users/omar/Documents/GitHub/cmp/docs/topics/midi/getting_started_with_midi-assets/midi_tut_take3_audio_2.wav" id="1" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:1;" mediaHandler="AmioWav" recoveryID="fc2d776e-04a1-4f19-9c79-f300990d0904" relativePath="../../midi_tut_take3_audio_2.wav"/>
+    <file absolutePath="/Users/omar/Documents/GitHub/cmp/docs/topics/midi/getting_started_with_midi-assets/getting_started_wtih_midi_narration.mp3" id="2" importerPrivateSettings="BitsPerSecond:0:320000;CompressionQuality:0:4;CompressionType:0:0;" mediaHandler="AmioMP3" recoveryID="7f16b4aa-e63a-4ccb-a7ef-47fb54497781" relativePath="../../getting_started_wtih_midi_narration.mp3"/>
   </files>
 
   <audioDevice inputID="AppleUSBAudioEngine:Focusrite:Scarlett 2i4 USB:14110000:1,2" outputID="AppleUSBAudioEngine:Focusrite:Scarlett 2i4 USB:14110000:1,2">
