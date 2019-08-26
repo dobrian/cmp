@@ -190,6 +190,29 @@ between the pitches the composer is using.</p>
 what are the frequencies of the pitches G2 and G4 (one octave below and above G4)?</li>
 </ul>
 
+<hr>
+    <div id="video-script1" class="row">
+      <div id="video" class="col">
+        <video controls
+               src="1.frequency_and_pitch_in_max_tutorial.mp4"
+               width="100%"
+               height="100%"
+               >
+      </div>
+      <div id="script1" class="col">
+        <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+        <div id="script-text" style="display: none; overflow-y: scroll">
+
+          <h3>Frequency and Pitch in Max</h3>
+
+          <p>
+            Here are a couple objects to allow your exploration of Pitch and Frequency in Max. By pushing the "I" key on your computer keyboard, you will create a flonum object at the precise location of your mouse. However simple this object might seem, it actually is capable of displaying several very useful information. Let's duplicate this object (using command D, or control D) and open the inspector window. In the inspector window we can change several attributes for the look and behavior of our object. Here we are going to take a look at the first attribute under the "Appearance" tab, the "Display Format". By changing this option to MIDI or MIDI(C4) we can see that the flonum object will then display MIDI note names instead of numbers. The difference between these two options is that in MIDI(C4) mode, the MIDI note number 60, the central C in the middle of the piano keyboard, will be a C4. Do keep in mind that, under the hood, these objects are still sending and receiving numbers, the MIDI note names are just for display purposes only. Also useful for display is the kslider object, which, as with virtually all other objects in Max, also has several customizable attributes on the inspector window. Finally, there are two other objects that you must keep under your toolbelt while working with Pitch and Frequency in Max. The mtof object will convert a midinote number to the corresponding frequency for you. Here we can confirm that MIDI note number 69, the central A, is equals to 440 Hz. And the ftom object will help you achieve just the opposite - to convert a frequency to the approximate MIDI note number.
+          </p>
+        </div>
+      </div>
+    </div>
+<hr>
+
 <h1>Additional Resources</h1>
 
 <ul>
