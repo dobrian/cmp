@@ -159,8 +159,31 @@ for example because they have a dense, inharmonic set of partials.</p>
   <p>Hint: review the vocab differences between partial, harmonic, and overtone</p>
 </blockquote>
 
+<hr>
+
 <h1>Additional Resources</h1>
 
+  <div id="video-script1" class="row">
+    <div id="video" class="col">
+      <video controls
+             src="2.scope~_and_spectroscope~_tutorial.mp4"
+             width="100%"
+             height="100%"
+             >
+    </div>
+    <div id="script1" class="col">
+      <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+      <div id="script-text" style="display: none; overflow-y: scroll">
+
+        <h3>scope~ and spectroscope~ in Max</h3>
+
+        <p>
+          This is a short introduction to visualizing signals in Max. When we want to produce a sine wave, we create a cycle~ object. In order to listen to this pure tone, we need to connect it to the speaker outputs and enable the DSP processing. We can create an ezdac~ object for this effect and, just as a precaution, we will also create a gain~ object to control the signal level coming out of our speakers. In terms of visual feedback, in Max we have a couple objects that can help us better understand the signal that we are producing. The meter~ object, as the name indicates, is a simple object that signals the level of the incoming signal, this can be useful for example to quickly figure out if one or the other object is sending a weak or strong signal, or no signal at all. In a similar fashion, the number~ object tells the exact amplitude value of the samples coming in. But then, we have the scope~ object which gives us a more detailed visual feedback of the incoming signal. With this object we can clearly see the waveform of the incoming signal and how it compresses when we raise the frequency. There are different ways to adjust this window's resolution, but for the time being let's just set it in automatic mode. If we create an additional cycle~ object, with a different frequency, and add it to our original signal, we can see that it makes the waveform look slightly more complex. And if we add more cycle~ objects, it will get even more complex. Another object worth looking at, when trying to understand our signals is the spectroscope~. This object, instead of showing amplitude over time, will show us amplitude over frequency. In our current example we can see that there are three peaks corresponding to the three sine waves that we added together - it's the waveform complexity put into perspective, if you will. Waveforms other than the sine (or cosine) wave, will have different complexities. The rect~ object creates a square wave that, as you can see, it's a rather complex waveform. In turn, the saw~ object creates a sawtooth looking waveform, as you can confirm by the scope~ object, and it is also a complex waveform with different rules for its partials.
+        </p>
+      </div>
+    </div>
+  </div>
+<hr>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=XPbLYD9KFAo">The Overtone Series and Timbre</a></li>
 </ul>
