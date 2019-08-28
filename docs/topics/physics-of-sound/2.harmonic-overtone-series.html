@@ -218,6 +218,26 @@ for example because they have a dense, inharmonic set of partials.</p>
     </div>
   </div>
 <hr>
+      <div id="video-script4" class="row">
+        <div id="video6" class="col">
+          <video controls
+                 src="2.local_web_server_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script2" class="col">
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Text</button>
+          <div id="answer-2" style="display: none; overflow-y: scroll">
+
+            <h3>3 ways to get your own Local Web Server</h3>
+
+            <p>
+              This is a video on 3 ways to get a Local Web Server running. Method 1: using Nodejs. Navigate to nodejs.org and install Nodejs. Once you have Nodejs installed, navigate to npmjs.com and search for "local web server". Open the package page and scroll down to copy the install command. Open a terminal window and paste the install code and run it. Once you have both Nodejs and Local Web Server installed, navigate to the folder for which you want to serve its files. Type "ws" and press enter. You web server is running on port 8000. On a browser, navigate to localhost:8000. These are the files that you are serving. Open an html page, and confirm that it is working. Go back to the terminal window, and press control-C to end your server. Method 2: using Python. If you have Python 2.7 installed on your machine, you can navigate to the folder that you want to host and type: python -m SimpleHTTPServer. Then press enter and your server will be running on port 8000. On a browser, navigate to localhost:8000. Open a file, and confirm that it is working. Go back to the terminal window and push control-C to end your server. Method 3: using google chrome. Open Google and search for: google chrome web server. Open the link for the chrome web store and install Web Server for Chrome. After installing Web Server for Chrome, open a new tab and navigate to apps to open the Web Server. On the window that opens, you might want to click "Choose Folder" to select the folder that you want to host. Copy the web server URL, and paste it in the browser. Open a file, and confirm that it is working. Go back to the Web Server for Chrome window to disable the webserver.
+            </p>
+          </div>
+        </div>
+      </div>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=XPbLYD9KFAo">The Overtone Series and Timbre</a></li>
 </ul>
@@ -234,8 +254,8 @@ for example because they have a dense, inharmonic set of partials.</p>
     hljs.initHighlightingOnLoad();
     </script>-->
     <script>
-      //var videoHeight2 = $("#video2 > video").height();
-      //$("#answer-2").height(videoHeight2 - 50);
+      var videoHeight2 = $("#video6 > video").height();
+      $("#answer-2").height(videoHeight2 - 50);
     </script>
     <script src="../../static/js/cmp.js"></script>
   </body>
