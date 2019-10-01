@@ -40,10 +40,10 @@ Important here is the relationship between `phasePerSample` and `freq`: they are
 
 Using a samplerate of 128Hz, the first 512 samples of a 1Hz phasor are plotted below:
 
-![Phasor](images/phasor.svg)
+![Phasor](images/phasor.png)
 
 Notice how the waveform ascends from 0 to 1 as noted above. This makes it extraordinarily useful in waveshaping, indexing into tables, etc. As a simplified block diagram, the phasor looks like this:
 
-![Phasor Block Diagram](images/process.svg)
+![Phasor Block Diagram](images/process.png)
 
 `phaseInc(1)` is the phase increment for a 1Hz signal at a 128Hz samplerate. 1/128 = 0.0078125.

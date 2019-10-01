@@ -32,7 +32,7 @@ HardClip(float *block, float *output, long samplesPerBlock, float limit) {
   };
 }
 ```
-![Overlayed clipped sine and normal](/ucsdResources/envelopes/images/sine_clippedSine.svg)
+![Overlayed clipped sine and normal](/ucsdResources/envelopes/images/sine_clippedSine.png)
 
 In this image, the purple line is a sine that is unclipped with a maximum amplitude of 1. The green line is a sine that is clipped at -3 dB (approx. 0.707 linear amplitude). Notice the hard edge at the clipping limit.
 
@@ -86,7 +86,7 @@ QuadraticSoftClip(float *block, float *output, long samplesPerBlock, float limit
 
 Here is a plot of a sine wave run through this function when the input gain is 1 (0dB, purple) and 1.412 (+3dB, green). When this function is ran, you can see the distortion occur as the steepening of the angle as the waveform ascends and descends. Notice, however, that when the input gain is above unity, the function prevents it from going above 1.
 
-![QuadraticSoftClip](/ucsdResources/envelopes/images/quadradicSoftClip.svg)
+![QuadraticSoftClip](/ucsdResources/envelopes/images/quadradicSoftClip.png)
 
 __Cubic__
 
@@ -96,7 +96,7 @@ $$
 
 In this function, alpha is called the _scaling coefficient_ which can vary between `0` and the limit, typically 1/3 which produces a clipped level of about -3dB. When the scaling coefficient is 0, the waveform as it is is passed through (no clipping, no distortion) but as alpha is increased, the waveform is clipped (softly!).
 
-![CubicSoftClip](/ucsdResources/envelopes/images/cubicSoftClip.svg)
+![CubicSoftClip](/ucsdResources/envelopes/images/cubicSoftClip.png)
 
 INTERESTING THING TO ASSIGN??? <br/>
 What happens when the scaling coefficient goes above approx. 1/3? Maybe have the students show it and describe what happens, especially harmonically...
@@ -107,7 +107,7 @@ $$
 y = \frac{2}{\pi} \text{ } arctan(\alpha \cdot x)
 $$
 
-![Arctangent Softclip](/ucsdResources/envelopes/images/atanSoftClip.svg)
+![Arctangent Softclip](/ucsdResources/envelopes/images/atanSoftClip.png)
 
 Notice that when `alpha >> 10`, the function approaches infinite clipping distortion; i.e. approaches a square wave with soft edges.
 

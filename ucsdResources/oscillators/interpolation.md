@@ -95,7 +95,7 @@ float cubicInterpolator(float idx, float *table)
 
 If we push this to an extreme to show the differences, this plot shows samples 32 to 64 of the same 100Hz sine wave lookup sampled at 8kHz using either phase truncation (purple), linear interpolation (green), or cubic interpolation (blue) from a tablesize of 16:
 
-![Linear and Truncation](images/lookup/interpComparison.svg)
+![Linear and Truncation](images/lookup/interpComparison.png)
 
 #### Listen
 Listen to each of the different interpolation methods below. Be particularly aware of the differences at extremely high and low frequencies.

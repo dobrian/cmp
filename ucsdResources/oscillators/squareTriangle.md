@@ -40,7 +40,7 @@ void Osc::Square(float *frequency, float *output, long samplesPerBlock)
 }
 ```
 
-![Square from clipping](images/squareClip_blockDiagram.svg)
+![Square from clipping](images/squareClip_blockDiagram.png)
 
 This method is very closely related to the sign method of creating the square wave in which the sign of a sinusoid is used to get either -1 or +1:
 
@@ -95,7 +95,7 @@ WRITE SUMMING THE TWO INTO A SQUARE
 
 Whatever method is used, the result looks something like this:
 
-![Square Wave](images/square.svg)
+![Square Wave](images/square.png)
 
 ## Triangle
 
@@ -108,11 +108,11 @@ If the input is a phasor, we can create a triangle wave using absolute value and
 
 `triangle = (abs(phasor-0.5)*4)-1;`
 
-![Block Diagram](images/triangle1_blockDiagram.svg)
+![Block Diagram](images/triangle1_blockDiagram.png)
 
 This method creates a triangle wave that begins it's cycle at the crest of the waveform. Here are the first 512 samples of a 100Hz triangle wave sampled at 8kHz.
 
-![Triangle Wave](images/triangle.svg)
+![Triangle Wave](images/triangle.png)
 
 We can also use a slightly different method but using the floor function, or truncation, in addition to absolute value, where truncation removes the decimal portion of a floating point value (essentially rounding _down_ to the nearest integer).
 
@@ -124,11 +124,11 @@ where _p_ is the period and _t_ is time in seconds.
 
 `triangle(f) = (4 * abs(phasor(f) - trunc(phasor(f) + 0.5))) - 1`
 
-![Block Diagram](images/triangle2_blockDiagram.svg)
+![Block Diagram](images/triangle2_blockDiagram.png)
 
 This method, as opposed to the one above, creates a triangle wave that begins its cycle at the trough:
 
-![Triangle Wave](images/triangle_trough.svg)
+![Triangle Wave](images/triangle_trough.png)
 
 When implemented either way, the result sounds like this:
 

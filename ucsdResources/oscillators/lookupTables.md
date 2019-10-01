@@ -27,7 +27,7 @@ for(int i = 0; i < tablesize; i++) {
 
 Using a tablesize of 1024, the table looks like this:
 
-![Sine Table](images/sine_table.svg)
+![Sine Table](images/sine_table.png)
 
 To index into this table, we need to use integers. If we take a phasor at some desired frequency, we can take the output and multiply it by the _size of the table minus one_ (since in most languages we start counting from 0) and cut off the fractional part to obtain an index:
 
@@ -43,4 +43,4 @@ index = int(phasor(f)*tablesize)
 
 This method of simply removing the fractional part of the phase is called _phase truncation_. We can then use this output to index into the table and get the correct value for the sine wave. Below are the first 512 samples of a 100Hz phasor indexing into a wavetable of size 1024 at an 8kHz samplerate:
 
-![Sine at 100Hz](images/sine_100hz512samp.svg)
+![Sine at 100Hz](images/sine_100hz512samp.png)

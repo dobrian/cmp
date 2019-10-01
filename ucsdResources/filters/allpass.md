@@ -59,7 +59,7 @@ FOLowPass(float *block, float *output, long samplesInBlock, float cutoff) {
 
 At a cutoff of 100Hz, the output is as such:
 
-![100Hz](images/foLP_100Hz.svg)
+![100Hz](images/foLP_100Hz.png)
 
 __Highpass__
 ```

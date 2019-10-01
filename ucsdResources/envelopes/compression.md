@@ -46,21 +46,21 @@ RMSCompressor(float *block, float *output, long samplesInBlock, float threshold 
 
 When applied to a signal, the dynamic range is compressed. The image below is an overlay of an original signal (purple) and a compressed version (green) sampled at 44.1kHz. Note how the amplitude peaks on the compressed version are lower than the original. The following image shows the amplitude correction applied to the signal to create the compressed version. The compressor used was 5:1 with a threshold of 0.5, an attack time of 0.003, a release time of 0.03, and a makeup gain of 0.
 
-![Compressed](images/compressor/sigOverlay_0.5-5.svg)
+![Compressed](images/compressor/sigOverlay_0.5-5.png)
 
-![Amp Correction](images/compressor/ampCorrection_0.5-5.svg)
+![Amp Correction](images/compressor/ampCorrection_0.5-5.png)
 
 More extreme compression with the threshold set to 0.2 and the ratio as 50:1.
 
-![Compressed](images/compressor/sigOverlay_0.2-50.svg)
+![Compressed](images/compressor/sigOverlay_0.2-50.png)
 
-![Amp Correction](images/compressor/ampCorrection_0.2-50.svg)
+![Amp Correction](images/compressor/ampCorrection_0.2-50.png)
 
 And the same again but with the attack time set to 0.03 and the release time to 0.3.
 
-![Compressed](images/compressor/sigOverlay_0.2-50_slow.svg)
+![Compressed](images/compressor/sigOverlay_0.2-50_slow.png)
 
-![Amp Correction](images/compressor/ampCorrection_0.2-50_slow.svg)
+![Amp Correction](images/compressor/ampCorrection_0.2-50_slow.png)
 
 #### The Limiter
 A limiter is a type of compressor with certain settings such that it only makes itself known at the extreme ends of amplitude and in a very high degree. For instance, it might have a threshold of 0.9 linear amplitude and a ratio of 40.

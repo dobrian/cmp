@@ -49,7 +49,7 @@ where _j_ is the square root of negative 1, _r_ is the length (or magnitude), _Î
 
 Relabeling a sine wave:
 
-![Sine with Radian Labels](images/complexSine/sine_radians.svg)
+![Sine with Radian Labels](images/complexSine/sine_radians.png)
 
 ## Advantages
 Represeting a sinewave in complex form has several distinct advantages:

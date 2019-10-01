@@ -29,10 +29,10 @@ float EF::GetMean(float sample)
 ```
 
 All:
-![Attack-Release](./images/funkyDrummer/mean_full.svg)
+![Attack-Release](./images/funkyDrummer/mean_full.png)
 
 Zoomed:
-![Attack-Release](./images/funkyDrummer/mean_zoom.svg)
+![Attack-Release](./images/funkyDrummer/mean_zoom.png)
 
 ## RMS
 
@@ -67,10 +67,10 @@ float EF::GetRMS(float sample)
 }
 ```
 All:
-![Attack-Release](./images/funkyDrummer/rms_full.svg)
+![Attack-Release](./images/funkyDrummer/rms_full.png)
 
 Zoomed:
-![Attack-Release](./images/funkyDrummer/rms_zoom.svg)
+![Attack-Release](./images/funkyDrummer/rms_zoom.png)
 
 ## Attack-Release
 
@@ -98,16 +98,16 @@ float EF::GetPeakAttackRelase(float attackF, float releaseF, float sample)
 }
 ```
 All:
-![Attack-Release](./images/funkyDrummer/attackRelease_full.svg)
+![Attack-Release](./images/funkyDrummer/attackRelease_full.png)
 
 Zoomed:
-![Attack-Release](./images/funkyDrummer/attackRelease_zoom.svg)
+![Attack-Release](./images/funkyDrummer/attackRelease_zoom.png)
 
 ## Envelope Followers Compared Aurally
 
 Plotted below are three envelope followers: mean with a window of 16, RMS with a window of 16, and attack-release with cutoffs at 1000Hz (attack) and 5Hz (release). To test the envelope followers, we can pass noise through our resulting envelope. Here are the three enveloped plotted below.
 
-![Attack-Release](./images/funkyDrummer/compared_zoom.svg)
+![Attack-Release](./images/funkyDrummer/compared_zoom.png)
 
 [Original](./src/amplitude/envFollowers/funkyDrummer/78888__oasyntax__170-funky-drummer.mp3) <br/>
 [Attack-Release (1000Hz and 5Hz)](./src/amplitude/envFollowers/funkyDrummer/attackRelease_1000-5.mp3)

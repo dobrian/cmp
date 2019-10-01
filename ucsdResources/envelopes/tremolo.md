@@ -24,19 +24,19 @@ This assumes that the frequency of the tremolo signal, _S<sub>sine</sub>_, is se
 For the input signal (signal we want tremolo on), let's use a guitar chord:
 
 <!-- __Input signal__ <br/> -->
-![Input Signal](images/tremolo/input.svg)
+![Input Signal](images/tremolo/input.png)
 
 [Listen](src/amplitude/tremolo/chord.mp3)
 
 For a tremolo with a depth of 0.5 and a frequency of 2Hz, we get the following:
 
 <!-- __Tremolo signal__ <br/> -->
-![Input Signal](images/tremolo/trem.svg)
+![Input Signal](images/tremolo/trem.png)
 
 When we multiply the input and the tremolo together, we get:
 
 <!-- __Output with Tremolo Superimposed__ <br/> -->
-![Input Signal](images/tremolo/trem-output.svg)
+![Input Signal](images/tremolo/trem-output.png)
 
 [Listen](src/amplitude/tremolo/output.mp3)
 
