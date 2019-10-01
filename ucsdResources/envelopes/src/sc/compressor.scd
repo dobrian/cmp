@@ -2,10 +2,10 @@
 var comp = IdentityDictionary.new(know: true), sound = IdentityDictionary.new(know: true), out, ampCorrection;
 
 // compressor
-comp.add(\rmsSize -> 64);
+comp.add(\rmsSize -> 128);
 comp.add(\thresh -> 0.2);
-comp.add(\att -> 0.03);
-comp.add(\rel -> 0.3);
+comp.add(\att -> 0.003);
+comp.add(\rel -> 0.5);
 comp.add(\gain -> 1);
 comp.add(\ratio -> 50);
 
@@ -18,15 +18,15 @@ sound.add(\sr -> sound.at(\sf).sampleRate);
 // rms function
 comp.rms = {|dict, input, array|
 	var avg, tmp;
-	x = input*input; // square it
-	tmp = array.shift(1, x); // add it to the array
+	input = input*input; // square it
+	tmp = array.shift(1, input); // add it to the array
 	avg = tmp.sum/tmp.size; // avg
 	[sqrt(avg), tmp]; // get the square root
 };
 
 comp.rmsComp = {|comp, sound|
 	var chunk, fac, gain, attCoeff, relCoeff;
-	chunk = Array.fill(comp.rmsSize, {rrand(0.5,0.95)}); // buffer for RMS
+	chunk = Array.fill(comp.rmsSize, {0}); // buffer for RMS
 	gain = 1; // placeholder
 	attCoeff = 1 - exp(-1/(sound.sr*comp.att)); // coefficent for the attack
 	relCoeff = 1 - exp(-1/(sound.sr*comp.rel)); // coefficent for the release
@@ -86,7 +86,7 @@ comp.peakComp = {|comp, sound|
 
 	sound.sig.collect{|x|
 		var amp, diff;
-		diff = (x - comp.thresh).clip(0,1); // get the difference
+		diff = (x.abs - comp.thresh).clip(0,1); // get the difference
 		if(diff>0) {
 			// attack
 			gain = gain + (attCoeff*((1-(diff*fac))-gain)); // one pole filter
@@ -104,11 +104,11 @@ out = comp.rmsComp(sound);
 ampCorrection = comp.rmsCompTest(sound);
 // out = comp.peakComp(sound);
 // [out, sound.sig].plot;
-~sound = sound.sig;
+// ~sound = sound.sig;
 
-ampCorrection.writeToFile("../compressor/amplitudeCorrection_50_slow.dat".resolveRelative);
-Array.newFrom(sound.sig).writeToFile("../compressor/original_50_slow.dat".resolveRelative);
-out.writeToFile("../compressor/compressed_50_slow.dat".resolveRelative);
+ampCorrection.writeToFile("../compressor/amplitudeCorrection_50_rms128.dat".resolveRelative);
+Array.newFrom(sound.sig).writeToFile("../compressor/original_50_rms128.dat".resolveRelative);
+out.writeToFile("../compressor/compressed_50_rms128.dat".resolveRelative);
 
 // exp(-1/(44100*0.03)) // coefficient in a one pole filter for a time of 0.03
 // a = SinglePoleLP.new
