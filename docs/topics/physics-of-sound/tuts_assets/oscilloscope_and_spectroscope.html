@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Oscilloscope and Spectroscope</title>
+</head>
+<body>
+  <p>We should hear a tone!</p>
+  <p>Frequency control: <input id="frequency" type="range" value="172" min="0.0" max="500.0" step="1.0" onchange="frequencychange()" oninput="frequencychange()"><a id="freq-display">172</a></p>
+  <canvas id="oscilloscope" width="640" height="100"></canvas>
+  <br>
+  <canvas id="spectroscope" width="640" height="100"></canvas>
+  <script src="oscillator.js"></script>
+  <script src="oscilloscope_and_spectroscope.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/cmp.css">
+
+    <title>Tempo-Relative Timing in Max & Self-Quiz</title>
+
+  </head>
+
+  <body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../topics.html">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.index.html">Musical Timing</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+      <h1 id="beat">Tempo-Relative Timing in Max & Self-Quiz</h1>
+
+      <div class="text">
+
+        <p>
+          In addition to Max's built-in clock-time scheduler, Max also has a feature to support tempo-relative musical-time scheduling. The musical timing feature is called the "global transport". Like the transport feature in most DAWs, Max's global transport allows one to set the tempo and the meter signature of musical time, start and stop the passage of musical time (in reference to a time 0 starting point), and refer to time in terms of bars, beats, and units. So-called "units" are fractions of a quarter note, for finer-resolution timing, also known as <i>ticks</i>, a.k.a. pulses-per-quarter (<i>ppq</i>). The number of pulses   per quarter note (ppq) used for fine-resolution musical timing is usually some number that can be divided by 2, 3, 4, and ideally 5. The ppq value in MIDI is 24 by default, whereas in DAWs it is usually 480 or 960. In Max's global transport, the number of ticks (ppq) is 480.
+        </p>
+
+        <p>
+          When programming in Max, you can access the global transport via the <b>transport</b> object, and some of its related objects such as <b>when</b> (to find out what the current time is in the global transport), <b>timepoint</b> (to send out a <i>bang</i> at a specific moment in musical time), and <b>translate</b> (to convert between different time formats in musical time and clock time). And, by using the global transport for musical timing, you can refer to timings and durations using Max's <a href="https://docs.cycling74.com/max7/vignettes/maxtime_syntax">time value syntax</a>. The following video and set of Max Cookbook examples will help you learn about the <b>transport</b> object and Max's way of handling musical timing.
+        </p>
+
+        <div id="video-script1" class="row">
+          <div id="video" class="col">
+            <video controls
+                 src="2.hello_transport_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+          </div>
+          <div id="script1" class="col">
+            <button id="question-6" type="button" class="btn btn-primary question">Show/Hide Text</button>
+            <div id="answer-6" style="display: none; overflow-y: scroll">
+              <h3>Hello Transport</h3>
+              <p>
+                We already know how to work with clock-time inside Max. The metro object, for example, can be set to bang each 250 milliseconds. But if we want to use tempo-relative timing in this case we need to set the metro object to bang, say, every quarter note, by writing the appropriate notevalue nomenclature. By the way, you can find out all about these nomenclatures by opening the reference window, scrolling down to Max Guides, and opening the Time Value Syntax page. Let's get back to our patch and try our new metro object. You will notice that even though we are toggling it on, it doesn't to do anything. This is because all tempo-relative timing operations are dependent on a transport. In Max 8 there are at least 3 ways to start the global transport. You can toggle the play/pause button on the bottom right corner of the toolbar. You can create a transport object and control it with a toggle. Or you can open the global transport window, either by double clicking the transport object, or by navigating to Extras > Global Transport. In this Global transport window, you have immediate access to several useful parameters, such as time signature and tempo. Shall you change the tempo, for instance, you will notice that the quarter note metro will bang differently.
+              </p>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div id="video-script2" class="row">
+          <div id="video2" class="col">
+            <video controls
+                 src="2.transport&friends_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+          </div>
+          <div id="script2" class="col">
+            <button id="question-7" type="button" class="btn btn-primary question">Show/Hide Text</button>
+            <div id="answer-7" style="display: none; overflow-y: scroll">
+              <h3>Transport & friends</h3>
+              <p>
+                Sometimes you might not want to rely on having to interact with this Global Transport window. In fact, everything that you can do with this window you can also achieve with the transport object in your patch. Besides, the Global Transport window is itself a max patch which relies on the transport object. If you connect message boxes to the transport object outlets, you will be able to retrieve information about its current state by sending it a bang. Now it would be easier to have this information be updated automatically, so we can use a metro to refresh the output information every quarter note, making sure that it will automatically start and be in sync with the transport. Here we have bars, beats, and units. If we want to restart the transport we can use its second inlet which sets the transport to a given position in time, in ticks. The transport object has a couple friends that work well with it. The timepoint object allow us to set a specific point in time - as a bars, beats, units argument -, at which it will send out a bang. Another friend, the when object, allows us to retrieve the precise moment in time, either as bars, beats, units, or ticks, when we send it a bang. Finally, the translate object allows us to convert between different units of time, say notevalues and milliseconds, which in turn could be useful to control other objects that typically don't work with one or the other unit of time. In this example, we are using the translate to help us set the size of a buffer, which only works in milliseconds, as the duration of a quarter note. Again, if we go back to the transport and change the current tempo, the absolute time duration of a quarter note will change, and thus the translate object will convert accordingly.
+              </p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <p>
+          Max Cookbook examples about <b>transport</b>:<br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/tempo-relative-timing-transport-object">Tempo-relative timing with the transport object</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/simple-demonstration-transport-object">Simple demonstration of the transport object</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/other-basic-functionality-transport-object">Other basic functionality of the transport object</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/beat-divisions-transport">Beat divisions with transport</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/translate-object-updates-its-output-when-tempo-changes">The translate object updates its output when the tempo changes</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/using-timepoints-interactive-sequencing">Using timepoints for interactive sequencing</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/event-timing-transport">Event timing with transport</a><br />
+          <a href="http://music.arts.uci.edu/dobrian/maxcookbook/tempo-relative-timing-msp-lfo-control">Tempo-relative timing for MSP LFO control</a><br />
+        </p>
+
+      </div>
+
+      <hr />
+
+      <div id="vocabulary">
+
+        <h2>Vocabulary</h2>
+
+        <ul>
+          <li>clock time</li>
+          <li>musical time</li>
+          <li>tempo</li>
+          <li>BPM</li>
+          <li>meter</li>
+          <li>measure</li>
+          <li>bar</li>
+          <li>beat</li>
+          <li>division</li>
+          <li>meter signature</li>
+          <li>time signature</li>
+          <li>ticks</li>
+          <li>ppq</li>
+          <li>onset</li>
+          <li>IOI</li>
+          <li>duration</li>
+          <li>timepoint</li>
+          <li>syncopation</li>
+          <li>transport</li>
+        </ul>
+
+      </div>
+
+      <hr />
+
+      <div id="self-study">
+
+        <h2>Try it yourself</h2>
+
+        <p>
+          To gain experience with this way of thinking of events in terms of the musical timing and musical rhythm, write a Max patch that uses the Max <b>transport</b> object and one or more related objects such as <b>metro</b>, <b>translate</b>, <b>timepoint</b>, and/or <b>phasor~</b>. Make something happen in a particular rhythm (play some MIDI notes, or trigger some sound files, or modulate a sound), in such a way that you can change its underlying tempo (the <i>tempo</i> attribute of the <b>transport</b> object) without changing the rhythm.
+        </p>
+
+        </div>
+
+        <hr />
+
+      <div id="self-quiz">
+
+        <h2>Self-Quiz</h2>
+
+        <ol>
+          <li>What is the basic unit of time for Max's clock-time scheduler?</li>
+          <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-1" class="answer" style="display: none">Millisecond</p>
+
+          <li>What object allows you to use musical timing in Max</li>
+          <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-2" class="answer" style="display: none">transport</p>
+
+          <li>What musical unit is most commonly used to designate a beat?</li>
+          <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-3" class="answer" style="display: none">Quarter note</p>
+
+          <li>What is syncopation?</li>
+          <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-4" class="answer" style="display: none">Displacement of a sonic event to create an unexpected effect</p>
+
+          <li>How many ticks are there per quarter note in Max's musical timing?</li>
+          <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+          <p id="answer-5" class="answer" style="display: none">480</p>
+        </ol>
+
+      </div>
+
+      <h2>Additional Resources</h2>
+
+      <ul>
+      <li><a href="http://algocomp.blogspot.com/">Algorithmic Composition</a> - A collection of essays on algorithmic composition, with sonic, musical, and visual examples in Max, by Christopher Dobrian.</li>
+      <li><a href="http://music.arts.uci.edu/dobrian/maxcookbook/">Max Cookbook:</a> Useful and Instructive Programming Examples, by Christopher Dobrian</li>
+      </ul>
+
+      <hr />
+
+      <p>This page was last modified May 27, 2019 by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>.</p>
+
+      <hr />
+      <p>This page was last modified: <a id="Last-Modified"></a>.</p>
+      
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="../../static/js/cmp.js"></script>
+    <script>
+      var videoHeight2 = $("#video2 > video").height();
+      $("#answer-6").height(videoHeight2 - 50);
+      $("#answer-7").height(videoHeight2 - 50);
+    </script>
+
+    <div class="footer mt-auto bg-dark" align="center" style="width: 100%; bottom: 0; position:">
+      <div class="navbar-nav mr-auto" align="center">  
+          <div class="nav-link disabled" align="center">
+              <p>This page was last modified: <a id="Last-Modified1"></a>.</p>
+          </div>
+      </div>
+    </div>
+    <script>document.getElementById("Last-Modified").innerHTML = fetchHeader(location.href,'Last-Modified');</script>
+    <script>document.getElementById("Last-Modified1").innerHTML = fetchHeader(location.href,'Last-Modified');</script>
+
+  </body>
+</html>
