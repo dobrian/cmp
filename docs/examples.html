@@ -30,35 +30,6 @@
       </p>
 
       <p>
-        <a name="Ex00"><b>Example 0</b></a>: Line and Line~
-      </p>
-      <div class="row">
-        <div class="col">
-          <video controls
-                 src="topics/control-signals/2.line_object_tutorial.mp4"
-                 width="100%"
-                 height="100%"
-                 >
-        </div>
-        <div class="col">
-          <video controls
-                 src="topics/control-signals/2.line~_object_tutorial.mp4"
-                 width="100%"
-                 height="100%"
-                 >
-        </div>
-      </div>
-      <br>
-      <p><b>Line object</b></p>
-      <p>Often we will find ourselves in the situation where we need to automate the change of a certain value in time, even if only to free ourselves from the burden of having to control the machine. Though there are always multiple ways to achieve the same result, as it happens in most programming languages, in Max we have an object whose sole purpose is to help us solve this specific problem. The line object can interpolate between two numbers in a given time interval. Given a new line object, we can put it to work by sending it a list with 2 numbers. The first number is the number that we want to reach; the second number is the time interval, in milliseconds, for that number to be reached. Using your max skills you can change this message box to include a place holder, so that you don't have retype the message box everytime you need to change its values. Should you send it a single value, the line object will immediatelly jump to that number. Furthermore, you can use this technique to your advantage if you decide to always have the numbers changing in the same fashion, say from 10 to 50 in 1500 milliseconds with the push of a button. Finally, you can also instruct the line object to work with floats, instead of integers, if you set the first argument as an initial floating point number.
-      </p>
-      <p>(<a href="examples/max/patches/line_object_tutorial.maxpat">Download the patch</a>)</p>
-      <p><b>Line~ object</b></p>
-      <p>As with many other objects in Max, the line object also has its MSP counterpart, the line~ object. This object functions very much like its Max counterpart with the exception that it outputs a signal instead of a stream of messages. Again, by sending it a list with two numbers the line~ object will interpolate between its current value and the first number you are sending, in the time interval of the second number on the list. This second number can also be sent to the second inlet. The line~ object only has two inlets instead of three because the time grain, the rate at which it is updating its internal value (the values that get sent out) is determined by the audio status settings. Having line object that works in the signal domain allow us to directly interact with other MSP objects. Here I'm multiplying the output of the line~ with the output of a cycle~ object. And sure enough, we can send a longer list of values in order to sculpt our signal with the precision we need. In this example, I will have the sound fade in during 2 seconds, fade out during 2 seconds, jump to full volume and stay there for 200 milliseconds, jump to silence and stay there for 200 milliseconds, and finally jump back to full volume and fade out during 2 seconds.
-      </p>
-      <p>(<a href="examples/max/patches/line~_object_tutorial.maxpat">Download the patch</a>)</p>
-      
-      <p>
         <a name="Ex01"><b>Example 1</b></a>: Fade-in and fade-out
       </p>
       <p>
@@ -190,6 +161,42 @@
         </div>
       </div>
       <p>(<a href="examples/max/patches/scope~_and_spectroscope~_tutorial.maxpat">Download the patch</a>)</p>
+      <p>
+        <a name="Ex11"><b>Example 11</b></a>: Line and Line~
+      </p>
+      <p>
+        <a href="examples/max/patches/line_object_tutorial.maxpat"><img src="examples/max/images/line_object_tutorial.png" alt="Example 11a" border=0></a>
+      </p>
+      <p><b>Line object</b></p>
+      <p>Often we will find ourselves in the situation where we need to automate the change of a certain value in time, even if only to free ourselves from the burden of having to control the machine. Though there are always multiple ways to achieve the same result, as it happens in most programming languages, in Max we have an object whose sole purpose is to help us solve this specific problem. The line object can interpolate between two numbers in a given time interval. Given a new line object, we can put it to work by sending it a list with 2 numbers. The first number is the number that we want to reach; the second number is the time interval, in milliseconds, for that number to be reached. Using your max skills you can change this message box to include a place holder, so that you don't have retype the message box everytime you need to change its values. Should you send it a single value, the line object will immediatelly jump to that number. Furthermore, you can use this technique to your advantage if you decide to always have the numbers changing in the same fashion, say from 10 to 50 in 1500 milliseconds with the push of a button. Finally, you can also instruct the line object to work with floats, instead of integers, if you set the first argument as an initial floating point number.
+      </p>
+      <br>
+      <p>
+        <a href="examples/max/patches/line~_object_tutorial.maxpat"><img src="examples/max/images/line~_object_tutorial.png" alt="Example 11b" border=0></a>
+      </p>
+      <p><b>Line~ object</b></p>
+      <p>As with many other objects in Max, the line object also has its MSP counterpart, the line~ object. This object functions very much like its Max counterpart with the exception that it outputs a signal instead of a stream of messages. Again, by sending it a list with two numbers the line~ object will interpolate between its current value and the first number you are sending, in the time interval of the second number on the list. This second number can also be sent to the second inlet. The line~ object only has two inlets instead of three because the time grain, the rate at which it is updating its internal value (the values that get sent out) is determined by the audio status settings. Having line object that works in the signal domain allow us to directly interact with other MSP objects. Here I'm multiplying the output of the line~ with the output of a cycle~ object. And sure enough, we can send a longer list of values in order to sculpt our signal with the precision we need. In this example, I will have the sound fade in during 2 seconds, fade out during 2 seconds, jump to full volume and stay there for 200 milliseconds, jump to silence and stay there for 200 milliseconds, and finally jump back to full volume and fade out during 2 seconds.
+      </p>
+      <!--
+      <div class="row">
+        <div class="col">
+          <video controls
+                 src="topics/control-signals/2.line_object_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div class="col">
+          <video controls
+                 src="topics/control-signals/2.line~_object_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+      </div>
+      <p>(<a href="examples/max/patches/line_object_tutorial.maxpat">Download the patch</a>)</p>
+      <p>(<a href="examples/max/patches/line~_object_tutorial.maxpat">Download the patch</a>)</p>
+      -->
       <hr>
 
       <hr />
@@ -285,6 +292,6 @@
       var videoHeight2 = $("#video6 > video").height();
       $("#answer-2").height(videoHeight2 - 50);
     </script>
-    <script src="../../static/js/cmp.js"></script>
+    <script src="/static/js/cmp.js"></script>
   </body>
 </html>
