@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="stylesheet" href="../../static/css/cmp.css">
+    <title>3 ways to get your own Local Web Server</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../topics.html">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.introduction-to-web-audio-api.html">Introduction to Web Audio API</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+<h1>3 ways to get your own Local Web Server</h1>
+
+  <div id="video-script" class="row">
+    <div id="video" class="col">
+      <video controls
+             src="local_web_server_tutorial.mp4"
+             width="100%"
+             height="100%"
+             >
+    </div>
+    <div id="script" class="col">
+      <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+      <div id="script-text" style="display: none; overflow-y: scroll">
+
+        <h3>3 ways to get your own Local Web Server</h3>
+
+        <p>
+          This is a video on 3 ways to get a Local Web Server running. Method 1: using Nodejs. Navigate to nodejs.org and install Nodejs. Once you have Nodejs installed, navigate to npmjs.com and search for "local web server". Open the package page and scroll down to copy the install command. Open a terminal window and paste the install code and run it. Once you have both Nodejs and Local Web Server installed, navigate to the folder for which you want to serve its files. Type "ws" and press enter. You web server is running on port 8000. On a browser, navigate to localhost:8000. These are the files that you are serving. Open an html page, and confirm that it is working. Go back to the terminal window, and press control-C to end your server. Method 2: using Python. If you have Python 2.7 installed on your machine, you can navigate to the folder that you want to host and type: python -m SimpleHTTPServer. Then press enter and your server will be running on port 8000. On a browser, navigate to localhost:8000. Open a file, and confirm that it is working. Go back to the terminal window and push control-C to end your server. Method 3: using google chrome. Open Google and search for: google chrome web server. Open the link for the chrome web store and install Web Server for Chrome. After installing Web Server for Chrome, open a new tab and navigate to apps to open the Web Server. On the window that opens, you might want to click "Choose Folder" to select the folder that you want to host. Copy the web server URL, and paste it in the browser. Open a file, and confirm that it is working. Go back to the Web Server for Chrome window to disable the webserver.
+        </p>
+      </div>
+    </div>
+  </div>
+
+<hr>
+
+<h1>Additional Resources</h1>
+
+<ul>
+<li><a href="../../examples.html#Ex03js">Example 3</a>: 3 ways to get your own Local Web Server</li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../static/js/cmp.js"></script>
+  </body>
+</html>
