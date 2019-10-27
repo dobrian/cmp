@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="stylesheet" href="../../static/css/cmp.css">
+    <title>scope~ and spectroscope~ in Max</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../topics.html">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="0.index.html">Introduction to Max and MSP</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+<h1>scope~ and spectroscope~ in Max</h1>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+                 src="scope~_and_spectroscope~_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div id="script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+
+            <p>
+              This is a short introduction to visualizing signals in Max. When we want to produce a sine wave, we create a cycle~ object. In order to listen to this pure tone, we need to connect it to the speaker outputs and enable the DSP processing. We can create an ezdac~ object for this effect and, just as a precaution, we will also create a gain~ object to control the signal level coming out of our speakers. In terms of visual feedback, in Max we have a couple objects that can help us better understand the signal that we are producing. The meter~ object, as the name indicates, is a simple object that signals the level of the incoming signal, this can be useful for example to quickly figure out if one or the other object is sending a weak or strong signal, or no signal at all. In a similar fashion, the number~ object tells the exact amplitude value of the samples coming in. But then, we have the scope~ object which gives us a more detailed visual feedback of the incoming signal. With this object we can clearly see the waveform of the incoming signal and how it compresses when we raise the frequency. There are different ways to adjust this window's resolution, but for the time being let's just set it in automatic mode. If we create an additional cycle~ object, with a different frequency, and add it to our original signal, we can see that it makes the waveform look slightly more complex. And if we add more cycle~ objects, it will get even more complex. Another object worth looking at, when trying to understand our signals is the spectroscope~. This object, instead of showing amplitude over time, will show us amplitude over frequency. In our current example we can see that there are three peaks corresponding to the three sine waves that we added together - it's the waveform complexity put into perspective, if you will. Waveforms other than the sine (or cosine) wave, will have different complexities. The rect~ object creates a square wave that, as you can see, it's a rather complex waveform. In turn, the saw~ object creates a sawtooth looking waveform, as you can confirm by the scope~ object, and it is also a complex waveform with different rules for its partials.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+<hr>
+
+<h1>Additional Resources</h1>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=XPbLYD9KFAo">The Overtone Series and Timbre</a></li>
+<li><a href="../../examples.html#Ex10">Example 10</a>: scope~ and spectroscope~ in Max</li>
+<li><a href="../../examples.html#Ex02js">Example 2</a>: Oscilloscope and Spectroscope in Webaudio</li>
+<li><a href="../../examples.html#Ex03js">Example 3</a>: 3 ways to get your own Local Web Server</li>
+</ul>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../static/js/cmp.js"></script>
+  </body>
+</html>

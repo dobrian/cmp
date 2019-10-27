@@ -20,6 +20,7 @@
     </nav>
     <div class="container">
       <h1 id="computer-music-programming">List of Examples</h1>
+      <p>Go to <a href="#max">"Max Examples"</a> or <a href="#webaudio">"WebAudio Examples"</a>.</p>
       <hr />
       <h2><a name="max">Max Examples</a></h2>
       <p>
@@ -29,35 +30,6 @@
         Right-click on an image to download the .maxpat file directly to disk, which you can then open in Max.]</strong>
       </p>
 
-      <p>
-        <a name="Ex00"><b>Example 0</b></a>: Line and Line~
-      </p>
-      <div class="row">
-        <div class="col">
-          <video controls
-                 src="topics/control-signals/2.line_object_tutorial.mp4"
-                 width="100%"
-                 height="100%"
-                 >
-        </div>
-        <div class="col">
-          <video controls
-                 src="topics/control-signals/2.line~_object_tutorial.mp4"
-                 width="100%"
-                 height="100%"
-                 >
-        </div>
-      </div>
-      <br>
-      <p><b>Line object</b></p>
-      <p>Often we will find ourselves in the situation where we need to automate the change of a certain value in time, even if only to free ourselves from the burden of having to control the machine. Though there are always multiple ways to achieve the same result, as it happens in most programming languages, in Max we have an object whose sole purpose is to help us solve this specific problem. The line object can interpolate between two numbers in a given time interval. Given a new line object, we can put it to work by sending it a list with 2 numbers. The first number is the number that we want to reach; the second number is the time interval, in milliseconds, for that number to be reached. Using your max skills you can change this message box to include a place holder, so that you don't have retype the message box everytime you need to change its values. Should you send it a single value, the line object will immediatelly jump to that number. Furthermore, you can use this technique to your advantage if you decide to always have the numbers changing in the same fashion, say from 10 to 50 in 1500 milliseconds with the push of a button. Finally, you can also instruct the line object to work with floats, instead of integers, if you set the first argument as an initial floating point number.
-      </p>
-      <p>(<a href="examples/max/patches/line_object_tutorial.maxpat">Download the patch</a>)</p>
-      <p><b>Line~ object</b></p>
-      <p>As with many other objects in Max, the line object also has its MSP counterpart, the line~ object. This object functions very much like its Max counterpart with the exception that it outputs a signal instead of a stream of messages. Again, by sending it a list with two numbers the line~ object will interpolate between its current value and the first number you are sending, in the time interval of the second number on the list. This second number can also be sent to the second inlet. The line~ object only has two inlets instead of three because the time grain, the rate at which it is updating its internal value (the values that get sent out) is determined by the audio status settings. Having line object that works in the signal domain allow us to directly interact with other MSP objects. Here I'm multiplying the output of the line~ with the output of a cycle~ object. And sure enough, we can send a longer list of values in order to sculpt our signal with the precision we need. In this example, I will have the sound fade in during 2 seconds, fade out during 2 seconds, jump to full volume and stay there for 200 milliseconds, jump to silence and stay there for 200 milliseconds, and finally jump back to full volume and fade out during 2 seconds.
-      </p>
-      <p>(<a href="examples/max/patches/line~_object_tutorial.maxpat">Download the patch</a>)</p>
-      
       <p>
         <a name="Ex01"><b>Example 1</b></a>: Fade-in and fade-out
       </p>
@@ -169,6 +141,10 @@
       <p>
         <a name="Ex10"><b>Example 10</b></a>: scope~ and spectroscope~ in Max
       </p>
+      <p>
+        <a href="examples/max/patches/scope~_and_spectroscope~_tutorial.maxpat"><img src="examples/max/images/scope~_and_spectroscope~_tutorial.png" alt="Example 10" border=0></a>
+      </p>
+      <!--
       <div id="video-script1" class="row">
         <div id="video" class="col">
           <video controls
@@ -190,6 +166,50 @@
         </div>
       </div>
       <p>(<a href="examples/max/patches/scope~_and_spectroscope~_tutorial.maxpat">Download the patch</a>)</p>
+      -->
+      <ul>
+        <li><a href="topics/intro-to-max-and-msp/4.scope~_and_spectroscope~_tutorial.html">See lesson on scope~ and spectroscope~ in Max</a></li>
+      </ul>
+
+      <p>
+        <a name="Ex11"><b>Example 11</b></a>: Line and Line~
+      </p>
+      <p>
+        <a href="examples/max/patches/line_object_tutorial.maxpat"><img src="examples/max/images/line_object_tutorial.png" alt="Example 11a" border=0></a>
+      </p>
+      <p><b>Line object</b></p>
+      <p>Often we will find ourselves in the situation where we need to automate the change of a certain value in time, even if only to free ourselves from the burden of having to control the machine. Though there are always multiple ways to achieve the same result, as it happens in most programming languages, in Max we have an object whose sole purpose is to help us solve this specific problem. The line object can interpolate between two numbers in a given time interval. Given a new line object, we can put it to work by sending it a list with 2 numbers. The first number is the number that we want to reach; the second number is the time interval, in milliseconds, for that number to be reached. Using your max skills you can change this message box to include a place holder, so that you don't have retype the message box everytime you need to change its values. Should you send it a single value, the line object will immediatelly jump to that number. Furthermore, you can use this technique to your advantage if you decide to always have the numbers changing in the same fashion, say from 10 to 50 in 1500 milliseconds with the push of a button. Finally, you can also instruct the line object to work with floats, instead of integers, if you set the first argument as an initial floating point number.
+      </p>
+      <br>
+      <p>
+        <a href="examples/max/patches/line~_object_tutorial.maxpat"><img src="examples/max/images/line~_object_tutorial.png" alt="Example 11b" border=0></a>
+      </p>
+      <p><b>Line~ object</b></p>
+      <p>As with many other objects in Max, the line object also has its MSP counterpart, the line~ object. This object functions very much like its Max counterpart with the exception that it outputs a signal instead of a stream of messages. Again, by sending it a list with two numbers the line~ object will interpolate between its current value and the first number you are sending, in the time interval of the second number on the list. This second number can also be sent to the second inlet. The line~ object only has two inlets instead of three because the time grain, the rate at which it is updating its internal value (the values that get sent out) is determined by the audio status settings. Having line object that works in the signal domain allow us to directly interact with other MSP objects. Here I'm multiplying the output of the line~ with the output of a cycle~ object. And sure enough, we can send a longer list of values in order to sculpt our signal with the precision we need. In this example, I will have the sound fade in during 2 seconds, fade out during 2 seconds, jump to full volume and stay there for 200 milliseconds, jump to silence and stay there for 200 milliseconds, and finally jump back to full volume and fade out during 2 seconds.
+      </p>
+      <!--
+      <div class="row">
+        <div class="col">
+          <video controls
+                 src="topics/control-signals/2.line_object_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+        <div class="col">
+          <video controls
+                 src="topics/control-signals/2.line~_object_tutorial.mp4"
+                 width="100%"
+                 height="100%"
+                 >
+        </div>
+      </div>
+      <p>(<a href="examples/max/patches/line_object_tutorial.maxpat">Download the patch</a>)</p>
+      <p>(<a href="examples/max/patches/line~_object_tutorial.maxpat">Download the patch</a>)</p>
+      -->
+      <ul>
+        <li><a href="topics/control-signals/2.line-and-line~.html">See lesson on Line and Line~</a></li>
+      </ul>
       <hr>
 
       <hr />
@@ -214,6 +234,10 @@
       <p>
         <a name="Ex02js"><b>Example 2</b></a>: Oscilloscope and Spectroscope in Webaudio
       </p>
+      <p>
+        <a href="examples/javascript/oscilloscope_and_spectroscope.html"><img src="examples/javascript/oscilloscope_and_spectroscope.png" alt="Example 2js" border=0></a>
+      </p>
+      <!--
         <div id="video-script2" class="row">
           <div id="video2" class="col">
             <video controls
@@ -247,10 +271,16 @@
           </div>
         </div>
         <p>(Download the <a href="examples/javascript/oscilloscope_and_spectroscope.html">html file</a> and the <a href="examples/javascript/oscillator_oscilloscope_spectroscope.js">js file</a>)</p>
+      -->
+      <p>Try this <a href="examples/javascript/oscilloscope_and_spectroscope.html">html file</a> and check the <a href="examples/javascript/oscillator_oscilloscope_spectroscope.js">js file</a> too.</p>
+      <ul>
+        <li><a href="topics/intro-to-web-audio-api/3.oscilloscope_and_spectroscope-lesson.html">See lesson on Oscilloscope and Spectroscope in Webaudio</a></li>
+      </ul>
       <hr>
       <p>
         <a name="Ex03js"><b>Example 3</b></a>: 3 ways to get your own Local Web Server
       </p>
+      <!--
         <div id="video-script4" class="row">
           <div id="video6" class="col">
             <video controls
@@ -271,6 +301,13 @@
             </div>
           </div>
         </div>
+      -->
+      <p>
+        These are 3 ways to get a Local Web Server running. Method 1: using Nodejs. Navigate to nodejs.org and install Nodejs. Once you have Nodejs installed, navigate to npmjs.com and search for "local web server". Open the package page and scroll down to copy the install command. Open a terminal window and paste the install code and run it. Once you have both Nodejs and Local Web Server installed, navigate to the folder for which you want to serve its files. Type "ws" and press enter. You web server is running on port 8000. On a browser, navigate to localhost:8000. These are the files that you are serving. Open an html page, and confirm that it is working. Go back to the terminal window, and press control-C to end your server. Method 2: using Python. If you have Python 2.7 installed on your machine, you can navigate to the folder that you want to host and type: python -m SimpleHTTPServer. Then press enter and your server will be running on port 8000. On a browser, navigate to localhost:8000. Open a file, and confirm that it is working. Go back to the terminal window and push control-C to end your server. Method 3: using google chrome. Open Google and search for: google chrome web server. Open the link for the chrome web store and install Web Server for Chrome. After installing Web Server for Chrome, open a new tab and navigate to apps to open the Web Server. On the window that opens, you might want to click "Choose Folder" to select the folder that you want to host. Copy the web server URL, and paste it in the browser. Open a file, and confirm that it is working. Go back to the Web Server for Chrome window to disable the webserver.
+      </p>
+      <ul>
+        <li><a href="topics/intro-to-web-audio-api/4.3_ways_to_local_web_server-lesson.html">See lesson on 3 ways to get your own Local Web Server</a></li>
+      </ul>
       <hr>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -285,6 +322,6 @@
       var videoHeight2 = $("#video6 > video").height();
       $("#answer-2").height(videoHeight2 - 50);
     </script>
-    <script src="../../static/js/cmp.js"></script>
+    <script src="/static/js/cmp.js"></script>
   </body>
 </html>
