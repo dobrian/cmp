@@ -187,13 +187,16 @@
 	border-left: 5px solid #717070;
 }
 .right_article ul li:hover {
-	background-color: #717070;
+	background-color: #E7E7E7;
 	cursor: pointer;
 }
 .footer {
-	background-color: #717070;
-	color: white;
+	background-color: #CFCFCF;
+	color: black;
+	font-size: 80%;
+	
 }
+
 .title {
 	font-weight: bold;
 	font-style: normal;
@@ -521,5 +524,5 @@ div {
 }
 
 #center-image {
-	float:;
+	float: left;
 }
