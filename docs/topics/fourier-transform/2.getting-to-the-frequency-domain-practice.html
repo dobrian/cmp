@@ -45,15 +45,16 @@
   <p>To switch between spectrogram and sonogram modes, change the "Display Mode"
     attribute in the inspector window.</p>
   <h3>Mini-Tutorial 2: How to Use pfft~</h3>
-  <div id="video-script" class="row">
-    <div id="video" class="col">
-      <video controls
+	<div id="video-script" class="row">
+		<div id="video" class="col">
+			<video controls
                  src="pfft_1.mp4"
                  width="100%"
                  height="100%"
-			 ></video>
+			 >
+			</video>
     </div>
-    <p><small><em>The <strong>spectroscope~</strong> object, in "sonogram" mode.</em></small></p>
+    
 	  <div id="script" class="col">
       <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
       <div id="script-text" style="display: none; overflow-y: scroll">
@@ -94,6 +95,7 @@
       </div>
     </div>
   </div>
+	<p><small><em>Pfft~ video 1</em></small></p>
   <div id="video-script" class="row">
     <div id="video" class="col">
       <video controls
@@ -106,6 +108,8 @@
       <div id="script-text" style="display: none; overflow-y: scroll"> </div>
     </div>
   </div>
+	
+  <p><small><em>Pfft~ video 2</em></small></p>
   <div id="video-script" class="row">
     <div id="video" class="col">
       <video controls
@@ -118,6 +122,8 @@
       <div id="script-text" style="display: none; overflow-y: scroll"> </div>
     </div>
   </div>
+	
+  <p><small><em>Pfft~ video 3</em></small></p>
   <p>The <strong>pfft~</strong> object has a number of unusual quirks. The first is that its
     first argument is <em>the name of a Max patch</em>. That's right: for <strong>pfft~</strong> to
     work, you need to create completely separate, secondary Max patch that contains
