@@ -36,7 +36,7 @@
 
 <p>Sound data is stored in a variety of file formats. Some file formats store the sound in a very straightforward way, simply as a list of sample values, without any elaborate data compression encoding. Other file formats store the data in an encoded form that yields a smaller file size. The encoded formats are quite varied in terms of their data compression methods. We'll mention a few of them here, but in general we won't engage in detailed discussion of them. For the purposes of this lesson, we'll focus on uncompressed sound files.</p>
 
-<p>Some programming environments, such as the <a href="WebAudio API">Web Audio API</a> and <a href="[https://cycling74.com/products/max]">Max</a>, already provide ways to open sound files and use the sound data, and they also provide ways to write some of these standard file formats. So, you might never need to write a program from scratch to manage every low-level aspect of opening and managing and writing sound files. On the other hand, some day you might. And in any case, it's probably good to have some idea of what's going on under the hood.</p>
+<p>Some programming environments, such as the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> and <a href="https://cycling74.com/products/max">Max</a>, already provide ways to open sound files and use the sound data, and they also provide ways to write some of these standard file formats. So, you might never need to write a program from scratch to manage every low-level aspect of opening and managing and writing sound files. On the other hand, some day you might. And in any case, it's probably good to have some idea of what's going on under the hood.</p>
 
 <p>The two most common uncompressed file formats are Audio Interchange File Format, a.k.a. AIFF (.aif), and Waveform Audio File Format, a.k.a. WAVE (.wav). AIFF was invented by Apple, and WAVE was invented by Microsoft and IBM. So, conventionally AIFF is used in Mac OS, and WAVE is used in Windows. But really, almost all applications in both operating systems can read and save either of those two file formats with no problems. And the two formats are really not very different from each other.</p>
 
@@ -47,9 +47,9 @@
 <p>Two excellent resources for learning the structure of an AIFF file are:</p>
 
 <ul>
-<li><a href="[http://paulbourke.net/dataformats/audio/]">Audio File Formats</a>, by Paul Bourke</li>
+<li><a href="http://paulbourke.net/dataformats/audio/">Audio File Formats</a>, by Paul Bourke</li>
 
-<li><a href="[http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/AIFF/AIFF.html]">AIFF/AIFC Sound File Specifications</a>, by Peter Kabal</li>
+<li><a href="http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/AIFF/AIFF.html">AIFF/AIFC Sound File Specifications</a>, by Peter Kabal</li>
 </ul>
 
 <p>The first of those two documents explains the file format and gives examples of how you might handle file headers and "chunks" using data structures in your program. It also contains example C code showing how you might write an AIFF file to disk. Even if you're not fluent in the C language, by reading the chunk descriptions you can get an idea of how different parts of an AIFF file are organized. At the bottom of the document, the author describes the  ways in which a WAVE file differs from an AIFF file, and provides example C code for writing a WAVE file.</p>
@@ -67,10 +67,10 @@
 <p>Here is a tutorial on the basic principles of MP3 encoding/decoding.</p>
 
 <ul>
-<li><a href="[http://music.arts.uci.edu/dobrian/MP3Tutorial/]">MP3 Learning Object</a>, by Nathaniel Tull Phillips</li>
+<li><a href="http://music.arts.uci.edu/dobrian/MP3Tutorial/">MP3 Learning Object</a>, by Nathaniel Tull Phillips</li>
 </ul>
 
-<p>The technology to enact MP3 encoding and decoding is patent-free. The Web Audio API and Max both have this decoding capability built in, thus they provide ways to open and decompress MP3 files, as do most end-user commercial audio applications, including open-source applications such as <a href="[https://www.audacityteam.org/]">Audacity</a>, which uses the open-source <a href="[http://lame.sourceforge.net/index.php]">LAME</a> encoding engine.</p>
+<p>The technology to enact MP3 encoding and decoding is patent-free. The Web Audio API and Max both have this decoding capability built in, thus they provide ways to open and decompress MP3 files, as do most end-user commercial audio applications, including open-source applications such as <a href="https://www.audacityteam.org/">Audacity</a>, which uses the open-source <a href="http://lame.sourceforge.net/index.php">LAME</a> encoding engine.</p>
 
 <h2 id="other">Other</h2>
 
@@ -158,17 +158,17 @@
 
 <h2 id="additionalresources">Additional Resources</h2>
 
-<p><a href="audio file formats">Audio File Formats</a>, Paul Bourke</p>
+<p><a href="http://paulbourke.net/dataformats/audio/">Audio File Formats</a>, Paul Bourke</p>
 
-<p><a href="aiff-aifc spec">AIFF/AIFC Sound File Specifications</a>, Peter Kabal</p>
+<p><a href="http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/AIFF/AIFF.html">AIFF/AIFC Sound File Specifications</a>, Peter Kabal</p>
 
-<p><a href="[http://music.arts.uci.edu/dobrian/MP3Tutorial/]">MP3 Learning Object</a>, Nathaniel Tull Phillips</p>
+<p><a href="http://music.arts.uci.edu/dobrian/MP3Tutorial/">MP3 Learning Object</a>, Nathaniel Tull Phillips</p>
 
 </div>
 
 <hr />
 
-<p>This page was last modified August 22, 2018 by Christopher Dobrian, <em><a href="mailto:dobrian@uci.edu">dobrian@uci.edu</a></em>.
+<p>This page was last modified March 30, 2020 by Christopher Dobrian, <em><a href="mailto:dobrian@uci.edu">dobrian@uci.edu</a></em>.
 
 </div>
 
