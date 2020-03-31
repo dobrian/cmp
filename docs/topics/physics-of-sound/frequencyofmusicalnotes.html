@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+  <link rel="stylesheet" href="../../css/cmp.css">
+  <title>Frequency of Musical Notes</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../topics.html">Topics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="0.index.html">Physics of Sound</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div id="text">
+      <h1 id="audio-filter-types">Frequency of Musical Notes</h1>
+      <hr>
+
+      <div id="video-script" class="row">
+        <div id="video" class="col">
+          <video controls
+          src="./FrequencyOfMusicalNotes.mp4"
+          width="100%"
+          height="100%"
+          >
+        </div>
+        <div id="video-script" class="col">
+          <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+          <div id="script-text" style="display: none; overflow-y: scroll">
+            <h3 id="introduction">Frequency of Musical Notes</h3>
+            <h4>Harmonic Series</h4>
+<p>
+A tone that we perceive as having a musical pitch is made up of harmonically-related frequency components, that are whole-number multiples of a fundamental frequency. But how do you know what the fundamental frequency of a given pitch is supposed to be?
+</p>
+<p>
+Well, one way to find out would be to Google “frequency of musical notes”, and you’d be shown a chart that looks something like this.
+</p>
+<h4>Pitch-to-Frequency Chart</h4>
+<p>
+This chart shows the names of some musical notes, their fundamental frequency in Hertz, and the wavelength of that frequency in centimeters. (We don’t care about the wavelength in this discussion; it just happens to be included in this particular chart.)
+</p>
+<p>
+So, theoretically, you could implement a pitch-to-frequency chart like this as a lookup table—an associative array—in your program. But instead of doing that, you can just have the computer calculate the frequency as needed, which has various advantages. So, here’s how to do that.
+</p>
+<h4>A-440</h4>
+<p>
+You’ll notice that this note here, which is the A above middle C, has a frequency of exactly 440 Hertz. That has been a tuning standard in Western music for over a century, and in fact has become an international standard. Not all instruments or orchestras necessarily tune to exactly that frequency, but all synthesizers and tuning devices use 440 Hz as the standard for that note A above middle C.
+</p>
+<p>
+And because of what we know about octave equivalence, if we multiply or divide that frequency by a power of 2, we’ll get other As in other octaves.
+</p>
+<h4>Other As</h4>
+<p>
+For example if we multiply by 2, we get the A an octave higher at 880 Hz. If we were to multiply that by 2, we’d get the A another octave higher at 1760 Hz. If we divide 440 Hz by 2, we get the A an octave lower at 220 Hz, and if we were to keep dividing by 2 we’d get successively lower As at 110 Hz, 55 Hz, and 27.5 Hz, which is the fundamental frequency of the lowest key on a piano.
+</p>
+<p>
+But how did we arrive at the frequencies for all the other notes in between? You’ll recall that in Western music there are 12 different notes per octave—A Bb B C C# D Eb E F F# G G#. (For historical reasons, the interval between each of those pitches is called a semitone, but in this discussion we’ll just call them “steps”.) The predominant tuning system that has been in use in Western music for centuries is called 12-tone equal temperament, which means that the tunings of the 12 pitches in each octave are derived by dividing the octave into 12 equal parts. Here’s the formula for how to do that.
+</p>
+<h4>The Formula (for Bb)</h4>
+<p>
+Given the standard of A being 440 Hz, we can use this formula to calculate the frequency of the note one step above that, which is B-flat. The formula says:
+</p>
+<h4>Base Frequency</h4>
+<p>
+We know that the frequency upon which all calculations will be based is 440 Hz.
+</p>
+<h4>Octave Factor</h4>
+<p>
+And we know that an octave is obtained by multiplying by a factor of 2, and each different A is obtained by multiplying by some integer power of 2. 2 to the 0th power is 1, so that gives us 440, 2 to the 1st power is 2, so that gives us 880, 2 to the 2nd power is 4, so that gives us 1760, and so on. And 2 to the -1st power is ½, so that gives us 220, 2 to the -2nd power is ¼, so that gives us 110, and so on.
+</p>
+<h4>Divisions of the Octave</h4>
+<p>
+For 12-tone equal temperament we want to divide the octave into 12 equal steps, 12 equal pitch intervals. So instead of taking only integer powers of 2, we’ll take fractional powers, 12ths of an octave.
+</p>
+<h4>Steps</h4>
+<p>
+We’ll take 2 to the 1/12 power, also known as the twelfth root of 2, to find out the frequency of the step just above A.
+</p>
+<h4>Bb</h4>
+<p>
+The 1 in this fractional exponent indicates that we’re taking one step up from A, to B-flat.
+</p>
+<h4>Twelfth Root of 2</h4>
+<p>
+The twelfth root of 2 equals 1.059463, which is to say an increase of about 6%.
+</p>
+<h4>Frequency of Bb</h4>
+<p>
+So, if we multiply the base frequency of A, 440, by the twelfth root of 2, we learn that the frequency of the B-flat above it is 466.163762 Hz. The difference in frequency between these two notes is about 26 Hz, but we don’t care about that number so much because that difference will vary at different pitch heights; the thing we care about, and that will determine our sense of the pitch interval, is the ratio of the two frequencies.
+</p>
+<p>
+It’s worth noting that, because of the physical and cognitive fact that octave equivalency occurs with a factor of 2, and because of the cultural standards of A-440 being the recognized base frequency and 12 being the number of steps per octave, most of the numbers in this formula are going to stay constant.
+</p>
+<h4>Steps is the Variable</h4>
+<p>
+The one element of this equation that we will definitely want to vary is the number of steps, in order to calculate the frequency of all the different pitches.
+</p>
+<h4>Frequency of B</h4>
+<p>
+For example, if we change that value to 2, we get the frequency of the pitch B-natural, two steps above A-440. (You might notice that the arithmetic difference in frequency between this B and the B-flat below it is nearly 28 Hz, a bigger difference than we saw between B-flat and A; remember that it’s the ratio of frequencies that’s important to our sense of pitch interval.)
+</p>
+<h4>Frequency of G#</h4>
+<p>
+To get the frequency of pitches below A-440, we just use a negative numerator in the fractional exponent, which means the exponent will be negative, which is equivalent to dividing by the twelfth root of 2 instead of multiplying by it. Here we see the frequency of the G-sharp that’s one step below A-440.
+</p>
+<h4>Frequency of A an Octave Up</h4>
+<p>
+If we go up 12 steps, we reach the next A, an octave up. 2 to the 12/12 power is 2 to the 1st power, which is just 2, so we get the expected frequency of 880 Hz.
+</p>
+<h4>Frequency of A an Octave Down</h4>
+<p>
+And if we want the A an octave down, we use 2 to the -12/12 power, which is 2 to the -1st power, which is ½, so we get the expected frequency of 220 Hz.
+</p>
+<h4>n steps</h4>
+<p>
+So, you can see that to make this formula more generally useful, we just need to consider “steps” to be a variable, so that we can get the frequency of any pitch, just by knowing how many steps it is from A-440.
+</p>
+<p>
+(For right now, we’ll leave all the other numbers as constants, although you might want to ponder what you could achieve by changing any one of them.)
+</p>
+<h4>fn(n) Code</h4>
+<p>
+This would be simple to implement as a function in JavaScript, which you could then use to obtain the frequency of any pitch in the 12-tone equal-tempered system.
+</p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p>
+        An explanation of a simple equation to calculate the frequency of any musical pitch, as a function of its distance, in semitone steps, from the A above middle C (440 Hz).
+      </p>
+    </div>
+    <hr>
+    <div id="vocabulary">
+      <h2>Vocabulary</h2>
+      <ul>
+        <li>harmonics</li>
+        <li>440 Hz tuning standard</li>
+        <li>octave equivalence</li>
+        <li>equal temperament</li>
+        <li>twelfth root of two</li>
+        <li>negative exponent</li>
+      </ul>
+    </div>
+    <hr>
+    <div id="self-quiz">
+      <h2>Self-Quiz</h2>
+      <ol>
+        <li>Tones that we perceive as having an identifiable pitch have what characteristic?</li>
+        <button id="question-1" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-1" class="answer" style="display: none">Harmonically-related frequency components</p>
+
+        <li>What is the fundamental frequency of the note A (above middle C) in the middle of the treble staff?</li>
+        <button id="question-2" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-2" class="answer" style="display: none">440 Hz</p>
+
+        <li>What's the ratio of frequencies that produces a musical interval of an octave?</li>
+        <button id="question-3" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-3" class="answer" style="display: none">2:1 (or 1:2)</p>
+
+        <li>What's the ratio of frequencies that produces a musical interval of a semitone?</li>
+        <button id="question-4" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-4" class="answer" style="display: none">The twelfth root of 2; 2^<super>(1/12)</super> (or 2^<super>(-1/12)</super>)</p>
+
+        <li>How many semitones are in the pitch interval from A down to the E below it?</li>
+        <button id="question-5" type="button" class="btn btn-primary question">Show/Hide Answer</button>
+        <p id="answer-5" class="answer" style="display: none">-5 (from A you have to go down G#, G, F#, F, E)</p>
+      </ol>
+      <hr />
+
+      <p>This page was last modified March 30, 2020 by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>.</p>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script>
+  //$('pre').addClass("javascript");
+  hljs.initHighlightingOnLoad();
+  </script>-->
+  <script src="../../js/cmp.js"></script>
+</body>
+</html>
