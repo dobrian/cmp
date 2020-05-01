@@ -29,14 +29,77 @@
     <div id="script" class="col">
       <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
       <div id="script-text" style="display: none; overflow-y: scroll">
-        <h3>The Notes on a Keyboard</h3>
-        <p>Text</p>       
+        <h3>The buffer~ object </h3>
+        <p>An audio buffer is a portion of your computer’s Random Access Memory that has been designated for holding audio data, or samples. Once established, this portion of memory can be written to and read from.  
+          
+          In Max, you can do this using a buffer~ object. The buffer object does not play audio, but it does offer helpful functions that will allow editing or saving the audio. Let’s have a look at some of this functionality. 
+          
+          The buffer~ object needs a name. Next, you can designate the buffer’s size in samples, as well as how many audio channels it has. Whether or not you define its size and channel count depends on what you hope to do with the buffer. In this case, we will be loading in a file from the disk in a way that will automatically set the size and channel count, so we will just provide a name. 
+          
+          We will use the “replace” function to automatically format the buffer for a certain audio file. The selected file is then loaded into the buffer. 
+          
+          
+          
+          The ability to visualize the audio is very helpful during the development process. We can do this by double clicking the buffer object while the patch is locked. Another method is to create a waveform~ object and assign it to the buffer. Either set the bufferName attribute while creating the object or send its first inlet the message “set” then your buffer name. </p>
+        <h3>Objects that access buffer~ </h3>
+        <p>This video will go over several objects that access data from the buffer~ object. These can be found in the patch found on this page called “objects that access buffer~.maxpat	 
+          
+          info~
+          Here we have a buffer named MySound. Let’s say we want to determine how many samples are in MySound. The easiest way is to use an attrui object set to the “samps” property. However, it is difficult to access this information for more dynamic situations. As a result, we will use the info~ object, referencing the MySound buffer. 
+          
+          To calculate the number of samples in a buffer with info~, convert the TotalTime value from msec to seconds, multiplying it by .001. 
+          
+          Then multiply the TotalTime in seconds by the buffer’s sampleRate.
+          
+          You can use the second outlet of buffer~ to trigger info~ after the data has been loaded into the buffer.
+          
+          record~ 
+          We can record an audio signal directly to a buffer. To do so, we’ll use the record~ object, referencing our buffer called MyRecordedSound. The audio signal connects to the first inlet. A toggle will begin the recording. We can monitor the recording with a number~ object. When it reaches one, that means it has recorded the entire length of the buffer. 
+          
+          Below this is an example that looks very similar, though it demonstrates how to record two channels.
+          
+          
+          play~
+          To play audio from a buffer, we can use the play~ object that is referenced to our buffer. There are a few ways to trigger playback, including the ability to playback a specified range of the buffer, but we’ll focus on the most straightforward methods. A toggle can start and stop playback. We can see from the second outlet when the playback is finished. The messages “Start” and “stop” do the same thing as a toggle. If we want to resume playback from the location that we stopped, we can use the “pause” message, followed by “resume.”
+          
+          You can loop playback of the buffer by enabling play~’s “loop mode.”
+          
+          
+          groove~
+          The groove~ object has many diverse functions, and I encourage you to explore its documentation. For now we’ll look at a common use for groove~ and buffer~, which is variable-rate of playback. We drive the variable rate with a signal from the sig~ object. Changing this signal value will alter the playback speed. Also, we want to enable “loop” mode. For reference, a signal value of 1 means normal playback. -1 plays the buffer in reverse. 0 stops playback. 
+          
+          You can also set a loop range using the second and third outlets of groove~.
+          
+          OTHER
+          Here are few final objects to be aware of. 
+          
+          Cycle~ is commonly used as a straightforward sine wave generator. However, it can use a buffer for wavetable synthesis. When doing this, make sure to consider the number of samples being used by cycle~.
+          
+          Wave~ performs a similar function, except that you can dynamically choose the buffer’s range being used for wavetable synthesis. This is done by designating the start and end points in the second and third inlets. Also, it is driven by a signal with values from 0 to 1, so phasor~ is good to use here. 
+          
+          index~ allows us to get the value of a specific sample. Here, we are sending in the sample number in the form of a signal, and index~ is returning the sample value. This can also be setup with an object like count~ to create audio playback.
+          
+          lookup~ treats a buffer like a lookup table where an input signal’s value ranging from -1 to 1, returns a corresponding sample from the buffer. -1 returns the first sample and 1 returns the buffer’s final sample.
+          
+          Remember that you can right click any of these for documentation. </p>
       </div>
     </div>
   </div>
   <p>Preloading sound into random-access memory (RAM)—–as opposed to reading it off of a hard disk—–allows you more easily to access any point in the sound file instantaneously, read backwards as well as forwards, access different points in the sound simultaneously, etc. When reading from disk, you usually need to give the computer a tiny bit of advance notice to preload some of the sound into memory before you use it; that's why, if you have the RAM available, it often makes most sense just to preload whatever sound you’ll need into memory.</p>
   <p>The <strong>buffer~</strong> object establishes a named location in RAM in which you can store audio data. You can preload a sound file (or a portion of a sound file) into that <strong>buffer~</strong> with the message <em>read</em> or <em>replace</em>. Other MSP objects can then refer to that memory location by name, and can use the data in various ways.</p>
   <p>The patch "objectsthataccessbuffer~" doesn’t really do much of anything, but it gathers together many (not all!) of the objects that can refer to a <strong>buffer~</strong>. You can Option-click (Alt-click on Windows) on each object to learn more about how it works.</p>
+  <div id="video-script" class="row">
+    <div id="video" class="col">
+      <video controls
+                 src="The-buffer-object-2.mp4"
+                 width="100%"
+                 height="100%"
+			 ></video>
+    </div>
+    <div id="script" class="col">
+      <div id="script-text" style="display: none; overflow-y: scroll"> </div>
+    </div>
+  </div>
   <h2>Downloads</h2>
   <p>Download the files used in the above examples by right-clicking the links, and
     then selecting "Save Link As...".</p>
