@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --> 
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="css/cmp.css" />
@@ -209,6 +209,26 @@
           <li><a href="topics/intro-to-web-audio-api/4.3_ways_to_local_web_server-lesson.html">See lesson on 3 ways to get your own Local Web Server</a></li>
         </ul>
         <hr>
+        <p>
+          <a name="Ex04js"><b>Example 4</b></a>: Volume Fader
+        </p>
+        <p>
+          This example demonstrates a way to give a user control over the volume of a sound. It also demonstrates a way to do a timed fade-in or fade-out, using the <span style="font-family: monospace">setInterval()</span> method in JavaScript.
+        </p>
+        <p>
+          <a href="examples/javascript/volumefaderjs.html">Volume Fader</a>
+        </p>
+        <hr>
+        <p>
+          <a name="Ex05js"><b>Example 5</b></a>: Volume Fader in Decibels
+        </p>
+        <p>
+          To make the change in a slider correspond well to our subjective sense of loudness, in JavaScript we need to map the slider value to the 0-to-1 range of volume using an exponential mapping. This example demonstrates a way to give a user control over the volume of a sound, with a linear change in the slider position actually causing an exponential change in the amplitude of the sound playback. It also demonstrates a way to do a timed fade-in or fade-out, using the <span style="font-family: monospace">setInterval()</span> method in JavaScript. You can compare and contrast this effect with the linear fade demonstrated in <a href="#Ex04js">Example 4</a>.
+        </p>
+        <p>
+          <a href="examples/javascript/volumefaderdbjs.html">Volume Fader in Decibels</a>
+        </p>
+        <hr>
       </div>
     </section>
   </div>
@@ -216,18 +236,18 @@
     <p class="footer"> <strong><!--MODIFICATION DATE--></strong></p>
   </footer>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
     <script>
     //$('pre').addClass("javascript");
     hljs.initHighlightingOnLoad();
-    </script>--> 
+    </script>-->
 <script>
       var videoHeight2 = $("#video6 > video").height();
       $("#answer-2").height(videoHeight2 - 50);
-    </script> 
+    </script>
 <script src="/js/cmp.js"></script>
 </body>
 </html>

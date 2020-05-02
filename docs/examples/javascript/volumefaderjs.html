@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<body>
+		<h1 align="center">Volume Fader</h1>
+		<p align="center" id="theButtons">
+			<button type="button" id="stopButton" onclick="stopSound()">Stop</button>&nbsp;&nbsp;<button type="button" id="startButton" onclick="startSound()">Start</button>
+		</p>
+		<p>&nbsp;</p>
+		<p align="center" id="theFader">
+			<button type="button" id="fadeOut" onclick="fadeOut()">Fade Out</button>&nbsp;&nbsp;<input type="range" id="volumeFader" name="volume" min="0" max="100" value="100" step="1" oninput="setUserVolume(this.value)"/>&nbsp;&nbsp;<button  type="button" id="fadeIn" onclick="fadeIn()">Fade In</button>
+			<br/><br/>
+			Fade Time:&nbsp;<input type="number" id="fadeTime" style="width: 30px" min="1" max="60" value="1" onchange="setFadeInterval(this.value)"/> seconds
+		</p>
+		<p align="center" id="userInfo"></p>
+		<br/>
+		<hr align="center" width="50%"/>
+		<div id="explanation">
+			<p>
+				This page demonstrates a way to give a user control over the volume of a sound. Normally volume is controlled with a knob (dial) or a fader (slider). The HTML element <span style="font-family: monospace">&lt;input&gt;</span> with <i>type=&quot;range&quot;</i> is the easiest way to put a slider in your web page. The <span style="font-family: monospace">volume</span> property of an <span style="font-family: monospace">&lt;audio&gt;</span> element can have a value from 0 (silence) to 1 (full volume). In this example, the range of the slider is 0 to 100 (the default), and in JavaScript we simply multiply its value by 0.01 (same as dividing by 100) to map its value to the 0-to-1 range of volume. (An exponential mapping might make for a more natural sense of loudness variation.) Note that we use the &quot;oninput&quot; event of the slider for continual updating every time the user moves the slider to a different value, rather than the &quot;onchange&quot; event, which occurs only once when the user releases the slider.
+			</p>
+			<p>
+				The page also demonstrates a way to do a timed fade-in or fade-out, using the <span style="font-family: monospace">setInterval()</span> method in JavaScript. The method allows you to specify a function you want to occur repeatedly at regular intervals. The minimum interval between repetitions is 10 milliseconds. For a slider with 100 steps, we can therefore pass through every single step in as little as one second. For a fade-out, we move the slider down from its current value to 0 in increments that are 1/100 of the specified fade time. (The fade time is specified by the user in seconds, whereas <span style="font-family: monospace">setInterval()</span> expects an interval to be specified in milliseconds.) We also store the user's setting of the volume slider so that we can fade back to that value for a fade-in. When we reach the destination, we stop the <span style="font-family: monospace">setInterval()</span> method with <span style="font-family: monospace">clearInterval()</span>.
+			</p>
+		</div>
+		<hr align="center" width="50%"/>
+		<p align="center" id="author">
+			This page was last modified May 1, 2020 by<br/>
+			Christopher Dobrian <i><a href="mailto:dobrian@uci.edu">dobrian@uci.edu</a></i>
+		</p>
+		<audio src="../../sounds/8barsof4@140bpm.wav" id="theSound" loop>
+		<script>
+			const snd = document.getElementById("theSound");
+			const fader = document.getElementById("volumeFader")
+			const info = document.getElementById("userInfo");
+			let userVolume = 100;
+			let fadeInterval = 10;
+			function stopSound() {
+				snd.pause();
+			}
+      function startSound() {
+        snd.play();
+      }
+			function setFadeInterval( theFadeTime ) {
+				fadeInterval = 10.*theFadeTime;
+			}
+			function setUserVolume( theVolume ) {
+				userVolume = theVolume;
+				setVolume( theVolume );
+				info.innerHTML = "Sound volume is " + snd.volume.toFixed(2) + ". User volume is " + theVolume + ".";
+			}
+			function setVolume( theVolume ) {
+				snd.volume = 0.01*theVolume;
+			}
+			function fadeOut() {
+				let theFadeOut = setInterval( doFadeOut, fadeInterval );
+				function doFadeOut() {
+					if ( fader.value >= fader.step ) {
+						fader.value -= fader.step;
+						setVolume( fader.value );
+						info.innerHTML = "Sound volume is " + snd.volume.toFixed(2) + ". User volume is " + fader.value + ".";
+					}
+					else {
+						clearInterval( theFadeOut );
+						setVolume( 0. );
+						fader.value = 0;
+						info.innerHTML = "Sound volume is " + snd.volume.toFixed(2) + ". User volume is " + fader.value + ".";
+					}
+				}
+			}
+			function fadeIn() {
+				let theFadeIn = setInterval( doFadeIn, fadeInterval );
+				function doFadeIn() {
+					console.log( userVolume-fader.step, fader.value );
+					if ( fader.value <= userVolume-fader.step ) {
+						fader.value = Number(fader.value) + Number(fader.step);
+						setVolume( fader.value );
+						info.innerHTML = "Sound volume is " + snd.volume.toFixed(2) + ". User volume is " + fader.value + ".";
+					}
+					else {
+						clearInterval( theFadeIn );
+						setVolume( userVolume );
+						fader.value = userVolume;
+						info.innerHTML = "Sound volume is " + snd.volume.toFixed(2) + ". User volume is " + fader.value + ".";
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
