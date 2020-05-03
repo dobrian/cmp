@@ -38,7 +38,35 @@
           <div id="script-text" style="display: none; overflow-y: scroll">
 
             <p>
+              When you succeed in programming a particular task, it's usually a good idea to save that as a kind of a function or subroutine that you can then call on anytime you want. So, in this case we're going to see how to do that successfully in Max.
+            </p>
 
+            <p>
+              We're going to need to have a task that we're trying to accomplish in order to do a demonstration. So, let's just say that our task is going to be that we've got some number here, or source of many numbers, like a <b>number</b> box, and we would like to find out what is the difference between any given number and the previous number. So, I'm going to put another <b>number</b> box down here that can be the result. But what I want to find is, as numbers come from this <b>number</b> box, what's the difference between the current number and the previous number?
+            </p>
+
+            <p>
+              Well, you know that the mathematical difference between two numbers is found by subtraction. And in order to do floating point subtraction, we're going to need to put in a floating point argument, so put in 0, which means that now when a number comes in here, it's going to subtract 0 from it and send out the result. But then we would like to put the number in the right inlet as the thing to subtract from the next number that comes in. In other words, the previous number should always be stored there, so that the current number (the new number) will get that previous number subtracted from it and we'll get the difference. To do that kind of message ordering, we need this handy object called <b>trigger</b>, or <b>t</b> for short, and something comes in its inlet and then you can specify what you want to have come out of its outlets. So in this case, I'm going to say I would like just that number itself, a floating-point number, to go out of two different outlets. But the right outlet is going to send first and then the left outlet will send after. So really, all we have to do in this case is: the one that comes out first, we subtract the previous number from it, and then we store that same number as the new previous number. Then the next time a number comes in, we'll subtract the previous number from it, and so on. So, this is a really very simple way to accomplish this task of finding out the difference between any two successive numbers.
+            </p>
+
+            <p>
+              Now that's not terribly intuitive-looking the first time you see it; you might need to kinda stare at it for a minute, to figure out what it's doing. So, you might want to put in a <b>comment</b> that says "subtract the previous number from the current number and then store the current number as the new previous number". Okay, so now it's a little clearer. We've got a comment there that's gonna tell us what to do. Still, there's a nice way that we can now store this task as a subroutine. Let's first verify that it works by locking the patch, and I'm going to send it a number here, like 4, and indeed 4 minus 0 equals 4. If I send in the number 6, we'd expect to see 2 come out. It does. If I send 6.5, we would expect to see 0.5. come out. And if I put in 3.5. we would expect to see -3 because it's three less than 6.5.
+            </p>
+
+            <p>
+              Okay, all very good, but if we want to now store this as a subroutine, here's what we're going to do. We can take the part that actually accomplishes the task, copy it with Command-C, and then (I'm going to make a new window here just to demonstrate) you can make an object called <b>patcher</b> or just <b>p</b> for short, which means a Patcher within a Patcher. So you're basically creating a subpatch, or a subroutine. And when you do that, it's going to open up a brand new window for you in which you can make your subroutine. So, now I'm going to just paste in the stuff that I copied. So, now we have this subpatch with this little task inside it. But to get numbers in and out of it, we need to create an object called <b>inlet</b>, which when you create it turns into this little box with a downward pointing arrow, and an object called <b>outlet</b>, which when you create it shows that the numbers will go out. So, numbers will come in here, we'll do our task, and we'll send the result out. When we lock that and close it, we're going to see that in our main patch we now have a <b>patcher</b> object that has one inlet and one outlet, just as we created in the subpatch. So, whatever number of <b>inlet</b>s and <b>outlet</b>s you created your subpatch will show up in the main patch here in the object. And you can even give your object a name. I'm going to call it <i>delta</i>, meaning "the change in".
+            </p>
+
+            <p>
+              And so now if I have a <b>number</b> box here and a <b>number</b> box here, and I start entering a number like 3.14159, it first subtracted 0 from that because we had no previous number. But now if I put in some other number like 1, we get -2.14159. If I put 3.6, we should get 2.6, and so on.
+            </p>
+
+            <p>
+              Okay, so we verified that our <b>patcher <i>delta</i></b> object does what we want, gives us the delta between two successive numbers. And so that's a little tidier, and it has a more descriptive name. (Give it whatever name you like.) But we've created a subroutine&mdash;it's basically a Patcher within a Patcher&mdash;and we can now copy that, and use it elsewhere in our patch. It's a little task that we know works, and we've saved it as a function or a subroutine within the main patch.
+            </p>
+
+            <p>
+              There's actually a clever way to do this that's even quicker than what I just did, which is you select the things that you would like to put into a subpatch. Notice that just outside, but connected to the things that I've selected, is one input and one output object. So that's going to tell Max that I want an inlet and an outlet. And all I have to do then is say "Encapsulate" and it does that job for me. If I double-click on this object to see its contents, yep, there it is. It didn't format exactly the way I wanted it, but close enough, right?, and it does the job. I can even then add the name in after if I want to. So, the Encapsulate message in the Edit menu is a way of encapsulating a set of objects as a subbatch, as a <b>patcher</b> object, automatically.
             </p>
 
           </div>
@@ -50,9 +78,11 @@
 <h1>Additional Resources</h1>
 
 <ul>
-<li></li>
+<li>An essay on <a href="https://music.arts.uci.edu/dobrian/Music215W11/Encapsulation.pdf">Encapsulation</a> from an early Max manual</li>
+<li>"<a href="https://docs.cycling74.com/max8/tutorials/basicchapter14">Tutorial 14: Encapsulation</a>" in the Max reference manual</li>
+<li>"<a href="https://docs.cycling74.com/max8/vignettes/encapsulate_deencapsulate">Encapsulate and De-encapsulate</a>" in the Max reference manual</li>
+<li>"<a href="6.Abstractions-in-Max.html">Abstractions in Max</a>"</li>
 </ul>
-
 
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

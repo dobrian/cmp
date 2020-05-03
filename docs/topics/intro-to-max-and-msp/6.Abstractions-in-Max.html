@@ -38,7 +38,23 @@
           <div id="script-text" style="display: none; overflow-y: scroll">
 
             <p>
+              Whenever you solve a particular programming problem&mdash;you solve a particular task or algorithm&mdash;and you know it works, you might want to be able to use that again as a Max object. And in fact, in Max it's very easy to make your own objects to be used in other patches. So for this demonstration, I'm going to make an object that outputs a random floating-point number between 0 and 1 every time I send it a message <i>bang</i>.
+            </p>
 
+            <p>
+              Okay, well, we know there's already an object called <b>random</b> that outputs integer values. So for example, if I said, "Give me one of a million possible different random numbers," when I send in a <i>bang</i>, it will send out a number from 0 to 999,999. Well, in this case, I would like it to give me floating point numbers between 0 and 1. So an easy way to do that would be simply to convert that, by multiplying it by one millionth. And I would expect then that when I send it a <i>bang</i>, I'll get a floating-point number between 0 and 1, and indeed I do.
+            </p>
+
+            <p>
+              Let's say that I've decided that that's a potentially useful object for me to use in other circumstances, and I'd like to make that a Max object. In other words, I'd like it to just appear as an object in other patches. Okay, so the way that I would do that is: I would take out these parts that I was just using to test it, and I would replace them with an <b>inlet</b> and an <b>outlet</b>. And then I will save that, and I'll give it the name that I would like it to appear as when I use it as an object. I'm going to call it <b>frandom</b>, for floating-point random.
+            </p>
+
+            <p>
+              And then if I were to create a new patch&mdash;and I'm going to save that one with the name testfrandom&mdash;and I create an object called <b>frandom</b>, well, what do you know, there is such an object even though it doesn't really exist as part of the Max program. That's because, if I double-click on it, I can see that it actually is the program I just wrote, but it's acting as it were a Max object. It has one inlet and one outlet, and if I send it a <i>bang</i>, it behaves just like I expect it to.
+            </p>
+
+            <p>
+              I can't actually edit this object here. It has little brackets here, showing me, "No, this is just an abstraction of that thing you created previously." If I want to edit its contents, I have to actually go back up, find the frandom patch that I originally made, and edit that. Well, if I do want to edit it, and let's say that I've decided that I'd like to put comments on my <b>inlet</b> and <b>outlet</b>. So, I'm going to comment my <b>inlet</b>, saying, "I expect a <i>bang</i>, and I'm going to output a random number 0 to 1. And then for my <b>outlet</b>, I'm going to make a comment that says it's going to come out is a <i>float</i>, random number 0 to 1. Okay, so now in my main patch, those will show up as comments on the inlet and outlet. And I might also decide that anything that comes in the inlet, I would actually like to convert to a <i>bang</i> before I send it on. So, regardless of whether the person programs it properly, anything that comes in will be converted to <i>bang</i>. I'm going to use the <b>bangbang</b> object for that, with just one outlet. And maybe I'll even change my comment to say "bang or anything will output a random number." Okay, so now I've decided this is good enough for me. Maybe I'll put in one more comment ["random number 0. to 0.999999"]. Save it, and now actually all of my changes have already been saved there. So even if I were to send in some ridiculous message, it still behaves properly.
             </p>
 
           </div>
@@ -50,7 +66,8 @@
 <h1>Additional Resources</h1>
 
 <ul>
-<li></li>
+  <li>"<a href="https://docs.cycling74.com/max8/vignettes/abstractions">Abstractions</a>" in the Max reference manual</li>
+  <li>"<a href="https://docs.cycling74.com/max8/tutorials/basicchapter15">Tutorial 15: Abstractions</a>" in the Max reference manual</li>
 </ul>
 
 
