@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+<link rel="stylesheet" href="../../css/cmp.css">
+<title>The buffer~ Object</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item"> <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="../../topics.html">Topics</a> </li>
+    <li class="nav-item"> <a class="nav-link" href="0.RAM-basedSamplePlayback.html">RAM-Based Sample Playback in Max</a> </li>
+  </ul>
+</nav>
+<div class="container">
+  <h1>Objects that access buffer~&nbsp;</h1>
+  <div id="video-script" class="row">
+    <div id="video" class="col">
+      <video controls
+                 src="2.Objects-that-access-buffer~.mp4"
+                 width="100%"
+                 height="100%"
+			 ></video>
+    </div>
+    <div id="script" class="col">
+      <button id="toggle-script" type="button" class="btn btn-primary">Show/Hide Text</button>
+      <div id="script-text" style="display: none; overflow-y: scroll">
+        <h3>Objects that access buffer~ </h3>
+        <p>This video will go over several objects that access data from the buffer~ object. These can be found in the patch found on this page called “objects that access buffer~.maxpat</p>
+        <p>info~</p>
+        <p>Here we have a buffer named MySound. Let’s say we want to determine how many samples are in MySound. The easiest way is to use an attrui object set to the “samps” property. However, it is difficult to access this information for more dynamic situations. As a result, we will use the info~ object, referencing the MySound buffer. </p>
+        <p>To calculate the number of samples in a buffer with info~, convert the TotalTime value from msec to seconds, multiplying it by .001. </p>
+        <p>Then multiply the TotalTime in seconds by the buffer’s sampleRate. </p>
+        <p>You can use the second outlet of buffer~ to trigger info~ after the data has been loaded into the buffer. </p>
+        <p>record~ </p>
+        <p>We can record an audio signal directly to a buffer. To do so, we’ll use the record~ object, referencing our buffer called MyRecordedSound. The audio signal connects to the first inlet. A toggle will begin the recording. We can monitor the recording with a number~ object. When it reaches one, that means it has recorded the entire length of the buffer. </p>
+        <p>Below this is an example that looks very similar, though it demonstrates how to record two channels. </p>
+        <p>play~</p>
+        <p>To play audio from a buffer, we can use the play~ object that is referenced to our buffer. There are a few ways to trigger playback, including the ability to playback a specified range of the buffer, but we’ll focus on the most straightforward methods. A toggle can start and stop playback. We can see from the second outlet when the playback is finished. The messages “Start” and “stop” do the same thing as a toggle. If we want to resume playback from the location that we stopped, we can use the “pause” message, followed by “resume.” </p>
+        <p>You can loop playback of the buffer by enabling play~’s “loop mode.” </p>
+        <p>groove~</p>
+        <p>The groove~ object has many diverse functions, and I encourage you to explore its documentation. For now we’ll look at a common use for groove~ and buffer~, which is variable-rate of playback. We drive the variable rate with a signal from the sig~ object. Changing this signal value will alter the playback speed. Also, we want to enable “loop” mode. For reference, a signal value of 1 means normal playback. -1 plays the buffer in reverse. 0 stops playback. </p>
+        <p>You can also set a loop range using the second and third outlets of groove~. </p>
+        <p>OTHER</p>
+        <p>Here are few final objects to be aware of. </p>
+        <p>Cycle~ is commonly used as a straightforward sine (in reality, cosine) tone generator. However, it can use a buffer for wavetable synthesis. When doing this, make sure to consider the number of samples being used by cycle~. </p>
+        <p>Wave~ performs a similar function, except that you can dynamically choose the buffer’s range being used for wavetable synthesis. This is done by designating the start and end points in the second and third inlets. Also, it is driven by a signal with values from 0 to 1, so phasor~ is good to use here. </p>
+        <p>index~ allows us to get the value of a specific sample. Here, we are sending in the sample number in the form of a signal, and index~ is returning the sample value. This can also be setup with an object like count~ to create audio playback. </p>
+        <p>lookup~ treats a buffer like a lookup table where an input signal’s value ranging from -1 to 1, returns a corresponding sample from the buffer. -1 returns the first sample and 1 returns the buffer’s final sample. </p>
+        <p>Remember that you can right click any of these for documentation. </p>
+      </div>
+    </div>
+  </div>
+	&nbsp;
+  <p>The patch "objectsthataccessbuffer~" doesn’t really do much of anything, but it gathers together many (not all!) of the objects that can refer to a <strong>buffer~</strong>. You can Option-click (Alt-click on Windows) on each object to learn more about how it works.</p>
+  <h2>Downloads</h2>
+  <p>Download the files used in the above examples by right-clicking the links, and
+    then selecting "Save Link As...".</p>
+  <ul>
+    <li><a href="objectsthataccessbuffer~.maxpat">objectsthataccessbuffer~.maxpat</a></li>
+  </ul>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>--> 
+<script src="../../js/cmp.js"></script>
+</body>
+</html>
