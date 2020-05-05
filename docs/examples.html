@@ -137,7 +137,7 @@
         <h2><a name="webaudio">WebAudio Examples</a></h2>
         <p> <a name="Ex01js"><b>Example 1</b></a>: Synthesizer with vibrato </p>
         <p>Here is a basic synthesizer in Web Audio, designed by Chris, with a sawtooth oscillator, a simple attack-release amplitude envelope, and sinusoidal vibrato by means of frequency modulation with an LFO. The notes are played by keys of the computer keyboard. MIDI velocity is simulated by setting a note-on velocity value to control the notes' peak amplitude. The rate and depth of the vibrato can also be set by the user. </p>
-        <p> <a href="examples/javascript/vibratosynth.html">Synthesizer with vibrato</a> </p>
+        <p> <a href="examples/javascript/vibratosynth.html">Synthesizer with vibrato &lt;vibratosynth.html&gt;</a> </p>
         <p> There are lots of explanatory comments in the <a href="examples/javascript/vibratosynth.js">vibratosynth.js</a> file. </p>
         <p> <a name="Ex02js"><b>Example 2</b></a>: Oscilloscope and Spectroscope in Webaudio </p>
         <p> <a href="examples/javascript/oscilloscope_and_spectroscope.html"><img src="examples/javascript/oscilloscope_and_spectroscope.png" alt="Example 2js" border=0></a> </p>
@@ -216,7 +216,7 @@
           This example demonstrates a way to give a user control over the volume of a sound. It also demonstrates a way to do a timed fade-in or fade-out, using the <span style="font-family: monospace">setInterval()</span> method in JavaScript.
         </p>
         <p>
-          <a href="examples/javascript/volumefaderjs.html">Volume Fader</a>
+          <a href="examples/javascript/volumefaderjs.html">Volume Fader &lt;volumefaderjs.html&gt;</a>
         </p>
         <hr>
         <p>
@@ -226,14 +226,47 @@
           To make the change in a slider correspond well to our subjective sense of loudness, in JavaScript we need to map the slider value to the 0-to-1 range of volume using an exponential mapping. This example demonstrates a way to give a user control over the volume of a sound, with a linear change in the slider position actually causing an exponential change in the amplitude of the sound playback. It also demonstrates a way to do a timed fade-in or fade-out, using the <span style="font-family: monospace">setInterval()</span> method in JavaScript. You can compare and contrast this effect with the linear fade demonstrated in <a href="#Ex04js">Example 4</a>.
         </p>
         <p>
-          <a href="examples/javascript/volumefaderdbjs.html">Volume Fader in Decibels</a>
+          <a href="examples/javascript/volumefaderdbjs.html">Volume Fader in Decibels &lt;volumefaderdbjs.html&gt;</a>
+        </p>
+        <hr>
+        <p>
+          <a name="Ex06js"><b>Example 6</b></a>: Show MIDI Input
+        </p>
+        <p>
+          This example shows how to get MIDI input in a browser, how to parse MIDI channel messages, and how to access and interpret the data bytes. It's just a MIDI "monitor" that looks at the incoming MIDI messages and reports the information. This could serve as the foundation for an application that uses MIDI messages to control a synthesizer.
+        </p>
+        <p>
+          First, the page's JavaScript queries the browser to see if the browser understands the Web MIDI API. Just about all modern browsers do. If so, it then requests access to the available MIDI devices, requests a listing of the input devices, and assigns a handler function to the
+        <span style="font-family: monospace">onmidimessage</span> event that might come from any of those input devices. The handler function will parse the MIDI message and respond to it.
+        </p>
+        <p>
+          In this example, we print what kind of message it is, and if it's a MIDI channel message (status bytes 128-239) we report details of its contents. The first byte in a message is the status byte, of which bits 0-3 indicate the MIDI channel (a value 0-15 indicating MIDI channel 1-16) and bits 4-6 indicate the message type (note-on, note-off, polyphonic key pressure, continuous controller, program change, aftertouch, or pitchbend). We use bit-masking to isolate the bits of the status byte that we want to examine. The type of message determines how many additional data bytes there will be in the message, and what they mean.
+        </p>
+        <p>
+          The information is printed into a scrolling text box, which is created by a <span style="font-family: monospace">&lt;div&gt;</span> element with <span style="font-family: monospace">style="overflow: auto"</span>. After each new line of text (each new MIDI message report) is added to that text box, we reset the scrolling position of the textbox to the bottom of the box, so that when the textbox fills to overflowing and begins to scroll, the most recently added message will be shown.
+        </p>
+        <p>
+          <a href="examples/javascript/showmidijs01.html">Show MIDI Input &lt;showmidijs01.html&gt;</a>
+        </p>
+        <hr>
+        <p>
+          <a name="Ex07js"><b>Example 7</b></a>: Draw a Sound
+        </p>
+        <p>
+          Once we get audio data into an array (an <span style="font-family: monospace">AudioBuffer</span>), we can graph the peak amplitudes in that data to show the sound's amplitude envelope. To get the sound into an array, we use an <span style="font-family: monospace">XMLHttpRequest</span> to get an audio file, put it in an array of binary data, decode it, and place it in the buffer of an <span style="font-family: monospace">AudioBufferSourceNode</span>. The <span style="font-family: monospace">&lt;canvas&gt;</span> element in the Web page provides a drawing space in which we can draw our graph with primitive drawing commands.
+        </p>
+        <p>
+          It probably goes without saying that in order to draw a sound, which consists of tens of thousands of samples, in the space of a few hundred pixels, we'll need to reduce the amount of information substantially. To figure out how to do that, we divide the sound into "chunks"; we divide the total number of samples in the sound by the number of pixels there are in the horizontal (width) dimension of the canvas. We then step through each of those chunks, and in each such chunk of audio samples we look for the minimum and maximum value, and we draw a line to those values in the graph. The result is an overall depiction of the peaks and troughs in the signal, which shows us the amplitude envelope.
+        </p>
+        <p>
+          <a href="examples/javascript/drawasoundjs.html">Draw a Sound &lt;drawasoundjs.html&gt;</a>
         </p>
         <hr>
       </div>
     </section>
   </div>
   <footer class="secondary_header footer">
-    <p class="footer">This page was last modified <strong>May 2, 2020</strong>.</p>
+    <p class="footer">This page was last modified <strong>May 4, 2020</strong>.</p>
   </footer>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

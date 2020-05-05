@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>Web Audio API - Draw a sound file</title>
+    </head>
+    <body>
+        <center>
+        <h1>Play this sound file</h1>
+        <p>Press the space bar to play,<br>
+        or click this button.</p>
+        <p><button onclick="playIt()">Play</button></p>
+        <p><canvas id="myCanvas" width="320" height="240" style="border:2px solid #000000;">
+		The sound will be drawn here.</canvas></p>
+		<p>Click this button to draw the sound.</p>
+		<p><button onclick="drawSound()">Draw</button></p>
+        </center>
+
+        <script>
+            // Create the audio context
+            var context = new AudioContext();
+            // Make a place to store the audio
+            var sourceBuffer = context.createBufferSource();
+            // Prepare to access a URL
+            var	request = new XMLHttpRequest();
+ 			// open file (asynchonously)
+			request.open("GET", "../../sounds/my.mp3", true);
+			// expect that it will be binary data, not text
+			request.responseType = "arraybuffer";
+			// when it loads, we'll put it in an AudioBuffer
+			// first create the onload function
+			request.onload = function () {
+				// put the undecoded audio data in a buffer
+			    var undecodedAudio = request.response;
+ 				// decode it, then put it in the global sourceBuffer
+			    context.decodeAudioData(undecodedAudio, function (buffer) {
+ 					sourceBuffer.buffer = buffer;
+				});
+			};
+			// now that the request is prepared, actually send the request
+			request.send();
+
+			// draw the sound in the canvas
+			var canvas = document.getElementById("myCanvas");
+			var drawingContext = canvas.getContext("2d");
+			function drawSound() {
+				var theArray = sourceBuffer.buffer.getChannelData(0);
+				var chunksize = sourceBuffer.buffer.length / canvas.width;
+				drawingContext.strokeStyle = "#888888"; // gray
+				drawingContext.moveTo(0, canvas.height/2); // go to the origin
+				for ( var i = 0; i < canvas.width; i++ ) {
+					var startpoint = i * chunksize ;
+					var endpoint = startpoint + chunksize;
+					var peakampPos = 0;
+					var peakampNeg = 0;
+					for ( var n = Math.floor(startpoint); n < endpoint; n++ ) {
+						var x = theArray[n];
+				 		if ( x >= 0 ) {
+				 			if ( x > peakampPos ) {
+				 				peakampPos = x ;
+				 			}
+				 		}
+				 		else {
+				 			if ( x < peakampNeg ) {
+				 				peakampNeg = x ;
+				 			}
+				 		}
+					}
+					var nextAmp = (peakampPos*(-1))*(canvas.height/2)+(canvas.height/2);
+					drawingContext.lineTo( i+1, nextAmp );
+					var nextAmp = (peakampNeg*(-1))*(canvas.height/2)+(canvas.height/2);
+					drawingContext.lineTo( i+1, nextAmp );
+				}
+				drawingContext.stroke();
+			}
+
+			// listen for the user to type the space bar
+			window.addEventListener( "keydown", onKeyDown);
+			function onKeyDown( theKey ){
+				if ( theKey.keyCode == 32 ) { // space bar
+					playIt();
+				}
+			}
+
+			// play the sound when the button is clicked or
+			// when the space bar is typed
+			function playIt() {
+				// create a new buffer source node
+				var	theSound = context.createBufferSource();
+				// point it to the captured, decoded sound
+				theSound.buffer = sourceBuffer.buffer;
+				// connect it to the output
+				theSound.connect( context.destination );
+				// play it
+				theSound.start(0);
+			}
+        </script>
+    </body>
+</html>

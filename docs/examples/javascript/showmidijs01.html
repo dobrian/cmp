@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <title>Show MIDI Input</title>
+    </head>
+    <body bgcolor="#FFFFFF">
+        <center>
+        <h1>MIDI Input</h1>
+        <div id="show" style="overflow: auto; width:800px; height:450px;"></div>
+        <p align="center">
+          <button type="button" id="clear" onclick="clearData()">Clear</button>
+        </p>
+        <hr>
+        <p>This page was last modified May 3, 2020<br>
+        by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a></p>
+        </center>
+
+        <script>
+          const show = document.getElementById( "show" );
+
+        	if ( navigator.requestMIDIAccess ) {
+    			  navigator.requestMIDIAccess({
+			      }).then( onMIDISuccess, onMIDIFailure );
+			    } else {
+    			  alert( "Your browser does not support Web MIDI." );
+			    }
+
+			function onMIDISuccess( midiAccess ) {
+    			// when the request is successful, do this
+    			show.innerHTML = ( "MIDI Access Object obtained: " + midiAccess + "<br/>" ); // print info about linked MIDI devices
+    			let inputs = midiAccess.inputs.values();
+    			show.innerHTML += ( "MIDI Input Map received: " + inputs + "<br/><br/>" );
+    			for ( let thisInput = inputs.next(); thisInput && !thisInput.done; thisInput = inputs.next() ) {
+      			thisInput.value.onmidimessage = onMIDIMessage;
+    			}
+			}
+
+			function onMIDIFailure( theError ) {
+    			// when the request fails, report that fact
+    			console.log( "No access to MIDI devices or your browser doesn't support WebMIDI API." + theError );
+			}
+
+			function onMIDIMessage( theMessage ) { // incoming message on thisInput
+        let msg = theMessage.data;
+        show.innerHTML += ( "MIDI data: " + msg + "&nbsp;&mdash;&nbsp;"); // MIDI data
+        /*
+        let bytes = [];
+        for ( let i = 0; i < msg.length; i++ ) {
+          bytes[i] = msg[i];
+        }
+        */
+        let channel = msg[0]&0x0f;
+        let statusNibble = msg[0]&0xf0;
+        let status;
+        let dataBytes;
+        switch ( statusNibble ) {
+          case 0x80 :
+            status = "Note-Off";
+            dataBytes = "Key " + msg[1] + " with Velocity " + msg[2];
+            break;
+          case 0x90 :
+            status = "Note-On";
+            dataBytes = "Key " + msg[1] + " with Velocity " + msg[2];
+            break;
+          case 0xA0 :
+            status = "Poly Pressure"
+            dataBytes = "Key " + msg[1] + " with Pressure " + msg[2];
+            break;;
+          case 0xB0 :
+            status = "Controller";
+            dataBytes = "Contoller " + msg[1] + " with Value " + msg[2];
+            break;
+          case 0xC0 :
+            status = "Program Change";
+            dataByes = "Program " + msg[1];
+            break;
+          case 0xD0 :
+            status = "Aftertouch";
+            dataByes = "Pressure " + msg[1];
+            break;
+          case 0xE0 :
+            status = "Pitch Bend";
+            dataBytes = "Coarse Bend " + msg[1] + " and Fine Bend " + msg[2];
+            break;
+          case 0xF0 :
+            status = "System Common Message"
+            break;
+          default :
+            status = "Running Status (not enabled in this program)"
+            break;
+        }
+        show.innerHTML += ( "Message Type: " + status + " on channel " + (channel+1) + ", " + dataBytes + "<br/>");
+        show.scrollTop = show.scrollHeight;
+  		}
+
+      function clearData() {
+        show.innerHTML = "";
+      }
+		</script>
+
+    </body>
+</html>
