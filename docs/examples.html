@@ -294,12 +294,105 @@
         <p>
           <a href="examples/javascript/drawasoundjs.html">Draw a Sound &lt;drawasoundjs.html&gt;</a>
         </p>
-        <hr>
+
+        <hr/>
+
+        <p>
+          <a name="Ex08js"><b>Example 8</b></a>: Recurring timed events in HTML5
+        </p>
+
+        <P>
+        Most programming languages provide a means of getting a numerical representation of the current time with millisecond or microsecond (or even nanosecond) accuracy, such as the System.nanoTime() method in Java and the <B>cpuclock</B> object in Max. By comparing one instant to another, you can measure time intervals or durations with great accuracy.
+        </P>
+
+        <P>
+        In JavaScript in HTML5, the performance.now() method will report the current time with microsecond accuracy. Even without knowing the current time, though, you can schedule events to happen at specific moments in the future in JavaScript with (approximately) millisecond accuracy. The WindowTimers method setTimeout() lets you schedule a named function to be executed a certain number of milliseconds in the future. The format is <I>var theID = setTimeout( theFunction, N );</I> where N is the number of milliseconds in the future that you want theFunction() to be executed. You can also use a WindowTimers method called setInterval() to schedule a recurring function call every N milliseconds. The methods setTimeout() and setInterval() return a unique ID which can serve as pointer to that scheduled task. It's important to keep track of that pointer, by storing it in a variable, so that you can later clear (unschedule) the task with the method clearTimeout( theID ) or clearInterval( theID ).
+        </P>
+
+        <P>
+        This Web page does nothing more than test the accuracy of the setInterval() method. The script uses the performance.now() method to measure how much time elapsed between the time setInterval() was called and the time it reports with each function call. Because performance.now() provides time with microsecond precision, we can see that each setInterval() function call might be off by some fraction of a millisecond. In fact, depending on how busy the client computer is, the timing could be off by more than that. However, this test appears to demonstrate that a) setInterval() seems to compensate for its own lateness on the next function call, so that it doesn't suffer from excessive time lag over the long term, and b) the inaccuracies are generally not so great as to be musically bothersome. The inaccuracies could be problematic in certain very time-crucial circumstances, though, and these WindowTimers methods are not sample-accurate for audio processing purposes, nor are they in any way explicitly related to the audio sample-rate timing of the Web Audio API.
+        </P>
+
+        <P>
+        <A HREF="examples/javascript/testperformancenow.html">Test performance of the setInterval() method in HTML5</A>
+        </P>
+
+        <hr/>
+
+        <p>
+          <a name="Ex09js"><b>Example 9</b></a>: Scheduling timed notes in HTML5
+        </p>
+
+        <P>
+          Although the WindowTimers.setInterval() method is not explicitly linked to the sample-rate timing of the Web Audio API, in many cases it can be sufficiently accurate for timing of audio events. In this example we use setInterval() to schedule a recurring pattern of notes events in Web Audio API. Try it and see if it is adequately accurate on your computer.
+        </P>
+
+        <P>
+        The script creates an array of sixteen pitches and an array of sixteen loudnesses, and uses those arrays to play a recurring pattern of sixteen synthesized notes in a loop, with each note scheduled by setInterval(). Note that the duration of each note is not quite as long as the time interval between note onsets. That produces a very slightly <I>staccato</I> or <I>d&eacute;tach&eacute;</I> articulation of the notes, but more importantly it avoids any potentially disparity between the timing of the notes' amplitude envelope and the timing of the setInterval() method.
+        </P>
+
+        <P>
+        This script also includes handy functions mtof() for converting MIDI-style pitch numbers to their corresponding frequency, and dbtoa() for converting loudness in decibels into their corresponding linear amplitude.
+        </P>
+
+        <P>
+          <A HREF="examples/javascript/intervalscheduling.html">Schedule notes with setInterval()</A>
+        </P>
+
+        <hr/>
+
+        <p>
+          <a name="Ex10js"><b>Example 10</b></a>: Scheduling audio events in Web Audio API
+        </p>
+
+        <P>
+        In the Web Audio API a parameter of an audio node (an AudioParam) can be changed with sample-accurate timing. Each AudioNode object, such as an oscillator node or a gain node, has one or more properties&mdash;the frequency value of an oscillator node or the gain value of a gain node&mdash;which can be set at specific times, either immediately or in the future.
+        </P>
+
+        <P>
+        In this example, we create our own "instrument" object consisting of an oscillator node and a gain node, and then we schedule notes to be played on that instrument at specific times by setting the frequency of the oscillator node and the gain of the gain node. To do that, we create an array of pitches and an array of volumes, and establish a beat tempo. Then we step through the two arrays, scheduling different pitches and volumes to happen at specific times based on the tempo. The program schedules 64 notes at once, then plays them.
+        </P>
+
+        <P>
+          <A HREF="examples/javascript/play64notes.html">Schedule and play 64 notes</A>
+        </P>
+
+        <hr/>
+
+        <p>
+          <a name="Ex11js"><b>Example 11</b></a>: Delay with Feedback in Web Audio API
+        </p>
+
+        <p>
+          To create echo effects, one needs to create a <a href="https://dobrian.github.io/cmp/topics/delay-based-effects/circularbuffer.html">circular buffer</a> to store and recall recent sound data. The Web Audio API provides an AudioNode interface called DelayNode that implements this digital delay line for you.
+        </p>
+
+        <p>
+          When you create the DelayNode, you specify a maxDelayTime (or, if not specified, it is 1 second by default), and that sets aside enough memory to store the corresponding number of samples. The <i>delayTime</i> property specifies how far in the past the DelayNode will look in its input buffer to determine what to send out as its output. Thus, the DelayNode in Web Audio API is comparable to <a href="https://music.arts.uci.edu/dobrian/maxcookbook/simple-delay-audio-signal">the <b>delay~</b> object in MSP</a>.
+        </p>
+
+        <p>
+          Sending the output of a digital delay line back into its input presents the potential danger of infitine recursion (calculating the delay of a delay of a delay, <i>et cetera ad infinitum</i>), so if you want a feedback delay, the <i>delayTime</i> must always be at least as great as the block of samples being calculated by the system. In MSP, the <b>delay~</b> object does not allow feedback, and to do feedback you must <a href="https://music.arts.uci.edu/dobrian/maxcookbook/delay-feedback">use the <b>tapin~</b> and <b>tapout~</b> objects</a> instead, which have a minimum delay time of one signal vector (the block of samples that MSP objects calculate at one time). In Web Audio API, you can create a feedback loop in which the output of a DelayNode is eventually routed back into its input, but in that case the minimum delay time will automatically be set at one <i><a href="https://webaudio.github.io/web-audio-api/#render-quantum">render quantum</a></i>, which is 128 samples (thus, 2.75 ms at a sampling rate of 48 KHz).
+        </p>
+
+        <p>
+          Whenever you implement feedback in an audio delay line, you need to diminish the amplitude of the signal being fed back, otherwise the sum of the feedback and the input signal will accumulate and grow out of control. In this example, we include volume control at three points in the system (with three Gain nodes)&mdash;gain of the sound source being used as input to the Delay node, gain of of the output of the Delay node, and gain of that output signal being used as feedback into the Delay node&mdash;and we give the user control over each of those gains.
+        </p>
+
+        <p>
+          <img src="../images/delaywithfeedback01.png" height="509" width="424" border="0">
+        </p>
+
+        <P>
+          <A HREF="examples/javascript/delaywithfeedback01.html">Schedule and play 64 notes</A>
+        </P>
+
+        <hr/>
       </div>
     </section>
   </div>
   <footer class="secondary_header footer">
-    <p class="footer">This page was last modified <strong>May 4, 2020</strong>.</p>
+    <p class="footer">This page was last modified <strong>May 10, 2020</strong>.</p>
   </footer>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

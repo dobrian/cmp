@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Test of the setInterval() method using performance.now()</title>
+    </head>
+    <body bgcolor="#FFFFFF">
+        <center>
+        <h1>setInterval()<br>
+        tested with<br>
+        performance.now()</h1>
+        <p>Events will be scheduled to happen 1 second apart.<br>
+        Let's see how long it actually takes.</p>
+        <p><input type="button" id="test" value="Test" onclick="clicked()"></p>
+        <p id="result"></p>
+        <hr>
+        <p>This page was last modified April 20, 2016<br>
+        by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a></p>
+        </center>
+        
+        <script>
+        	var t1, t2, event1;
+        	function clicked() {
+        		if ( test.value === "Test" ) {
+        			test.value = "Stop";
+        			startTest();
+        		}
+        		else {
+        			test.value = "Test";
+        			stopTest();
+        		}
+        	}
+        	function startTest() {
+        		t1 = performance.now();
+        		event1 = setInterval( showInterval, 1000 );
+        	}
+        	function stopTest() {
+        		clearInterval( event1 );
+        	}
+        	function showInterval() {
+        		t2 = performance.now();
+        		document.getElementById("result").innerHTML = t2-t1;
+        	}
+        </script>
+        
+    </body>
+</html>
