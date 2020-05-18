@@ -51,7 +51,7 @@
           Musicians often discuss tempo in terms of beats per minute (BPM), and they have a pretty good intuitive sense of beat rate when they hear that number. They don't give much conscious thought specifically to what interval of time passes between beats, the IOI in clock time. In a computer program, though, it's often necessary to know the amount of time per beat. You could calculate that easily by taking the number of milliseconds per minute and dividing that by the BPM number. The result would give you milliseconds per beat. For example 60,000 milliseconds per 1 minute, divided by 120 beats per 1 minute, yields 500 milliseconds per 1 beat.<br />
 
           <center><i>ms/min &divide; beats/min = ms/min &middot; min/beat = ms/beat</i></center><br />
-          
+
           You can read more about these time relationships in the blog post "<a href="http://algocomp.blogspot.com/2008/08/tempo-relative-timing.html">Tempo-relative timing</a>".
         </p>
 
@@ -90,7 +90,7 @@
         <h2 id="beat">The Temporal Grid</h2>
 
         <p>
-          The preceding discussion points to a way of thinking about musical timing&mdash;and <i>rhythm</i>, which we can define as the articulation of timepoints with sound&mdash;in a way that's particularly appropriate for computer music. In this model, music exists on a temporal grid, one in which sonic events reside upon, and are quantized to, conceptual time divisions that correspond to the pulse (the quickest division)&mdash;which is the sixteenth-note rate in the above example. According to this model, the grid represents musical time, and the rhythm is articulated by sounds placed on that grid. The grid, and the events on it, exist independent of clock time, but if we know the BPM tempo, we can easily translate the grid into clock time. One advantage of thinking of musical time as a temporal grid is that it's analogous to the way musicians think about notation of rhythms, as shown above. Another powerful advantage of using a musical time grid that's indpendent of clock time is that we can leave the musical structure intact, changing only the BPM tempo, and all of the clock times can then be adjusted accordingly with straightforward arithmetic.
+          The preceding discussion points to a way of thinking about musical timing&mdash;and <i>rhythm</i>, which we can define as the articulation of timepoints with sound&mdash;in a way that's particularly appropriate for computer music. In this model, music exists on a temporal grid, one in which sonic events reside upon, and are quantized to, conceptual time divisions that correspond to the pulse (the quickest division)&mdash;which is the sixteenth-note rate in the above example. According to this model, the grid represents musical time, and the rhythm is articulated by sounds placed on that grid. The grid, and the events on it, exist independent of clock time, but if we know the BPM tempo, we can easily translate the grid into clock time. One advantage of thinking of musical time as a temporal grid is that it's analogous to the way musicians think about notation of rhythms, as shown above. Another powerful advantage of using a musical time grid that's independent of clock time is that we can leave the musical structure intact, changing only the BPM tempo, and all of the clock times can then be adjusted accordingly with straightforward arithmetic.
         </p>
 
         <p>
@@ -114,7 +114,7 @@
       <p>This page was last modified May 27, 2019 by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><em>dobrian@uci.edu</em></a>.</p>
 
       <hr />
-      
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -122,6 +122,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="../../js/cmp.js"></script>
 
-    
+
   </body>
 </html>
