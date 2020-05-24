@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+	<body>
+		<h1 align="center">Stereo Panning Demo</h1>
+		<p align="center" id="theButtons">
+			<button type="button" id="stopButton" onclick="stopSound()">Stop</button>&nbsp;&nbsp;<button type="button" id="startButton" onclick="startSound()">Start</button>
+		</p>
+		<p align="center" id="theFader">
+			<input type="range" id="volumeFader" name="volume" min="0" max="100" value="60" step="1" oninput="setUserVolume(this.value)"/><br/>
+			Volume: <span id="volumeInfo">60</span></p>
+		<p align="center" id="thePanner">
+			<button type="button" id="panLeft" onclick="panLeft()">&nbsp;Pan Left&nbsp;</button>&nbsp;&nbsp;<input type="range" id="panningFader" name="panning" min="-100" max="100" value="0" step="1" oninput="setUserPanning(this.value)"/>&nbsp;&nbsp;<button  type="button" id="panRight" onclick="panRight()">Pan Right</button><br/>
+			Panning: <span id="panningInfo">0</span></p>
+		<p align="center" id="panningTime">
+			Pan Time:&nbsp;<input type="number" id="panTime" style="width: 30px" min="1" max="60" value="5" onchange="setPanTime(this.value)"/> seconds
+		</p>
+		<br/>
+		<hr align="center" width="50%"/>
+		<p align="center" id="userInfo"></p>
+		<br/>
+		<hr align="center" width="50%"/>
+		<div id="explanation">
+			<p>
+				This page demonstrates a way to give a user control over the stereo panning of a sound. Normally panning is controlled with a knob (dial) or a fader (slider). The HTML element <span style="font-family: monospace">&lt;input&gt;</span> with <i>type=&quot;range&quot;</i> is the easiest way to put a slider in your web page. The <span style="font-family: monospace">pan</span> property of a <span style="font-family: monospace">StereoPannerNode</span> element can have a value from -1 (panned fully left) to 1 (panned fully right). In this example, the range of the slider is -100 to 100 (with 0 as the default), and in JavaScript we simply multiply its value by 0.01 (same as dividing by 100) to map its value to the -1 to 1 range of the <span style="font-family: monospace">pan</span> property. Note that we use the &quot;oninput&quot; event of the slider for continual updating every time the user moves the slider to a different value, rather than the &quot;onchange&quot; event, which occurs only once when the user releases the slider.
+			</p>
+			<p>
+				The page also demonstrates a way to do a timed pan left or right, using the <span style="font-family: monospace">linearRampToValueAtTime()</span> method of the <span style="font-family: monospace">pan</span> AudioParam. The method allows you to specify a value you want to go to and the time at which you want the parameter to arrive there. When the slider is moved by hand, we can interpolate linearly to the new value in a short time, say 100 milliseconds. For an automated change of panning, we move the slider from its current value to -100 or 100 in the specified panning time. (The panning time is specified by the user in seconds.)
+			</p>
+		</div>
+		<hr align="center" width="50%"/>
+		<p align="center" id="author">
+			This page was last modified May 20, 2020 by<br/>
+			Christopher Dobrian <i><a href="mailto:dobrian@uci.edu">dobrian@uci.edu</a></i>
+		</p>
+		<script>
+			// pointers to elements in web page
+			const fader = document.getElementById("volumeFader");
+			const volumeInfo = document.getElementById("volumeInfo");
+			const panner = document.getElementById("panningFader");
+			const panningInfo = document.getElementById("panningInfo");
+			const info = document.getElementById("userInfo"); // unused in this example
+			// values obtained from the web page
+			let userVolume = Number( fader.value );
+			let userPanning = Number( panner.value );
+			let panTime = Number(document.getElementById("panTime").value);
+
+
+			// manage event scheduler
+			let events; // pointer to the scheduled "note" events
+			let interval = 200; // ms per event (IOI)
+			let panningChanges; // pointer to scheduled panning changes
+			let changeTime = 0.1; // 100 ms for smoothing changes
+
+			// create audio context
+			const ctx = new AudioContext();
+
+			// generate a bit of white noise
+			const noiseBufferLength = 512;
+			let theBuffer = ctx.createBuffer( 1, noiseBufferLength, ctx.sampleRate );
+			let noiseData = theBuffer.getChannelData(0);
+			for ( let i = 0; i < noiseBufferLength; i++ ) {
+				noiseData[i] = Math.random()*2.-1.;
+			}
+
+			// create the instrument
+			let noise = ctx.createBufferSource();
+			noise.buffer = theBuffer; // ArrayBuffer containing noise data
+			let env = ctx.createGain();
+			env.gain.value = 0;
+			let pan = ctx.createStereoPanner();
+			setPanning( userPanning );
+			let volume = ctx.createGain();
+			setVolume( userVolume );
+			noise.connect( env );
+			env.connect( pan );
+			pan.connect( volume );
+			volume.connect( ctx.destination );
+			noise.loop = true;
+			noise.start();
+
+			function stopSound() {
+				clearInterval( events );
+			}
+
+      function startSound() {
+				// in case browser has suspended audio, resume it
+				if ( ctx.state !== "running" ) ctx.resume();
+				// start playing sound repeatedly
+				events = setInterval( playNote, interval );
+      }
+
+			function setUserVolume( theVolume ) {
+				userVolume = theVolume;
+				setVolume( theVolume );
+				volumeInfo.innerHTML = userVolume;
+			}
+
+			function setVolume( theVolume ) {
+				if ( theVolume != 0 ) {
+					// change volume exponentially by 0.5 dB per fader step
+					volume.gain.linearRampToValueAtTime( Math.pow(10.,0.025*(theVolume-fader.max)), ctx.currentTime+changeTime );
+				}
+				else {
+					volume.gain.linearRampToValueAtTime( 0., ctx.currentTime+changeTime );
+				}
+			}
+
+			function setUserPanning( thePanning ) {
+				userPanning = thePanning;
+				setPanning( userPanning );
+				panner.value = userPanning; // for when userPanning was changed algorithmically
+				panningInfo.innerHTML = Math.round( userPanning ); // show the value onscreen
+			}
+
+			function setPanning( thePanning ) { // go to new panning position quickly
+				pan.pan.linearRampToValueAtTime( 0.01*thePanning, ctx.currentTime+changeTime );
+			}
+
+			function setPanTime ( thePanTime ) { // when user changes the Pan Time
+				panTime = Number( thePanTime );
+			}
+
+			function playNote() { // open amplitude envelope briefly
+				env.gain.linearRampToValueAtTime( 1, ctx.currentTime );
+				env.gain.linearRampToValueAtTime( 0, ctx.currentTime+(changeTime*0.1) );
+			}
+
+			/*
+			// this would normally be the panning method
+			// but in this case we're using the fader position
+			// so as to give the user visual feedback and to
+			// keep the onscreen fader in the right place
+			function pan( destination, time ) {
+				pan.pan.cancelScheduledValues( ctx.currentTime );
+				pan.pan.linearRampToValueAtTime ( clip( destination, -1, 1 ), ctx.currentTime+time );
+			}
+			*/
+
+			function panLeft() {
+				clearInterval( panningChanges);
+				// based on how far the panner has to change
+				// (from where it is now, to all the way to the left),
+				// and the total amount of time to get there ("panTime"),
+				// calculate how big a step to take in each "changeTime" interval
+				let stepSize = (panner.min-userPanning)*changeTime/panTime;
+				panningChanges = setInterval( function() { // repeatedly
+					setUserPanning( userPanning+stepSize ); // move left one step, and
+					if ( userPanning <= panner.min ) { // if we've reached or exceeded
+						setUserPanning( Number( panner.min ) ); // stop at the minimum, and
+						clearInterval( panningChanges ); // stop the repetitions
+					}
+				}, changeTime*1000.); // convert seconds to milliseconds for setInterval()
+			}
+
+			function panRight() {
+				clearInterval( panningChanges);
+				let stepSize = (panner.max-userPanning)*changeTime/panTime;
+				panningChanges = setInterval( function() {
+					setUserPanning( userPanning+stepSize );
+					if ( userPanning > panner.max ) {
+						setUserPanning( Number( panner.max ) );
+						clearInterval( panningChanges );
+					}
+				}, changeTime*1000.);
+			}
+
+			// untility function to constrain a value within a range
+			function clip( x, min, max ) {
+				let y = x;
+				if ( y > max ) y = max;
+				else if ( y < min ) y = min;
+				return y;
+			}
+
+		</script>
+	</body>
+</html>

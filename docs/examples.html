@@ -388,11 +388,33 @@
         </P>
 
         <hr/>
+
+        <p>
+          <a name="Ex12js"><b>Example 12</b></a>: Stereo panning in Web Audio API
+        </p>
+
+        <P>
+          In the Web Audio API there is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/PannerNode">PannerNode</a> for altering the intensity of the sound in each of the two stereo channels according to its onstensible location and orientation in virtual 3D space. The PannerNode allows you to take into account the sound source's virtual location (X, Y, and Z position) relative to the listener's position, the sound source's orientation (which direction it's facing), the directionality of the sound source (how much the intensity diminishes when the source is not facing right at the listener), and various other settings for how much the intensity should change based on those factors. The PannerNode deals only with the amplitude of the sound, and doesn't take into account other possible alterations such as filtering, reverberation, etc. However, it does offer an "<a href="https://webaudio.github.io/web-audio-api/#Spatialization-hrtf-panning">HRTF</a>" panning mode that uses <a href="https://en.wikipedia.org/wiki/Head-related_transfer_function">head-related transfer functions</a>.
+        </P>
+
+        <P>
+          Web Audio API also provides a simplified <a href="https://developer.mozilla.org/en-US/docs/Web/API/StereoPannerNode">StereoPannerNode</a>, with just one parameter, <a href="https://developer.mozilla.org/en-US/docs/Web/API/StereoPannerNode/pan"><i>pan</i></a>, that lets you specify the sound source's virtual location on the X axis. The StereoPannerNode implements amplitude-based stereo panning employing <a href="https://webaudio.github.io/web-audio-api/#stereopanner-algorithm">an efficient constant-intensity algorithm</a> that's essentially identical to the method shown in the Max Cookbook examples "<a href="https://music.arts.uci.edu/dobrian/maxcookbook/constant-power-panning-using-table-lookup">Constant power panning using table lookup</a>" and "<a href="https://music.arts.uci.edu/dobrian/maxcookbook/constant-intensity-panning-subpatch">Constant-intensity panning subpatch</a>". That's the method shown in this example. (The MDN Web Audio API reference page for StereoPannerNode also provides a simple and clear <a href="https://mdn.github.io/webaudio-examples/stereo-panner-node/">StereoPannerNode example</a>.)
+        </P>
+
+        <P>
+          In this example, we create our own "instrument" consisting of a 10-millisecond burst of white noise that goes to a StereoPannerNode and then to a master volume GainNode. The Start button uses the setInterval() method to set up a repeating callback to a playNote() function that periodically (5 times per second) opens a 10 ms window on the white noise. You can use the sliders to control volume and panning, and you can also use the Pan Left and Pan Right buttons to do a timed pan to one speaker or the other.
+        </P>
+
+        <P>
+          <A HREF="examples/javascript/panningdemojs.html">Stereo Panning Demo &lt;panningdemojs.html&gt;</A>
+        </P>
+
+        <hr/>
       </div>
     </section>
   </div>
   <footer class="secondary_header footer">
-    <p class="footer">This page was last modified <strong>May 10, 2020</strong>.</p>
+    <p class="footer">This page was last modified <strong>May 24, 2020</strong>.</p>
   </footer>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
