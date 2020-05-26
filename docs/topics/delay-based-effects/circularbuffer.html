@@ -40,7 +40,7 @@
 		</p>
 
 		<p>
-		Audio delay is achieved by simultaneous recording and playback; while we play back recorded sound from the recent past, we keep recording the current sound so that there's always sound to play back. Since we don't have an infinite amount of memory in which to store recorded sound, it makes sense to store a recording only of the most recent time period&mdash;up to the amount of delay we expect to need&mdash;and throw away recorded sound from the more distant past. We do that by recording the newest (current) sound over the oldest (no longer needed) sound in a loop. We record the sound data into an array, and when we reach the end of the array we wrap around to the beginning and continue recording. An array that we treat as a loop in this manner is called a <i>circular buffer</i> or a <i>ring buffer</i>.
+		Audio delay is achieved by simultaneous recording and playback; while we play back recorded sound from the recent past, we keep recording the current sound so that there's always sound to play back. Since we don't have an infinite amount of memory in which to store recorded sound, it makes sense to store a recording only of the most recent time period&mdash;up to the amount of delay we expect to need&mdash;and throw away recorded sound from the more distant past. We do that by recording the newest (current) sound over the oldest (no longer needed) sound in a loop. We record the sound data into an array, and when we reach the end of the array we wrap around to the beginning and continue recording. An array that we treat as a loop in this manner is called a <i><a href="https://en.wikipedia.org/wiki/Circular_buffer">circular buffer</a></i> or a <i>ring buffer</i>.
 		</p>
 
 		<p>
@@ -92,6 +92,3 @@
 </body>
 
 </html>
-
-
-

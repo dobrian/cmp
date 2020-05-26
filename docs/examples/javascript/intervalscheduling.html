@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <title>HTML5 Event Scheduling</title>
+    </head>
+    <body bgcolor="#FFFFFF">
+        <center>
+        <h1>setInterval()</h1>
+        <p>This page is designed to test the timing accuracy of the HTML5 WindowTimers.setInterval() method.<br>
+        Is the timing stable enough to play a rhythm with acceptable accuracy? You be the judge.</p>
+        <p>The script in this window plays a sequence of pitches in a loop at a rate of 125ms per note.<br>
+        Does it sound steady? Does it stay steady even when you do other things in your browser?</p>
+        <hr>
+        <p><input type="button" id="startstop" value="Start" onclick="toggleSequence()"></p>
+        <hr>
+        <p>This page was last modified April 26, 2016<br>
+        by Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a></p>
+        </center>
+        
+        <script>
+        	var timerID; // a pointer to the timer
+        	var isOn = false; // the on/off state of the timer (off initially)
+        	var theAudioContext = new AudioContext(); // the audio context
+        	var theInstrument = { // the sound generator
+        		osc: theAudioContext.createOscillator(), // consists of an oscillator
+        		amp: theAudioContext.createGain() // and an amplifier
+        	};
+        	var pitchArray = [ 62, 69, 73, 66, 71, 66, 69, 62, 64, 71, 74, 67, 73, 67, 69, 64 ];
+			var volumeArray = [ 0, -24, -16, -12, -4, -12, -20, -4, -12, -16, -12, -8, -4, -16, -12, -24 ];
+			var counter = 0; // index for the arrays
+						
+			function toggleSequence() {
+				if ( isOn ) { // stop playing
+					isOn = false; // set toggle state to off
+					document.getElementById("startstop").value = "Start"; // get ready to play again
+					clearInterval( timerID ); // stop the timer
+					setTimeout( function() {
+						theInstrument.osc.stop( theAudioContext.currentTime+0.120 );
+					}, 125 ); // leave time for last note to finish, then stop the oscillator
+					
+				}
+				else { // start playing
+					isOn = true; // set toggle state to on
+					document.getElementById("startstop").value = "Stop"; // show stop button
+					counter = 0; // start at the beginning of the array
+					// construct the audio graph and get ready to play
+					theInstrument.osc = theAudioContext.createOscillator(); // make an oscillator
+					theInstrument.osc.frequency.value = 0; // start with oscillator stopped
+					theInstrument.amp.gain.setValueAtTime( 0., theAudioContext.currentTime ); // set a starting point for volume
+					theInstrument.osc.connect( theInstrument.amp ); // connect oscillator to amplifier
+					theInstrument.amp.connect( theAudioContext.destination ); // connect amplifier to speakers
+					theInstrument.osc.start( theAudioContext.currentTime ); // start the oscillator running
+					timerID = setInterval( playNote, 125 ); // play a note every 125 milliseconds
+				}
+			}
+			
+			function playNote() {
+				theInstrument.osc.frequency.setValueAtTime( mtof( pitchArray[counter] ), theAudioContext.currentTime ); // set the frequency
+				theInstrument.amp.gain.setValueAtTime( 0., theAudioContext.currentTime ); // set a starting point for volume
+				theInstrument.amp.gain.linearRampToValueAtTime( dbtoa( volumeArray[counter] ), theAudioContext.currentTime+0.005 ); // ramp quickly to the new volume in 5 ms
+				theInstrument.amp.gain.setValueAtTime( dbtoa( volumeArray[counter] ), theAudioContext.currentTime+0.09 ); // provide the starting point for the next volume ramp
+				theInstrument.amp.gain.linearRampToValueAtTime( 0., theAudioContext.currentTime+0.1 ); // ramp quickly to 0 in 5 ms
+				counter = (counter+1)%16; // increment the counter within the range of the arrays
+			}	
+			
+			function mtof( m ) { // convert MIDI-style pitch number to frequency
+				return 440*Math.pow(2,(m-69)/12);
+			}
+
+			function dbtoa( dB ) { // convert decibels to linear amplitude
+				return Math.pow(10,dB*0.05);
+			}	
+	</script>
+        
+    </body>
+</html>

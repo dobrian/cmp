@@ -1,0 +1,94 @@
+<HTML>
+
+<HEAD>
+<TITLE>Play 64 Notes</TITLE>
+</HEAD>
+
+
+<BODY BGCOLOR="#FFFFFF">
+
+<CENTER>
+
+<H1>Schedule Audio Events</H1>
+
+<HR>
+
+<P><INPUT TYPE="button" ID="doit" VALUE="Play 64 Notes" ONCLICK="playNNotes()"></P>
+
+<HR>
+
+<P>This page was last modified April 20, 2016<BR>
+by Christopher Dobrian, <A HREF="mailto:dobrian@uci.edu"><I>dobrian@uci.edu</I></A></P>
+
+</CENTER>
+
+<SCRIPT>
+	var noteCount = 0; // keep track of which note is being played
+	var howManyNotes = 64; // how many notes to play
+	var bpm = 100; // metronomic tempo, in beats per minute
+	var pitchArray = [ 62, 69, 73, 66, 71, 66, 69, 62, 64, 71, 74, 67, 73, 67, 69, 64 ];
+	var volumeArray = [ 0, -24, -16, -12, -4, -12, -20, -4, -12, -16, -12, -8, -4, -16, -12, -24 ];
+	var theAudioContext; // the context
+	var theInstrument; // an "instrument" object with an oscillator node and a gain node
+	var theStartingTime; // the starting time of each note
+	
+	theAudioContext = new AudioContext(); // create the context
+	
+	function playNNotes() {
+		toggleButton( document.getElementById("doit") ); // disable the button till done playing
+		theInstrument = setupInstrument( theAudioContext ); // create and connect an oscillator
+		theStartingTime = theAudioContext.currentTime; // store the starting time
+		theInstrument.amplifier.gain.setValueAtTime( 0., theStartingTime ); // start with volume at 0
+		setupNotes( theInstrument ); // schedule all the notes
+		theInstrument.oscillator.start( theStartingTime ); // start the oscillator
+		// schedule a ramp of the gain down to 0 in 5 ms at end of the last note
+		theInstrument.amplifier.gain.linearRampToValueAtTime( 0., theStartingTime+beats(16)+0.005 );
+		theInstrument.oscillator.stop( theStartingTime+beats(16)+0.005 ); // stop the oscillator 16 beats later
+		setTimeout( toggleButton, beats(16)*1000, document.getElementById("doit") ); // re-enable the button 16 beats later than the starting time
+	}
+	
+	function toggleButton( buttonID ) { // toggle the enabled/disabled state of the specified button
+		buttonID.disabled = !buttonID.disabled;
+	}
+	
+	function setupInstrument( context ) { // create and connect an oscillator and a gain node
+		var instrument = { // simplest possible "instrument"
+			oscillator: context.createOscillator(),
+			amplifier: context.createGain()
+		};
+		instrument.oscillator.connect( instrument.amplifier ); // connect oscillator to amplifier
+		instrument.amplifier.connect( context.destination ); // connect amplifier to speakers
+		return instrument;
+	}
+	
+	function setupNotes( instrument ) { // schedule notes on the specified instrument
+		for ( noteCount = 0; noteCount < howManyNotes; noteCount++ ) {
+			playNote( theStartingTime+(noteCount*beats(0.25)), instrument, pitchArray[noteCount%16] , volumeArray[noteCount%16] );
+		}
+	}
+
+	function playNote( startTime, instrument, pitch, volume ) { 
+		// change the frequency of the oscillator at the specified time
+		instrument.oscillator.frequency.setValueAtTime( mtof( pitch ), startTime );
+		// ramp the gain to the new level in 5 ms at the start of the note
+		instrument.amplifier.gain.linearRampToValueAtTime( dbtoa( volume ), startTime+0.005 );
+		// keep it at that level till the end of the note
+		instrument.amplifier.gain.setValueAtTime( dbtoa( volume ), startTime+beats(0.25) );
+	}
+	
+	function mtof( m ) { // convert MIDI-style pitch number to frequency
+		return 440*Math.pow(2,(m-69)/12);
+	}
+
+	function dbtoa( dB ) { // convert decibels to linear amplitude
+		return Math.pow(10,dB*0.05);
+	}
+	
+	function beats( f ) { // convert beats to seconds based on current bpm tempo
+		return f*(60/bpm);
+	}
+</SCRIPT>
+
+</BODY>
+
+</HTML>

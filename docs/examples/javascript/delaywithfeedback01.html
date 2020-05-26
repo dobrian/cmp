@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+  <head><title>Delay with Feedback</title></head>
+  <body>
+    <h1 align="center">Delay with Feedback</h1>
+    <hr/>
+    <p id="interface" align="center">
+      <input type="button" id="startStop" value="Start" onclick="toggleSound( this.value )">
+      <br/><br/>
+			Volume:&nbsp;<input type="range" id="volumeFader" name="volume" min="0" max="50" value="50" step="1" oninput="setVolume( this.value )"/>&nbsp;<span id="volumeDisplay">0</span> dB
+      <br/><br/>
+			Delay Time:&nbsp;<input type="range" id="delayTimeFader" name="delayTime" min="0" max="100" value="50" step="1" oninput="setDelayTime( this.value )"/>&nbsp;<span id="delayTimeDisplay">0.50</span> sec.
+      <br/><br/>
+			Delay Gain:&nbsp;<input type="range" id="delayGainFader" name="delayGain" min="0" max="50" value="44" step="1" oninput="setDelayGain( this.value )"/>&nbsp;<span id="delayGainDisplay">-6</span> dB
+      <br/><br/>
+			Feedback:&nbsp;<input type="range" id="feedbackFader" name="feedback" min="0" max="50" value="0" step="1" oninput="setFeedback( this.value )"/>&nbsp;<span id="feedbackDisplay">-INF</span> dB
+    </p>
+    <hr/>
+    <p id="graphic" align="center">
+      <img src="../../images/delaywithfeedback01.png" height="509" width="424" border="0">
+    </p>
+    <p id="userInfo" align="center">
+    </p>
+    <hr/>
+    <p id="modifiedInfo" align="center">
+      This page was last modified May 9, 2020 by<br/>
+      Christopher Dobrian, <a href="mailto:dobrian@uci.edu"><i>dobrian@uci.edu</i></a>.
+    </p>
+    <script src="delaywithfeedback01.js"></script>
+  </body>
+</html>
