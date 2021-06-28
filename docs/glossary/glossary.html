@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">-->
+    <link rel="stylesheet" href="../css/cmp.css">
+    <title>CMP Glossary</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp">Computer Music Programming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://dobrian.github.io/cmp/lessons.html">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="glossary.html">Glossary</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+
+      <h1>Glossary</h1>
+
+      <div id='glossaryTerms'></div>
+    <!--       
+      <div id="new">
+        <p id="p1">Tutorix</p>
+        <p id="p2">Tutorialspoint</p>
+      </div> 
+    -->
+    
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+    //$('pre').addClass("javascript");
+    hljs.initHighlightingOnLoad();
+    </script>-->
+    <script src="../js/cmp.js"></script>
+
+    <!-- https://stackoverflow.com/questions/3535055/load-html-file-contents-to-div-without-the-use-of-iframes -->
+    <script>
+      const definitions = ["grain", "window"].sort();
+      async function getDefinitions(){
+        definitions.forEach((vocab) => {
+          const vocabHTML = "definitions/"+vocab+".html"
+          fetch(vocabHTML)
+            .then(data => data.text())
+            .then(html => document.getElementById('glossaryTerms').innerHTML += html)
+        })
+      }
+
+      getDefinitions();
+
+    </script>
+
+    <!-- https://jsonformatter.curiousconcept.com/# -->
+
+    <script>
+      let content = new Array();
+      fetch('definitions/dictionary.json')
+        .then(data => data.json())
+        .then(json => Object.values(json))
+        .then(console.log)
+    </script>
+<!-- 
+<script>
+   var tag = document.createElement("p");
+   var text = document.createTextNode("Tutorix is the best e-learning platform");
+   tag.appendChild(text);
+   var element = document.getElementById("new");
+   element.appendChild(tag);
+</script> 
+-->
+
+  </body>
+</html>
