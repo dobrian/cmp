@@ -80,14 +80,19 @@
 
 			function stopSound() {
 				clearInterval( events );
+				ctx.suspend();
 			}
 
-      function startSound() {
-				// in case browser has suspended audio, resume it
-				if ( ctx.state !== "running" ) ctx.resume();
+      		function startSound() {
+				// in case browser or user has suspended audio, resume it
+				if ( ctx.state !== "running" ) {
+					ctx.resume();
+				}
+				// stop any currently playing events
+				clearInterval( events );
 				// start playing sound repeatedly
 				events = setInterval( playNote, interval );
-      }
+			}
 
 			function setUserVolume( theVolume ) {
 				userVolume = theVolume;
@@ -106,14 +111,14 @@
 			}
 
 			function setUserPanning( thePanning ) {
-				userPanning = thePanning;
+				userPanning = Number( thePanning );
 				setPanning( userPanning );
 				panner.value = userPanning; // for when userPanning was changed algorithmically
 				panningInfo.innerHTML = Math.round( userPanning ); // show the value onscreen
 			}
 
 			function setPanning( thePanning ) { // go to new panning position quickly
-				pan.pan.linearRampToValueAtTime( 0.01*thePanning, ctx.currentTime+changeTime );
+				pan.pan.linearRampToValueAtTime( 0.01*Number(thePanning), ctx.currentTime+changeTime );
 			}
 
 			function setPanTime ( thePanTime ) { // when user changes the Pan Time
@@ -157,7 +162,7 @@
 				let stepSize = (panner.max-userPanning)*changeTime/panTime;
 				panningChanges = setInterval( function() {
 					setUserPanning( userPanning+stepSize );
-					if ( userPanning > panner.max ) {
+					if ( userPanning >= panner.max ) {
 						setUserPanning( Number( panner.max ) );
 						clearInterval( panningChanges );
 					}
